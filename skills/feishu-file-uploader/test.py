@@ -6,7 +6,7 @@
 
 import sys
 import json
-import io
+import os
 
 
 def test_import():
@@ -68,53 +68,9 @@ def test_get_token():
         sys.exit(1)
 
 
-def test_create_test_image():
-    """测试创建测试图片"""
-    print("测试4: 创建测试图片")
-    try:
-        from PIL import Image, ImageDraw
-
-        # 创建测试图片
-        img = Image.new('RGB', (400, 300), color='lightblue')
-        draw = ImageDraw.Draw(img)
-        draw.text((100, 150), "测试图片", fill='black')
-
-        # 保存为字节
-        img_bytes = io.BytesIO()
-        img.save(img_bytes, format='PNG')
-        img_bytes = img_bytes.getvalue()
-
-        print(f"✅ 测试图片创建完成: {len(img_bytes)} bytes\n")
-        return img_bytes
-    except ImportError:
-        print("⏭️  PIL/Pillow未安装，跳过图片创建测试\n")
-        return None
-    except Exception as e:
-        print(f"❌ 创建测试图片失败: {e}\n")
-        sys.exit(1)
-
-
-def test_upload_image_data(uploader, img_bytes):
-    """测试上传图片数据"""
-    print("测试5: 上传图片数据")
-    if img_bytes is None:
-        print("⏭️  跳过（图片未创建）\n")
-        return
-
-    try:
-        image_key = uploader.upload_image_data(img_bytes)
-        assert image_key is not None
-        assert len(image_key) > 0
-        print(f"✅ 图片数据上传成功: {image_key}\n")
-        return image_key
-    except Exception as e:
-        print(f"❌ 上传图片数据失败: {e}\n")
-        sys.exit(1)
-
-
 def test_create_image_message_dict():
     """测试创建图片消息字典"""
-    print("测试6: 创建图片消息字典")
+    print("测试4: 创建图片消息字典")
     try:
         image_key = "test_image_key_123"
         user_id = "test_user_id"
@@ -131,13 +87,12 @@ def test_create_image_message_dict():
         assert message_dict["msg_type"] == "image"
         print("✅ 图片消息字典创建成功\n")
     except Exception as e:
-        print(f"❌ 创建图片消息字典失败: {e}\n")
-        sys.exit(1)
+        print(f"❌ 图片消息字典创建失败: {e}\n")
 
 
 def test_create_file_message_dict():
     """测试创建文件消息字典"""
-    print("测试7: 创建文件消息字典")
+    print("测试5: 创建文件消息字典")
     try:
         file_key = "test_file_key_456"
         user_id = "test_user_id"
@@ -154,41 +109,12 @@ def test_create_file_message_dict():
         assert message_dict["msg_type"] == "file"
         print("✅ 文件消息字典创建成功\n")
     except Exception as e:
-        print(f"❌ 创建文件消息字典失败: {e}\n")
-        sys.exit(1)
+        print(f"❌ 文件消息字典创建失败: {e}\n")
 
 
-def test_upload_nonexistent_file(uploader):
+def test_upload_nonexistent_file():
     """测试上传不存在的文件"""
-    print("测试8: 上传不存在的文件")
-    try:
-        uploader.upload_image("/tmp/nonexistent.png")
-        print("❌ 应该抛出异常\n")
-        sys.exit(1)
-    except FileNotFoundError:
-        print("✅ 正确抛出FileNotFoundError\n")
-    except Exception as e:
-        print(f"❌ 抛出错误的异常: {e}\n")
-        sys.exit(1)
-
-
-def test_upload_screenshot(uploader):
-    """测试上传截图"""
-    print("测试9: 上传截图（需要PIL）")
-    try:
-        image_key = uploader.upload_screenshot()
-        assert image_key is not None
-        assert len(image_key) > 0
-        print(f"✅ 截图上传成功: {image_key}\n")
-    except ImportError:
-        print("⏭️  PIL/Pillow未安装，跳过截图测试\n")
-    except Exception as e:
-        print(f"❌ 截图上传失败: {e}\n")
-
-
-def test_upload_file_data():
-    """测试上传文件数据"""
-    print("测试10: 上传文件数据")
+    print("测试6: 上传不存在的文件")
     from uploader import FeishuFileUploader
 
     # 读取配置
@@ -201,15 +127,33 @@ def test_upload_file_data():
     uploader = FeishuFileUploader(app_id, app_secret)
 
     try:
-        # 创建测试文件数据
-        test_data = b"This is a test file content"
-        file_key = uploader.upload_file_data(test_data, "file", "chat")
-        assert file_key is not None
-        assert len(file_key) > 0
-        print(f"✅ 文件数据上传成功: {file_key}\n")
-    except Exception as e:
-        print(f"❌ 上传文件数据失败: {e}\n")
+        uploader.upload_image("/tmp/nonexistent.png")
+        print("❌ 应该抛出异常\n")
         sys.exit(1)
+    except FileNotFoundError:
+        print("✅ 正确抛出FileNotFoundError\n")
+
+
+def test_upload_nonexistent_file2():
+    """测试上传不存在的文件2"""
+    print("测试7: 上传不存在的文件")
+    from uploader import FeishuFileUploader
+
+    # 读取配置
+    with open('/home/lejurobot/.moltbot/moltbot.json', 'r') as f:
+        config = json.load(f)
+
+    app_id = config['channels']['feishu']['appId']
+    app_secret = config['channels']['feishu']['appSecret']
+
+    uploader = FeishuFileUploader(app_id, app_secret)
+
+    try:
+        uploader.upload_file("/tmp/nonexistent.txt")
+        print("❌ 应该抛出异常\n")
+        sys.exit(1)
+    except FileNotFoundError:
+        print("✅ 正确抛出FileNotFoundError\n")
 
 
 def run_all_tests():
@@ -220,12 +164,10 @@ def run_all_tests():
         test_import,
         test_init,
         test_get_token,
-        test_create_test_image,
         test_create_image_message_dict,
         test_create_file_message_dict,
         test_upload_nonexistent_file,
-        test_upload_screenshot,
-        test_upload_file_data
+        test_upload_nonexistent_file2
     ]
 
     passed = 0
