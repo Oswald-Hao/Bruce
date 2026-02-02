@@ -2,10 +2,10 @@
 
 为 Moltbot 的 Feishu 插件添加消息更新功能，支持流式输出。
 
-## 补丁文件
+## 修改文件
 
-- `feishu-update-api.patch` - 添加 `updateFeishuMessage` 函数
-- `feishu-update-channel.patch` - 添加 `updateText` 方法
+- `api.ts` - 添加 `updateFeishuMessage` 函数
+- `channel.ts` - 添加 `updateText` 方法
 
 ## 功能说明
 
@@ -19,34 +19,40 @@
 
 Feishu 插件的 `outbound.updateText` 方法，支持从 Moltbot 核心调用。
 
-## 应用补丁
+## 应用修改
+
+**方法 1：直接复制文件**
 
 ```bash
 cd /home/lejurobot/moltbot
 
-# 应用 API 补丁
-patch -p1 < /home/lejurobot/clawd/patches/feishu-update-api.patch
+# 备份原文件
+cp extensions/feishu/src/api.ts extensions/feishu/src/api.ts.backup
+cp extensions/feishu/src/channel.ts extensions/feishu/src/channel.ts.backup
 
-# 应用 Channel 补丁
-patch -p1 < /home/lejurobot/clawd/patches/feishu-update-channel.patch
-
-# 重新编译（如果需要）
-pnpm build
+# 复制修改后的文件
+cp /home/lejurobot/clawd/patches/api.ts extensions/feishu/src/api.ts
+cp /home/lejurobot/clawd/patches/channel.ts extensions/feishu/src/channel.ts
 
 # 重启 Gateway
 pnpm moltbot gateway restart
 ```
 
-## 撤销补丁
+**方法 2：手动添加代码**
+
+参考 `api.ts` 和 `channel.ts` 中的修改，手动添加到相应位置。
+
+## 撤销修改
 
 ```bash
 cd /home/lejurobot/moltbot
 
-# 撤销 API 补丁
-patch -p1 -R < /home/lejurobot/clawd/patches/feishu-update-api.patch
+# 恢复备份
+cp extensions/feishu/src/api.ts.backup extensions/feishu/src/api.ts
+cp extensions/feishu/src/channel.ts.backup extensions/feishu/src/channel.ts
 
-# 撤销 Channel 补丁
-patch -p1 -R < /home/lejurobot/clawd/patches/feishu-update-channel.patch
+# 重启 Gateway
+pnpm moltbot gateway restart
 ```
 
 ## 使用示例
