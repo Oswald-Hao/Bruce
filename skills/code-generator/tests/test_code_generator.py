@@ -131,7 +131,7 @@ def test_get_code_quality_score():
     assert 0 <= score <= 100
 
     # 测试更复杂的代码
-    complex_code = """
+    complex_code = '''
 def calculate(x, y):
     """
     Calculate something
@@ -140,7 +140,7 @@ def calculate(x, y):
         return x + y
     else:
         return x - y
-"""
+'''
     score = generator.get_code_quality_score(complex_code, "python")
     assert 0 <= score <= 100
 

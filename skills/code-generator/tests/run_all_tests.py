@@ -6,38 +6,49 @@ Code Generator - 完整测试套件
 
 import sys
 import os
-import subprocess
+
+# 添加src目录到Python路径
+src_dir = os.path.join(os.path.dirname(__file__), '..', 'src')
+sys.path.insert(0, src_dir)
 
 
-def run_test_file(test_file):
-    """运行单个测试文件"""
+def run_test_module(module_name):
+    """运行单个测试模块"""
     print(f"\n{'='*60}")
-    print(f"运行测试: {test_file}")
+    print(f"运行测试: {module_name}")
     print('='*60)
 
-    test_dir = os.path.dirname(os.path.abspath(__file__))
-    test_path = os.path.join(test_dir, test_file)
-
-    result = subprocess.run(
-        [sys.executable, test_path],
-        capture_output=True,
-        text=True
-    )
-
-    print(result.stdout)
-    if result.stderr:
-        print("STDERR:", result.stderr)
-
-    return result.returncode == 0
+    try:
+        module = __import__(module_name)
+        if hasattr(module, 'main'):
+            result = module.main()
+            return result == 0
+        else:
+            # 如果没有main函数，运行所有测试函数
+            test_functions = [
+                getattr(module, name)
+                for name in dir(module)
+                if name.startswith('test_') and callable(getattr(module, name))
+            ]
+            for test_func in test_functions:
+                try:
+                    test_func()
+                except Exception as e:
+                    print(f"❌ {test_func.__name__} 失败: {e}")
+                    return False
+            return True
+    except Exception as e:
+        print(f"❌ 加载模块失败: {e}")
+        return False
 
 
 def main():
     """主测试函数"""
-    test_files = [
-        'test_completers.py',
-        'test_refactors.py',
-        'test_analyzers.py',
-        'test_code_generator.py'
+    test_modules = [
+        'test_completers',
+        'test_refactors',
+        'test_analyzers',
+        'test_code_generator'
     ]
 
     print("\n" + "="*60)
@@ -45,9 +56,9 @@ def main():
     print("="*60)
 
     results = {}
-    for test_file in test_files:
-        success = run_test_file(test_file)
-        results[test_file] = success
+    for module_name in test_modules:
+        success = run_test_module(module_name)
+        results[module_name] = success
 
     # 汇总结果
     print("\n" + "="*60)
@@ -57,9 +68,9 @@ def main():
     passed = sum(results.values())
     total = len(results)
 
-    for test_file, success in results.items():
+    for module_name, success in results.items():
         status = "✅ 通过" if success else "❌ 失败"
-        print(f"{test_file:30s} {status}")
+        print(f"{module_name:30s} {status}")
 
     print(f"\n总计: {passed}/{total} 测试通过")
 

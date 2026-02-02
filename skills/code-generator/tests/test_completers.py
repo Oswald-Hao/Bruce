@@ -5,9 +5,18 @@
 import sys
 import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+# 添加src目录到路径
+src_dir = os.path.join(os.path.dirname(__file__), '..', 'src')
+sys.path.insert(0, src_dir)
 
-from completers import PythonCompleter, JavaScriptCompleter
+# 直接导入模块
+import importlib.util
+spec = importlib.util.spec_from_file_location("completers", os.path.join(src_dir, "completers.py"))
+completers_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(completers_module)
+
+PythonCompleter = completers_module.PythonCompleter
+JavaScriptCompleter = completers_module.JavaScriptCompleter
 
 
 def test_python_completer_function():

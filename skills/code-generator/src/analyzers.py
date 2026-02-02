@@ -142,7 +142,7 @@ class CodeAnalyzer:
                 elif isinstance(node, ast.Name):
                     used_vars.add(node.id)
 
-            unused_vars = defined_vars - used_vars - {'self', 'cls', '_']
+            unused_vars = defined_vars - used_vars - {'self', 'cls', '_'}
             for var in unused_vars:
                 issues.append({
                     'type': 'unused_variable',

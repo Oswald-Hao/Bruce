@@ -49,6 +49,13 @@ class PythonCompleter:
 
     def _complete_function_definition(self, code: str) -> Optional[str]:
         """补全函数定义"""
+        # 检查是否是函数定义的中间状态
+        if code.startswith('def ') and '(' in code:
+            if code.endswith(':'):
+                return '    pass'
+            else:
+                return ':\n    pass'
+
         match = re.match(r'def\s+(\w+)\s*\(([^)]*)\):?\s*$', code)
         if match:
             func_name = match.group(1)
@@ -61,10 +68,6 @@ class PythonCompleter:
                 return '    pass'
             else:
                 return '    pass'
-
-        # 检查是否是函数定义的中间状态
-        if code.startswith('def ') and '(' in code:
-            return ':\n    pass'
 
         return None
 
