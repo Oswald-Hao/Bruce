@@ -1,0 +1,71 @@
+diff --git a/extensions/feishu/src/api.ts b/extensions/feishu/src/api.ts
+index d879077cd..6ec00d850 100644
+--- a/extensions/feishu/src/api.ts
++++ b/extensions/feishu/src/api.ts
+@@ -322,6 +322,66 @@ export const getFeishuChatInfo = async ({
+   return data.data;
+ };
+ 
++/**
++ * Update message in Feishu
++ */
++export const updateFeishuMessage = async ({
++  account,
++  messageId,
++  msgType = "text",
++  content,
++}: {
++  account: ResolvedFeishuAccount;
++  messageId: string;
++  msgType?: "text" | "post" | "interactive";
++  content: string | Record<string, unknown>;
++}): Promise<void> => {
++  const token = await getTenantAccessToken(account);
++
++  // Build content object
++  let contentObj: Record<string, unknown>;
++  if (typeof content === "string") {
++    try {
++      contentObj = JSON.parse(content);
++    } catch {
++      contentObj = { text: content };
++    }
++  } else {
++    contentObj = content;
++  }
++
++  const requestBody = {
++    msg_type: msgType,
++    content: contentObj,
++  };
++
++  console.log(`[feishu] [API] Updating message: ${messageId}`);
++  console.log(`[feishu] [API]   msg_type: ${msgType}`);
++  console.log(`[feishu] [API]   content:`, JSON.stringify(contentObj).substring(0, 100));
++
++  const response = await fetch(`${getApiBaseUrl(account.config.appType)}/im/v1/messages/${messageId}/update`, {
++    method: "PUT",
++    headers: {
++      "Content-Type": "application/json; charset=utf-8",
++      "Authorization": `Bearer ${token}`,
++    },
++    body: JSON.stringify(requestBody),
++  });
++
++  if (!response.ok) {
++    throw new Error(`Failed to update message: ${response.statusText}`);
++  }
++
++  const data = await response.json();
++
++  if (data.code !== 0) {
++    console.error(`[feishu] [API] Update message failed. Response:`, JSON.stringify(data));
++    throw new Error(`Failed to update message: ${data.msg} (code: ${data.code})`);
++  }
++
++  console.log(`[feishu] [API] ✓ Message updated successfully!`);
++};
++
+ /**
+  * Verify webhook signature
+  */
