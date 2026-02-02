@@ -139,7 +139,7 @@ class FeishuMessageUpdater:
         }
         data = {
             "receive_id": user_id,
-            "receive_id_type": "open_id",
+            # "receive_id_type": "open_id",  # 移除，只保留在URL中
             "msg_type": "interactive",
             "content": {"card": card_copy},  # 使用对象，不是字符串
             "uuid": str(int(time.time() * 1000))
