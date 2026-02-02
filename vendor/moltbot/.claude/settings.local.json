@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bunx:*)",
+      "Bash(ls:*)",
+      "Bash(pnpm moltbot config set channels.feishu.appId:*)",
+      "Bash(pnpm moltbot config set:*)",
+      "Bash(pnpm moltbot channels status)",
+      "Bash(pnpm moltbot doctor)",
+      "Bash(curl:*)",
+      "Bash(sudo:*)",
+      "Bash(sudo apt:*)",
+      "Bash(sudo apt install:*)",
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(unset:*)",
+      "Bash(env:*)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)",
+      "Bash(wget:*)",
+      "Bash(test:*)",
+      "Bash(pnpm moltbot plugins status:*)",
+      "Bash(pkill:*)",
+      "Bash(pnpm moltbot sessions clear:*)",
+      "Bash(find:*)",
+      "Bash(pnpm build:*)"
+    ]
+  }
+}

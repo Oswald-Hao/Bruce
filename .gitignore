@@ -86,3 +86,9 @@ git-auto-test.txt
 
 # Tunnel凭证
 tunnel-credentials.json
+
+# Moltbot vendor
+vendor/moltbot/node_modules/
+vendor/moltbot/dist/
+vendor/moltbot/.git/
+vendor/moltbot/*.log
