@@ -125,13 +125,14 @@ class FeishuMessageUpdater:
         url = f"{self.base_url}/message/v4/send?receive_id_type=open_id"
         headers = {
             "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-Custom-Auth": "t-g1041tjP63RE55E7GSZH6CRXVRNRO7VPUKKZX6JU"  # 自定义认证头
         }
         data = {
             "receive_id": user_id,
             "receive_id_type": "open_id",
             "msg_type": "interactive",
-            "content": json.dumps({"card": card}),  # 使用JSON字符串
+            "content": {"card": card},  # 使用对象，不是字符串
             "uuid": str(int(time.time() * 1000))
         }
 
