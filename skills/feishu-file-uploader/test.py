@@ -145,6 +145,9 @@ def test_create_file_message_dict():
         assert message_dict["content"]["file_key"] == file_key
         assert message_dict["msg_type"] == "file"
         print("✅ 文件消息字典创建成功\n")
+    except Exception as e:
+        print(f"❌ 创建文件消息字典失败: {e}\n")
+        sys.exit(1)
 
 
 def test_upload_nonexistent_file():
