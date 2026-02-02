@@ -3,9 +3,32 @@ Code Generator - 主类
 """
 
 from typing import Optional, Dict, List, Any
-from .completers import PythonCompleter, JavaScriptCompleter
-from .refactors import CodeRefactor, suggest_refactoring
-from .analyzers import CodeAnalyzer
+
+try:
+    from .completers import PythonCompleter, JavaScriptCompleter
+    from .refactors import CodeRefactor, suggest_refactoring
+    from .analyzers import CodeAnalyzer
+except ImportError:
+    # 如果相对导入失败，尝试直接导入（用于测试）
+    import importlib.util
+    import os
+
+    def load_module(name, file_path):
+        spec = importlib.util.spec_from_file_location(name, file_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+
+    src_dir = os.path.dirname(os.path.abspath(__file__))
+    completers_module = load_module("completers", os.path.join(src_dir, "completers.py"))
+    refactors_module = load_module("refactors", os.path.join(src_dir, "refactors.py"))
+    analyzers_module = load_module("analyzers", os.path.join(src_dir, "analyzers.py"))
+
+    PythonCompleter = completers_module.PythonCompleter
+    JavaScriptCompleter = completers_module.JavaScriptCompleter
+    CodeRefactor = refactors_module.CodeRefactor
+    suggest_refactoring = refactors_module.suggest_refactoring
+    CodeAnalyzer = analyzers_module.CodeAnalyzer
 
 
 class CodeGenerator:

@@ -6,6 +6,8 @@ import re
 import ast
 from typing import Optional, List, Dict, Any
 
+# 不依赖utils模块，直接内联需要的函数
+
 
 class PythonCompleter:
     """Python代码补全器"""
