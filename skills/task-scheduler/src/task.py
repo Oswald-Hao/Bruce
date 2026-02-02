@@ -64,6 +64,10 @@ class Task:
             self.last_error = str(e)
             raise
 
+    def after_run(self):
+        """运行后更新状态（可被子类重写）"""
+        pass
+
     def should_retry(self) -> bool:
         """判断是否应该重试"""
         return self.failure_count < self.max_retries
