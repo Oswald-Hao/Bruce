@@ -75,3 +75,14 @@ git-auto-test.txt
 .env
 .env.local
 .env.*.local
+
+# Moltbot
+~/.clawdbot/
+*.log.moltbot
+
+# Cloudflared
+~/.cloudflared/
+*.cloudflared
+
+# Tunnel凭证
+tunnel-credentials.json

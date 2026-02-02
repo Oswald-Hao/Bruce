@@ -99,11 +99,36 @@ sudo chmod +x /usr/local/bin/cloudflared
 
 ## 部署步骤
 
-### 1. 安装Moltbot
+### 1. 运行一键安装（推荐）
 
 ```bash
-# 安装Moltbot（参考官方文档）
-# https://github.com/moltbot/moltbot
+./install.sh
+```
+
+这会自动安装Moltbot和Cloudflared。
+
+### 2. 安装Moltbot（手动方式）
+
+```bash
+# 使用安装脚本
+./tools/install-moltbot.sh
+
+# 或手动安装
+git clone https://github.com/moltbot/moltbot.git ~/moltbot
+cd ~/moltbot
+pnpm install
+```
+
+### 3. 安装Cloudflared（手动方式）
+
+```bash
+# 使用安装脚本
+./tools/install-cloudflared.sh
+
+# 或手动安装
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
+sudo chmod +x /usr/local/bin/cloudflared
 ```
 
 ### 2. 配置Bruce
@@ -448,6 +473,146 @@ git commit -m "描述更新内容"
 - 总技能数：63/200
 - 自动推送：✅ 已启用
 - HomeKit：✅ 已配置
+
+---
+
+## Moltbot集成
+
+### Moltbot是什么
+
+Moltbot是Bruce的核心框架，提供：
+- 💬 多平台消息接入（飞书、Telegram、WhatsApp等）
+- 🔧 技能系统（Skills）
+- 📊 代理系统（Agents）
+- ⏰ 定时任务（Cron）
+- 🎨 Canvas渲染
+- 🧠 记忆系统
+
+### Moltbot安装
+
+**一键安装：**
+```bash
+./tools/install-moltbot.sh
+```
+
+**手动安装：**
+```bash
+git clone https://github.com/moltbot/moltbot.git ~/moltbot
+cd ~/moltbot
+pnpm install
+```
+
+**配置Moltbot：**
+```bash
+# 创建配置文件
+cp ~/moltbot/.env.example ~/.clawdbot/config.json
+
+# 编辑配置
+vim ~/.clawdbot/config.json
+```
+
+**启动Moltbot：**
+```bash
+cd ~/moltbot
+node moltbot.mjs gateway start
+```
+
+**查看状态：**
+```bash
+moltbot status
+```
+
+### Cloudflared集成
+
+### Cloudflared是什么
+
+Cloudflared是Cloudflare的隧道服务，用于：
+- 🌐 内网穿透，将HomeKit服务暴露到公网
+- 🔒 安全连接，使用Cloudflare加密隧道
+- ⚡ 全球加速，使用Cloudflare CDN
+
+### Cloudflared安装
+
+**一键安装：**
+```bash
+./tools/install-cloudflared.sh
+```
+
+**手动安装：**
+```bash
+# 下载最新版本
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+
+# 安装到系统
+sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
+sudo chmod +x /usr/local/bin/cloudflared
+
+# 验证安装
+cloudflared --version
+```
+
+### Cloudflared使用
+
+**登录账户：**
+```bash
+cloudflared tunnel login
+```
+
+**创建隧道：**
+```bash
+cloudflared tunnel create bruce-homekit
+```
+
+**配置隧道：**
+```bash
+# 创建配置文件
+mkdir -p ~/.cloudflared
+vim ~/.cloudflared/config.yml
+```
+
+**配置示例：**
+```yaml
+tunnel: <tunnel-id>
+credentials-file: /home/lejurobot/.cloudflared/<tunnel-id>.json
+
+ingress:
+  - hostname: bruce.yourdomain.com
+    service: http://localhost:18790
+  - service: http_status:404
+```
+
+**运行隧道：**
+```bash
+cloudflared tunnel run bruce-homekit
+```
+
+**设置为系统服务：**
+```bash
+sudo cloudflared service install
+sudo systemctl enable cloudflared
+sudo systemctl start cloudflared
+```
+
+### 集成说明
+
+**Moltbot和Cloudflared都通过Bruce仓库管理：**
+- 📦 安装脚本：`tools/install-moltbot.sh`、`tools/install-cloudflared.sh`
+- 🚀 一键安装：`./install.sh`（同时安装两者）
+- 📚 使用文档：本文档
+- 🔧 配置文件：各自独立的配置目录
+
+**目录结构：**
+```
+Bruce/
+├── tools/
+│   ├── install-moltbot.sh      # Moltbot安装脚本
+│   ├── install-cloudflared.sh   # Cloudflared安装脚本
+│   └── install.sh              # 一键安装脚本
+├── vendor/
+│   └── moltbot/                # Moltbot（克隆后安装）
+└── services/
+    └── homekit-bruce/          # HomeKit服务（使用Cloudflared隧道）
+```
 
 ---
 
