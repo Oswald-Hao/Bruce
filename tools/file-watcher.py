@@ -16,20 +16,86 @@ class GitAutoPusher:
         self.last_push = 0
         self.push_cooldown = 60  # 推送冷却时间（秒）
 
-    def get_changes(self):
-        """检查是否有未提交的更改"""
+    def get_changes_summary(self):
+        """获取更改的文件列表和类型"""
         try:
-            # 检查未跟踪的文件
+            # 获取git状态
             result = subprocess.run(
                 ["git", "status", "--porcelain"],
                 capture_output=True,
                 text=True,
                 cwd="/home/lejurobot/clawd"
             )
-            return result.stdout.strip() != ""
+
+            if not result.stdout.strip():
+                return None
+
+            # 解析git状态
+            added = []
+            modified = []
+            deleted = []
+
+            for line in result.stdout.strip().split('\n'):
+                if not line:
+                    continue
+                status, file = line[:2], line[3:]
+                if 'A' in status:
+                    added.append(file)
+                elif 'M' in status or 'R' in status:
+                    modified.append(file)
+                elif 'D' in status:
+                    deleted.append(file)
+
+            return {
+                'added': added,
+                'modified': modified,
+                'deleted': deleted
+            }
         except Exception as e:
             print(f"检查Git状态失败：{e}")
-            return False
+            return None
+
+    def generate_commit_message(self, changes):
+        """生成智能的commit信息"""
+        if not changes:
+            return "自动更新：文件变化"
+
+        message_parts = []
+
+        # 新增文件
+        if changes['added']:
+            # 只取前5个文件，避免太长
+            files = changes['added'][:5]
+            # 简化文件路径
+            files = [f.split('/')[-1] if '/' in f else f for f in files]
+            if len(files) == 1:
+                message_parts.append(f"新增：{files[0]}")
+            else:
+                message_parts.append(f"新增{len(files)}个文件")
+
+        # 修改文件
+        if changes['modified']:
+            files = changes['modified'][:5]
+            files = [f.split('/')[-1] if '/' in f else f for f in files]
+            if len(files) == 1:
+                message_parts.append(f"修改：{files[0]}")
+            else:
+                message_parts.append(f"修改{len(files)}个文件")
+
+        # 删除文件
+        if changes['deleted']:
+            files = changes['deleted'][:5]
+            files = [f.split('/')[-1] if '/' in f else f for f in files]
+            if len(files) == 1:
+                message_parts.append(f"删除：{files[0]}")
+            else:
+                message_parts.append(f"删除{len(files)}个文件")
+
+        # 生成最终信息
+        if not message_parts:
+            return "自动更新：文件变化"
+
+        return "自动更新：" + "，".join(message_parts)
 
     def git_add_and_commit(self, message="自动更新：文件变化"):
         """添加更改并提交"""
@@ -67,13 +133,14 @@ class GitAutoPusher:
         try:
             while True:
                 # 检查是否有更改
-                if self.get_changes():
+                changes = self.get_changes_summary()
+                if changes:
                     current_time = time.time()
 
                     # 检查冷却时间
                     if current_time - self.last_push >= self.push_cooldown:
-                        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
-                        message = f"自动更新：{timestamp} 文件变化"
+                        # 生成智能commit信息
+                        message = self.generate_commit_message(changes)
 
                         # 提交更改（会自动触发Git钩子推送）
                         if self.git_add_and_commit(message):
