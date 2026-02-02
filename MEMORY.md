@@ -227,3 +227,34 @@
 - git add .
 - git commit -m "描述更新内容"
 - git push origin master
+
+## 自动推送系统（2026-02-02）
+
+### 方案4：Git钩子推送（已启用✅）
+- 配置文件：.git/hooks/post-commit
+- 功能：每次git commit后自动git push
+- 状态：已启用并测试通过
+- 无需额外配置，立即可用
+
+### 方案3：文件监听推送（已配置⚠️）
+- 配置文件：tools/file-watcher.py
+- 服务文件：tools/git-auto-pusher.service
+- 功能：监听文件变化，自动提交并推送
+- 状态：已配置，需要手动启动systemd服务
+
+**启动文件监听器：**
+```bash
+sudo cp tools/git-auto-pusher.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl start git-auto-pusher
+sudo systemctl enable git-auto-pusher
+```
+
+**使用文档：** tools/auto-push-guide.md
+
+**当前状态：**
+- Git钩子：✅ 已启用
+- 文件监听：⚠️ 已配置，待启动
+- GitHub：https://github.com/Oswald-Hao/Bruce.git
+
+现在每次修改代码并commit后，都会自动推送到GitHub！
