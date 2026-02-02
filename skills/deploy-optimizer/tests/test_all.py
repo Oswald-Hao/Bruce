@@ -4,12 +4,23 @@ Deploy Optimizer - 完整测试套件
 
 import sys
 import os
+import unittest.mock as mock
 
 # 添加src目录到路径
 src_dir = os.path.join(os.path.dirname(__file__), '..', 'src')
 sys.path.insert(0, src_dir)
 
-from deploy_optimizer import DeployOptimizer
+# Mock docker模块（如果未安装）
+sys.modules['docker'] = mock.MagicMock()
+sys.modules['docker'].__version__ = '6.0.0'
+
+# 动态导入
+import importlib.util
+spec = importlib.util.spec_from_file_location("deploy_optimizer", os.path.join(src_dir, "deploy_optimizer.py"))
+deploy_optimizer_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(deploy_optimizer_module)
+
+DeployOptimizer = deploy_optimizer_module.DeployOptimizer
 
 
 def test_deploy_optimizer_status():

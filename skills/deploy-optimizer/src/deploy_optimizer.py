@@ -3,16 +3,30 @@ Deploy Optimizer - 主类
 """
 
 from typing import Dict, Any, Optional
-from .docker_manager import DockerManager
-from .k8s_manager import K8sManager
-from .cloud_manager import CloudManager
-from .utils import (
-    load_yaml_config,
-    save_yaml_config,
-    generate_dockerfile,
-    generate_k8s_deployment,
-    generate_k8s_service
-)
+import os
+import importlib.util
+
+# 动态导入模块（避免相对导入问题）
+def load_module(name, file_path):
+    spec = importlib.util.spec_from_file_location(name, file_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+src_dir = os.path.dirname(os.path.abspath(__file__))
+docker_manager_module = load_module("docker_manager", os.path.join(src_dir, "docker_manager.py"))
+k8s_manager_module = load_module("k8s_manager", os.path.join(src_dir, "k8s_manager.py"))
+cloud_manager_module = load_module("cloud_manager", os.path.join(src_dir, "cloud_manager.py"))
+utils_module = load_module("utils", os.path.join(src_dir, "utils.py"))
+
+DockerManager = docker_manager_module.DockerManager
+K8sManager = k8s_manager_module.K8sManager
+CloudManager = cloud_manager_module.CloudManager
+load_yaml_config = utils_module.load_yaml_config
+save_yaml_config = utils_module.save_yaml_config
+generate_dockerfile = utils_module.generate_dockerfile
+generate_k8s_deployment = utils_module.generate_k8s_deployment
+generate_k8s_service = utils_module.generate_k8s_service
 
 
 class DeployOptimizer:

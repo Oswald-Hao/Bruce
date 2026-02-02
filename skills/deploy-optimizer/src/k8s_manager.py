@@ -6,11 +6,88 @@ import yaml
 import subprocess
 import os
 from typing import Dict, Any, Optional, List
-from .utils import (
-    generate_k8s_deployment,
-    generate_k8s_service,
-    save_yaml_config
-)
+
+
+def generate_k8s_deployment(
+    app_name: str,
+    image: str,
+    replicas: int = 1,
+    cpu: str = "500m",
+    memory: str = "512Mi"
+) -> str:
+    """生成Kubernetes Deployment配置"""
+    deployment = {
+        'apiVersion': 'apps/v1',
+        'kind': 'Deployment',
+        'metadata': {
+            'name': app_name,
+            'labels': {
+                'app': app_name
+            }
+        },
+        'spec': {
+            'replicas': replicas,
+            'selector': {
+                'matchLabels': {
+                    'app': app_name
+                }
+            },
+            'template': {
+                'metadata': {
+                    'labels': {
+                        'app': app_name
+                    }
+                },
+                'spec': {
+                    'containers': [{
+                        'name': app_name,
+                        'image': image,
+                        'ports': [{
+                            'containerPort': 8080
+                        }],
+                        'resources': {
+                            'requests': {
+                                'cpu': cpu,
+                                'memory': memory
+                            },
+                            'limits': {
+                                'cpu': cpu,
+                                'memory': memory
+                            }
+                        }
+                    }]
+                }
+            }
+        }
+    }
+    return yaml.dump(deployment, default_flow_style=False)
+
+
+def generate_k8s_service(
+    app_name: str,
+    port: int = 8080,
+    service_type: str = "ClusterIP"
+) -> str:
+    """生成Kubernetes Service配置"""
+    service = {
+        'apiVersion': 'v1',
+        'kind': 'Service',
+        'metadata': {
+            'name': app_name
+        },
+        'spec': {
+            'type': service_type,
+            'selector': {
+                'app': app_name
+            },
+            'ports': [{
+                'port': port,
+                'targetPort': port,
+                'protocol': 'TCP'
+            }]
+        }
+    }
+    return yaml.dump(service, default_flow_style=False)
 
 
 class K8sManager:

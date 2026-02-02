@@ -5,12 +5,50 @@ Docker管理器
 import docker
 import os
 from typing import Dict, Any, Optional, List
-from .utils import (
-    validate_app_structure,
-    get_app_name,
-    generate_dockerfile,
-    format_size
-)
+
+
+def validate_app_structure(app_dir: str) -> bool:
+    """验证应用结构"""
+    required_files = ['requirements.txt', 'app.py', 'Dockerfile']
+    for file in required_files:
+        if not os.path.exists(os.path.join(app_dir, file)):
+            return False
+    return True
+
+
+def get_app_name(app_dir: str) -> str:
+    """从目录名获取应用名称"""
+    return os.path.basename(os.path.normpath(app_dir))
+
+
+def generate_dockerfile(
+    app_name: str,
+    python_version: str = "3.11-slim",
+    port: int = 8080
+) -> str:
+    """生成Dockerfile"""
+    return f"""FROM python:{python_version}
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE {port}
+
+CMD ["python", "app.py"]
+"""
+
+
+def format_size(size_bytes: int) -> str:
+    """格式化字节大小"""
+    for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
+        if size_bytes < 1024.0:
+            return f"{size_bytes:.2f} {unit}"
+        size_bytes /= 1024.0
+    return f"{size_bytes:.2f} PB"
 
 
 class DockerManager:
