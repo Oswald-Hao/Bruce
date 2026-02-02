@@ -75,6 +75,7 @@ git-auto-test.txt
 .env
 .env.local
 .env.*.local
+MOLTBOT_CONFIG*
 
 # Moltbot
 ~/.clawdbot/
