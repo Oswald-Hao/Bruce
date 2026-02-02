@@ -5,7 +5,42 @@
 import ast
 import re
 from typing import Dict, List, Any
-from .utils import is_valid_python, calculate_complexity
+
+
+def is_valid_python(code: str) -> bool:
+    """检查代码是否是有效的Python代码"""
+    try:
+        ast.parse(code)
+        return True
+    except SyntaxError:
+        return False
+
+
+def calculate_complexity(code: str) -> Dict[str, Any]:
+    """计算代码复杂度"""
+    try:
+        tree = ast.parse(code)
+        complexity = 1  # 基础复杂度
+
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.If, ast.While, ast.For)):
+                complexity += 1
+            elif isinstance(node, ast.BoolOp):
+                complexity += 1
+            elif isinstance(node, ast.ExceptHandler):
+                complexity += 1
+
+        return {
+            'complexity': complexity,
+            'is_simple': complexity <= 5,
+            'is_complex': complexity > 10
+        }
+    except SyntaxError:
+        return {
+            'complexity': 0,
+            'is_simple': False,
+            'is_complex': False
+        }
 
 
 class CodeAnalyzer:

@@ -5,7 +5,60 @@
 import ast
 import re
 from typing import Dict, List, Any
-from .utils import is_valid_python, normalize_indentation, calculate_complexity
+
+
+def is_valid_python(code: str) -> bool:
+    """检查代码是否是有效的Python代码"""
+    try:
+        ast.parse(code)
+        return True
+    except SyntaxError:
+        return False
+
+
+def normalize_indentation(code: str, spaces: int = 4) -> str:
+    """规范化代码缩进"""
+    def extract_indentation(line: str) -> str:
+        match = re.match(r'^(\s+)', line)
+        return match.group(1) if match else ''
+
+    lines = code.split('\n')
+    normalized = []
+    for line in lines:
+        if line.strip():
+            current_indent = len(extract_indentation(line))
+            new_indent = (current_indent // 4) * spaces
+            normalized.append(' ' * new_indent + line.lstrip())
+        else:
+            normalized.append('')
+    return '\n'.join(normalized)
+
+
+def calculate_complexity(code: str) -> Dict[str, Any]:
+    """计算代码复杂度"""
+    try:
+        tree = ast.parse(code)
+        complexity = 1  # 基础复杂度
+
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.If, ast.While, ast.For)):
+                complexity += 1
+            elif isinstance(node, ast.BoolOp):
+                complexity += 1
+            elif isinstance(node, ast.ExceptHandler):
+                complexity += 1
+
+        return {
+            'complexity': complexity,
+            'is_simple': complexity <= 5,
+            'is_complex': complexity > 10
+        }
+    except SyntaxError:
+        return {
+            'complexity': 0,
+            'is_simple': False,
+            'is_complex': False
+        }
 
 
 class CodeRefactor:
