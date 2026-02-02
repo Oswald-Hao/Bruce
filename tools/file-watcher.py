@@ -91,7 +91,7 @@ class GitAutoPusher:
         # 分类所有更改的文件
         all_files = changes.get('added', []) + changes.get('modified', [])
         for file in all_files:
-            if 'skills/' in file or 'kills/' in file
+            if 'skills/' in file or 'kills/' in file:
                 # 提取技能名称
                 skill_name = file.split('/')[-2] if '/' in file else file
                 summary['skills'].append(skill_name)
