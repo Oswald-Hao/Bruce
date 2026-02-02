@@ -120,11 +120,12 @@ def test_generate_deployment_config():
     assert 'dockerfile' in result
     assert 'FROM python:' in result['dockerfile']
 
-    # 生成Kubernetes配置
+    # 生成Kubernetes配置（只传deployment需要的参数）
     result = optimizer.generate_deployment_config(
         'myapp', 'kubernetes',
         image='myapp:latest',
-        replicas=3
+        replicas=3,
+        port=8080
     )
     assert result['success'] is True
     assert 'deployment' in result

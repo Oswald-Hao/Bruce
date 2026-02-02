@@ -375,8 +375,16 @@ class DeployOptimizer:
             }
 
         elif platform == "kubernetes":
-            deployment = generate_k8s_deployment(app_name, **kwargs)
-            service = generate_k8s_service(app_name, **kwargs)
+            # 过滤参数：deployment需要image, replicas, cpu, memory
+            deploy_kwargs = {k: v for k, v in kwargs.items()
+                             if k in ['image', 'replicas', 'cpu', 'memory']}
+            deployment = generate_k8s_deployment(app_name, **deploy_kwargs)
+
+            # 过滤参数：service需要port, service_type
+            service_kwargs = {k: v for k, v in kwargs.items()
+                              if k in ['port', 'service_type']}
+            service = generate_k8s_service(app_name, **service_kwargs)
+
             return {
                 'success': True,
                 'deployment': deployment,
