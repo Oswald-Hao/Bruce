@@ -1,0 +1,14 @@
+[Unit]
+Description=Bruce Moltbot Code Watcher - 监听Moltbot代码变化并同步到Bruce仓库
+After=network.target
+
+[Service]
+Type=simple
+User=lejurobot
+WorkingDirectory=/home/lejurobot/clawd
+ExecStart=/usr/bin/python3 /home/lejurobot/clawd/tools/moltbot-code-watcher.py 60
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
