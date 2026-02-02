@@ -5,13 +5,57 @@
 import time
 from typing import Callable, Any, Optional, Dict
 from datetime import datetime
-from .utils import (
-    generate_task_id,
-    validate_task_function,
-    validate_cron_expression,
-    serialize_task,
-    deserialize_task
-)
+
+
+def validate_task_function(func: Callable) -> bool:
+    """验证任务函数是否有效"""
+    return callable(func)
+
+
+def validate_cron_expression(cron_expr: str) -> bool:
+    """验证Cron表达式是否有效"""
+    try:
+        parts = cron_expr.split()
+        if len(parts) != 5:
+            return False
+
+        # 检查每部分是否为*或数字
+        for part in parts:
+            if part != '*':
+                try:
+                    # 检查是否为数字或范围（如1-5）或列表（如1,3,5）
+                    if '-' in part:
+                        start, end = part.split('-')
+                        int(start)
+                        int(end)
+                    elif ',' in part:
+                        for item in part.split(','):
+                            int(item)
+                    else:
+                        int(part)
+                except ValueError:
+                    return False
+
+        return True
+    except Exception:
+        return False
+
+
+def generate_task_id(func: Callable, *args, **kwargs) -> str:
+    """生成任务ID"""
+    import hashlib
+    import json
+
+    # 使用函数名和参数生成唯一的任务ID
+    func_name = func.__name__
+    params_str = json.dumps({
+        'args': str(args),
+        'kwargs': str(kwargs)
+    }, sort_keys=True)
+
+    hash_input = f"{func_name}:{params_str}"
+    hash_value = hashlib.md5(hash_input.encode()).hexdigest()
+    return f"task_{func_name}_{hash_value[:8]}"
 
 
 class Task:

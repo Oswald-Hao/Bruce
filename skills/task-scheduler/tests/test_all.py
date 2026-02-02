@@ -28,6 +28,7 @@ task_scheduler_module = load_module("task_scheduler", os.path.join(src_dir, "tas
 TaskScheduler = task_scheduler_module.TaskScheduler
 CronTask = task_module.CronTask
 IntervalTask = task_module.IntervalTask
+Task = task_module.Task
 
 
 # 测试函数
@@ -67,8 +68,6 @@ def test_utils_functions():
 
 def test_task_creation():
     """测试任务创建"""
-    from task_module import Task
-
     task = Task(
         task_id="test_task",
         func=simple_task

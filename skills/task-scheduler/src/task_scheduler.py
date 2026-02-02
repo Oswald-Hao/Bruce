@@ -3,13 +3,35 @@ Task Scheduler Optimizer - 主类
 """
 
 from typing import Dict, List, Optional, Callable, Any
-from .scheduler import Scheduler
-from .task import Task, CronTask, IntervalTask
-from .utils import (
-    validate_task_function,
-    validate_cron_expression,
-    format_duration
+import os
+import importlib.util
+
+# 动态导入模块（避免相对导入问题）
+def load_module(name, file_path):
+    spec = importlib.util.spec_from_file_location(name, file_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+src_dir = os.path.dirname(os.path.abspath(__file__))
+utils_module = load_module("utils", os.path.join(src_dir, "utils.py"))
+task_module = load_module("task", os.path.join(src_dir, "task.py"))
+scheduler_module = load_module("scheduler", os.path.join(src_dir, "scheduler.py"))
+
+# 设置循环引用
+scheduler_module.set_task_classes(
+    task_module.Task,
+    task_module.CronTask,
+    task_module.IntervalTask
 )
+
+Scheduler = scheduler_module.Scheduler
+Task = task_module.Task
+CronTask = task_module.CronTask
+IntervalTask = task_module.IntervalTask
+validate_task_function = utils_module.validate_task_function
+validate_cron_expression = utils_module.validate_cron_expression
+format_duration = utils_module.format_duration
 
 
 class TaskScheduler:

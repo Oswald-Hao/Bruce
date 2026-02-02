@@ -6,13 +6,46 @@ import time
 import threading
 from typing import Dict, List, Optional, Callable, Any
 from datetime import datetime
-from .task import Task, CronTask, IntervalTask
-from .utils import (
-    generate_task_id,
-    validate_task_function,
-    validate_cron_expression,
-    format_duration
-)
+
+
+# 由于循环导入问题，这些类在运行时动态获取
+Task = None
+CronTask = None
+IntervalTask = None
+
+
+def set_task_classes(task_cls, cron_task_cls, interval_task_cls):
+    """设置任务类（避免循环导入）"""
+    global Task, CronTask, IntervalTask
+    Task = task_cls
+    CronTask = cron_task_cls
+    IntervalTask = interval_task_cls
+
+
+def generate_task_id(func: Callable, *args, **kwargs) -> str:
+    """生成任务ID"""
+    import hashlib
+    import json
+
+    func_name = func.__name__
+    params_str = json.dumps({
+        'args': str(args),
+        'kwargs': str(kwargs)
+    }, sort_keys=True)
+
+    hash_input = f"{func_name}:{params_str}"
+    hash_value = hashlib.md5(hash_input.encode()).hexdigest()
+    return f"task_{func_name}_{hash_value[:8]}"
+
+
+def format_duration(seconds: float) -> str:
+    """格式化持续时间"""
+    if seconds < 60:
+        return f"{seconds:.2f}s"
+    elif seconds < 3600:
+        return f"{seconds/60:.2f}m"
+    else:
+        return f"{seconds/3600:.2f}h"
 
 
 class Scheduler:
