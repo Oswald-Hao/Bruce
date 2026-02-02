@@ -129,8 +129,9 @@ class FeishuMessageUpdater:
         }
         data = {
             "receive_id": user_id,
+            "receive_id_type": "open_id",
             "msg_type": "interactive",
-            "content": json.dumps({"card": card}),
+            "content": json.dumps({"card": card}),  # 使用JSON字符串
             "uuid": str(int(time.time() * 1000))
         }
 
@@ -166,7 +167,7 @@ class FeishuMessageUpdater:
         }
         data = {
             "msg_type": "interactive",
-            "content": json.dumps({"card": card})
+            "content": {"card": card}  # 使用对象而不是字符串
         }
 
         response = requests.put(url, headers=headers, json=data)
@@ -282,8 +283,9 @@ class FeishuMessageUpdater:
         }
         data = {
             "receive_id": user_id,
+            "receive_id_type": "open_id",
             "msg_type": "text",
-            "content": json.dumps({"text": text}),
+            "content": {"text": text},  # 使用对象而不是字符串
             "uuid": str(int(time.time() * 1000))
         }
 
