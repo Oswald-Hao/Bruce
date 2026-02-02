@@ -1,0 +1,14 @@
+[Unit]
+Description=Bruce Git Auto Pusher - 监听文件变化并自动推送
+After=network.target
+
+[Service]
+Type=simple
+User=lejurobot
+WorkingDirectory=/home/lejurobot/clawd
+ExecStart=/usr/bin/python3 /home/lejurobot/clawd/tools/file-watcher.py /home/lejurobot/clawd 30
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
