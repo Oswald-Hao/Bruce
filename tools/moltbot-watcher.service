@@ -1,0 +1,14 @@
+[Unit]
+Description=Bruce Moltbot Watcher - 监听Moltbot配置变化并同步到Bruce仓库
+After=network.target
+
+[Service]
+Type=simple
+User=lejurobot
+WorkingDirectory=/home/lejurobot/clawd
+ExecStart=/usr/bin/python3 /home/lejurobot/clawd/tools/moltbot-watcher.py 30
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
