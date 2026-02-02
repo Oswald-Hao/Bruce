@@ -27,6 +27,7 @@ bpy.context.scene.cycles.volume_bounces = 4
 bpy.context.scene.render.resolution_x = 3840
 bpy.context.scene.render.resolution_y = 2160
 bpy.context.scene.render.resolution_percentage = 100
+bpy.context.scene.render.filepath = '/home/lejurobot/clawd/space_colonization.png'
 
 # 创建摄像机
 camera = bpy.data.cameras.new(name="Camera")
@@ -36,138 +37,169 @@ bpy.context.scene.camera = camera_obj
 camera_obj.location = (0, -25, 8)
 camera_obj.rotation_euler = (math.radians(20), 0, 0)
 
+def create_planet_material():
+    """创建行星材质"""
+    material = bpy.data.materials.new(name="PlanetMaterial")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    links = material.node_tree.links
+
+    # 清理默认节点
+    for node in list(nodes):
+        nodes.remove(node)
+
+    # 创建节点布局
+    output_node = nodes.new(type='ShaderNodeOutputMaterial')
+    output_node.location = (400, 0)
+
+    bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
+    bsdf_node.location = (0, 0)
+    bsdf_node.inputs['Base Color'].default_value = (0.1, 0.3, 0.8, 1.0)  # 蓝色行星
+    bsdf_node.inputs['Metallic'].default_value = 0.2
+    bsdf_node.inputs['Roughness'].default_value = 0.7
+
+    links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
+
+    return material
+
+def create_atmosphere_material():
+    """创建大气层材质"""
+    material = bpy.data.materials.new(name="AtmosphereMaterial")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    links = material.node_tree.links
+
+    for node in list(nodes):
+        nodes.remove(node)
+
+    output_node = nodes.new(type='ShaderNodeOutputMaterial')
+    output_node.location = (500, 0)
+
+    bsdf_node = nodes.new(type='ShaderNodeBsdfTransparent')
+    bsdf_node.location = (0, 100)
+
+    glass_node = nodes.new(type='ShaderNodeBsdfGlass')
+    glass_node.location = (0, 0)
+    glass_node.inputs['Roughness'].default_value = 0.0
+    glass_node.inputs['IOR'].default_value = 1.0
+
+    mix_node = nodes.new(type='ShaderNodeMixShader')
+    mix_node.location = (200, 50)
+    mix_node.inputs['Fac'].default_value = 0.3
+
+    links.new(bsdf_node.outputs['BSDF'], mix_node.inputs[1])
+    links.new(glass_node.outputs['BSDF'], mix_node.inputs[2])
+    links.new(mix_node.outputs['Shader'], output_node.inputs['Surface'])
+
+    return material
+
+def create_station_material():
+    """创建空间站材质"""
+    material = bpy.data.materials.new(name="StationMaterial")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    links = material.node_tree.links
+
+    for node in list(nodes):
+        nodes.remove(node)
+
+    output_node = nodes.new(type='ShaderNodeOutputMaterial')
+    output_node.location = (400, 0)
+
+    bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
+    bsdf_node.location = (0, 0)
+    bsdf_node.inputs['Base Color'].default_value = (0.8, 0.8, 0.8, 1.0)  # 白色金属
+    bsdf_node.inputs['Metallic'].default_value = 0.9
+    bsdf_node.inputs['Roughness'].default_value = 0.2
+    bsdf_node.inputs['IOR'].default_value = 2.5
+
+    links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
+
+    return material
+
+def create_solar_material():
+    """创建太阳能板材质"""
+    material = bpy.data.materials.new(name="SolarMaterial")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    links = material.node_tree.links
+
+    for node in list(nodes):
+        nodes.remove(node)
+
+    output_node = nodes.new(type='ShaderNodeOutputMaterial')
+    output_node.location = (400, 0)
+
+    bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
+    bsdf_node.location = (0, 0)
+    bsdf_node.inputs['Base Color'].default_value = (0.1, 0.2, 0.6, 1.0)  # 深蓝色太阳能板
+    bsdf_node.inputs['Metallic'].default_value = 0.5
+    bsdf_node.inputs['Roughness'].default_value = 0.3
+
+    links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
+
+    return material
+
+def create_star_material(brightness):
+    """创建星星材质"""
+    material = bpy.data.materials.new(name=f"StarMaterial_{random.randint(0, 10000)}")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    links = material.node_tree.links
+
+    for node in list(nodes):
+        nodes.remove(node)
+
+    output_node = nodes.new(type='ShaderNodeOutputMaterial')
+    output_node.location = (400, 0)
+
+    emission_node = nodes.new(type='ShaderNodeEmission')
+    emission_node.location = (0, 0)
+    emission_node.inputs['Strength'].default_value = brightness
+
+    links.new(emission_node.outputs['Emission'], output_node.inputs['Surface'])
+
+    return material
+
 # 创建行星
-planet_material = bpy.data.materials.new(name="PlanetMaterial")
-planet_material.use_nodes = True
-nodes = planet_material.node_tree.nodes
-links = planet_material.node_tree.links
-
-# 清理默认节点
-for node in nodes:
-    nodes.remove(node)
-
-# 创建节点布局
-output_node = nodes.new(type='ShaderNodeOutputMaterial')
-output_node.location = (400, 0)
-
-bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
-bsdf_node.location = (0, 0)
-bsdf_node.inputs['Base Color'].default_value = (0.1, 0.3, 0.8, 1.0)  # 蓝色行星
-bsdf_node.inputs['Metallic'].default_value = 0.2
-bsdf_node.inputs['Roughness'].default_value = 0.7
-
-links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
-
-# 创建行星球体
+planet_material = create_planet_material()
 bpy.ops.mesh.primitive_uv_sphere_add(radius=8, location=(0, 10, 0))
 planet = bpy.context.object
 planet.name = "Planet"
-planet.material_slots.create()
-planet.material_slots[0].material = planet_material
+planet.data.materials.append(planet_material)
 
 # 创建大气层
-atmosphere_material = bpy.data.materials.new(name="AtmosphereMaterial")
-atmosphere_material.use_nodes = True
-nodes = atmosphere_material.node_tree.nodes
-links = atmosphere_material.node_tree.links
-
-for node in nodes:
-    nodes.remove(node)
-
-output_node = nodes.new(type='ShaderNodeOutputMaterial')
-output_node.location = (500, 0)
-
-bsdf_node = nodes.new(type='ShaderNodeBsdfTransparent')
-bsdf_node.location = (0, 100)
-links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
-
-glass_node = nodes.new(type='ShaderNodeBsdfGlass')
-glass_node.location = (0, 0)
-glass_node.inputs['Roughness'].default_value = 0.0
-glass_node.inputs['IOR'].default_value = 1.0
-links.new(glass_node.outputs['BSDF'], output_node.inputs['Surface'])
-
-mix_node = nodes.new(type='ShaderNodeMixShader')
-mix_node.location = (200, 50)
-mix_node.inputs['Fac'].default_value = 0.3
-links.new(bsdf_node.outputs['BSDF'], mix_node.inputs[1])
-links.new(glass_node.outputs['BSDF'], mix_node.inputs[2])
-links.new(mix_node.outputs['Shader'], output_node.inputs['Surface'])
-
-# 创建大气层球体
+atmosphere_material = create_atmosphere_material()
 bpy.ops.mesh.primitive_uv_sphere_add(radius=8.5, location=(0, 10, 0))
 atmosphere = bpy.context.object
 atmosphere.name = "Atmosphere"
 atmosphere.scale = (1.02, 1.02, 1.02)
-atmosphere.material_slots.create()
-atmosphere.material_slots[0].material = atmosphere_material
-
-# 创建空间站（环形结构）
-station_material = bpy.data.materials.new(name="StationMaterial")
-station_material.use_nodes = True
-nodes = station_material.node_tree.nodes
-links = station_material.node_tree.links
-
-for node in nodes:
-    nodes.remove(node)
-
-output_node = nodes.new(type='ShaderNodeOutputMaterial')
-output_node.location = (400, 0)
-
-bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
-bsdf_node.location = (0, 0)
-bsdf_node.inputs['Base Color'].default_value = (0.8, 0.8, 0.8, 1.0)  # 白色金属
-bsdf_node.inputs['Metallic'].default_value = 0.9
-bsdf_node.inputs['Roughness'].default_value = 0.2
-bsdf_node.inputs['IOR'].default_value = 2.5
-
-links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
+atmosphere.data.materials.append(atmosphere_material)
 
 # 创建环形空间站
+station_material = create_station_material()
 bpy.ops.mesh.primitive_torus_add(major_radius=12, minor_radius=0.3, location=(0, 0, 0))
 ring = bpy.context.object
 ring.name = "SpaceStationRing"
 ring.rotation_euler = (math.radians(0), 0, math.radians(15))
-ring.material_slots.create()
-ring.material_slots[0].material = station_material
+ring.data.materials.append(station_material)
 
 # 创建空间站核心
 bpy.ops.mesh.primitive_ico_sphere_add(radius=1.5, location=(0, 0, 0))
 core = bpy.context.object
 core.name = "SpaceStationCore"
 core.scale = (1, 0.5, 1)
-core.material_slots.create()
-core.material_slots[0].material = station_material
+core.data.materials.append(station_material)
 
 # 添加太阳能板（4个）
-solar_material = bpy.data.materials.new(name="SolarMaterial")
-solar_material.use_nodes = True
-nodes = solar_material.node_tree.nodes
-links = solar_material.node_tree.links
-
-for node in nodes:
-    nodes.remove(node)
-
-output_node = nodes.new(type='ShaderNodeOutputMaterial')
-output_node.location = (400, 0)
-
-bsdf_node = nodes.new(type='ShaderNodeBsdfPrincipled')
-bsdf_node.location = (0, 0)
-bsdf_node.inputs['Base Color'].default_value = (0.1, 0.2, 0.6, 1.0)  # 深蓝色太阳能板
-bsdf_node.inputs['Metallic'].default_value = 0.5
-bsdf_node.inputs['Roughness'].default_value = 0.3
-
-links.new(bsdf_node.outputs['BSDF'], output_node.inputs['Surface'])
-
-# 创建4个太阳能板
+solar_material = create_solar_material()
 solar_positions = [(15, 0, 0), (-15, 0, 0), (0, 15, 0), (0, -15, 0)]
 for i, pos in enumerate(solar_positions):
     bpy.ops.mesh.primitive_cube_add(size=4, location=pos)
     solar = bpy.context.object
     solar.name = f"SolarPanel_{i+1}"
     solar.scale = (1, 1, 0.1)
-    solar.material_slots.create()
-    solar.material_slots[0].material = solar_material
+    solar.data.materials.append(solar_material)
 
 # 创建星空背景
 for i in range(500):
@@ -176,29 +208,13 @@ for i in range(500):
     star_z = random.uniform(-100, 100)
 
     # 创建星星点
-    star_material = bpy.data.materials.new(name=f"StarMaterial_{i}")
-    star_material.use_nodes = True
-    nodes = star_material.node_tree.nodes
-    links = star_material.node_tree.links
-
-    for node in nodes:
-        nodes.remove(node)
-
-    output_node = nodes.new(type='ShaderNodeOutputMaterial')
-    output_node.location = (400, 0)
-
-    emission_node = nodes.new(type='ShaderNodeEmission')
-    emission_node.location = (0, 0)
     brightness = random.uniform(0.5, 2.0)
-    emission_node.inputs['Strength'].default_value = brightness
-
-    links.new(emission_node.outputs['Emission'], output_node.inputs['Surface'])
+    star_material = create_star_material(brightness)
 
     bpy.ops.mesh.primitive_uv_sphere_add(radius=random.uniform(0.1, 0.3), location=(star_x, star_y, star_z))
     star = bpy.context.object
     star.name = f"Star_{i}"
-    star.material_slots.create()
-    star.material_slots[0].material = star_material
+    star.data.materials.append(star_material)
 
 # 创建灯光
 # 太阳光（平行光）
@@ -216,8 +232,9 @@ if world is None:
     bpy.context.scene.world = world
 
 world.use_nodes = True
-bg_node = world.node_tree.nodes['Background']
-bg_node.inputs['Strength'].default_value = 0.1  # 暗色背景
+if 'Background' in world.node_tree.nodes:
+    bg_node = world.node_tree.nodes['Background']
+    bg_node.inputs['Strength'].default_value = 0.1
 
 # 添加一些反射光
 light_data = bpy.data.lights.new(name="ReflectionLight", type='POINT')
