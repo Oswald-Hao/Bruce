@@ -136,20 +136,6 @@ class Task:
             'status': self.status
         }
 
-    @classmethod
-    def from_dict(cls, data: dict) -> 'Task':
-        """从字典创建任务（简化版）"""
-        # 注意：这需要func可以从某个注册表获取
-        return cls(
-            task_id=data['task_id'],
-            func=lambda: None,  # 实际应用中需要从注册表获取
-            args=data.get('args', ()),
-            kwargs=data.get('kwargs', {}),
-            max_retries=data.get('max_retries', 3),
-            retry_delay=data.get('retry_delay', 1.0),
-            timeout=data.get('timeout')
-        )
-
 
 class CronTask(Task):
     """Cron定时任务"""
@@ -175,8 +161,28 @@ class CronTask(Task):
 
     def update_next_run_time(self):
         """更新下次运行时间"""
-        from .utils import calculate_next_run_time
-        self.next_run_time = calculate_next_run_time(self.cron_expr)
+        def calculate_next_run_time_simple(cron_expr, current_time=None):
+            """简化版的下次运行时间计算"""
+            from datetime import timedelta
+
+            if current_time is None:
+                current_time = datetime.now()
+
+            # 解析Cron表达式
+            parts = cron_expr.split()
+            minute = int(parts[0]) if parts[0] != '*' else current_time.minute
+            hour = int(parts[1]) if parts[1] != '*' else current_time.hour
+
+            # 构建下次运行时间
+            next_time = current_time.replace(minute=minute, hour=hour, second=0, microsecond=0)
+
+            # 如果已经过了这个时间，设置为明天
+            if next_time <= current_time:
+                next_time += timedelta(days=1)
+
+            return next_time
+
+        self.next_run_time = calculate_next_run_time_simple(self.cron_expr)
 
     def should_run(self) -> bool:
         """判断是否应该运行"""
