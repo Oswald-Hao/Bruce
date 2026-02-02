@@ -34,52 +34,11 @@ Bruce是一个自我进化的AI智能助手，目标是：
 
 ## 快速开始
 
-### 一键安装（推荐）
+### 克隆仓库
 
 ```bash
 git clone git@github.com:Oswald-Hao/Bruce.git
 cd Bruce
-./install.sh
-```
-
-**一键安装包括：**
-- 📦 Moltbot安装
-- ☁️ Cloudflared安装
-- 🐍 Python依赖安装
-- 🔄 自动推送配置
-- 👀 文件监听器启动
-
-### 手动安装
-
-#### 克隆仓库
-
-```bash
-git clone git@github.com:Oswald-Hao/Bruce.git
-cd Bruce
-```
-
-#### 安装Moltbot
-
-```bash
-# 使用安装脚本
-./tools/install-moltbot.sh
-
-# 或手动安装
-git clone https://github.com/moltbot/moltbot.git ~/moltbot
-cd ~/moltbot
-pnpm install
-```
-
-#### 安装Cloudflared
-
-```bash
-# 使用安装脚本
-./tools/install-cloudflared.sh
-
-# 或手动安装
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
-sudo chmod +x /usr/local/bin/cloudflared
 ```
 
 ### 系统要求
@@ -87,7 +46,7 @@ sudo chmod +x /usr/local/bin/cloudflared
 **必需：**
 - Linux系统（Ubuntu 20.04+推荐）
 - Python 3.8+
-- Node.js 14+（用于HomeKit服务）
+- Node.js 14+
 - Git
 
 **推荐：**
@@ -99,37 +58,22 @@ sudo chmod +x /usr/local/bin/cloudflared
 
 ## 部署步骤
 
-### 1. 运行一键安装（推荐）
+### 1. 克隆仓库
 
 ```bash
-./install.sh
+git clone git@github.com:Oswald-Hao/Bruce.git
+cd Bruce
 ```
 
-这会自动安装Moltbot和Cloudflared。
-
-### 2. 安装Moltbot（手动方式）
+### 2. 安装Moltbot依赖
 
 ```bash
-# 使用安装脚本
-./tools/install-moltbot.sh
-
-# 或手动安装
-git clone https://github.com/moltbot/moltbot.git ~/moltbot
-cd ~/moltbot
+# 安装Moltbot依赖（moltbot源代码已包含在vendor/moltbot/）
+cd vendor/moltbot
 pnpm install
 ```
 
-### 3. 安装Cloudflared（手动方式）
-
-```bash
-# 使用安装脚本
-./tools/install-cloudflared.sh
-
-# 或手动安装
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
-sudo chmod +x /usr/local/bin/cloudflared
-```
+### 3. 配置Moltbot
 
 ### 2. 配置Bruce
 
