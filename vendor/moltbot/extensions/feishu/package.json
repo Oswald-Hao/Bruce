@@ -1,0 +1,37 @@
+{
+  "name": "@moltbot/feishu",
+  "version": "2026.1.27-beta.1",
+  "type": "module",
+  "description": "Moltbot Feishu/Lark channel plugin",
+  "moltbot": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "channel": {
+      "id": "feishu",
+      "label": "Feishu",
+      "selectionLabel": "Feishu (飞书)",
+      "detailLabel": "Feishu",
+      "docsPath": "/channels/feishu",
+      "docsLabel": "feishu",
+      "blurb": "Feishu/Lark bot via HTTP webhooks.",
+      "aliases": [
+        "lark",
+        "feishu-bot"
+      ],
+      "order": 60
+    },
+    "install": {
+      "npmSpec": "@moltbot/feishu",
+      "localPath": "extensions/feishu",
+      "defaultChoice": "npm"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "moltbot": "workspace:*"
+  },
+  "peerDependencies": {
+    "moltbot": ">=2026.1.26"
+  }
+}
