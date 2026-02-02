@@ -215,6 +215,27 @@ export const feishuPlugin: ChannelPlugin<ResolvedFeishuAccount> = {
         messageTs: Date.now().toString(),
       };
     },
+    updateText: async ({ cfg, to, messageId, text, accountId }) => {
+      if (!to) {
+        throw missingTargetError({ channel: "Feishu" });
+      }
+
+      const account = resolveFeishuAccount({ cfg: cfg as MoltbotConfig, accountId });
+
+      const content = JSON.stringify({ text });
+
+      await updateFeishuMessage({
+        account,
+        messageId,
+        msgType: "text",
+        content,
+      });
+
+      return {
+        channelId: to,
+        messageTs: Date.now().toString(),
+      };
+    },
     sendMedia: async ({ cfg, to, mediaUrl, accountId }) => {
       if (!to) {
         throw missingTargetError({ channel: "Feishu" });
