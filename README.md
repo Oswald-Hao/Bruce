@@ -2,15 +2,23 @@
 
 *为Oswald而生的高效AI管家*
 
+---
+
 ## 📋 目录
 
 - [Bruce是什么](#bruce是什么)
 - [快速开始](#快速开始)
 - [系统要求](#系统要求)
 - [部署步骤](#部署步骤)
+- [Moltbot集成](#moltbot集成)
 - [自动推送说明](#自动推送说明)
 - [技能系统](#技能系统)
 - [HomeKit集成](#homekit集成)
+- [定时任务](#定时任务)
+- [记忆系统](#记忆系统)
+- [换电脑后使用](#换电脑后使用)
+- [故障排查](#故障排查)
+- [相关文档](#相关文档)
 
 ---
 
@@ -52,7 +60,6 @@ cd Bruce
 **推荐：**
 - 4GB+ RAM
 - 10GB+ 可用磁盘空间
-- 稳定的网络连接
 
 ---
 
@@ -65,63 +72,97 @@ git clone git@github.com:Oswald-Hao/Bruce.git
 cd Bruce
 ```
 
-### 2. 安装Moltbot依赖
+### 2. 安装Moltbot
+
+**Moltbot源代码已包含在vendor/moltbot/中，无需联网下载！**
 
 ```bash
-# 安装Moltbot依赖（moltbot源代码已包含在vendor/moltbot/）
 cd vendor/moltbot
 pnpm install
 ```
 
 ### 3. 配置Moltbot
 
-### 2. 配置Bruce
-
 ```bash
-# 复制配置文件
-cp MOLTBOT_CONFIG.example ~/.clawdbot/config.json
+# 复制配置模板到home目录
+cp ../../MOLTBOT_CONFIG.example ~/.clawdbot/config.json
 
 # 编辑配置
 vim ~/.clawdbot/config.json
 ```
 
-### 3. 设置技能目录
-
-```bash
-# 技能目录（Python技能）
-mkdir -p /home/lejurobot/clawd/skills
-
-# 工具目录
-mkdir -p /home/lejurobot/clawd/tools
-```
-
 ### 4. 启动Moltbot
 
 ```bash
-# 启动Moltbot
-moltbot gateway start
-
-# 查看状态
-moltbot status
+cd vendor/moltbot
+node moltbot.mjs gateway start
 ```
 
 ### 5. 配置自动推送（可选）
 
+**Git钩子（每次commit自动push）：**
 ```bash
-# Git钩子（每次commit自动push）
 chmod +x .git/hooks/post-commit
+```
 
-# 文件监听器（自动提交并推送）
+**文件监听器（自动提交并推送）：**
+```bash
 python3 tools/file-watcher.py /home/lejurobot/clawd 30
+```
+
+---
+
+## Moltbot集成
+
+### Moltbot是什么
+
+Moltbot是Bruce的核心框架，提供：
+- 💬 多平台消息接入（飞书、Telegram、WhatsApp等）
+- 🔧 技能系统（Skills）
+- 📊 代理系统（Agents）
+- ⏰ 定时任务（Cron）
+- 🎨 Canvas渲染
+- 🧠 记忆系统
+
+### 为什么包含在仓库里？
+
+**优点：**
+- ✅ 换电脑后clone仓库即可直接使用
+- ✅ 不需要联网下载Moltbot源代码
+- ✅ 保证版本一致
+- ✅ 完全离线可用
+
+**说明：**
+- ⚠️ vendor/moltbot/已包含完整源代码（49MB，已排除node_modules）
+- ⚠️ 配置文件在~/.clawdbot/（不在仓库中，保护敏感信息）
+- ⚠️ 需要运行`pnpm install`安装依赖
+
+### 快速命令
+
+```bash
+# 进入Moltbot目录
+cd vendor/moltbot
+
+# 启动Moltbot
+node moltbot.mjs gateway start
+
+# 查看状态
+node moltbot.mjs status
+
+# 重启
+node moltbot.mjs gateway restart
+
+# 停止
+node moltbot.mjs gateway stop
 ```
 
 ---
 
 ## 自动推送说明
 
-### 哪些文件会推送
+### 会推送的文件
 
-**会推送的文件：**
+**会自动推送：**
 - ✅ `skills/` - 所有技能代码
 - ✅ `tools/` - 工具脚本
 - ✅ `services/` - 服务配置
@@ -129,43 +170,21 @@ python3 tools/file-watcher.py /home/lejurobot/clawd 30
 - ✅ `*.md` - 所有Markdown文档
 - ✅ 根目录的配置文件（SOUL.md、MEMORY.md等）
 
-**不会推送的文件：**
-- ❌ `.git/` - Git系统文件
-- ❌ `node_modules/` - npm依赖（如果添加.gitignore）
+**不会推送：**
+- ❌ `vendor/moltbot/node_modules/` - npm依赖
 - ❌ `__pycache__/` - Python缓存
 - ❌ `*.pyc` - Python编译文件
-- ❌ `.DS_Store` - macOS系统文件
+- ❌ `~/.clawdbot/` - Moltbot配置（敏感信息）
+- ❌ `~/.cloudflared/` - Cloudflared配置（敏感信息）
 - ❌ 临时文件
-
-**建议：创建`.gitignore`**
-```gitignore
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-
-# Node
-node_modules/
-npm-debug.log*
-
-# macOS
-.DS_Store
-
-# 临时文件
-*.tmp
-*.swp
-*.bak
-*.log
-
-# 备份
-{{backup_dir}}
-```
 
 ### 推送方式
 
 #### 方式1：Git钩子（已启用）
+
+**工作方式：** 每次`git commit`后自动`git push`
+
+**使用方法：**
 ```bash
 git add .
 git commit -m "提交信息"
@@ -173,10 +192,21 @@ git commit -m "提交信息"
 ```
 
 #### 方式2：文件监听器（后台运行）
+
+**工作方式：** 监听文件变化，自动提交并推送
+
+**使用方法：**
 ```bash
 python3 tools/file-watcher.py /home/lejurobot/clawd 30
 # 监听文件变化，自动提交并推送
 ```
+
+**智能Commit信息：**
+- ✅ 自动识别新增、修改、删除的文件
+- ✅ 生成清晰的commit信息，例如：
+  - "自动更新：新增：README.md"
+  - "自动更新：修改：file-watcher.py"
+  - "自动更新：新增3个文件，删除1个文件"
 
 ---
 
@@ -277,33 +307,17 @@ node index.js
 
 ```bash
 # 查看所有任务
-moltbot cron list
+cd vendor/moltbot
+node moltbot.mjs cron list
 
 # 运行特定任务
-moltbot cron run <job-id>
+cd vendor/moltbot
+node moltbot.mjs cron run <job-id>
 
 # 禁用任务
-moltbot cron update <job-id> --disable
+cd vendor/moltbot
+node moltbot.mjs cron update <job-id> --disable
 ```
-
----
-
-## 文件说明
-
-### 核心文件
-
-- **SOUL.md** - Bruce的灵魂（身份和使命）
-- **IDENTITY.md** - Bruce的身份信息
-- **USER.md** - 用户信息（Oswald）
-- **MEMORY.md** - 长期记忆
-- **evolution-log.md** - 进化日志
-- **evolution-tasks.md** - 进化任务队列
-
-### 工具脚本
-
-- **tools/git-push.sh** - 手动推送脚本
-- **tools/file-watcher.py** - 文件监听器
-- **tools/auto-push-guide.md** - 自动推送说明
 
 ---
 
@@ -336,6 +350,44 @@ vim memory/$(date +%Y-%m-%d).md
 
 ---
 
+## 换电脑后使用
+
+### 1. 克隆仓库
+
+```bash
+git clone git@github.com:Oswald-Hao/Bruce.git
+cd Bruce
+```
+
+### 2. 安装Moltbot（完全离线）
+
+```bash
+cd vendor/moltbot
+pnpm install
+```
+
+### 3. 配置Moltbot
+
+```bash
+cp ../../MOLTBOT_CONFIG.example ~/.clawdbot/config.json
+vim ~/.clawdbot/config.json
+```
+
+### 4. 启动Moltbot
+
+```bash
+cd vendor/moltbot
+node moltbot.mjs gateway start
+```
+
+### 5. 启动文件监听器（可选）
+
+```bash
+python3 tools/file-watcher.py /home/lejurobot/clawd 30
+```
+
+---
+
 ## 故障排查
 
 ### 问题：无法推送代码
@@ -364,48 +416,39 @@ pip3 list
 python3 skills/<skill-name>/test_<skill-name>.py
 ```
 
-### 问题：HomeKit服务无法启动
+### 问题：Moltbot无法启动
 
 ```bash
-# 检查端口占用
-sudo netstat -tulpn | grep 18790
+# 检查日志
+cd vendor/moltbot
+node moltbot.mjs status
 
-# 查看服务日志
-sudo journalctl -u homekit-bruce -f
+# 检查配置
+cat ~/.clawdbot/config.json
+
+# 检查端口占用
+sudo netstat -tulpn | grep <port>
+```
+
+### 问题：文件监听器不工作
+
+```bash
+# 检查进程
+ps aux | grep file-watcher
+
+# 手动测试
+python3 tools/file-watcher.py /home/lejurobot/clawd 30
 ```
 
 ---
 
-## 开发指南
+## 相关文档
 
-### 创建新技能
-
-```bash
-# 1. 创建技能目录
-mkdir -p skills/new-skill
-
-# 2. 创建技能文件
-touch skills/new-skill/SKILL.md
-touch skills/new-skill/new_skill.py
-touch skills/new-skill/test_new_skill.py
-
-# 3. 更新进化日志
-vim evolution-log.md
-
-# 4. 提交并推送（自动）
-git add skills/new-skill
-git commit -m "新增技能：New Skill"
-```
-
-### 提交代码
-
-```bash
-# 添加所有更改
-git add .
-
-# 提交（会自动推送）
-git commit -m "描述更新内容"
-```
+- [DEPLOYMENT.md](DEPLOYMENT.md) - 完整部署指南
+- [COMPLETE.md](COMPLETE.md) - 集成完成总结
+- [vendor/moltbot/README.md](vendor/moltbot/README.md) - Moltbot详细说明
+- [services/homekit-bruce/SETUP_GUIDE.md](services/homekit-bruce/SETUP_GUIDE.md) - HomeKit配置指南
+- [tools/auto-push-guide.md](tools/auto-push-guide.md) - 自动推送详细说明
 
 ---
 
@@ -415,148 +458,9 @@ git commit -m "描述更新内容"
 
 **状态：**
 - 总技能数：63/200
+- Moltbot：✅ 已包含在vendor/moltbot/
 - 自动推送：✅ 已启用
 - HomeKit：✅ 已配置
-
----
-
-## Moltbot集成
-
-### Moltbot是什么
-
-Moltbot是Bruce的核心框架，提供：
-- 💬 多平台消息接入（飞书、Telegram、WhatsApp等）
-- 🔧 技能系统（Skills）
-- 📊 代理系统（Agents）
-- ⏰ 定时任务（Cron）
-- 🎨 Canvas渲染
-- 🧠 记忆系统
-
-### Moltbot安装
-
-**一键安装：**
-```bash
-./tools/install-moltbot.sh
-```
-
-**手动安装：**
-```bash
-git clone https://github.com/moltbot/moltbot.git ~/moltbot
-cd ~/moltbot
-pnpm install
-```
-
-**配置Moltbot：**
-```bash
-# 创建配置文件
-cp ~/moltbot/.env.example ~/.clawdbot/config.json
-
-# 编辑配置
-vim ~/.clawdbot/config.json
-```
-
-**启动Moltbot：**
-```bash
-cd ~/moltbot
-node moltbot.mjs gateway start
-```
-
-**查看状态：**
-```bash
-moltbot status
-```
-
-### Cloudflared集成
-
-### Cloudflared是什么
-
-Cloudflared是Cloudflare的隧道服务，用于：
-- 🌐 内网穿透，将HomeKit服务暴露到公网
-- 🔒 安全连接，使用Cloudflare加密隧道
-- ⚡ 全球加速，使用Cloudflare CDN
-
-### Cloudflared安装
-
-**一键安装：**
-```bash
-./tools/install-cloudflared.sh
-```
-
-**手动安装：**
-```bash
-# 下载最新版本
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-
-# 安装到系统
-sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
-sudo chmod +x /usr/local/bin/cloudflared
-
-# 验证安装
-cloudflared --version
-```
-
-### Cloudflared使用
-
-**登录账户：**
-```bash
-cloudflared tunnel login
-```
-
-**创建隧道：**
-```bash
-cloudflared tunnel create bruce-homekit
-```
-
-**配置隧道：**
-```bash
-# 创建配置文件
-mkdir -p ~/.cloudflared
-vim ~/.cloudflared/config.yml
-```
-
-**配置示例：**
-```yaml
-tunnel: <tunnel-id>
-credentials-file: /home/lejurobot/.cloudflared/<tunnel-id>.json
-
-ingress:
-  - hostname: bruce.yourdomain.com
-    service: http://localhost:18790
-  - service: http_status:404
-```
-
-**运行隧道：**
-```bash
-cloudflared tunnel run bruce-homekit
-```
-
-**设置为系统服务：**
-```bash
-sudo cloudflared service install
-sudo systemctl enable cloudflared
-sudo systemctl start cloudflared
-```
-
-### 集成说明
-
-**Moltbot和Cloudflared都通过Bruce仓库管理：**
-- 📦 安装脚本：`tools/install-moltbot.sh`、`tools/install-cloudflared.sh`
-- 🚀 一键安装：`./install.sh`（同时安装两者）
-- 📚 使用文档：本文档
-- 🔧 配置文件：各自独立的配置目录
-
-**目录结构：**
-```
-Bruce/
-├── tools/
-│   ├── install-moltbot.sh      # Moltbot安装脚本
-│   ├── install-cloudflared.sh   # Cloudflared安装脚本
-│   └── install.sh              # 一键安装脚本
-├── vendor/
-│   └── moltbot/                # Moltbot（克隆后安装）
-└── services/
-    └── homekit-bruce/          # HomeKit服务（使用Cloudflared隧道）
-```
 
 ---
 
@@ -575,4 +479,4 @@ Bruce/
 ---
 
 **最后更新：** 2026-02-02  
-**当前版本：** v1.0.0
+**当前版本：** v1.1.0
