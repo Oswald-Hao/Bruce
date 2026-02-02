@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.1.27-beta.1",
+    "lastTouchedAt": "2026-01-29T07:12:50.292Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-01-29T01:35:41.258Z",
+    "lastRunVersion": "2026.1.27-beta.1",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "zai:default": {
+        "provider": "zai",
+        "mode": "api_key"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "zai/glm-4.7"
+      },
+      "models": {
+        "zai/glm-4.7": {
+          "alias": "GLM"
+        }
+      },
+      "workspace": "/home/lejurobot/clawd",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "channels": {
+    "imessage": {
+      "enabled": true,
+      "cliPath": "imsg",
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist"
+    },
+    "feishu": {
+      "appId": "cli_a9f05a5e0378dcb0",
+      "appSecret": "KdosR8d6vhlLdM6yP9nrUdSwb2VoevJr",
+      "webhookPath": "/feishu/default",
+      "enabled": true,
+      "dm": {
+        "policy": "pairing",
+        "allowFrom": []
+      },
+      "groupPolicy": "all"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "lan",
+    "auth": {
+      "mode": "token",
+      "token": "qwe748868317"
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "imessage": {
+        "enabled": true
+      },
+      "feishu": {
+        "enabled": true
+      }
+    }
+  }
+}
