@@ -120,6 +120,15 @@ class FeishuMessageUpdater:
         Returns:
             消息ID
         """
+        # 深度复制卡片，避免修改原始数据
+        card_copy = json.loads(json.dumps(card))
+
+        # 转换header.title为字符串格式
+        if 'header' in card_copy and 'title' in card_copy['header']:
+            title_obj = card_copy['header']['title']
+            if isinstance(title_obj, dict) and 'content' in title_obj:
+                card_copy['header']['title'] = title_obj['content']
+
         token = self.get_tenant_access_token()
 
         url = f"{self.base_url}/message/v4/send?receive_id_type=open_id"
@@ -132,7 +141,7 @@ class FeishuMessageUpdater:
             "receive_id": user_id,
             "receive_id_type": "open_id",
             "msg_type": "interactive",
-            "content": {"card": card},  # 使用对象，不是字符串
+            "content": {"card": card_copy},  # 使用对象，不是字符串
             "uuid": str(int(time.time() * 1000))
         }
 
@@ -159,16 +168,26 @@ class FeishuMessageUpdater:
         Returns:
             是否成功
         """
+        # 深度复制卡片，避免修改原始数据
+        card_copy = json.loads(json.dumps(card))
+
+        # 转换header.title为字符串格式
+        if 'header' in card_copy and 'title' in card_copy['header']:
+            title_obj = card_copy['header']['title']
+            if isinstance(title_obj, dict) and 'content' in title_obj:
+                card_copy['header']['title'] = title_obj['content']
+
         token = self.get_tenant_access_token()
 
         url = f"{self.base_url}/im/v1/messages/{message_id}/update"
         headers = {
             "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-Custom-Auth": "t-g1041tjP63RE55E7GSZH6CRXVRNRO7VPUKKZX6JU"  # 自定义认证头
         }
         data = {
             "msg_type": "interactive",
-            "content": {"card": card}  # 使用对象而不是字符串
+            "content": {"card": card_copy}  # 使用对象，不是字符串
         }
 
         response = requests.put(url, headers=headers, json=data)
