@@ -1,0 +1,21 @@
+{
+  "name": "resource-monitor",
+  "version": "1.0.0",
+  "description": "Resource Monitor - 系统资源监控系统",
+  "author": "Bruce",
+  "created": "2026-02-01",
+  "category": "system",
+  "keywords": ["monitor", "system", "cpu", "memory", "disk", "network"],
+  "dependencies": {
+    "python": ">=3.8",
+    "psutil": ">=5.9.0"
+  },
+  "install": "pip3 install psutil",
+  "main": "monitor.py",
+  "skills": [
+    "monitor": "监控系统资源使用情况",
+    "check": "检查资源是否超限",
+    "alert": "资源超限报警",
+    "history": "查看历史数据"
+  ]
+}
