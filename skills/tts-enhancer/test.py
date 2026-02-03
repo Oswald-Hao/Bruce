@@ -19,25 +19,28 @@ def test_initialization():
 
     try:
         # Mock所有引擎依赖
-        with patch('tts.pyttsx3', create=True) as mock_py:
-            with patch('tts.gtts', create=True) as mock_gtts:
-                with patch('tts.edge_tts', create=True) as mock_edge:
+        sys.modules['pyttsx3'] = MagicMock()
+        sys.modules['gtts'] = MagicMock()
+        sys.modules['edge_tts'] = MagicMock()
+        sys.modules['azure.cognitiveservices.speech'] = MagicMock()
 
-                    # 测试system引擎
-                    from tts import TTSEnhancer
-                    enhancer = TTSEnhancer(engine="system")
-                    assert enhancer.engine == "system", "引擎类型错误"
-                    print("  ✓ System引擎初始化")
+        # 测试不同的引擎
+        from tts import TTSEnhancer
 
-                    # 测试gtts引擎
-                    enhancer = TTSEnhancer(engine="gtts")
-                    assert enhancer.engine == "gtts", "引擎类型错误"
-                    print("  ✓ gTTS引擎初始化")
+        # 测试system引擎
+        enhancer = TTSEnhancer(engine="system")
+        assert enhancer.engine == "system", "引擎类型错误"
+        print("  ✓ System引擎初始化")
 
-                    # 测试edge引擎
-                    enhancer = TTSEnhancer(engine="edge")
-                    assert enhancer.engine == "edge", "引擎类型错误"
-                    print("  ✓ Edge引擎初始化")
+        # 测试gtts引擎
+        enhancer = TTSEnhancer(engine="gtts")
+        assert enhancer.engine == "gtts", "引擎类型错误"
+        print("  ✓ gTTS引擎初始化")
+
+        # 测试edge引擎
+        enhancer = TTSEnhancer(engine="edge")
+        assert enhancer.engine == "edge", "引擎类型错误"
+        print("  ✓ Edge引擎初始化")
 
         print("  ✓ 引擎初始化测试通过")
         return True
@@ -54,32 +57,32 @@ def test_synthesize_mock():
     print("\n测试2: 语音合成功能（模拟模式）")
 
     try:
-        with patch('tts.pyttsx3', create=True) as mock_py:
-            # Mock pyttsx3
-            mock_engine = MagicMock()
-            mock_engine.getProperty.return_value = []
-            mock_engine.runAndWait.return_value = None
-            mock_py.init.return_value = mock_engine
+        # Mock pyttsx3
+        sys.modules['pyttsx3'] = MagicMock()
+        mock_engine = MagicMock()
+        mock_engine.getProperty.return_value = []
+        mock_engine.runAndWait.return_value = None
+        sys.modules['pyttsx3'].init.return_value = mock_engine
 
-            from tts import TTSEnhancer
+        from tts import TTSEnhancer
 
-            enhancer = TTSEnhancer(engine="system")
+        enhancer = TTSEnhancer(engine="system")
 
-            # Mock临时文件创建
-            with patch('tempfile.NamedTemporaryFile') as mock_temp:
-                mock_temp.return_value.name = "/tmp/test_output.wav"
+        # Mock临时文件创建
+        with patch('tts.tempfile.NamedTemporaryFile') as mock_temp:
+            mock_temp.return_value.name = "/tmp/test_output.wav"
 
-                # 测试合成
-                output = enhancer.synthesize(
-                    "测试文本",
-                    voice="zh-CN",
-                    rate=1.0,
-                    output=None
-                )
+            # 测试合成
+            output = enhancer.synthesize(
+                "测试文本",
+                voice="zh-CN",
+                rate=1.0,
+                output=None
+            )
 
-                # 验证
-                assert output is not None, "输出为空"
-                print(f"  ✓ 语音合成测试通过")
+            # 验证
+            assert output is not None, "输出为空"
+            print(f"  ✓ 语音合成测试通过")
 
         return True
 
@@ -95,27 +98,28 @@ def test_emotion_mapping():
     print("\n测试3: 情感映射")
 
     try:
+        sys.modules['pyttsx3'] = MagicMock()
+
         from tts import TTSEnhancer
-        with patch('tts.pyttsx3', create=True):
-            enhancer = TTSEnhancer(engine="system")
+        enhancer = TTSEnhancer(engine="system")
 
-            # 测试SSML情感转换
-            assert enhancer._emotion_to_style("happy") == "cheerful"
-            assert enhancer._emotion_to_style("sad") == "sad"
-            assert enhancer._emotion_to_style("angry") == "angry"
-            print("  ✓ 情感类型映射")
+        # 测试SSML情感转换
+        assert enhancer._emotion_to_style("happy") == "cheerful"
+        assert enhancer._emotion_to_style("sad") == "sad"
+        assert enhancer._emotion_to_style("angry") == "angry"
+        print("  ✓ 情感类型映射")
 
-            # 测试语速转换
-            assert enhancer._rate_to_ssml(0.5) == "0.5"
-            assert enhancer._rate_to_ssml(1.0) == "1.0"
-            assert enhancer._rate_to_ssml(2.0) == "2.0"
-            print("  ✓ 语速转换")
+        # 测试语速转换
+        assert enhancer._rate_to_ssml(0.5) == "0.5"
+        assert enhancer._rate_to_ssml(1.0) == "1.0"
+        assert enhancer._rate_to_ssml(2.0) == "2.0"
+        print("  ✓ 语速转换")
 
-            # 测试音调转换
-            assert enhancer._pitch_to_ssml(0.5) == "-20%"
-            assert enhancer._pitch_to_ssml(1.0) == "+0%"
-            assert enhancer._pitch_to_ssml(1.5) == "+10%"
-            print("  ✓ 音调转换")
+        # 测试音调转换
+        assert enhancer._pitch_to_ssml(0.5) == "-20%"
+        assert enhancer._pitch_to_ssml(1.0) == "+0%"
+        assert enhancer._pitch_to_ssml(1.5) == "+10%"
+        print("  ✓ 音调转换")
 
         print("  ✓ 情感映射测试通过")
         return True
