@@ -390,15 +390,53 @@ async function processFeishuMessageAsync(data: any) {
             }
           }
 
-          // Send final reply
-          await sendFeishuMessage({
-            account,
-            receiveId: channelId,
-            receiveIdType: replyIdType,
-            msgType: "text",
-            content: { text },
-          });
-          console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ Final reply sent successfully`);
+          // Determine message type based on text length
+          // Use card (interactive) for long messages to support Markdown
+          const TEXT_THRESHOLD = 200; // Use card for messages longer than 200 chars
+          const useCard = text.length > TEXT_THRESHOLD;
+
+          if (useCard) {
+            console.log(`[feishu] [ASYNC] [DISPATCHER] Using card format (text length: ${text.length} chars)`);
+
+            // Create card with Markdown content
+            const card = {
+              config: { wide_screen_mode: true },
+              header: {
+                title: {
+                  content: "Moltbot 回复",
+                  tag: "plain_text",
+                },
+                template: "blue",
+              },
+              elements: [
+                {
+                  tag: "div",
+                  text: {
+                    tag: "lark_md",
+                    content: text,
+                  },
+                },
+              ],
+            };
+
+            await sendFeishuMessage({
+              account,
+              receiveId: channelId,
+              receiveIdType: replyIdType,
+              msgType: "interactive",
+              content: { card: card },
+            });
+          } else {
+            // Short message - use plain text
+            await sendFeishuMessage({
+              account,
+              receiveId: channelId,
+              receiveIdType: replyIdType,
+              msgType: "text",
+              content: { text },
+            });
+          }
+          console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ Final reply sent successfully (${useCard ? 'card' : 'text'})`);
         }
 
         return true;
