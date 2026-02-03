@@ -136,12 +136,14 @@ export const sendFeishuMessage = async ({
   receiveIdType = "open_id",
   msgType = "text",
   content,
+  parentId,
 }: {
   account: ResolvedFeishuAccount;
   receiveId: string;
   receiveIdType?: "open_id" | "user_id" | "union_id" | "chat_id";
   msgType?: "text" | "post" | "image" | "file" | "audio" | "video" | "media" | "interactive";
   content: string | Record<string, unknown>;
+  parentId?: string;
 }): Promise<FeishuSendMessageResponse> => {
   const token = await getTenantAccessToken(account);
 
@@ -163,13 +165,19 @@ export const sendFeishuMessage = async ({
   // 2. receive_id AND open_id/chat_id field BOTH in body
   // 3. msg_type in body
   // 4. content as an OBJECT (not JSON string!)
-  const requestBody = {
+  // 5. parent_id for reply threading (optional)
+  const requestBody: Record<string, unknown> = {
     receive_id: receiveId,
     [receiveIdType]: receiveId,  // Add explicit open_id or chat_id field
     msg_type: msgType,
     content: contentObj,  // Use object directly, not JSON string!
     uuid: crypto.randomUUID(),
   };
+
+  // Add parent_id if provided (for reply threading)
+  if (parentId) {
+    requestBody.parent_id = parentId;
+  }
 
   console.log(`[feishu] [API] Sending message:`);
   console.log(`[feishu] [API]   receive_id: ${receiveId}`);
@@ -409,6 +417,110 @@ export const verifyFeishuWebhook = ({
 
   // Compare signatures
   return signature === computedSignature;
+};
+
+/**
+ * Add typing indicator (via emoji reaction) to a message
+ * Uses Feishu's special "Typing" emoji to show "typing" status
+ * @see https://open.feishu.cn/document/server-docs/im-v1/message-reaction/create
+ */
+export const addTypingIndicator = async ({
+  account,
+  messageId,
+}: {
+  account: ResolvedFeishuAccount;
+  messageId: string;
+}): Promise<string | null> => {
+  const token = await getTenantAccessToken(account);
+
+  // Feishu emoji for typing indicator
+  // Note: "Typing" emoji may not exist, using common emojis instead
+  // Try different emojis: "THINKING", "WAVE", "SMILE"
+  const requestBody = {
+    reaction_type: {
+      emoji_type: "THINKING",  // Use THINKING emoji instead of Typing
+    },
+  };
+
+  console.log(`[feishu] [API] Adding typing indicator to message: ${messageId}`);
+
+  const response = await fetch(
+    `${getApiBaseUrl(account.config.appType)}/im/v1/messages/${messageId}/reactions`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(requestBody),
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`[feishu] [API] Failed to add typing indicator: ${response.status} ${response.statusText}`);
+    console.error(`[feishu] [API] Error response:`, errorText);
+    return null;
+  }
+
+  const data: {
+    code: number;
+    msg?: string;
+    data?: {
+      reaction_id: string;
+    };
+  } = await response.json();
+
+  if (data.code !== 0 || !data.data?.reaction_id) {
+    console.error(`[feishu] [API] Add typing indicator failed:`, data);
+    return null;
+  }
+
+  console.log(`[feishu] [API] ✓ Typing indicator added! reaction_id: ${data.data.reaction_id}`);
+  return data.data.reaction_id;
+};
+
+/**
+ * Remove a reaction from a message (used to remove typing indicator)
+ * @see https://open.feishu.cn/document/server-docs/im-v1/message-reaction/delete
+ */
+export const removeReaction = async ({
+  account,
+  messageId,
+  reactionId,
+}: {
+  account: ResolvedFeishuAccount;
+  messageId: string;
+  reactionId: string;
+}): Promise<boolean> => {
+  const token = await getTenantAccessToken(account);
+
+  console.log(`[feishu] [API] Removing reaction: ${reactionId} from message: ${messageId}`);
+
+  const response = await fetch(
+    `${getApiBaseUrl(account.config.appType)}/im/v1/messages/${messageId}/reactions/${reactionId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    console.error(`[feishu] [API] Failed to remove reaction: ${response.statusText}`);
+    return false;
+  }
+
+  const data: { code: number; msg?: string } = await response.json();
+
+  if (data.code !== 0) {
+    console.error(`[feishu] [API] Remove reaction failed:`, data);
+    return false;
+  }
+
+  console.log(`[feishu] [API] ✓ Reaction removed successfully!`);
+  return true;
 };
 
 /**

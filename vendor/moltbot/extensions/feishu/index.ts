@@ -8,7 +8,7 @@ import { loadConfig } from "../../src/config/config.js";
 
 // Pre-import dispatch modules to avoid slow dynamic imports
 import { dispatchInboundMessage } from "../../src/auto-reply/dispatch.js";
-import { sendFeishuMessage, uploadFeishuImage } from "./src/api.js";
+import { sendFeishuMessage, uploadFeishuImage, updateFeishuMessage, addTypingIndicator, removeReaction } from "./src/api.js";
 
 // Message deduplication cache (persisted to disk)
 import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync, statSync } from "node:fs";
@@ -116,6 +116,10 @@ async function processFeishuMessageAsync(data: any) {
 
   console.log(`[feishu] [ASYNC] [1/6] Message extracted: senderId=${senderId}, chatType=${message?.chat_type}`);
 
+  // Extract original message ID for reply threading
+  const originalMessageId = message?.message_id;
+  console.log(`[feishu] [ASYNC] [1/6] Original message ID: ${originalMessageId}`);
+
   // For sending replies:
   // - P2P (private chat): use sender's open_id
   // - Group chat: use chat_id
@@ -137,6 +141,30 @@ async function processFeishuMessageAsync(data: any) {
 
   // Track if sendFinalReply has been called to prevent duplicates
   let sendFinalCalled = false;
+  let typingReactionId: string | null = null;
+
+  // Function to send "typing" indicator (via emoji reaction)
+  const sendThinkingCard = async () => {
+    try {
+      // Add "Typing" emoji reaction to user's message
+      const reactionId = await addTypingIndicator({
+        account,
+        messageId: originalMessageId,
+      });
+
+      if (reactionId) {
+        typingReactionId = reactionId;
+        console.log(`[feishu] [ASYNC] ✓ Typing indicator added, reaction_id: ${typingReactionId}`);
+      }
+    } catch (error) {
+      console.error(`[feishu] [ASYNC] ✗ Failed to add typing indicator:`, error);
+    }
+  };
+
+  // Send thinking card immediately
+  sendThinkingCard().catch((e) => {
+    console.error(`[feishu] [ASYNC] Failed to send thinking card:`, e);
+  });
 
   // Create dispatcher for sending replies
   console.log(`[feishu] [ASYNC] [4/6] Creating reply dispatcher...`);
@@ -346,6 +374,23 @@ async function processFeishuMessageAsync(data: any) {
         } else {
           // No media - just send text
           console.log(`[feishu] [ASYNC] [DISPATCHER] Sending final reply: ${text.substring(0, 100)}...`);
+
+          // Remove typing indicator before sending final reply
+          if (typingReactionId) {
+            try {
+              await removeReaction({
+                account,
+                messageId: originalMessageId,
+                reactionId: typingReactionId,
+              });
+              console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ Typing indicator removed`);
+              typingReactionId = null;
+            } catch (removeError) {
+              console.error(`[feishu] [ASYNC] [DISPATCHER] ✗ Failed to remove typing indicator:`, removeError);
+            }
+          }
+
+          // Send final reply
           await sendFeishuMessage({
             account,
             receiveId: channelId,
@@ -371,11 +416,26 @@ async function processFeishuMessageAsync(data: any) {
     },
     waitForIdle: async () => {
       console.log(`[feishu] [ASYNC] [DISPATCHER] waitForIdle called - waiting for processing...`);
-      // Wait for processing to complete (or timeout after 60 seconds)
-      const timeout = new Promise<void>((_, reject) =>
-        setTimeout(() => reject(new Error("waitForIdle timeout")), 60000)
-      );
-      await Promise.race([processingComplete, timeout]);
+      // If processingComplete is still pending after a long delay, resolve it ourselves.
+      // This handles the case where agent returns NO_REPLY (no sendFinalReply call).
+      // Give agent enough time to process (30 seconds) before giving up.
+      const fallbackTimeout = setTimeout(() => {
+        if (resolveProcessing) {
+          console.log(`[feishu] [ASYNC] [DISPATCHER] No reply received after 30s, signaling processing complete (NO_REPLY or timeout?)`);
+          // Remove typing indicator on timeout
+          if (typingReactionId) {
+            removeReaction({
+              account,
+              messageId: originalMessageId,
+              reactionId: typingReactionId,
+            }).catch((e) => console.error(`[feishu] Failed to remove typing indicator on timeout:`, e));
+            typingReactionId = null;
+          }
+          resolveProcessing();
+        }
+      }, 30000); // 30 second fallback for NO_REPLY/timeout case
+      await processingComplete;
+      clearTimeout(fallbackTimeout);
       console.log(`[feishu] [ASYNC] [DISPATCHER] waitForIdle - processing complete`);
     },
     getQueuedCounts: () => {
@@ -424,10 +484,15 @@ async function processFeishuMessageAsync(data: any) {
       dispatcher,
     });
     console.log(`[feishu] [ASYNC] [5/6] Dispatch result:`, result);
-    // Note: dispatchInboundMessage internally calls waitForIdle, so we don't need to call it again
   } catch (error) {
     console.error(`[feishu] [ASYNC] [ERROR] Dispatch failed:`, error);
     console.error(`[feishu] [ASYNC] [ERROR] Error stack:`, error.stack);
+  } finally {
+    // Ensure processingComplete is resolved even if no reply was sent (e.g., NO_REPLY)
+    if (resolveProcessing) {
+      console.log(`[feishu] [ASYNC] Signaling processing complete (dispatch finished)`);
+      resolveProcessing();
+    }
   }
 
   console.log(`[feishu] ============================================`);
