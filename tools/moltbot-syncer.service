@@ -1,0 +1,14 @@
+[Unit]
+Description=Bruce Moltbot Syncer - 监听moltbot变化并同步到clawd
+After=network.target
+
+[Service]
+Type=simple
+User=lejurobot
+WorkingDirectory=/home/lejurobot/clawd
+ExecStart=/usr/bin/python3 /home/lejurobot/clawd/tools/moltbot-sync.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
