@@ -136,23 +136,24 @@ def test_ssml_generation():
     print("\n测试4: SSML生成")
 
     try:
+        sys.modules['pyttsx3'] = MagicMock()
+
         from tts import TTSEnhancer
-        with patch('tts.pyttsx3', create=True):
-            enhancer = TTSEnhancer(engine="system")
+        enhancer = TTSEnhancer(engine="system")
 
-            # 测试SSML生成
-            ssml = enhancer._apply_emotion_ssml(
-                "你好世界",
-                emotion="happy",
-                rate=1.0,
-                pitch=1.0
-            )
+        # 测试SSML生成
+        ssml = enhancer._apply_emotion_ssml(
+            "你好世界",
+            emotion="happy",
+            rate=1.0,
+            pitch=1.0
+        )
 
-            assert "<speak>" in ssml, "缺少<speak>标签"
-            assert "你好世界" in ssml, "缺少原始文本"
-            assert "cheerful" in ssml, "缺少情感样式"
-            assert "prosody" in ssml, "缺少prosody标签"
-            print("  ✓ SSML生成")
+        assert "<speak>" in ssml, "缺少<speak>标签"
+        assert "你好世界" in ssml, "缺少原始文本"
+        assert "cheerful" in ssml, "缺少情感样式"
+        assert "prosody" in ssml, "缺少prosody标签"
+        print("  ✓ SSML生成")
 
         print("  ✓ SSML生成测试通过")
         return True
