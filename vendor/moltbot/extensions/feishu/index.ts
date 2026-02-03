@@ -402,10 +402,7 @@ async function processFeishuMessageAsync(data: any) {
             const card = {
               config: { wide_screen_mode: true },
               header: {
-                title: {
-                  content: "Moltbot 回复",
-                  tag: "plain_text",
-                },
+                title: "Moltbot 回复",
                 template: "blue",
               },
               elements: [
