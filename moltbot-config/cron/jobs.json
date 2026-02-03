@@ -58,7 +58,7 @@
       "name": "AI资讯收集",
       "enabled": true,
       "createdAtMs": 1769732676759,
-      "updatedAtMs": 1770082536477,
+      "updatedAtMs": 1770082648538,
       "schedule": {
         "kind": "cron",
         "expr": "30 9 * * *",
@@ -68,7 +68,7 @@
       "wakeMode": "next-heartbeat",
       "payload": {
         "kind": "agentTurn",
-        "message": "使用SerpAPI搜索今天最新的AI和机器人相关资讯（至少5-8条），包括以下内容：\n\n**搜索关键词（每天轮换2-3个）**：\n1. AI最新资讯\n2. 机器人算法\n3. AI算法\n4. 机器人技术\n5. 人工智能前沿\n\n**每条资讯包括**：\n- 标题\n- 链接地址\n- 发布时间\n- 内容摘要\n- 功能简介/核心观点\n\n**格式要求**：\n- 使用清晰的列表格式\n- 重要信息突出显示\n- 便于快速浏览\n\n**使用方法**：\npython3 /home/lejurobot/clawd/skills/serpapi-search/search.py \"搜索关键词\" 3-5\n\n**注意事项**：\n- API免费额度：每月100次查询\n- 每天搜索2-3个关键词，每个关键词返回3-5条结果\n- 避免重复搜索相同内容\n- 优先搜索机器人算法、路径规划、强化学习、SLAM等核心技术",
+        "message": "使用SerpAPI搜索今天最新的AI和机器人相关资讯（至少5-8条），包括以下内容：\n\n**搜索关键词（每天轮换2-3个，优先VLA相关）**：\n1. **VLA机器人** ⭐️重点\n2. **VLA模型** ⭐️重点\n3. **Vision-Language-Action** ⭐️重点\n4. 机器人算法\n5. AI算法\n6. 机器人技术\n7. 人工智能前沿\n\n**每条资讯包括**：\n- 标题\n- 链接地址\n- 发布时间\n- 内容摘要\n- 功能简介/核心观点\n\n**格式要求**：\n- 使用清晰的列表格式\n- 重要信息突出显示\n- 便于快速浏览\n\n**VLA重点关注方向**：\n- Vision-Language-Action模型进展\n- 机器人视觉-语言-动作融合\n- VLA在机器人中的应用\n- VLA算法优化和改进\n- 开源VLA模型和项目\n\n**使用方法**：\npython3 /home/lejurobot/clawd/skills/serpapi-search/search.py \"搜索关键词\" 3-5\n\n**注意事项**：\n- API免费额度：每月100次查询\n- 每天搜索2-3个关键词，每个关键词返回3-5条结果\n- 优先搜索VLA相关内容\n- 避免重复搜索相同内容",
         "to": "ou_ac30832212aa13310b80594b6a24b8d9",
         "channel": "feishu",
         "deliver": true
