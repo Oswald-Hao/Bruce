@@ -121,11 +121,10 @@ async function processFeishuMessageAsync(data: any) {
   console.log(`[feishu] [ASYNC] [1/6] Original message ID: ${originalMessageId}`);
 
   // For sending replies:
-  // - P2P (private chat): use sender's open_id
-  // - Group chat: use chat_id
-  const isPrivateChat = message?.chat_type === "p2p";
-  const channelId = isPrivateChat ? senderId : (message?.chat_id || senderId);
-  const replyIdType = isPrivateChat ? "open_id" : "chat_id";
+  // - P2P (private chat): use chat_id with chat_id type
+  // - Group chat: use chat_id with chat_id type
+  const channelId = message?.chat_id || senderId;
+  const replyIdType = "chat_id";
 
   console.log(`[feishu] [ASYNC] [2/6] Reply target resolved: channelId=${channelId}, replyIdType=${replyIdType}`);
 
