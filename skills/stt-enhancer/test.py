@@ -262,10 +262,9 @@ def test_api_structure():
         import inspect
 
         # 检查STTEnhancer类
-        methods = [name for name, _ in inspect.getmembers(STTEnhancer, predicate=inspect.ismethod)]
-        assert "__init__" in methods, "缺少__init__方法"
-        assert "transcribe" in methods, "缺少transcribe方法"
-        assert "save_transcript" in methods, "缺少save_transcript方法"
+        members = [name for name in dir(STTEnhancer) if not name.startswith('_') or name == '__init__']
+        assert "transcribe" in members, "缺少transcribe方法"
+        assert "save_transcript" in members, "缺少save_transcript方法"
 
         print(f"  ✓ STTEnhancer API完整")
 
