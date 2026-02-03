@@ -401,7 +401,10 @@ async function processFeishuMessageAsync(data: any) {
             // Create card with plain text (avoid markdown parsing issues)
             const card = {
               header: {
-                title: "Moltbot 回复",
+                title: {
+                  content: "Moltbot 回复",
+                  tag: "plain_text",
+                },
                 template: "blue",
               },
               elements: [
