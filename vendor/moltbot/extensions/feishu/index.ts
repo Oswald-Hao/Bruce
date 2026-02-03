@@ -398,9 +398,8 @@ async function processFeishuMessageAsync(data: any) {
           if (useCard) {
             console.log(`[feishu] [ASYNC] [DISPATCHER] Using card format (text length: ${text.length} chars)`);
 
-            // Create card with Markdown content
+            // Create card with plain text (avoid markdown parsing issues)
             const card = {
-              config: { wide_screen_mode: true },
               header: {
                 title: "Moltbot 回复",
                 template: "blue",
@@ -409,7 +408,7 @@ async function processFeishuMessageAsync(data: any) {
                 {
                   tag: "div",
                   text: {
-                    tag: "lark_md",
+                    tag: "plain_text",
                     content: text,
                   },
                 },
