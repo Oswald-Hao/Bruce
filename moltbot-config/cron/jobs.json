@@ -86,7 +86,7 @@
       "name": "健身提醒",
       "enabled": true,
       "createdAtMs": 1769732687733,
-      "updatedAtMs": 1770028200014,
+      "updatedAtMs": 1770114600000,
       "schedule": {
         "kind": "cron",
         "expr": "30 18 * * *",
@@ -102,10 +102,10 @@
         "deliver": true
       },
       "state": {
-        "nextRunAtMs": 1770114600000,
-        "lastRunAtMs": 1770028200014,
+        "nextRunAtMs": 1770201000000,
+        "lastRunAtMs": 1770114600001,
         "lastStatus": "ok",
-        "lastDurationMs": 26456
+        "lastDurationMs": 11908
       }
     },
     {
