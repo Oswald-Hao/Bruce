@@ -29,6 +29,7 @@ import {
 import {
   normalizeFeishuTarget,
   formatFeishuTarget,
+  looksLikeFeishuTargetId,
 } from "./targets.js";
 
 const meta = getChatChannelMeta("feishu");
