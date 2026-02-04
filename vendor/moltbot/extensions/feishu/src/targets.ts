@@ -111,6 +111,32 @@ export const formatFeishuTarget = (target: string): {
 };
 
 /**
+ * Check if a string looks like a Feishu target ID
+ */
+export const looksLikeFeishuTargetId = (raw: string, normalized?: string): boolean => {
+  const trimmed = raw.trim();
+  if (!trimmed) return false;
+
+  // Check if it starts with Feishu ID prefixes
+  if (trimmed.startsWith("ou_") || trimmed.startsWith("oc_") || trimmed.startsWith("on_")) {
+    return true;
+  }
+
+  // Check if it has explicit type prefixes
+  if (/^open_id:/i.test(trimmed) || /^user_id:/i.test(trimmed) ||
+      /^union_id:/i.test(trimmed) || /^chat_id:/i.test(trimmed)) {
+    return true;
+  }
+
+  // Check if it has channel prefix
+  if (/^(feishu|lark|feishu-bot):/i.test(trimmed)) {
+    return true;
+  }
+
+  return false;
+};
+
+/**
  * Resolve target display name
  */
 export const resolveFeishuTargetDisplayName = ({
