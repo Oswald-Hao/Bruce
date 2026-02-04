@@ -114,6 +114,7 @@ class DocGenerator:
         features_html = '\n'.join([f'- {f}' for f in features]) if features else ''
 
         # 避免在f-string中使用反斜杠
+        default_features = '- Feature 1\n- Feature 2\n- Feature 3'
         default_usage = 'from project import main\nmain()'
 
         return f"""# {project_name or 'Project'}
@@ -122,7 +123,7 @@ class DocGenerator:
 
 ## Features
 
-{features_html or '- Feature 1\n- Feature 2\n- Feature 3'}
+{features_html or default_features}
 
 ## Installation
 
