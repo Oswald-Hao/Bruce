@@ -569,7 +569,7 @@ body {{
     text-align: center;
     font-size: 2rem;
     margin-bottom: 3rem;
-    color: {self.theme.text};
+    color: {self.theme.text_color};
 }}
 
 /* Card Grid */
@@ -782,7 +782,7 @@ body {{
 
 /* Footer */
 .footer {{
-    background: {self.theme.text};
+    background: {self.theme.text_color};
     color: white;
     padding: 2rem 0;
     margin-top: 3rem;
