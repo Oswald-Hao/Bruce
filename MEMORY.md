@@ -208,6 +208,46 @@
   - 文档自动生成器（doc-generator）
   - 当前进度：33/200（16.5%）
   - 自创技能：33个
+
+## 当前技能列表（2026-02-05）
+
+**自创技能目录：** /home/lejurobot/clawd/skills/
+**总数：** 33个技能（不包括test-开头的测试技能）
+
+**技能列表：**
+1. auto-test-framework（自动化测试框架）
+2. auto-testing
+3. backup-system（备份系统）
+4. code-generator（代码生成器）
+5. data-collector（数据采集）
+6. data-format-handler
+7. deploy-optimizer
+8. doc-generator（文档生成器）
+9. ecommerce-arbitrage（电商套利）
+10. email-automation（邮件自动化）
+11. feishu-bot-manager（飞书机器人）
+12. feishu-card-generator（飞书卡片）
+13. feishu-emoji-manager（飞书表情）
+14. feishu-file-uploader（飞书文件上传）
+15. feishu-shortcut-manager（飞书快捷方式）
+16. feishu-streaming（飞书流）
+17. feishu-updater（飞书更新）
+18. feishu-webhook-handler（飞书Webhook）
+19. file-sync（文件同步）
+20. image-processor（图像处理）
+21. log-analyzer（日志分析）
+22. multi-machine（多机器控制）
+23. new-ai-skill
+24. performance-optimizer（性能优化）
+25. resource-monitor（资源监控）
+26. script-generator（脚本生成器）
+27. security-scanner（安全扫描）
+28. serpapi-search（搜索API）
+29. stt-enhancer（语音识别）
+30. task-scheduler（任务调度）
+31. tts-enhancer（语音合成）
+32. ui-generator（UI生成器）
+33. video-processor（视频处理）
 - 2026-02-01（优化）：优化进化系统 + Feishu联动
   - 周日进化：每5小时最多10个技能（从1个提升到10个）
   - 工作日进化：每次最多3个技能（从1个提升到3个）
