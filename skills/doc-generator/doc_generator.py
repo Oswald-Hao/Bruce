@@ -147,6 +147,10 @@ MIT License
         """生成开源项目README"""
         features_html = '\n'.join([f'- {f}' for f in features]) if features else ''
 
+        # 避免在f-string中使用反斜杠
+        default_features = '- Feature 1\n- Feature 2\n- Feature 3'
+        default_usage = 'from project import main\nmain()'
+
         return f"""# {project_name or 'Project'}
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -156,7 +160,7 @@ MIT License
 
 ## Features
 
-{features_html or '- Feature 1\n- Feature 2\n- Feature 3'}
+{features_html or default_features}
 
 ## Installation
 
@@ -167,7 +171,7 @@ MIT License
 ## Usage
 
 ```python
-{usage or 'from project import main\nmain()'}
+{usage or default_usage}
 ```
 
 ## Contributing
@@ -185,6 +189,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
         """生成商业项目README"""
         features_html = '\n'.join([f'- {f}' for f in features]) if features else ''
 
+        # 避免在f-string中使用反斜杠
+        default_features = '- Feature 1\n- Feature 2\n- Feature 3'
+        default_usage = 'from project import main\nmain()'
+
         return f"""# {project_name or 'Project'}
 
 **Version:** 1.0.0
@@ -193,7 +201,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Features
 
-{features_html or '- Feature 1\n- Feature 2\n- Feature 3'}
+{features_html or default_features}
 
 ## Installation
 
@@ -204,7 +212,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Usage
 
 ```python
-{usage or 'from project import main\nmain()'}
+{usage or default_usage}
 ```
 
 ## Documentation
