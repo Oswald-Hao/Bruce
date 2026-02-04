@@ -55,11 +55,9 @@ export function sanitizeToolResult(result: unknown): unknown {
       return { ...entry, text: truncateToolText(entry.text) };
     }
     if (type === "image") {
-      const data = typeof entry.data === "string" ? entry.data : undefined;
-      const bytes = data ? data.length : undefined;
-      const cleaned = { ...entry };
-      delete cleaned.data;
-      return { ...cleaned, bytes, omitted: true };
+      // Keep image data for channels that need it (like Feishu)
+      // The data will be base64 encoded and needs to be preserved
+      return { ...entry };
     }
     return entry;
   });
