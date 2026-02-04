@@ -113,6 +113,9 @@ class DocGenerator:
         """生成详细版README"""
         features_html = '\n'.join([f'- {f}' for f in features]) if features else ''
 
+        # 避免在f-string中使用反斜杠
+        default_usage = 'from project import main\nmain()'
+
         return f"""# {project_name or 'Project'}
 
 {description or 'Project description'}
@@ -130,7 +133,7 @@ class DocGenerator:
 ## Usage
 
 ```python
-{usage or 'from project import main\nmain()'}
+{usage or default_usage}
 ```
 
 ## License
