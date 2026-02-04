@@ -186,6 +186,24 @@ export const feishuPlugin: ChannelPlugin<ResolvedFeishuAccount> = {
       return warnings;
     },
   },
+  messaging: {
+    targetResolver: {
+      looksLikeId: looksLikeFeishuTargetId,
+      hint: "Use Feishu user ID (ou_...) or chat ID (oc_...), or prefix with feishu:",
+    },
+    formatTargetDisplay: ({ target, display, kind }) => {
+      if (display) {
+        return kind === "user" ? `@${display}` : `#${display}`;
+      }
+      if (target.startsWith("ou_")) {
+        return `@${target}`;
+      }
+      if (target.startsWith("oc_")) {
+        return `#${target}`;
+      }
+      return target;
+    },
+  },
   outbound: {
     sendText: async ({ cfg, to, text, accountId }) => {
       if (!to) {
