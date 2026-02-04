@@ -487,7 +487,7 @@ class Page:
 body {{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: {self.theme.background};
-    color: {self.theme.text};
+    color: {self.theme.text_color};
     line-height: 1.6;
 }}
 
@@ -523,7 +523,7 @@ body {{
 
 .nav-link {{
     text-decoration: none;
-    color: {self.theme.text};
+    color: {self.theme.text_color};
     transition: color 0.3s;
 }}
 
@@ -875,7 +875,7 @@ window.addEventListener('scroll', function() {
 class UIGenerator:
     """UI生成器"""
 
-    def __init__(self, theme: str = 'modern' or Dict = None):
+    def __init__(self, theme = None):
         if isinstance(theme, dict):
             self.theme = Theme.from_dict(theme)
         else:
