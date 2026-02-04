@@ -8,7 +8,7 @@ import { loadConfig } from "../../src/config/config.js";
 
 // Pre-import dispatch modules to avoid slow dynamic imports
 import { dispatchInboundMessage } from "../../src/auto-reply/dispatch.js";
-import { sendFeishuMessage, uploadFeishuImage, updateFeishuMessage, addTypingIndicator, removeReaction } from "./src/api.js";
+import { sendFeishuMessage, uploadFeishuImage, uploadFeishuMedia, updateFeishuMessage, addTypingIndicator, removeReaction } from "./src/api.js";
 
 // Message deduplication cache (persisted to disk)
 import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync, statSync } from "node:fs";
@@ -173,18 +173,65 @@ async function processFeishuMessageAsync(data: any) {
       console.log(`[feishu] [ASYNC] [DISPATCHER] Payload:`, JSON.stringify(payload).substring(0, 200));
 
       try {
-        const text = payload.text || "";
-        const hasMedia = payload.media && payload.media.length > 0;
+        // Handle both formats:
+        // 1. New format: { text, media: [{ type, buffer }] }
+        // 2. Legacy/browser format: { content: [{ type, text/data, mimeType }] }
+        const isContentFormat = payload.content && Array.isArray(payload.content);
+        const isMediaFormat = payload.media && Array.isArray(payload.media);
 
-        // Handle media attachments (audio, images, etc.)
-        if (hasMedia) {
-          console.log(`[feishu] [ASYNC] [DISPATCHER] Processing ${payload.media.length} media attachment(s)`);
+        let text = "";
+        const mediaItems: Array<{ type: string; buffer: Buffer; mimeType?: string }> = [];
 
+        if (isContentFormat) {
+          // Process content array format (from browser tools)
+          console.log(`[feishu] [ASYNC] [DISPATCHER] Processing content array format (${payload.content.length} items)`);
+
+          for (const item of payload.content) {
+            if (item.type === "text") {
+              text += (text ? "\n" : "") + (item.text || "");
+            } else if (item.type === "image" && item.data) {
+              // Convert base64 to buffer
+              const buffer = Buffer.from(item.data, "base64");
+              mediaItems.push({
+                type: "image",
+                buffer,
+                mimeType: item.mimeType || "image/png",
+              });
+              console.log(`[feishu] [ASYNC] [DISPATCHER] Found image: ${buffer.length} bytes, ${item.mimeType || "image/png"}`);
+            } else if (item.type === "audio" && item.data) {
+              const buffer = Buffer.from(item.data, "base64");
+              mediaItems.push({
+                type: "audio",
+                buffer,
+                mimeType: item.mimeType || "audio/mp3",
+              });
+            }
+          }
+        } else if (isMediaFormat) {
+          // Process media format
+          text = payload.text || "";
           for (const mediaItem of payload.media) {
+            if (mediaItem.buffer) {
+              mediaItems.push({
+                type: mediaItem.type,
+                buffer: mediaItem.buffer,
+                mimeType: mediaItem.mimeType,
+              });
+            }
+          }
+        } else {
+          // Text only
+          text = payload.text || "";
+        }
+
+        // Send media attachments
+        if (mediaItems.length > 0) {
+          console.log(`[feishu] [ASYNC] [DISPATCHER] Sending ${mediaItems.length} media item(s)`);
+
+          for (const mediaItem of mediaItems) {
             const mediaType = mediaItem.type; // "audio", "image", "file", etc.
 
-            if (mediaItem.buffer && (mediaType === "audio" || mediaType === "file")) {
-              // Upload audio/file and send
+            if (mediaType === "audio" || mediaType === "file") {
               try {
                 console.log(`[feishu] [ASYNC] [DISPATCHER] Uploading ${mediaType} (${mediaItem.buffer.length} bytes)...`);
                 const fileKey = await uploadFeishuMedia({
@@ -205,8 +252,7 @@ async function processFeishuMessageAsync(data: any) {
               } catch (mediaError) {
                 console.error(`[feishu] [ASYNC] [DISPATCHER] ✗ Failed to send ${mediaType}:`, mediaError);
               }
-            } else if (mediaItem.type === "image" && mediaItem.buffer) {
-              // Upload image and send
+            } else if (mediaType === "image") {
               try {
                 console.log(`[feishu] [ASYNC] [DISPATCHER] Uploading image (${mediaItem.buffer.length} bytes)...`);
                 const imageKey = await uploadFeishuImage({
