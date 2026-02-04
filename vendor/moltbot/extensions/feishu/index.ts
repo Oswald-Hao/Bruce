@@ -168,9 +168,96 @@ async function processFeishuMessageAsync(data: any) {
   // Create dispatcher for sending replies
   console.log(`[feishu] [ASYNC] [4/6] Creating reply dispatcher...`);
   const dispatcher = {
-    sendToolResult: (payload) => {
-      console.log(`[feishu] [ASYNC] [DISPATCHER] sendToolResult called:`, typeof payload);
-      return true;
+    sendToolResult: async (payload) => {
+      console.log(`[feishu] [ASYNC] [DISPATCHER] ========== sendToolResult CALLED ==========`);
+      console.log(`[feishu] [ASYNC] [DISPATCHER] Payload:`, JSON.stringify(payload).substring(0, 200));
+
+      try {
+        const text = payload.text || "";
+        const hasMedia = payload.media && payload.media.length > 0;
+
+        // Handle media attachments (audio, images, etc.)
+        if (hasMedia) {
+          console.log(`[feishu] [ASYNC] [DISPATCHER] Processing ${payload.media.length} media attachment(s)`);
+
+          for (const mediaItem of payload.media) {
+            const mediaType = mediaItem.type; // "audio", "image", "file", etc.
+
+            if (mediaItem.buffer && (mediaType === "audio" || mediaType === "file")) {
+              // Upload audio/file and send
+              try {
+                console.log(`[feishu] [ASYNC] [DISPATCHER] Uploading ${mediaType} (${mediaItem.buffer.length} bytes)...`);
+                const fileKey = await uploadFeishuMedia({
+                  account,
+                  file: mediaItem.buffer,
+                  fileType: mediaType === "audio" ? "audio" : "file",
+                });
+
+                console.log(`[feishu] [ASYNC] [DISPATCHER] Sending ${mediaType} message...`);
+                await sendFeishuMessage({
+                  account,
+                  receiveId: channelId,
+                  receiveIdType: replyIdType,
+                  msgType: mediaType === "audio" ? "audio" : "file",
+                  content: { [`${mediaType}_key`]: fileKey },
+                });
+                console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ ${mediaType} message sent successfully`);
+              } catch (mediaError) {
+                console.error(`[feishu] [ASYNC] [DISPATCHER] ✗ Failed to send ${mediaType}:`, mediaError);
+              }
+            } else if (mediaItem.type === "image" && mediaItem.buffer) {
+              // Upload image and send
+              try {
+                console.log(`[feishu] [ASYNC] [DISPATCHER] Uploading image (${mediaItem.buffer.length} bytes)...`);
+                const imageKey = await uploadFeishuImage({
+                  account,
+                  imageBuffer: mediaItem.buffer,
+                });
+
+                console.log(`[feishu] [ASYNC] [DISPATCHER] Sending image message...`);
+                await sendFeishuMessage({
+                  account,
+                  receiveId: channelId,
+                  receiveIdType: replyIdType,
+                  msgType: "image",
+                  content: { image_key: imageKey },
+                });
+                console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ Image message sent successfully`);
+              } catch (imgError) {
+                console.error(`[feishu] [ASYNC] [DISPATCHER] ✗ Failed to send image:`, imgError);
+              }
+            }
+          }
+
+          // Send text message along with media
+          if (text) {
+            await sendFeishuMessage({
+              account,
+              receiveId: channelId,
+              receiveIdType: replyIdType,
+              msgType: "text",
+              content: { text },
+            });
+            console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ Text message sent successfully`);
+          }
+        } else if (text) {
+          // No media - just send text
+          console.log(`[feishu] [ASYNC] [DISPATCHER] Sending tool result: ${text.substring(0, 100)}...`);
+          await sendFeishuMessage({
+            account,
+            receiveId: channelId,
+            receiveIdType: replyIdType,
+            msgType: "text",
+            content: { text },
+          });
+          console.log(`[feishu] [ASYNC] [DISPATCHER] ✓ Tool result sent successfully`);
+        }
+
+        return true;
+      } catch (error) {
+        console.error(`[feishu] [ASYNC] [DISPATCHER] ✗ Failed to send tool result:`, error);
+        return false;
+      }
     },
     sendBlockReply: async (payload) => {
       console.log(`[feishu] [ASYNC] [DISPATCHER] ========== sendBlockReply CALLED ==========`);
