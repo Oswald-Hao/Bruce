@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
 """
 测试金融数据分析系统
+直接执行financial-analyzer.py并运行测试
 """
 
-import sys
-import os
-sys.path.insert(0, os.path.dirname(__file__))
+# 执行financial-analyzer.py获取所有类和函数
+with open('financial-analyzer.py', 'r') as f:
+    code = f.read()
 
-from financial_analyzer import (
-    TechnicalIndicators,
-    TrendAnalyzer,
-    RiskAnalyzer,
-    InvestmentAdvisor,
-    StockData,
-    DataGenerator,
-    analyze_stock
-)
+# 移除main()调用部分以避免在import时执行
+if '__name__' in code:
+    code = code[:code.index('if __name__')]
+
+exec(code)
 
 
 def test_data_generator():
@@ -134,11 +131,6 @@ def test_macd():
     assert len(macd['signal']) == len(prices), 'signal长度应该匹配价格长度'
     assert len(macd['histogram']) == len(prices), 'histogram长度应该匹配价格长度'
 
-    # 上涨趋势中，MACD应该大于signal，histogram应该为正
-    if macd['macd'][-1] is not None and macd['signal'][-1] is not None:
-        # 注意：由于计算延迟，可能最后一个值还是None
-        pass
-
     print('  ✓ MACD指标测试通过')
     return True
 
@@ -198,7 +190,6 @@ def test_kdj():
             assert 0 <= k <= 100, f'K应该在0-100之间, 实际是{k}'
         if d is not None:
             assert 0 <= d <= 100, f'D应该在0-100之间, 实际是{d}'
-        # J可以超过0-100
 
     print('  ✓ KDJ指标测试通过')
     return True
@@ -508,4 +499,5 @@ def run_all_tests():
 
 if __name__ == '__main__':
     success = run_all_tests()
+    import sys
     sys.exit(0 if success else 1)
