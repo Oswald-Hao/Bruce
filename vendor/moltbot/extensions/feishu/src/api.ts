@@ -537,20 +537,7 @@ export const getFeishuChatMembers = async ({
   chatId: string;
   pageSize?: number;
   pageToken?: string;
-}): Promise<{
-  data?: {
-    items?: Array<{
-      member_id: string;
-      member_id_type: string;
-      name: string;
-      tenant_id: string;
-    }>;
-    page_token?: string;
-    has_more: boolean;
-  };
-  code?: number;
-  msg?: string;
-}> => {
+}): Promise<FeishuChatMembersResponse> => {
   const token = await getTenantAccessToken(account);
 
   let url = `${getApiBaseUrl(account.config.appType)}/im/v1/chats/${chatId}/members?page_size=${pageSize}`;
