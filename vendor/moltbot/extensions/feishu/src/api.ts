@@ -581,7 +581,9 @@ export const getFeishuChatMemberCount = async ({
 
     // If member_count is available, return it
     if ((chatInfo as any).member_count) {
-      return (chatInfo as any).member_count;
+      const count = (chatInfo as any).member_count as number;
+      console.log(`[feishu] [API] Got member_count from chat info: ${count}`);
+      return { count, memberCountFromInfo: count };
     }
 
     // Otherwise, fetch all members
@@ -613,7 +615,7 @@ export const getFeishuChatMemberCount = async ({
     } while (pageToken);
 
     console.log(`[feishu] [API] Total members in chat ${chatId}: ${total}`);
-    return total;
+    return { count: total };
   } catch (error) {
     console.error(`[feishu] [API] Failed to get chat member count:`, error);
     throw error;
