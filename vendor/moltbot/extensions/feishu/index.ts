@@ -141,9 +141,6 @@ async function processFeishuMessageAsync(data: any) {
     try {
       console.log(`[feishu] [ASYNC] [3.5/6] Member count query detected, fetching...`);
 
-      // Import getFeishuChatMemberCount
-      const { getFeishuChatMemberCount } = await import("./src/api.js");
-
       // Get member count
       const { count } = await getFeishuChatMemberCount({
         account,
