@@ -566,6 +566,7 @@ export const getFeishuChatMembers = async ({
 
 /**
  * Get total member count in a chat
+ * First tries to get member_count from chat info, falls back to fetching all members
  */
 export const getFeishuChatMemberCount = async ({
   account,
@@ -573,7 +574,7 @@ export const getFeishuChatMemberCount = async ({
 }: {
   account: ResolvedFeishuAccount;
   chatId: string;
-}): Promise<number> => {
+}): Promise<{ count: number; memberCountFromInfo?: number }> => {
   try {
     // Get chat info first (may contain member_count)
     const chatInfo = await getFeishuChatInfo({ account, chatId });
