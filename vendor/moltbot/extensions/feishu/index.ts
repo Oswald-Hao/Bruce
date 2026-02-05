@@ -567,17 +567,20 @@ async function processFeishuMessageAsync(data: any) {
           if (useCard) {
             console.log(`[feishu] [ASYNC] [DISPATCHER] Using card format (text length: ${text.length} chars)`);
 
-            // Create card with plain text (avoid markdown parsing issues)
+            // Create card with markdown text
             const card = {
               header: {
-                title: "Moltbot 回复",
+                title: {
+                  content: "Moltbot 回复",
+                  tag: "plain_text",
+                },
                 template: "blue",
               },
               elements: [
                 {
                   tag: "div",
                   text: {
-                    tag: "plain_text",
+                    tag: "lark_md",
                     content: text,
                   },
                 },
