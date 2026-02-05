@@ -524,6 +524,114 @@ export const removeReaction = async ({
 };
 
 /**
+ * Get chat members list
+ */
+export const getFeishuChatMembers = async ({
+  account,
+  chatId,
+  pageSize = 50,
+  pageToken = "",
+}: {
+  account: ResolvedFeishuAccount;
+  chatId: string;
+  pageSize?: number;
+  pageToken?: string;
+}): Promise<{
+  data?: {
+    items?: Array<{
+      member_id: string;
+      member_id_type: string;
+      name: string;
+      tenant_id: string;
+    }>;
+    page_token?: string;
+    has_more: boolean;
+  };
+  code?: number;
+  msg?: string;
+}> => {
+  const token = await getTenantAccessToken(account);
+
+  let url = `${getApiBaseUrl(account.config.appType)}/im/v1/chats/${chatId}/members?page_size=${pageSize}`;
+  if (pageToken) {
+    url += `&page_token=${pageToken}`;
+  }
+
+  console.log(`[feishu] [API] Getting chat members: ${chatId}`);
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to get chat members: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  console.log(`[feishu] [API] Got ${data.data?.items?.length || 0} members`);
+
+  return data;
+};
+
+/**
+ * Get total member count in a chat
+ */
+export const getFeishuChatMemberCount = async ({
+  account,
+  chatId,
+}: {
+  account: ResolvedFeishuAccount;
+  chatId: string;
+}): Promise<number> => {
+  try {
+    // Get chat info first (may contain member_count)
+    const chatInfo = await getFeishuChatInfo({ account, chatId });
+
+    // If member_count is available, return it
+    if ((chatInfo as any).member_count) {
+      return (chatInfo as any).member_count;
+    }
+
+    // Otherwise, fetch all members
+    let total = 0;
+    let pageToken = "";
+    const pageSize = 100;
+
+    do {
+      const result = await getFeishuChatMembers({
+        account,
+        chatId,
+        pageSize,
+        pageToken,
+      });
+
+      total += result.data?.items?.length || 0;
+      pageToken = result.data?.page_token || "";
+
+      // Check if has_more flag exists
+      if (!result.data?.has_more) {
+        break;
+      }
+
+      // Safety limit to prevent infinite loops
+      if (total > 10000) {
+        console.warn(`[feishu] [API] Member count exceeds safety limit, stopping at ${total}`);
+        break;
+      }
+    } while (pageToken);
+
+    console.log(`[feishu] [API] Total members in chat ${chatId}: ${total}`);
+    return total;
+  } catch (error) {
+    console.error(`[feishu] [API] Failed to get chat member count:`, error);
+    throw error;
+  }
+};
+
+/**
  * Probe Feishu connection (health check)
  */
 export const probeFeishu = async ({
