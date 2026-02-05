@@ -8,7 +8,7 @@ import { loadConfig } from "../../src/config/config.js";
 
 // Pre-import dispatch modules to avoid slow dynamic imports
 import { dispatchInboundMessage } from "../../src/auto-reply/dispatch.js";
-import { sendFeishuMessage, uploadFeishuImage, uploadFeishuMedia, updateFeishuMessage, addTypingIndicator, removeReaction } from "./src/api.js";
+import { sendFeishuMessage, uploadFeishuImage, uploadFeishuMedia, updateFeishuMessage, addTypingIndicator, removeReaction, getFeishuChatMemberCount } from "./src/api.js";
 
 // Message deduplication cache (persisted to disk)
 import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync, statSync } from "node:fs";
