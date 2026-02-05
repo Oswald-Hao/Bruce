@@ -169,17 +169,17 @@ export const sendFeishuMessage = async ({
     contentStr = JSON.stringify(content);
   }
 
-  // IMPORTANT: Working format (matches @larksuiteoapi/node-sdk):
+  // IMPORTANT: Working format:
   // 1. receive_id_type in URL query params
   // 2. receive_id AND open_id/chat_id field BOTH in body
   // 3. msg_type in body
-  // 4. content as a JSON STRING (not object!)
+  // 4. content as an OBJECT (not string!) - API will serialize it
   // 5. parent_id for reply threading (optional)
   const requestBody: Record<string, unknown> = {
     receive_id: receiveId,
     [receiveIdType]: receiveId,  // Add explicit open_id or chat_id field
     msg_type: msgType,
-    content: contentStr,  // Use JSON string!
+    content: contentObj,  // Use object, let fetch serialize it
     uuid: crypto.randomUUID(),
   };
 
