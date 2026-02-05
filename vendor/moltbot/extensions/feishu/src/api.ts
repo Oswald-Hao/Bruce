@@ -5,6 +5,7 @@ import type {
   FeishuUserInfo,
   FeishuChatInfo,
   FeishuMediaUploadResponse,
+  FeishuChatMembersResponse,
 } from "./types.js";
 import type { ResolvedFeishuAccount } from "./types.config.js";
 
