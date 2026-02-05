@@ -192,7 +192,7 @@ export const sendFeishuMessage = async ({
   console.log(`[feishu] [API]   receive_id: ${receiveId}`);
   console.log(`[feishu] [API]   receive_id_type: ${receiveIdType} (URL param)`);
   console.log(`[feishu] [API]   msg_type: ${msgType}`);
-  console.log(`[feishu] [API]   content (string):`, contentStr.substring(0, 200));
+  console.log(`[feishu] [API]   content (object):`, JSON.stringify(contentObj).substring(0, 200));
   console.log(`[feishu] [API]   Full request body:`, JSON.stringify(requestBody));
 
   const response = await fetch(`${getApiBaseUrl(account.config.appType)}/message/v4/send?receive_id_type=${receiveIdType}`, {
