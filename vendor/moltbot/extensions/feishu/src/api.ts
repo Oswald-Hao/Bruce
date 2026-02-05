@@ -148,30 +148,38 @@ export const sendFeishuMessage = async ({
 }): Promise<FeishuSendMessageResponse> => {
   const token = await getTenantAccessToken(account);
 
-  // Build content object first
+  // Build content - for most types, it's an object, but must be JSON string when sending
+  let contentStr: string;
   let contentObj: Record<string, unknown>;
+
   if (typeof content === "string") {
+    // If it's already a JSON string, use it directly
     try {
+      JSON.parse(content);
+      contentStr = content;
       contentObj = JSON.parse(content);
     } catch {
       // If parsing fails, treat as plain text
       contentObj = { text: content };
+      contentStr = JSON.stringify(contentObj);
     }
   } else {
+    // It's an object, convert to JSON string
     contentObj = content;
+    contentStr = JSON.stringify(content);
   }
 
-  // IMPORTANT: Working format discovered through testing:
+  // IMPORTANT: Working format (matches @larksuiteoapi/node-sdk):
   // 1. receive_id_type in URL query params
   // 2. receive_id AND open_id/chat_id field BOTH in body
   // 3. msg_type in body
-  // 4. content as an OBJECT (not JSON string!)
+  // 4. content as a JSON STRING (not object!)
   // 5. parent_id for reply threading (optional)
   const requestBody: Record<string, unknown> = {
     receive_id: receiveId,
     [receiveIdType]: receiveId,  // Add explicit open_id or chat_id field
     msg_type: msgType,
-    content: contentObj,  // Use object directly, not JSON string!
+    content: contentStr,  // Use JSON string!
     uuid: crypto.randomUUID(),
   };
 
@@ -184,7 +192,7 @@ export const sendFeishuMessage = async ({
   console.log(`[feishu] [API]   receive_id: ${receiveId}`);
   console.log(`[feishu] [API]   receive_id_type: ${receiveIdType} (URL param)`);
   console.log(`[feishu] [API]   msg_type: ${msgType}`);
-  console.log(`[feishu] [API]   content (object):`, JSON.stringify(contentObj).substring(0, 100));
+  console.log(`[feishu] [API]   content (string):`, contentStr.substring(0, 200));
   console.log(`[feishu] [API]   Full request body:`, JSON.stringify(requestBody));
 
   const response = await fetch(`${getApiBaseUrl(account.config.appType)}/message/v4/send?receive_id_type=${receiveIdType}`, {
@@ -192,8 +200,6 @@ export const sendFeishuMessage = async ({
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "Authorization": `Bearer ${token}`,
-      // Add custom app header (from user's successful test)
-      "X-Custom-Auth": "t-g1041tjP63RE55E7GSZH6CRXVRNRO7VPUKKZX6JU",
     },
     body: JSON.stringify(requestBody),
   });
