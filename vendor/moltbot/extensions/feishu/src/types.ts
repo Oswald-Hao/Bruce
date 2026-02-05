@@ -101,6 +101,24 @@ export type FeishuChatInfo = {
   chat_type?: FeishuChatType;
   external?: boolean;
   tenant_key?: string;
+  member_count?: number;
+};
+
+export type FeishuChatMember = {
+  member_id: string;
+  member_id_type: string;
+  name: string;
+  tenant_id: string;
+};
+
+export type FeishuChatMembersResponse = {
+  data?: {
+    items?: FeishuChatMember[];
+    page_token?: string;
+    has_more: boolean;
+  };
+  code?: number;
+  msg?: string;
 };
 
 export type FeishuAttachment = {
