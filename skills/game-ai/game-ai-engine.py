@@ -394,10 +394,10 @@ class GameAnalyzer:
         # 计算胜率
         balance_score = 0
         win_rates_dict = {}
-        for role in pick_rates.keys():
-            total = pick_rates[role]
-            wins = win_rates[role] if role in win_rates else 0
-            win_rate = len(wins) / total if total > 0 else 0.5
+        for role, picks in pick_rates.items():
+            total = picks
+            wins = role_wins.get(role, 0)
+            win_rate = wins / total if total > 0 else 0.5
             win_rates_dict[role] = win_rate
             # 理想胜率接近50%
             balance_score += (50 - abs(win_rate * 100 - 50)) / len(pick_rates)
@@ -406,10 +406,7 @@ class GameAnalyzer:
         overpowered = []
         underpowered = []
 
-        for role, wins in win_rates.items():
-            total = pick_rates.get(role, 1)
-            win_rate = len(wins) / total
-
+        for role, win_rate in win_rates_dict.items():
             if win_rate > 0.6:
                 overpowered.append((role, round(win_rate * 100, 2)))
             elif win_rate < 0.4:
