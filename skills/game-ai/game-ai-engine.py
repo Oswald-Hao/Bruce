@@ -383,9 +383,14 @@ class GameAnalyzer:
         pick_rates = defaultdict(int)
 
         # 模拟数据分析
+        role_wins = defaultdict(int)
         for data in game_data:
             winner = data.get('winner', '')
-            win_rates[winner].append(1)
+            # 假设winner就是role名称
+            if winner and winner in pick_rates:
+                role_wins[winner] += 1
+            elif winner:
+                role_wins[winner] += 1
 
             # 模拟英雄/角色选择
             for role in data.get('roles', []):
