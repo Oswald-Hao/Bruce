@@ -132,6 +132,46 @@ async function processFeishuMessageAsync(data: any) {
   const msgContent = message?.content ? JSON.parse(message.content) : undefined;
   console.log(`[feishu] [ASYNC] [3/6] Message content parsed:`, msgContent);
 
+  // Check for group member count query
+  const textMessage = msgContent?.text || "";
+  const memberCountKeywords = ["群里有几个人", "群里有几人", "群多少人", "有多少人", "成员数量"];
+  const isMemberCountQuery = memberCountKeywords.some(keyword => textMessage.includes(keyword));
+
+  if (isMemberCountQuery && message?.chat_type === "group") {
+    try {
+      console.log(`[feishu] [ASYNC] [3.5/6] Member count query detected, fetching...`);
+
+      // Import getFeishuChatMemberCount
+      const { getFeishuChatMemberCount } = await import("./src/api.js");
+
+      // Get member count
+      const { count } = await getFeishuChatMemberCount({
+        account,
+        chatId: channelId,
+      });
+
+      console.log(`[feishu] [ASYNC] [3.5/6] Member count: ${count}`);
+
+      // Send direct reply
+      const replyText = `这个群里有 ${count} 个人。`;
+      await sendFeishuMessage({
+        account,
+        receiveId: channelId,
+        receiveIdType: "chat_id",
+        msgType: "text",
+        content: JSON.stringify({ text: replyText }),
+      });
+
+      console.log(`[feishu] [ASYNC] ✓ Sent member count reply`);
+
+      // Skip AI processing for this query
+      return;
+    } catch (error) {
+      console.error(`[feishu] [ASYNC] Failed to get member count:`, error);
+      // Continue to AI processing if failed
+    }
+  }
+
   // Create a promise that resolves when AI processing is complete
   let resolveProcessing: ((value: void) => void) | null = null;
   const processingComplete = new Promise<void>((resolve) => {
