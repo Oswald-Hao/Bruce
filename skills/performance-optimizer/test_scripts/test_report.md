@@ -2,7 +2,7 @@
 
 **脚本:** /home/lejurobot/clawd/skills/performance-optimizer/test_scripts/md_report_test.py
 **总执行时间:** 0.00s
-**分析时间:** 2026-02-07T00:09:06.303136
+**分析时间:** 2026-02-07T00:10:19.596774
 
 ## 函数性能
 
