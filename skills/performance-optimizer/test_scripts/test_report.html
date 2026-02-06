@@ -20,7 +20,7 @@
         <h1>性能分析报告</h1>
         <p>脚本: /home/lejurobot/clawd/skills/performance-optimizer/test_scripts/report_test.py</p>
         <p>总执行时间: 0.00s</p>
-        <p>分析时间: 2026-02-07T00:10:19.575249</p>
+        <p>分析时间: 2026-02-07T00:11:38.888428</p>
     </div>
 
     <div class="section">
@@ -35,16 +35,94 @@
                 <th>平均时间(s)</th>
             </tr>
 
+            <tr>
+                <td><built-in method builtins.exec></td>
+                <td>~</td>
+                <td>0</td>
+                <td>0.0000</td>
+                <td>1</td>
+                <td>0.000006</td>
+            </tr>
+
+            <tr>
+                <td>test_func</td>
+                <td>/home/lejurobot/clawd/skills/performance-optimizer/test_scripts/report_test.py</td>
+                <td>2</td>
+                <td>0.0000</td>
+                <td>1</td>
+                <td>0.000000</td>
+            </tr>
+
+            <tr>
+                <td><module></td>
+                <td>/home/lejurobot/clawd/skills/performance-optimizer/test_scripts/report_test.py</td>
+                <td>1</td>
+                <td>0.0000</td>
+                <td>1</td>
+                <td>0.000001</td>
+            </tr>
+
+            <tr>
+                <td><method 'disable' of '_lsprof.Profiler' objects></td>
+                <td>~</td>
+                <td>0</td>
+                <td>0.0000</td>
+                <td>1</td>
+                <td>0.000000</td>
+            </tr>
+
         </table>
     </div>
 
     <div class="section">
         <h2>性能瓶颈</h2>
-<p>未发现明显的性能瓶颈</p>
+
+        <div class="bottleneck">
+            <p><strong>类型:</strong> slow_function</p>
+            <p><strong>位置:</strong> ~:0</p>
+            <p><strong>影响:</strong> 0.00</p>
+            <p><strong>建议:</strong> 函数'<built-in method builtins.exec>'执行时间过长(0.00s)。建议：1) 检查算法复杂度 2) 使用缓存 3) 异步处理</p>
+        </div>
+
+        <div class="bottleneck">
+            <p><strong>类型:</strong> slow_function</p>
+            <p><strong>位置:</strong> /home/lejurobot/clawd/skills/performance-optimizer/test_scripts/report_test.py:1</p>
+            <p><strong>影响:</strong> 0.00</p>
+            <p><strong>建议:</strong> 函数'<module>'执行时间过长(0.00s)。建议：1) 检查算法复杂度 2) 使用缓存 3) 异步处理</p>
+        </div>
+
     </div>
 
     <div class="section">
         <h2>优化建议</h2>
+
+        <div class="suggestion">
+            <p>⚠️ 函数'<built-in method builtins.exec>'执行时间过长(0.00s)。建议：1) 检查算法复杂度 2) 使用缓存 3) 异步处理</p>
+        </div>
+
+        <div class="suggestion">
+            <p>⚠️ 函数'<module>'执行时间过长(0.00s)。建议：1) 检查算法复杂度 2) 使用缓存 3) 异步处理</p>
+        </div>
+
+        <div class="suggestion">
+            <p>💡 使用内置函数和库（如itertools, collections）替代手动实现</p>
+        </div>
+
+        <div class="suggestion">
+            <p>💡 考虑使用@lru_cache装饰器缓存函数结果</p>
+        </div>
+
+        <div class="suggestion">
+            <p>💡 对大列表使用生成器表达式替代列表推导式</p>
+        </div>
+
+        <div class="suggestion">
+            <p>💡 使用set/dict进行O(1)查找，避免在列表中线性搜索</p>
+        </div>
+
+        <div class="suggestion">
+            <p>💡 对于I/O密集型操作，考虑使用asyncio或多线程</p>
+        </div>
 
     </div>
 </body>
