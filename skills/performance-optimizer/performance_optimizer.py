@@ -143,61 +143,42 @@ class PerformanceOptimizer:
             stats = pstats.Stats(profile_file)
             stats.sort_stats('cumulative')
 
-            # 使用stats.get_stats_profile()获取函数信息
-            try:
-                profile_data = stats.get_stats_profile()
-                if hasattr(profile_data, 'func_profiles'):
-                    func_profiles = profile_data.func_profiles
-                else:
-                    # 降级：直接使用stats.stats
-                    func_profiles = stats.stats
+            # 直接使用stats.stats字典
+            # 格式: {(file, line, name): (ncalls, ncalls, tottime, cumtime, callers)}
+            count = 0
+            for func_key, func_data in stats.stats.items():
+                if count >= 20:
+                    break
 
-                # 获取前20个函数
-                count = 0
-                for func_info in func_profiles:
-                    if count >= 20:
-                        break
+                try:
+                    # func_key = (file_path, line_num, func_name)
+                    file_path = func_key[0]
+                    line_num = func_key[1]
+                    func_name = func_key[2]
 
-                    try:
-                        if isinstance(func_info, tuple):
-                            # pstats格式: (file, line, name), (ncalls, ncalls, tottime, cumtime, callers)
-                            file_path = func_info[0]
-                            line_num = func_info[1]
-                            func_name = func_info[2]
+                    # func_data = (ncalls, ncalls, tottime, cumtime, callers)
+                    # ncalls可能是整数或元组 (原调用数, 实际调用数)
+                    call_count = func_data[0]
+                    if isinstance(call_count, tuple):
+                        call_count = call_count[0]  # 取原调用数
 
-                            # 获取统计数据
-                            stats_info = func_profiles[func_info]
-                            call_count = stats_info[0] if isinstance(stats_info[0], int) else stats_info[0].calls
-                            tot_time = stats_info[2]
-                            cum_time = stats_info[3]
-                        else:
-                            # 新版本pstats的格式
-                            if hasattr(func_info, 'name'):
-                                func_name = func_info.name
-                                file_path = str(func_info.file) if hasattr(func_info, 'file') else "unknown"
-                                line_num = func_info.line if hasattr(func_info, 'line') else 0
-                                call_count = func_info.ncalls if hasattr(func_info, 'ncalls') else 0
-                                cum_time = func_info.cumtime if hasattr(func_info, 'cumtime') else 0
-                            else:
-                                continue
+                    tot_time = func_data[2]  # tottime
+                    cum_time = func_data[3]  # cumtime
 
-                        functions.append(FunctionProfile(
-                            name=func_name,
-                            file=file_path,
-                            line=line_num,
-                            time=cum_time,
-                            calls=call_count,
-                            avg_time=cum_time / call_count if call_count > 0 else 0,
-                            memory_peak=0
-                        ))
+                    functions.append(FunctionProfile(
+                        name=func_name,
+                        file=file_path,
+                        line=line_num,
+                        time=cum_time,
+                        calls=call_count,
+                        avg_time=cum_time / call_count if call_count > 0 else 0,
+                        memory_peak=0
+                    ))
 
-                        count += 1
+                    count += 1
 
-                    except (IndexError, KeyError, AttributeError) as e:
-                        continue
-
-            except Exception as e:
-                print(f"Warning: Failed to get profile data: {e}")
+                except (IndexError, KeyError, AttributeError) as e:
+                    continue
 
         except Exception as e:
             print(f"Warning: Failed to parse profile: {e}")
