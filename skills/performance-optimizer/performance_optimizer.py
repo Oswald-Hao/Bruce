@@ -114,16 +114,20 @@ class PerformanceOptimizer:
     def _run_cprofile(self, script_path: str) -> str:
         """运行cProfile分析"""
         profile_file = os.path.join(self.temp_dir, "profile.stats")
-        cmd = [
-            "python", "-m", "cProfile", "-o", profile_file, script_path
-        ]
+        # 先尝试python3，再尝试python
+        for py_cmd in ["python3", "python"]:
+            cmd = [
+                py_cmd, "-m", "cProfile", "-o", profile_file, script_path
+            ]
 
-        try:
-            subprocess.run(cmd, capture_output=True, timeout=300)
-        except subprocess.TimeoutExpired:
-            pass
-        except Exception as e:
-            print(f"Warning: cProfile failed: {e}")
+            try:
+                subprocess.run(cmd, capture_output=True, timeout=300, check=True)
+                break
+            except (subprocess.TimeoutExpired, subprocess.CalledProcessError, FileNotFoundError) as e:
+                print(f"Warning: cProfile with {py_cmd} failed: {e}")
+                if py_cmd == "python":  # 最后一个尝试也失败
+                    pass
+                continue
 
         return profile_file
 
