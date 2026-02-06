@@ -106,7 +106,7 @@ class NetworkMonitorData:
 class NetworkTools:
     """网络工具集"""
 
-    def __init__(self, timeout: int = 3):
+    def __init__(self, timeout: int = 1):
         self.timeout = timeout
         self.common_ports = [
             21, 22, 23, 25, 53, 80, 110, 143, 443,
