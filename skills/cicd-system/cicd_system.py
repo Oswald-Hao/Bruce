@@ -60,7 +60,6 @@ class PipelineResult:
 @dataclass
 class DeploymentConfig:
     """部署配置"""
-    environment: str
     strategy: str = "rolling"  # rolling, blue-green, canary
     replicas: int = 1
     auto_rollback: bool = True
@@ -219,7 +218,14 @@ class CICDSystem:
                 timeout=timeout,
                 cwd=os.getcwd()
             )
+
+            # 检查退出码
+            if result.returncode != 0:
+                error_msg = result.stderr or f"Command failed with exit code {result.returncode}"
+                raise Exception(error_msg)
+
             return result.stdout, result.stderr
+
         except subprocess.TimeoutExpired as e:
             raise Exception(f"Command timeout after {timeout}s")
         except Exception as e:
