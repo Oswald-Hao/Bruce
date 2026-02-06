@@ -183,7 +183,7 @@
       "name": "Bruce自我进化 - 每天凌晨2点",
       "enabled": true,
       "createdAtMs": 1769839572748,
-      "updatedAtMs": 1770307200007,
+      "updatedAtMs": 1770393600002,
       "schedule": {
         "kind": "cron",
         "expr": "0 0 * * 1-6",
@@ -197,10 +197,10 @@
         "timeoutSeconds": 1800
       },
       "state": {
-        "nextRunAtMs": 1770393600000,
-        "lastRunAtMs": 1770307200008,
+        "nextRunAtMs": 1770566400000,
+        "lastRunAtMs": 1770393600002,
         "lastStatus": "ok",
-        "lastDurationMs": 1800081
+        "lastDurationMs": 1526163
       }
     },
     {
