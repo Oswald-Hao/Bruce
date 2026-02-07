@@ -1,0 +1,53 @@
+# 内容生成引擎配置
+
+# AI配置
+ai:
+  provider: "openai"  # openai/anthropic/azure
+  model: "gpt-4"
+  api_key: "your_api_key"
+  temperature: 0.8
+  max_tokens: 2000
+
+# 品牌配置
+brand:
+  name: "ABC科技"
+  voice: "专业且亲切"
+  tone: "专业"
+  language: "zh-CN"
+
+# SEO配置
+seo:
+  enabled: true
+  keyword_density: 0.02
+  meta_description_length: 160
+  title_length: 60
+
+# 内容质量
+quality:
+  min_word_count: 300
+  max_word_count: 3000
+  readability_score: 60
+
+# 多语言
+languages:
+  enabled: true
+  default: "zh-CN"
+  supported: ["zh-CN", "en-US", "ja-JP", "ko-KR"]
+
+# 输出格式
+output:
+  format: "markdown"  # markdown/html/plain
+  encoding: "utf-8"
+  include_meta: true
+
+# 示例模板
+example_templates:
+  - name: "博客文章模板"
+    type: "article_blog"
+    structure: ["标题", "摘要", "简介", "正文", "结论"]
+    required_sections: ["标题", "正文"]
+
+  - name: "广告文案模板"
+    type: "copy_ad"
+    structure: ["标题", "卖点", "号召"]
+    required_sections: ["标题", "卖点"]
