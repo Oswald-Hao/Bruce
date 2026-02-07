@@ -1,0 +1,67 @@
+# 自动化交易助手配置
+
+# 股票交易配置
+stock:
+  broker: "tushare"  # 数据源
+  api_key: "your_api_key"
+  trading_account:
+    account_id: "your_account"
+    cash: 100000
+    positions: {}
+
+# 电商交易配置
+ecommerce:
+  platforms:
+    taobao:
+      enabled: true
+      api_key: "your_taobao_key"
+
+    pinduoduo:
+      enabled: true
+      api_key: "your_pdd_key"
+
+    jd:
+      enabled: true
+      api_key: "your_jd_key"
+
+# 风险控制
+risk_management:
+  max_position_size: 0.3  # 单只股票最大仓位
+  max_daily_loss: 0.05  # 最大日亏损
+  max_drawdown: 0.15  # 最大回撤
+  stop_loss_default: 0.05  # 默认止损
+  take_profit_default: 0.1  # 默认止盈
+
+# 交易设置
+trading:
+  trading_hours: "09:30-15:00"  # 交易时间
+  order_type: "limit"  # 限价单
+  slippage: 0.001  # 滑点容忍度
+  commission: 0.0003  # 手续费率
+
+# 通知设置
+notifications:
+  trade_executed: true
+  profit_target: true
+  stop_loss_triggered: true
+  daily_summary: true
+  channels: ["feishu", "email"]
+
+# 示例策略
+example_strategies:
+  - name: "均线交叉策略"
+    type: "stock"
+    symbol: "600519.SH"
+    params:
+      short_ma: 5
+      long_ma: 20
+    position_size: 0.1
+    stop_loss: 0.05
+    take_profit: 0.1
+
+  - name: "拼多多-淘宝套利"
+    type: "ecommerce"
+    product_id: "123456"
+    platforms: ["taobao", "pinduoduo"]
+    min_profit: 0.1
+    max_capital: 5000
