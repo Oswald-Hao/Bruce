@@ -1,0 +1,64 @@
+# 智能客服系统配置
+
+# 渠道配置
+channels:
+  wechat:
+    enabled: true
+    app_id: "your_app_id"
+    app_secret: "your_app_secret"
+    token: "your_token"
+
+  web:
+    enabled: true
+    domain: "example.com"
+    widget_id: "widget_123"
+
+  phone:
+    enabled: false
+    provider: "alicloud"
+
+# AI配置
+ai:
+  provider: "openai"  # openai/anthropic/azure
+  model: "gpt-4"
+  api_key: "your_api_key"
+  temperature: 0.7
+  max_tokens: 1000
+
+# 知识库配置
+knowledge_base:
+  enabled: true
+  faq_file: "data/faq.json"
+  similarity_threshold: 0.8
+
+# 工单配置
+tickets:
+  auto_create: true
+  auto_assign: true
+  sla_response_time: 3600  # 1小时内响应
+  sla_resolution_time: 86400  # 24小时内解决
+
+# 客服配置
+agents:
+  online_hours: "09:00-21:00"
+  max_concurrent_chats: 5
+  auto_away_after: 300  # 5分钟无操作后自动离开
+
+# 通知配置
+notifications:
+  new_ticket: true
+  urgent_ticket: true
+  new_message: true
+  channels: ["feishu", "email"]
+
+# 示例FAQ
+example_faq:
+  - question: "如何退款？"
+    answer: "您可以登录账户，进入订单中心，选择需要退款的订单，点击申请退款。"
+    category: "订单"
+    tags: ["退款", "订单"]
+
+  - question: "发货需要多长时间？"
+    answer: "通常情况下，我们会在24小时内发货，快递需要3-5天送达。"
+    category: "物流"
+    tags: ["发货", "物流"]
