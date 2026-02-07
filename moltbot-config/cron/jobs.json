@@ -237,7 +237,7 @@
       "name": "Bruce周日增强进化 - 每5小时一个技能",
       "enabled": true,
       "createdAtMs": 1769840831549,
-      "updatedAtMs": 1770480000002,
+      "updatedAtMs": 1770498000002,
       "schedule": {
         "kind": "cron",
         "expr": "0 0,5,10,15,20 * * 0",
@@ -251,10 +251,10 @@
         "timeoutSeconds": 18000
       },
       "state": {
-        "nextRunAtMs": 1770498000000,
-        "lastRunAtMs": 1770480000002,
+        "nextRunAtMs": 1770516000000,
+        "lastRunAtMs": 1770498000002,
         "lastStatus": "ok",
-        "lastDurationMs": 2302965
+        "lastDurationMs": 167599
       }
     }
   ]
