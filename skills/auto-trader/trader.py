@@ -579,7 +579,22 @@ class AutoTrader:
         if strategy_id:
             trades = [t for t in trades if t.strategy_id == strategy_id]
 
-        return [asdict(trade) for trade in trades]
+
+        trades_list = []
+        for trade in trades:
+            trades_list.append({
+                "trade_id": trade.trade_id,
+                "strategy_id": trade.strategy_id,
+                "timestamp": trade.timestamp.isoformat(),
+                "symbol": trade.symbol,
+                "action": trade.action.value,
+                "price": trade.price,
+                "quantity": trade.quantity,
+                "amount": trade.amount,
+                "profit": trade.profit,
+                "status": trade.status.value
+            })
+        return trades_list
 
     def get_account_info(self) -> Dict:
         """获取账户信息"""
