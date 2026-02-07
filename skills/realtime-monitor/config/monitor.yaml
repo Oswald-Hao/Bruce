@@ -1,0 +1,77 @@
+# 实时数据监控系统配置
+
+# 数据源配置
+sources:
+  taobao:
+    enabled: true
+    api_key: "your_taobao_api_key"
+    rate_limit: 10  # 每分钟请求次数
+
+  jd:
+    enabled: true
+    api_key: "your_jd_api_key"
+    rate_limit: 10
+
+  news:
+    toutiao:
+      enabled: true
+      api_key: "your_toutiao_api_key"
+
+    baidu:
+      enabled: true
+      api_key: "your_baidu_api_key"
+
+# 预警配置
+alerts:
+  email:
+    enabled: false
+    smtp_host: "smtp.gmail.com"
+    smtp_port: 587
+    username: "your_email@gmail.com"
+    password: "your_password"
+    recipients: ["user@example.com"]
+
+  feishu:
+    enabled: false
+    webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/xxx"
+
+  webhook:
+    enabled: false
+    default_url: "https://api.example.com/notify"
+
+# 规则引擎
+rules:
+  price_drop:
+    condition: "price_change < -threshold"
+    priority: "high"
+
+  keyword_match:
+    condition: "keyword in content"
+    priority: "medium"
+
+  trend_change:
+    condition: "trend > threshold"
+    priority: "low"
+
+# 数据存储
+storage:
+  type: "sqlite"  # sqlite/mysql/postgresql
+  path: "data/monitor.db"
+  retention_days: 90
+
+# 监控任务示例
+example_tasks:
+  - name: "iPhone 15 Pro 价格监控"
+    type: "price"
+    source: "taobao"
+    keywords: ["iPhone 15 Pro 256G"]
+    interval: 300  # 5分钟
+    threshold: "price_change > 500"
+    action: "webhook:https://api.example.com/notify"
+
+  - name: "AI行业新闻监控"
+    type: "news"
+    source: "toutiao"
+    keywords: ["人工智能", "AI", "大模型", "ChatGPT"]
+    interval: 600  # 10分钟
+    action: "feishu:robot_id"
