@@ -116,7 +116,7 @@ class TestAutoTrader(unittest.TestCase):
         """测试均线交叉策略逻辑"""
         strategy = TradingStrategy(
             strategy_id="strategy_test",
-            name="MA Cross Strategy",
+            name="ma_cross strategy",
             type=MarketType.STOCK,
             symbol="600519.SH",
             params={},
@@ -150,7 +150,7 @@ class TestAutoTrader(unittest.TestCase):
         """测试套利策略逻辑"""
         strategy = TradingStrategy(
             strategy_id="strategy_test",
-            name="Arbitrage Strategy",
+            name="arbitrage strategy",
             type=MarketType.ECOMMERCE,
             symbol="product_123",
             params={},
@@ -177,8 +177,8 @@ class TestAutoTrader(unittest.TestCase):
         data = {
             "prices": {
                 "taobao": 100.0,
-                "pinduoduo": 95.0,
-                "jd": 105.0
+                "pinduoduo": 96.0,
+                "jd": 104.0
             },
             "best_buy": "pinduoduo",
             "best_sell": "jd"
