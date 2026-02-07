@@ -330,11 +330,14 @@ class MonitorEngine:
 
             if data:
                 # 检查变化
-                if self._check_threshold(task, data):
-                    # 触发预警
-                    self._trigger_alert(task, data)
+                try:
+                    if self._check_threshold(task, data):
+                        # 触发预警
+                        self._trigger_alert(task, data)
+                except Exception as e:
+                    logger.error(f"触发预警失败: {e}")
 
-                # 更新任务
+                # 更新任务（即使预警失败也要更新）
                 task.last_check = datetime.now()
                 task.last_value = data["value"]
                 self._save_task(task)
@@ -343,55 +346,13 @@ class MonitorEngine:
             logger.error(f"检查任务失败 {task.task_id}: {e}")
 
     def _fetch_data(self, task: MonitorTask) -> Optional[Dict]:
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
+        """
+        获取数据
 
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
+        Args:
+            task: 监控任务
 
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
-
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
-
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
-
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
-
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
-                # 更新任务
-                task.last_check = datetime.now()
-                task.last_value = data["value"]
-                self._save_task(task)
-
-        except Exception as e:
-            logger.error(f"检查任务失败 {task.task_id}: {e}")
+        Returns:
             数据
         """
         # 模拟获取数据
