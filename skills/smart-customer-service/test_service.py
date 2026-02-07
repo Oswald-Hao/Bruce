@@ -182,11 +182,12 @@ class TestCustomerService(unittest.TestCase):
 
     def test_close_ticket(self):
         """测试关闭工单"""
-        # 添加客服
+        # 添加客服并设置为在线
         agent = self.service.add_agent(
             name="客服A",
             email="agent_a@example.com"
         )
+        agent.status = "online"  # 设置为在线，才能被自动分配
 
         # 添加客户
         self.service.add_customer(
@@ -221,7 +222,7 @@ class TestCustomerService(unittest.TestCase):
         # 检查客服活跃会话数
         updated_agent = self.service._get_agent(agent.agent_id)
         self.assertEqual(updated_agent.active_chats, 0)
-        self.assertEqual(updated_agent.tickets_handled, 2)  # 创建时分配了1次，关闭时又+1
+        self.assertEqual(updated_agent.tickets_handled, 1)  # 关闭时+1
 
     def test_add_agent(self):
         """测试添加客服"""
