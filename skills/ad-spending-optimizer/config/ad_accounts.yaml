@@ -1,0 +1,86 @@
+# 广告账户配置
+# 请将示例值替换为实际的API密钥和账户信息
+
+accounts:
+  # 百度推广
+  baidu:
+    username: "your_username"
+    password: "your_password"
+    account_id: "your_account_id"
+    token: "your_api_token"
+    # 百度推广API相关
+    api_base_url: "https://api.baidu.com/json/sms/service"
+
+  # 腾讯广告
+  tencent:
+    account_id: "your_account_id"
+    app_id: "your_app_id"
+    secret: "your_secret_key"
+    # 腾讯广告API相关
+    api_base_url: "https://api.e.qq.com/v1.3"
+
+  # 巨量引擎（抖音）
+  bytedance:
+    advertiser_id: "your_advertiser_id"
+    app_id: "your_app_id"
+    secret: "your_secret_key"
+    # 巨量引擎API相关
+    api_base_url: "https://ad.oceanengine.com/open_api/v2.0"
+
+  # Google Ads
+  google:
+    customer_id: "your_customer_id"
+    developer_token: "your_developer_token"
+    client_id: "your_client_id"
+    client_secret: "your_client_secret"
+    refresh_token: "your_refresh_token"
+
+  # Facebook (Meta)
+  facebook:
+    account_id: "your_account_id"
+    access_token: "your_access_token"
+    app_id: "your_app_id"
+    app_secret: "your_app_secret"
+
+# 监控配置
+monitoring:
+  # 默认监控间隔（秒）
+  default_interval: 60
+
+  # 预警渠道
+  alert_channels:
+    - email
+    - webhook
+
+  # 默认阈值
+  default_thresholds:
+    max_cpa: 150.0      # 最大CPA（元）
+    min_ctr: 1.0         # 最小CTR（%）
+    min_roi: 100.0       # 最小ROI（%）
+
+# 报告配置
+reporting:
+  # 默认输出目录
+  output_dir: "reports"
+
+  # 默认报告格式
+  default_format: "markdown"
+
+  # 是否自动发送报告
+  auto_send: false
+
+  # 报告发送配置
+  send_config:
+    email_recipients: []
+    webhook_url: ""
+
+# A/B测试配置
+ab_testing:
+  # 默认测试时长（天）
+  default_duration: 7
+
+  # 最小样本量（点击数）
+  min_sample_size: 500
+
+  # 显著性水平
+  significance_level: 0.95
