@@ -40,7 +40,7 @@ class TestContentGenerator(unittest.TestCase):
         """测试创建模板"""
         template = self.generator.create_template(
             name="测试模板",
-            type="article_blog",
+            type="blog",
             structure=["标题", "摘要", "正文", "结论"],
             required_sections=["标题", "正文"]
         )
@@ -101,7 +101,7 @@ class TestContentGenerator(unittest.TestCase):
         # 先创建模板
         template = self.generator.create_template(
             name="测试模板",
-            type="article_blog",
+            type="blog",
             structure=["标题", "摘要", "正文", "结论"],
             required_sections=["标题", "正文"]
         )
@@ -148,7 +148,7 @@ class TestContentGenerator(unittest.TestCase):
         self.assertEqual(len(all_contents), 3)
 
         # 列出文章
-        articles = self.generator.list_contents(type="article_blog")
+        articles = self.generator.list_contents(type="blog")
         self.assertEqual(len(articles), 2)
 
     def test_export_content_markdown(self):
