@@ -343,13 +343,55 @@ class MonitorEngine:
             logger.error(f"检查任务失败 {task.task_id}: {e}")
 
     def _fetch_data(self, task: MonitorTask) -> Optional[Dict]:
-        """
-        获取数据
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
 
-        Args:
-            task: 监控任务
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
 
-        Returns:
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
+
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
+
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
+
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
+
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
+                # 更新任务
+                task.last_check = datetime.now()
+                task.last_value = data["value"]
+                self._save_task(task)
+
+        except Exception as e:
+            logger.error(f"检查任务失败 {task.task_id}: {e}")
             数据
         """
         # 模拟获取数据
@@ -521,10 +563,10 @@ class MonitorEngine:
             alert: 预警
         """
         # 解析动作
-        if alert.action.startswith("webhook:"):
-            url = alert.action.split(":", 1)[1]
+        if alert.action_taken.startswith("webhook:"):
+            url = alert.action_taken.split(":", 1)[1]
             self._send_webhook(url, alert)
-        elif alert.action.startswith("feishu:"):
+        elif alert.action_taken.startswith("feishu:"):
             self._send_feishu(alert)
 
     def _send_webhook(self, url: str, alert: Alert):
