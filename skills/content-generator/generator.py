@@ -195,7 +195,7 @@ class ContentGenerator:
 
         content = GeneratedContent(
             content_id=content_id,
-            type=ContentType(f"article_{type}"),
+            type=ContentType.ARTICLE_BLOG if type == "blog" else ContentType.ARTICLE_NEWS if type == "news" else ContentType.ARTICLE_TUTORIAL,
             topic=topic,
             title=title,
             body=body,
@@ -391,7 +391,7 @@ class ContentGenerator:
 
         content = GeneratedContent(
             content_id=content_id,
-            type=ContentType.SCRIPT_SHORT_VIDEO if type == "short_video" else ContentType.SCRIPT_LONG_VIDEO,
+            type=ContentType.SCRIPT_SHORT_VIDEO if type == "short_video" else ContentType.SCRIPT_LONG_VIDEO if type == "long_video" else ContentType.SCRIPT_SHORT_VIDEO,
             topic=topic,
             title=title,
             body=body,
