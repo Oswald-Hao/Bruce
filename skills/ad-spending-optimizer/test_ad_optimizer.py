@@ -358,7 +358,7 @@ class TestAdMonitor(unittest.TestCase):
 
         # 添加一个26小时前的预警
         old_alert = Alert(
-            timestamp=datetime.now() - timedelta(hours=26),
+            timestamp=datetime.now() - timedelta(hours=25, minutes=1),
             level=AlertLevel.WARNING,
             platform="baidu",
             campaign_id="cmp_2",
@@ -375,8 +375,8 @@ class TestAdMonitor(unittest.TestCase):
         self.assertEqual(len(recent_alerts_24h), 1)
 
         # 获取26小时内的预警（应该有2个）
-        recent_alerts_26h = self.monitor.get_recent_alerts(hours=26)
-        self.assertEqual(len(recent_alerts_26h), 2)
+        recent_alerts_30h = self.monitor.get_recent_alerts(hours=30)
+        self.assertEqual(len(recent_alerts_30h), 2)
 
     def test_get_alerts_by_level(self):
         """测试按级别获取预警"""
