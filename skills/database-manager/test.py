@@ -369,7 +369,8 @@ def test_multiple_connections():
         conn1 = db.connect_sqlite(db_path1)
         conn2 = db.connect_sqlite(db_path2)
         
-        assert len(db.connections) == 2, "连接数不正确"
+        # 应该有3个连接：sqlite_{db_path1}, sqlite_{db_path2}, sqlite（默认连接）
+        assert len(db.connections) == 3, f"连接数不正确，期望3，实际{len(db.connections)}"
         
         # 在第一个数据库创建表
         db.create_table('users', {'id': 'INTEGER PRIMARY KEY'}, 'sqlite')

@@ -131,26 +131,32 @@ class DatabaseManager:
         if backup_name is None:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             backup_name = f"backup_{timestamp}.db"
+        
+        # 确保backup_name以.db结尾
+        if not backup_name.endswith('.db'):
+            backup_name = backup_name + '.db'
 
         backup_path = self.backup_dir / backup_name
-        print(f"调试: 复制 {db_path} -> {backup_path}")
         
         try:
             subprocess.run(['cp', db_path, str(backup_path)], check=True)
         except subprocess.CalledProcessError as e:
             raise RuntimeError(f"复制文件失败: {e}")
 
-        # 压缩备份
-        compressed_path = backup_path.with_suffix('.db.gz')
-        print(f"调试: 压缩 {backup_path} -> {compressed_path}")
-        
+        # 压缩备份（gzip会自动添加.gz后缀）
         try:
             subprocess.run(['gzip', '-f', str(backup_path)], check=True)
         except subprocess.CalledProcessError as e:
             raise RuntimeError(f"压缩文件失败: {e}")
 
+        # 压缩后的文件名是原文件名加上.gz
+        compressed_path = backup_path.with_suffix('.db.gz')
+        
         if not os.path.exists(compressed_path):
-            raise FileNotFoundError(f"压缩后的文件不存在: {compressed_path}")
+            # 尝试另一种可能的命名方式
+            compressed_path = backup_path.with_suffix('.gz')
+            if not os.path.exists(compressed_path):
+                raise FileNotFoundError(f"压缩后的文件不存在: {compressed_path}")
         
         return str(compressed_path)
 
