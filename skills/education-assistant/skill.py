@@ -215,7 +215,7 @@ class EducationAssistant:
         return question_id
 
     def generate_test(self, subject: str, topic: str = None, 
-                      difficulty: str = 'medium', 
+                      difficulty: str = None, 
                       count: int = 10) -> List[Question]:
         """
         生成测试题目
@@ -223,7 +223,7 @@ class EducationAssistant:
         Args:
             subject: 学科
             topic: 主题（可选）
-            difficulty: 难度
+            difficulty: 难度（可选）
             count: 题目数量
 
         Returns:
@@ -233,7 +233,7 @@ class EducationAssistant:
             q for q in self.questions 
             if q['subject'] == subject
             and (topic is None or q['topic'] == topic)
-            and q['difficulty'] == difficulty
+            and (difficulty is None or q['difficulty'] == difficulty)
         ]
         
         if len(filtered_questions) < count:

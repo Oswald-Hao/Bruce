@@ -139,11 +139,6 @@ def test_submit_test():
             # 生成测试
             test = assistant.generate_test(subject="数学", difficulty="easy", count=2)
             
-            # 调试：打印题目信息
-            print(f"调试: test类型={type(test)}, 长度={len(test)}")
-            for i, q in enumerate(test):
-                print(f"调试: 题目{i+1} type={type(q)}, correct_answer={getattr(q, 'correct_answer', 'N/A')}")
-            
             # 提交答案（1对1错）
             result = assistant.submit_test(test, ["2", "3"], time_spent=60)
             
