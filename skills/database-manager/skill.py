@@ -47,7 +47,9 @@ class DatabaseManager:
         """
         conn = sqlite3.connect(db_path)
         conn.row_factory = sqlite3.Row
-        self.connections['sqlite'] = conn
+        # 使用数据库路径作为key，支持多个SQLite连接
+        conn_key = f'sqlite_{db_path}'
+        self.connections[conn_key] = conn
         return conn
 
     def connect_postgresql(self, host: str, database: str, user: str, password: str, port: int = 5432):

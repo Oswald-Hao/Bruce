@@ -11,9 +11,11 @@ import shutil
 from pathlib import Path
 
 import sys
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# 直接导入当前目录的skill模块
+skill_path = str(Path(__file__).parent)
+sys.path.insert(0, skill_path)
 
-from skills.database_manager.skill import DatabaseManager
+from skill import DatabaseManager
 
 
 def test_sqlite_connection():
