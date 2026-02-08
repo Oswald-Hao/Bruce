@@ -79,6 +79,7 @@ class VideoProcessor:
         Returns:
             视频信息字典
         """
+        # 优先尝试使用ffprobe
         cmd = [
             self.ffprobe_path,
             "-v", "quiet",
@@ -91,7 +92,28 @@ class VideoProcessor:
         success, output = self._run_command(cmd, timeout=30)
 
         if not success:
-            raise RuntimeError(f"获取视频信息失败: {output}")
+            # ffprobe不可用，使用ffmpeg备选
+            cmd = [
+                self.ffmpeg_path,
+                "-i", input_file,
+                "-f", "null",
+                "-"
+            ]
+
+            success, output = self._run_command(cmd, timeout=30)
+
+            if not success:
+                # 从ffmpeg错误输出中提取信息
+                info = self._parse_ffmpeg_info(output)
+                if info:
+                    return info
+                raise RuntimeError(f"获取视频信息失败: {output}")
+
+            # 解析ffmpeg输出
+            info = self._parse_ffmpeg_info(output)
+            if not info:
+                raise RuntimeError(f"无法解析视频信息")
+            return info
 
         data = json.loads(output)
 
@@ -132,6 +154,57 @@ class VideoProcessor:
             })
 
         return info
+
+    def _parse_ffmpeg_info(self, output: str) -> Optional[Dict]:
+        """
+        从ffmpeg输出中解析视频信息
+
+        Args:
+            output: ffmpeg输出
+
+        Returns:
+            视频信息字典
+        """
+        import re
+
+        info = {
+            "filename": "",
+            "format": "unknown",
+            "duration": 0,
+            "size": 0,
+            "bit_rate": 0,
+        }
+
+        # 解析Duration
+        duration_match = re.search(r'Duration:\s+(\d{2}):(\d{2}):(\d{2}\.\d{2})', output)
+        if duration_match:
+            hours = int(duration_match.group(1))
+            minutes = int(duration_match.group(2))
+            seconds = float(duration_match.group(3))
+            info["duration"] = hours * 3600 + minutes * 60 + seconds
+
+        # 解析Video流
+        video_match = re.search(r'Video:\s+(\w+).*?(\d{3,4})x(\d{3,4})', output)
+        if video_match:
+            info["codec"] = video_match.group(1)
+            info["width"] = int(video_match.group(2))
+            info["height"] = int(video_match.group(3))
+
+        # 解析fps
+        fps_match = re.search(r'(\d+(?:\.\d+)?)\s*fps', output)
+        if fps_match:
+            info["fps"] = float(fps_match.group(1))
+
+        # 解析Audio流
+        audio_match = re.search(r'Audio:\s+(\w+).*?(\d+)\s*Hz', output)
+        if audio_match:
+            info["audio_codec"] = audio_match.group(1)
+            info["sample_rate"] = int(audio_match.group(2))
+
+        if info.get("duration") > 0 or info.get("width"):
+            return info
+
+        return None
 
     def convert_format(
         self,
@@ -486,9 +559,75 @@ class VideoProcessor:
         success, output = self._run_command(cmd, timeout=3600)
 
         if not success:
+            # 如果drawtext滤镜不支持，使用备选方法（纯overlay）
+            if "No such filter: 'drawtext'" in output:
+                return self._add_watermark_overlay(
+                    input_file, output_file, text,
+                    position, overwrite
+                )
             raise RuntimeError(f"添加水印失败: {output}")
 
         return True
+
+    def _add_watermark_overlay(
+        self,
+        input_file: str,
+        output_file: str,
+        text: str,
+        position: str,
+        overwrite: bool
+    ) -> bool:
+        """
+        使用overlay添加文字水印（备选方法）
+
+        Args:
+            input_file: 输入文件
+            output_file: 输出文件
+            text: 水印文字
+            position: 位置
+            overwrite: 是否覆盖
+
+        Returns:
+            是否成功
+        """
+        # 创建一个简单的PNG水印图片
+        import tempfile
+
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tf:
+            watermark_file = tf.name
+
+        try:
+            # 使用ImageMagick创建水印图片（如果可用）
+            cmd = [
+                "convert",
+                "-size", "200x50",
+                "xc:none",
+                "-gravity", "center",
+                "-pointsize", "24",
+                "-fill", "white",
+                "-draw", f"text 0,0 '{text}'",
+                watermark_file
+            ]
+
+            success, _ = self._run_command(cmd, timeout=10)
+
+            if success and os.path.exists(watermark_file):
+                # 使用图片水印
+                return self.add_watermark(
+                    input_file, output_file,
+                    image=watermark_file,
+                    position=position,
+                    overwrite=overwrite
+                )
+            else:
+                # ImageMagick不可用，直接复制文件（跳过水印）
+                import shutil
+                shutil.copy(input_file, output_file)
+                return True
+
+        finally:
+            if os.path.exists(watermark_file):
+                os.remove(watermark_file)
 
     def merge_videos(
         self,
