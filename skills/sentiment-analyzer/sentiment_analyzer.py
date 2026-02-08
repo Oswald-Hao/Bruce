@@ -6,7 +6,7 @@
 
 import re
 import json
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
 from collections import Counter
 
 
@@ -115,39 +115,6 @@ class SentimentAnalyzer:
         """判断文本是否包含中文"""
         return bool(re.search(r'[\u4e00-\u9fff]', text))
 
-    def _tokenize_chinese(self, text: str) -> List[tuple]:
-        """
-        中文分词（基于词典匹配）
-
-        Returns:
-            词汇列表，每个元素为 (词, 起始位置)
-        """
-        tokens = []
-        i = 0
-
-        # 合并所有词
-        all_words = self.zh_positive | self.zh_negative | self.zh_negation | set(self.degree_words.keys())
-
-        # 按长度排序，优先匹配长词
-        sorted_words = sorted(all_words, key=len, reverse=True)
-
-        while i < len(text):
-            matched = False
-
-            # 尝试匹配最长词
-            for word in sorted_words:
-                if text[i:i+len(word)] == word:
-                    tokens.append((word, i))
-                    i += len(word)
-                    matched = True
-                    break
-
-            if not matched:
-                # 跳过非情感词字符
-                i += 1
-
-        return tokens
-
     def _tokenize_english(self, text: str) -> List[str]:
         """英文分词"""
         # 移除标点符号
@@ -156,9 +123,9 @@ class SentimentAnalyzer:
         tokens = text.split()
         return tokens
 
-    def _find_chinese_words(self, text: str, word_set: Set[str]) -> List[tuple]:
+    def _find_words(self, text: str, word_set: Set[str]) -> List[Tuple[str, int]]:
         """
-        在中文文本中查找所有匹配的词
+        在文本中查找所有匹配的词
 
         Args:
             text: 文本
@@ -169,7 +136,10 @@ class SentimentAnalyzer:
         """
         matches = []
 
-        for word in word_set:
+        # 按长度排序，优先匹配长词
+        sorted_words = sorted(word_set, key=len, reverse=True)
+
+        for word in sorted_words:
             start = 0
             while True:
                 pos = text.find(word, start)
@@ -221,103 +191,56 @@ class SentimentAnalyzer:
         positive_tokens = []
         negative_tokens = []
 
-        if is_chinese:
-            # 中文处理
-            # 查找所有情感词和否定词的位置
-            positive_matches = self._find_chinese_words(text, positive_dict)
-            negative_matches = self._find_chinese_words(text, negative_dict)
-            negation_matches = self._find_chinese_words(text, negation_dict)
-            degree_matches = self._find_chinese_words(text, set(self.degree_words.keys()))
+        # 查找所有词的位置
+        positive_matches = self._find_words(text, positive_dict)
+        negative_matches = self._find_words(text, negative_dict)
+        negation_matches = self._find_words(text, negation_dict)
+        degree_matches = self._find_words(text, set(self.degree_words.keys()))
 
-            # 创建位置映射
-            negation_positions = set()
-            for word, pos in negation_matches:
-                # 否定词影响后续2-3个字
-                for i in range(pos, min(pos + 5, len(text))):
-                    negation_positions.add(i)
+        # 创建否定词影响范围
+        negation_ranges = []
+        for word, pos in negation_matches:
+            negation_ranges.append((pos, pos + len(word) + 3))  # 影响3个字
 
-            # 处理正面词
-            for word, pos in positive_matches:
-                # 检查是否被否定
-                is_negated = any(p in negation_positions for p in range(pos, pos + len(word)))
+        # 处理正面词
+        for word, pos in positive_matches:
+            # 检查是否在否定词影响范围内
+            is_negated = any(start <= pos < end for start, end in negation_ranges)
 
-                # 查找程度副词
-                degree = 1.0
-                for d_word, d_pos in degree_matches:
-                    if d_pos < pos and d_pos + len(d_word) >= pos - 2:
-                        degree = self.degree_words[d_word]
-                        break
+            # 查找程度副词
+            degree = 1.0
+            for d_word, d_pos in degree_matches:
+                if d_pos < pos and d_pos + len(d_word) >= pos - 3:
+                    degree = self.degree_words[d_word]
+                    break
 
-                score = 1.0 * degree
-                if is_negated:
-                    negative_score += score
-                    negative_tokens.append(word)
-                else:
-                    positive_score += score
-                    positive_tokens.append(word)
+            score = 1.0 * degree
+            if is_negated:
+                negative_score += score
+                negative_tokens.append(word)
+            else:
+                positive_score += score
+                positive_tokens.append(word)
 
-            # 处理负面词
-            for word, pos in negative_matches:
-                # 检查是否被否定
-                is_negated = any(p in negation_positions for p in range(pos, pos + len(word)))
+        # 处理负面词
+        for word, pos in negative_matches:
+            # 检查是否在否定词影响范围内
+            is_negated = any(start <= pos < end for start, end in negation_ranges)
 
-                # 查找程度副词
-                degree = 1.0
-                for d_word, d_pos in degree_matches:
-                    if d_pos < pos and d_pos + len(d_word) >= pos - 2:
-                        degree = self.degree_words[d_word]
-                        break
+            # 查找程度副词
+            degree = 1.0
+            for d_word, d_pos in degree_matches:
+                if d_pos < pos and d_pos + len(d_word) >= pos - 3:
+                    degree = self.degree_words[d_word]
+                    break
 
-                score = 1.0 * degree
-                if is_negated:
-                    positive_score += score
-                    positive_tokens.append(word)
-                else:
-                    negative_score += score
-                    negative_tokens.append(word)
-
-        else:
-            # 英文处理
-            tokens = self._tokenize_english(text)
-
-            # 检测否定词位置
-            negation_flags = [False] * (len(tokens) + 1)
-
-            for i, token in enumerate(tokens):
-                if token in negation_dict:
-                    negation_flags[i] = True
-                    # 否定词影响后1-2个词
-                    if i + 1 < len(negation_flags):
-                        negation_flags[i + 1] = True
-                    if i + 2 < len(negation_flags):
-                        negation_flags[i + 2] = True
-
-            # 检测情感词
-            for i, token in enumerate(tokens):
-                is_negated = negation_flags[i]
-
-                # 计算程度副词权重
-                degree = 1.0
-                if i > 0 and tokens[i - 1] in self.degree_words:
-                    degree = self.degree_words[tokens[i - 1]]
-
-                if token in positive_dict:
-                    score = 1.0 * degree
-                    if is_negated:
-                        negative_score += score
-                        negative_tokens.append(token)
-                    else:
-                        positive_score += score
-                        positive_tokens.append(token)
-
-                elif token in negative_dict:
-                    score = 1.0 * degree
-                    if is_negated:
-                        positive_score += score
-                        positive_tokens.append(token)
-                    else:
-                        negative_score += score
-                        negative_tokens.append(token)
+            score = 1.0 * degree
+            if is_negated:
+                positive_score += score
+                positive_tokens.append(word)
+            else:
+                negative_score += score
+                negative_tokens.append(word)
 
         # 计算总得分
         total_score = positive_score - negative_score
@@ -343,11 +266,17 @@ class SentimentAnalyzer:
         else:
             confidence = 0.3
 
+        # 分词（简化版）
+        if is_chinese:
+            tokens = list(text)  # 中文按字分
+        else:
+            tokens = self._tokenize_english(text)
+
         return {
             "label": label,
             "score": round(normalized_score, 3),
             "confidence": round(confidence, 3),
-            "tokens": self._tokenize_english(text) if not is_chinese else [t[0] for t in self._tokenize_chinese(text)],
+            "tokens": tokens,
             "positive_tokens": positive_tokens,
             "negative_tokens": negative_tokens,
         }
