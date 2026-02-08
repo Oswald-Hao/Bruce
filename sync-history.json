@@ -1,0 +1,140 @@
+{
+  "syncs": [
+    {
+      "timestamp": "2026-02-09T00:17:04.955649",
+      "source": "/tmp/tmp3orux5mk/source",
+      "target": "/tmp/tmp3orux5mk/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file1.txt",
+          "file2.txt",
+          "subdir/file3.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.956135",
+      "source": "/tmp/tmp0j9h0psz/source",
+      "target": "/tmp/tmp0j9h0psz/target",
+      "mode": "reflect",
+      "result": {
+        "copied": [],
+        "updated": [
+          "keep.txt"
+        ],
+        "skipped": [],
+        "deleted": [
+          "delete.txt"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.969893",
+      "source": "/tmp/tmp4_ut2a3s/source",
+      "target": "/tmp/tmp4_ut2a3s/target",
+      "mode": "two-way",
+      "result": {
+        "copied": [
+          "only_source.txt",
+          "only_target.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "conflicts": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.970203",
+      "source": "/tmp/tmpcckq0698/source",
+      "target": "/tmp/tmpcckq0698/backup",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file1.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.970462",
+      "source": "/tmp/tmpcckq0698/source",
+      "target": "/tmp/tmpcckq0698/backup",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file2.txt"
+        ],
+        "updated": [
+          "file1.txt"
+        ],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.970870",
+      "source": "/tmp/tmp4d0q84nu/source",
+      "target": "/tmp/tmp4d0q84nu/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "keep.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.971552",
+      "source": "/tmp/tmpieh5qpe_/source",
+      "target": "/tmp/tmpieh5qpe_/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.971877",
+      "source": "/tmp/tmpsoxnopnr/source",
+      "target": "/tmp/tmpsoxnopnr/target",
+      "mode": "two-way",
+      "result": {
+        "copied": [],
+        "updated": [],
+        "skipped": [],
+        "conflicts": [
+          "conflict.txt"
+        ],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:04.974409",
+      "source": "/tmp/tmpixepk79q/source",
+      "target": "/tmp/tmpixepk79q/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "large.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    }
+  ],
+  "file_records": {}
+}
