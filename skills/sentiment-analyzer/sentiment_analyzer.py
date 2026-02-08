@@ -85,9 +85,9 @@ class SentimentAnalyzer:
             "tough", "slow", "sluggish", "lagging", "unstable", "unreliable",
         }
 
-        # 中文否定词
+        # 中文否定词（排除程度副词中的"非"）
         self.zh_negation = {
-            "不", "没", "无", "非", "别", "莫", "勿", "未", "没有",
+            "不", "没", "无", "别", "莫", "勿", "未", "没有",
         }
 
         # 英文否定词
@@ -139,16 +139,22 @@ class SentimentAnalyzer:
         # 按长度排序，优先匹配长词
         sorted_words = sorted(word_set, key=len, reverse=True)
 
+        # 使用字典记录每个位置的最佳匹配（最长词）
+        position_matches = {}
+
         for word in sorted_words:
             start = 0
             while True:
                 pos = text.find(word, start)
                 if pos == -1:
                     break
-                matches.append((word, pos))
+                # 如果这个位置已经有匹配，且新词更长，则替换
+                if pos not in position_matches or len(word) > len(position_matches[pos][0]):
+                    position_matches[pos] = (word, pos)
                 start = pos + 1
 
-        # 按位置排序
+        # 转换为列表
+        matches = list(position_matches.values())
         matches.sort(key=lambda x: x[1])
         return matches
 
