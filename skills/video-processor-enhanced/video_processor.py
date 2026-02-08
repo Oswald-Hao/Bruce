@@ -25,7 +25,7 @@ class VideoProcessor:
         """
         self.ffmpeg_path = ffmpeg_path
         # 更可靠的ffprobe路径查找
-        self.ffprobe_path = shutil.which("ffprobe") or "ffprobe"
+        self.ffprobe_path = shutil.which("ffprobe")
         self._check_ffmpeg()
 
     def _check_ffmpeg(self):
@@ -79,61 +79,66 @@ class VideoProcessor:
         Returns:
             视频信息字典
         """
-        # 优先尝试使用ffprobe
-        cmd = [
-            self.ffprobe_path,
-            "-v", "quiet",
-            "-print_format", "json",
-            "-show_format",
-            "-show_streams",
-            input_file
-        ]
+        # 检查ffprobe是否可用
+        if self.ffprobe_path and os.path.exists(self.ffprobe_path):
+            # 优先尝试使用ffprobe
+            cmd = [
+                self.ffprobe_path,
+                "-v", "quiet",
+                "-print_format", "json",
+                "-show_format",
+                "-show_streams",
+                input_file
+            ]
 
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
 
-        if result.returncode == 0:
-            # ffprobe成功
-            data = json.loads(result.stdout)
+            if result.returncode == 0:
+                # ffprobe成功
+                try:
+                    data = json.loads(result.stdout)
 
-            # 提取视频流信息
-            video_stream = None
-            audio_stream = None
+                    # 提取视频流信息
+                    video_stream = None
+                    audio_stream = None
 
-            for stream in data.get("streams", []):
-                if stream["codec_type"] == "video" and video_stream is None:
-                    video_stream = stream
-                elif stream["codec_type"] == "audio" and audio_stream is None:
-                    audio_stream = stream
+                    for stream in data.get("streams", []):
+                        if stream["codec_type"] == "video" and video_stream is None:
+                            video_stream = stream
+                        elif stream["codec_type"] == "audio" and audio_stream is None:
+                            audio_stream = stream
 
-            format_info = data.get("format", {})
+                    format_info = data.get("format", {})
 
-            info = {
-                "filename": format_info.get("filename", input_file),
-                "format": format_info.get("format_name", "unknown"),
-                "duration": float(format_info.get("duration", 0)),
-                "size": int(format_info.get("size", 0)),
-                "bit_rate": int(format_info.get("bit_rate", 0)),
-            }
+                    info = {
+                        "filename": format_info.get("filename", input_file),
+                        "format": format_info.get("format_name", "unknown"),
+                        "duration": float(format_info.get("duration", 0)),
+                        "size": int(format_info.get("size", 0)),
+                        "bit_rate": int(format_info.get("bit_rate", 0)),
+                    }
 
-            if video_stream:
-                info.update({
-                    "width": video_stream.get("width"),
-                    "height": video_stream.get("height"),
-                    "codec": video_stream.get("codec_name"),
-                    "fps": eval(video_stream.get("r_frame_rate", "0/1")),
-                    "pixel_format": video_stream.get("pix_fmt"),
-                })
+                    if video_stream:
+                        info.update({
+                            "width": video_stream.get("width"),
+                            "height": video_stream.get("height"),
+                            "codec": video_stream.get("codec_name"),
+                            "fps": eval(video_stream.get("r_frame_rate", "0/1")),
+                            "pixel_format": video_stream.get("pix_fmt"),
+                        })
 
-            if audio_stream:
-                info.update({
-                    "audio_codec": audio_stream.get("codec_name"),
-                    "sample_rate": audio_stream.get("sample_rate"),
-                    "channels": audio_stream.get("channels"),
-                })
+                    if audio_stream:
+                        info.update({
+                            "audio_codec": audio_stream.get("codec_name"),
+                            "sample_rate": audio_stream.get("sample_rate"),
+                            "channels": audio_stream.get("channels"),
+                        })
 
-            return info
+                    return info
+                except (json.JSONDecodeError, KeyError):
+                    pass  # ffprobe输出解析失败，使用ffmpeg备选
 
-        # ffprobe不可用，使用ffmpeg备选
+        # 使用ffmpeg备选
         cmd = [
             self.ffmpeg_path,
             "-i", input_file,
