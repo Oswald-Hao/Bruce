@@ -152,6 +152,63 @@ class SentimentAnalyzer:
         matches.sort(key=lambda x: x[1])
         return matches
 
+    def _check_negation(self, text: str, word_pos: int, word_len: int,
+                       negation_dict: Set[str]) -> bool:
+        """
+        检查词是否被否定
+
+        Args:
+            text: 文本
+            word_pos: 词的起始位置
+            word_len: 词的长度
+            negation_dict: 否定词典
+
+        Returns:
+            是否被否定
+        """
+        # 检查词前面是否有否定词
+        lookbehind = text[:word_pos]
+
+        # 查找最近的否定词
+        negation_words = self._find_words(lookbehind, negation_dict)
+
+        if not negation_words:
+            return False
+
+        # 找到最近的否定词
+        last_negation = negation_words[-1]
+        neg_word, neg_pos = last_negation
+
+        # 否定词到目标词的距离（考虑字符数）
+        distance = word_pos - (neg_pos + len(neg_word))
+
+        # 如果距离在5个字符内，认为是否定
+        return distance <= 5
+
+    def _get_degree(self, text: str, word_pos: int) -> float:
+        """
+        获取词前面的程度副词
+
+        Args:
+            text: 文本
+            word_pos: 词的起始位置
+
+        Returns:
+            程度副词权重
+        """
+        # 检查词前面的程度副词
+        lookbehind = text[:word_pos]
+
+        for word, weight in self.degree_words.items():
+            # 查找程度副词是否在词前面
+            pos = lookbehind.rfind(word)
+            if pos != -1:
+                # 检查距离（5个字符内）
+                if word_pos - (pos + len(word)) <= 5:
+                    return weight
+
+        return 1.0
+
     def analyze(self, text: str) -> Dict:
         """
         分析单句文本的情感
@@ -191,28 +248,17 @@ class SentimentAnalyzer:
         positive_tokens = []
         negative_tokens = []
 
-        # 查找所有词的位置
+        # 查找所有情感词的位置
         positive_matches = self._find_words(text, positive_dict)
         negative_matches = self._find_words(text, negative_dict)
-        negation_matches = self._find_words(text, negation_dict)
-        degree_matches = self._find_words(text, set(self.degree_words.keys()))
-
-        # 创建否定词影响范围
-        negation_ranges = []
-        for word, pos in negation_matches:
-            negation_ranges.append((pos, pos + len(word) + 3))  # 影响3个字
 
         # 处理正面词
         for word, pos in positive_matches:
-            # 检查是否在否定词影响范围内
-            is_negated = any(start <= pos < end for start, end in negation_ranges)
+            # 检查是否被否定
+            is_negated = self._check_negation(text, pos, len(word), negation_dict)
 
-            # 查找程度副词
-            degree = 1.0
-            for d_word, d_pos in degree_matches:
-                if d_pos < pos and d_pos + len(d_word) >= pos - 3:
-                    degree = self.degree_words[d_word]
-                    break
+            # 获取程度副词
+            degree = self._get_degree(text, pos)
 
             score = 1.0 * degree
             if is_negated:
@@ -224,15 +270,11 @@ class SentimentAnalyzer:
 
         # 处理负面词
         for word, pos in negative_matches:
-            # 检查是否在否定词影响范围内
-            is_negated = any(start <= pos < end for start, end in negation_ranges)
+            # 检查是否被否定
+            is_negated = self._check_negation(text, pos, len(word), negation_dict)
 
-            # 查找程度副词
-            degree = 1.0
-            for d_word, d_pos in degree_matches:
-                if d_pos < pos and d_pos + len(d_word) >= pos - 3:
-                    degree = self.degree_words[d_word]
-                    break
+            # 获取程度副词
+            degree = self._get_degree(text, pos)
 
             score = 1.0 * degree
             if is_negated:
@@ -266,7 +308,7 @@ class SentimentAnalyzer:
         else:
             confidence = 0.3
 
-        # 分词（简化版）
+        # 分词
         if is_chinese:
             tokens = list(text)  # 中文按字分
         else:
