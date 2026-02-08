@@ -92,8 +92,8 @@ class QualityEvaluator:
             with open(self.quality_db, 'r', encoding='utf-8') as f:
                 return json.load(f)
 
-        # 返回示例数据
-        return self._generate_sample_data()
+        # 返回空列表（不再生成示例数据）
+        return []
 
     def _generate_sample_data(self) -> List[Dict]:
         """生成示例数据"""

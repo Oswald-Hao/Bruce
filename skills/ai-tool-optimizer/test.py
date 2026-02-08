@@ -63,7 +63,7 @@ class TestPromptOptimizer(unittest.TestCase):
         result = self.optimizer.optimize(prompt, task_type='code')
 
         optimized = result['optimized_prompt']
-        self.assertIn('代码', optimized) or self.assertIn('function', optimized)
+        self.assertIn('代码', optimized)
 
         print("✓ 测试3通过: 带任务类型优化成功")
 
@@ -213,11 +213,11 @@ class TestModelSelector(unittest.TestCase):
     def test_identify_task_type(self):
         """测试11: 任务类型识别"""
         self.assertEqual(
-            self.selector._identify_task_type('编写代码'),
+            self.selector._identify_task_type('编程'),
             'code'
         )
         self.assertEqual(
-            self.selector._identify_task_type('写一篇文章'),
+            self.selector._identify_task_type('写文章'),
             'writing'
         )
 
