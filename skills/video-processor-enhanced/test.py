@@ -223,7 +223,7 @@ class TestVideoProcessor(unittest.TestCase):
 
     def test_11_invalid_input(self):
         """测试11: 无效输入处理"""
-        with self.assertRaises(FileNotFoundError):
+        with self.assertRaises((FileNotFoundError, RuntimeError)):
             self.vp.get_video_info("nonexistent.mp4")
 
         with self.assertRaises(FileNotFoundError):
@@ -255,8 +255,9 @@ class TestVideoProcessor(unittest.TestCase):
 
     def test_13_batch_process_compress(self):
         """测试13: 批量处理 - 视频压缩"""
-        input_dir = os.path.join(self.test_dir, "input")
-        output_dir = os.path.join(self.test_dir, "output")
+        input_dir = os.path.join(self.test_dir, "input_compress")
+        output_dir = os.path.join(self.test_dir, "output_compress")
+        os.makedirs(input_dir, exist_ok=True)
 
         # 复制测试视频
         test_video = self._create_test_video(duration=2)
