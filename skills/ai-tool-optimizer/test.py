@@ -97,6 +97,9 @@ class TestTokenAnalyzer(unittest.TestCase):
 
     def setUp(self):
         """测试前准备"""
+        # 使用独立的测试数据库
+        import tempfile
+        self.test_db = tempfile.mktemp(suffix='.json')
         config = {
             'models': {
                 'gpt-3.5-turbo': {
@@ -104,15 +107,15 @@ class TestTokenAnalyzer(unittest.TestCase):
                 }
             },
             'storage': {
-                'usage_db': 'test_usage_db.json'
+                'usage_db': self.test_db
             }
         }
         self.analyzer = TokenAnalyzer(config)
 
     def tearDown(self):
         """测试后清理"""
-        if os.path.exists('test_usage_db.json'):
-            os.remove('test_usage_db.json')
+        if hasattr(self, 'test_db') and os.path.exists(self.test_db):
+            os.remove(self.test_db)
 
     def test_analyze_usage(self):
         """测试5: 分析使用情况"""
@@ -316,17 +319,20 @@ class TestQualityEvaluator(unittest.TestCase):
 
     def setUp(self):
         """测试前准备"""
+        # 使用独立的测试数据库
+        import tempfile
+        self.test_db = tempfile.mktemp(suffix='.json')
         config = {
             'storage': {
-                'quality_db': 'test_quality_db.json'
+                'quality_db': self.test_db
             }
         }
         self.evaluator = QualityEvaluator(config)
 
     def tearDown(self):
         """测试后清理"""
-        if os.path.exists('test_quality_db.json'):
-            os.remove('test_quality_db.json')
+        if hasattr(self, 'test_db') and os.path.exists(self.test_db):
+            os.remove(self.test_db)
 
     def test_evaluate_good_response(self):
         """测试15: 评估好的响应"""
