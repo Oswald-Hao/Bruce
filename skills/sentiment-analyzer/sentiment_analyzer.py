@@ -85,9 +85,9 @@ class SentimentAnalyzer:
             "tough", "slow", "sluggish", "lagging", "unstable", "unreliable",
         }
 
-        # 中文否定词（排除程度副词中的"非"）
+        # 中文否定词（移除有歧义的"别"）
         self.zh_negation = {
-            "不", "没", "无", "别", "莫", "勿", "未", "没有",
+            "不", "没", "无", "莫", "勿", "未", "没有",
         }
 
         # 英文否定词
