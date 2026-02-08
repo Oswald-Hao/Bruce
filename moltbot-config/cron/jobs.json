@@ -209,7 +209,7 @@
       "name": "进化汇报 - 每天上午10点",
       "enabled": true,
       "createdAtMs": 1769839580043,
-      "updatedAtMs": 1770429600000,
+      "updatedAtMs": 1770516000003,
       "schedule": {
         "kind": "cron",
         "expr": "0 10 * * *",
@@ -225,10 +225,10 @@
         "to": "ou_ac30832212aa13310b80594b6a24b8d9"
       },
       "state": {
-        "nextRunAtMs": 1770516000000,
-        "lastRunAtMs": 1770429600000,
+        "nextRunAtMs": 1770602400000,
+        "lastRunAtMs": 1770516000003,
         "lastStatus": "ok",
-        "lastDurationMs": 97418
+        "lastDurationMs": 163020
       }
     },
     {
@@ -237,7 +237,7 @@
       "name": "Bruce周日增强进化 - 每5小时一个技能",
       "enabled": true,
       "createdAtMs": 1769840831549,
-      "updatedAtMs": 1770498000002,
+      "updatedAtMs": 1770516000003,
       "schedule": {
         "kind": "cron",
         "expr": "0 0,5,10,15,20 * * 0",
@@ -251,10 +251,10 @@
         "timeoutSeconds": 18000
       },
       "state": {
-        "nextRunAtMs": 1770516000000,
-        "lastRunAtMs": 1770498000002,
+        "nextRunAtMs": 1770534000000,
+        "lastRunAtMs": 1770516163025,
         "lastStatus": "ok",
-        "lastDurationMs": 167599
+        "lastDurationMs": 2898255
       }
     }
   ]
