@@ -1,0 +1,4 @@
+# 视频处理增强器依赖
+
+# 不需要额外Python依赖
+# 系统需要安装ffmpeg: sudo apt-get install ffmpeg
