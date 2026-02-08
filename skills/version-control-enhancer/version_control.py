@@ -7,7 +7,7 @@ Git版本控制增强工具
 import os
 import subprocess
 import json
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 from collections import Counter
 
@@ -229,7 +229,7 @@ class VersionControl:
         print(f"✓ 切换到分支: {branch_name}")
         return True
 
-    def list_branches(self) -> List[str]:
+    def list_branches(self) -> Dict:
         """
         列出所有分支
 
@@ -390,7 +390,7 @@ def main():
     branch_create.add_argument("--no-checkout", action="store_false", dest="checkout", default=True)
     branch_switch = branch_subparsers.add_parser("switch", help="切换分支")
     branch_switch.add_argument("name", help="分支名称")
-    branch_list = branch_subparsers.add_parser("list", help="列出分支")
+    branch_subparsers.add_parser("list", help="列出分支")
 
     # stats命令
     stats_parser = subparsers.add_parser("stats", help="历史统计")
