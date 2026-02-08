@@ -1,0 +1,4 @@
+# 版本控制增强器依赖
+
+# 无需额外Python依赖
+# 系统需要安装git: sudo apt-get install git
