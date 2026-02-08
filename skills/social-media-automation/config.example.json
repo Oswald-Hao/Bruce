@@ -1,0 +1,36 @@
+{
+  "platforms": {
+    "douyin": {
+      "client_id": "your_douyin_client_id",
+      "client_secret": "your_douyin_client_secret",
+      "access_token": "your_douyin_access_token",
+      "username": "your_douyin_username"
+    },
+    "xiaohongshu": {
+      "client_id": "your_xhs_client_id",
+      "access_token": "your_xhs_access_token",
+      "username": "your_xhs_username"
+    },
+    "weibo": {
+      "app_key": "your_weibo_app_key",
+      "app_secret": "your_weibo_app_secret",
+      "access_token": "your_weibo_access_token",
+      "username": "your_weibo_username"
+    },
+    "zhihu": {
+      "client_id": "your_zhihu_client_id",
+      "client_secret": "your_zhihu_client_secret",
+      "access_token": "your_zhihu_access_token",
+      "username": "your_zhihu_username"
+    }
+  },
+  "scheduler": {
+    "enabled": true,
+    "check_interval": 60
+  },
+  "storage": {
+    "content_db": "content_db.json",
+    "scheduled_db": "scheduled_db.json",
+    "analytics_db": "analytics_db.json"
+  }
+}
