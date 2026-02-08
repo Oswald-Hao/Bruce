@@ -176,11 +176,15 @@ def test_backup():
         
         db.close()
         
+        # 确认数据库文件存在
+        assert os.path.exists(db_path), f"数据库文件不存在: {db_path}"
+        
         # 创建新实例进行备份
         db2 = DatabaseManager()
         backup_path = db2.backup_sqlite(db_path, 'test_backup')
         
-        assert os.path.exists(backup_path), "备份文件不存在"
+        print(f"调试: 备份路径 = {backup_path}")
+        assert os.path.exists(backup_path), f"备份文件不存在: {backup_path}"
         assert backup_path.endswith('.gz'), "备份文件未压缩"
         
         # 检查备份文件大小

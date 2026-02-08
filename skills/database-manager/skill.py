@@ -124,17 +124,34 @@ class DatabaseManager:
         Returns:
             备份文件路径
         """
+        # 检查源文件是否存在
+        if not os.path.exists(db_path):
+            raise FileNotFoundError(f"源数据库文件不存在: {db_path}")
+        
         if backup_name is None:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             backup_name = f"backup_{timestamp}.db"
 
         backup_path = self.backup_dir / backup_name
-        subprocess.run(['cp', db_path, str(backup_path)], check=True)
+        print(f"调试: 复制 {db_path} -> {backup_path}")
+        
+        try:
+            subprocess.run(['cp', db_path, str(backup_path)], check=True)
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError(f"复制文件失败: {e}")
 
         # 压缩备份
         compressed_path = backup_path.with_suffix('.db.gz')
-        subprocess.run(['gzip', '-f', str(backup_path)], check=True)
+        print(f"调试: 压缩 {backup_path} -> {compressed_path}")
+        
+        try:
+            subprocess.run(['gzip', '-f', str(backup_path)], check=True)
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError(f"压缩文件失败: {e}")
 
+        if not os.path.exists(compressed_path):
+            raise FileNotFoundError(f"压缩后的文件不存在: {compressed_path}")
+        
         return str(compressed_path)
 
     def backup_postgresql(self, host: str, database: str, user: str, backup_name: str = None) -> str:
