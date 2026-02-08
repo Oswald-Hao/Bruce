@@ -7,10 +7,10 @@
 import os
 import subprocess
 import json
-import re
+import shutil
+import tempfile
 from pathlib import Path
 from typing import Dict, Optional, Tuple
-import tempfile
 
 
 class VideoProcessor:
@@ -24,7 +24,8 @@ class VideoProcessor:
             ffmpeg_path: ffmpeg可执行文件路径
         """
         self.ffmpeg_path = ffmpeg_path
-        self.ffprobe_path = ffmpeg_path.replace("ffmpeg", "ffprobe")
+        # 更可靠的ffprobe路径查找
+        self.ffprobe_path = shutil.which("ffprobe") or "ffprobe"
         self._check_ffmpeg()
 
     def _check_ffmpeg(self):
@@ -437,13 +438,13 @@ class VideoProcessor:
         cmd.extend(["-i", input_file])
 
         if text:
-            # 文字水印
+            # 文字水印 - 修复语法
             position_map = {
-                "top-left": "(x=w-tw-10:y=h-th-10)",
-                "top-right": "(x=w-tw-10:y=10)",
-                "bottom-left": "(x=10:y=h-th-10)",
-                "bottom-right": "(x=w-tw-10:y=h-th-10)",
-                "center": "(x=(w-tw)/2:y=(h-th)/2)",
+                "top-left": "x=10:y=10",
+                "top-right": "x=w-tw-10:y=10",
+                "bottom-left": "x=10:y=h-th-10",
+                "bottom-right": "x=w-tw-10:y=h-th-10",
+                "center": "x=(w-tw)/2:y=(h-th)/2",
             }
 
             pos = position_map.get(position, position_map["bottom-right"])
