@@ -89,70 +89,67 @@ class VideoProcessor:
             input_file
         ]
 
-        success, output = self._run_command(cmd, timeout=30)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
 
-        if not success:
-            # ffprobe不可用，使用ffmpeg备选
-            cmd = [
-                self.ffmpeg_path,
-                "-i", input_file,
-                "-f", "null",
-                "-"
-            ]
+        if result.returncode == 0:
+            # ffprobe成功
+            data = json.loads(result.stdout)
 
-            success, output = self._run_command(cmd, timeout=30)
+            # 提取视频流信息
+            video_stream = None
+            audio_stream = None
 
-            if not success:
-                # 从ffmpeg错误输出中提取信息
-                info = self._parse_ffmpeg_info(output)
-                if info:
-                    return info
-                raise RuntimeError(f"获取视频信息失败: {output}")
+            for stream in data.get("streams", []):
+                if stream["codec_type"] == "video" and video_stream is None:
+                    video_stream = stream
+                elif stream["codec_type"] == "audio" and audio_stream is None:
+                    audio_stream = stream
 
-            # 解析ffmpeg输出
-            info = self._parse_ffmpeg_info(output)
-            if not info:
-                raise RuntimeError(f"无法解析视频信息")
+            format_info = data.get("format", {})
+
+            info = {
+                "filename": format_info.get("filename", input_file),
+                "format": format_info.get("format_name", "unknown"),
+                "duration": float(format_info.get("duration", 0)),
+                "size": int(format_info.get("size", 0)),
+                "bit_rate": int(format_info.get("bit_rate", 0)),
+            }
+
+            if video_stream:
+                info.update({
+                    "width": video_stream.get("width"),
+                    "height": video_stream.get("height"),
+                    "codec": video_stream.get("codec_name"),
+                    "fps": eval(video_stream.get("r_frame_rate", "0/1")),
+                    "pixel_format": video_stream.get("pix_fmt"),
+                })
+
+            if audio_stream:
+                info.update({
+                    "audio_codec": audio_stream.get("codec_name"),
+                    "sample_rate": audio_stream.get("sample_rate"),
+                    "channels": audio_stream.get("channels"),
+                })
+
             return info
 
-        data = json.loads(output)
+        # ffprobe不可用，使用ffmpeg备选
+        cmd = [
+            self.ffmpeg_path,
+            "-i", input_file,
+            "-f", "null",
+            "-"
+        ]
 
-        # 提取视频流信息
-        video_stream = None
-        audio_stream = None
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
 
-        for stream in data.get("streams", []):
-            if stream["codec_type"] == "video" and video_stream is None:
-                video_stream = stream
-            elif stream["codec_type"] == "audio" and audio_stream is None:
-                audio_stream = stream
+        # ffmpeg将信息输出到stderr
+        output = result.stderr
 
-        format_info = data.get("format", {})
-
-        info = {
-            "filename": format_info.get("filename", input_file),
-            "format": format_info.get("format_name", "unknown"),
-            "duration": float(format_info.get("duration", 0)),
-            "size": int(format_info.get("size", 0)),
-            "bit_rate": int(format_info.get("bit_rate", 0)),
-        }
-
-        if video_stream:
-            info.update({
-                "width": video_stream.get("width"),
-                "height": video_stream.get("height"),
-                "codec": video_stream.get("codec_name"),
-                "fps": eval(video_stream.get("r_frame_rate", "0/1")),
-                "pixel_format": video_stream.get("pix_fmt"),
-            })
-
-        if audio_stream:
-            info.update({
-                "audio_codec": audio_stream.get("codec_name"),
-                "sample_rate": audio_stream.get("sample_rate"),
-                "channels": audio_stream.get("channels"),
-            })
-
+        # 解析ffmpeg输出
+        info = self._parse_ffmpeg_info(output)
+        if not info:
+            raise RuntimeError(f"无法解析视频信息")
         return info
 
     def _parse_ffmpeg_info(self, output: str) -> Optional[Dict]:
@@ -160,7 +157,7 @@ class VideoProcessor:
         从ffmpeg输出中解析视频信息
 
         Args:
-            output: ffmpeg输出
+            output: ffmpeg输出（stderr）
 
         Returns:
             视频信息字典
@@ -175,7 +172,7 @@ class VideoProcessor:
             "bit_rate": 0,
         }
 
-        # 解析Duration
+        # 解析Duration - 格式: Duration: 00:00:02.00
         duration_match = re.search(r'Duration:\s+(\d{2}):(\d{2}):(\d{2}\.\d{2})', output)
         if duration_match:
             hours = int(duration_match.group(1))
@@ -183,25 +180,26 @@ class VideoProcessor:
             seconds = float(duration_match.group(3))
             info["duration"] = hours * 3600 + minutes * 60 + seconds
 
-        # 解析Video流
+        # 解析Video流 - 格式: Video: h264 (High), 320x240
         video_match = re.search(r'Video:\s+(\w+).*?(\d{3,4})x(\d{3,4})', output)
         if video_match:
             info["codec"] = video_match.group(1)
             info["width"] = int(video_match.group(2))
             info["height"] = int(video_match.group(3))
 
-        # 解析fps
+        # 解析fps - 格式: 25 fps
         fps_match = re.search(r'(\d+(?:\.\d+)?)\s*fps', output)
         if fps_match:
             info["fps"] = float(fps_match.group(1))
 
-        # 解析Audio流
+        # 解析Audio流 - 格式: Audio: aac, 44100 Hz
         audio_match = re.search(r'Audio:\s+(\w+).*?(\d+)\s*Hz', output)
         if audio_match:
             info["audio_codec"] = audio_match.group(1)
             info["sample_rate"] = int(audio_match.group(2))
 
-        if info.get("duration") > 0 or info.get("width"):
+        # 更宽松的验证条件
+        if info.get("duration") > 0 or info.get("width") or info.get("codec"):
             return info
 
         return None
