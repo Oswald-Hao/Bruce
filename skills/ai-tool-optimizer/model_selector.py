@@ -114,9 +114,14 @@ class ModelSelector:
         """识别任务类型"""
         task_lower = task.lower()
 
-        for task_type, keywords in self.task_types.items():
-            if any(keyword in task_lower for keyword in keywords):
-                return task_type
+        # 按优先级检查任务类型
+        priority_order = ['code', 'analysis', 'reasoning', 'writing']
+
+        for task_type in priority_order:
+            if task_type in self.task_types:
+                keywords = self.task_types[task_type]
+                if any(keyword in task_lower for keyword in keywords):
+                    return task_type
 
         return 'general'
 
@@ -132,8 +137,8 @@ class ModelSelector:
         cost_score = self._get_cost_score(model, budget)
 
         if quality_priority:
-            # 质量优先：70%质量 + 30%成本
-            return quality_score * 0.7 + cost_score * 0.3
+            # 质量优先：90%质量 + 10%成本
+            return quality_score * 0.9 + cost_score * 0.1
         else:
             # 平衡模式：50%质量 + 50%成本
             return quality_score * 0.5 + cost_score * 0.5

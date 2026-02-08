@@ -134,15 +134,15 @@ class PromptOptimizer:
 
         # 根据任务类型添加特定约束
         if task_type:
-            if 'code' in task_type.lower():
+            if task_type == 'code':
                 constraints.append("- 输出完整可运行的代码")
                 constraints.append("- 添加必要的注释")
 
-            elif 'writing' in task_type.lower():
+            elif task_type == 'writing':
                 constraints.append("- 输出格式清晰，段落分明")
                 constraints.append("- 使用简洁的表达")
 
-            elif 'analysis' in task_type.lower():
+            elif task_type == 'analysis':
                 constraints.append("- 提供详细的分析过程")
                 constraints.append("- 给出具体的数据和证据")
 
