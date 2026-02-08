@@ -32,8 +32,10 @@ class DatabaseManager:
         """
         self.config = config or {}
         self.connections: Dict[str, Any] = {}
-        self.backup_dir = Path(self.config.get('backup_dir', './backups'))
-        self.backup_dir.mkdir(exist_ok=True)
+        # 使用绝对路径作为备份目录
+        backup_dir = self.config.get('backup_dir', './backups')
+        self.backup_dir = Path(backup_dir).resolve()
+        self.backup_dir.mkdir(parents=True, exist_ok=True)
 
     def connect_sqlite(self, db_path: str) -> sqlite3.Connection:
         """
@@ -50,6 +52,8 @@ class DatabaseManager:
         # 使用数据库路径作为key，支持多个SQLite连接
         conn_key = f'sqlite_{db_path}'
         self.connections[conn_key] = conn
+        # 同时保存到'sqlite'作为默认连接（最后一个连接）
+        self.connections['sqlite'] = conn
         return conn
 
     def connect_postgresql(self, host: str, database: str, user: str, password: str, port: int = 5432):
@@ -192,6 +196,28 @@ class DatabaseManager:
         except subprocess.CalledProcessError:
             return False
 
+    def _get_connection(self, db_type: str = 'sqlite'):
+        """
+        获取连接对象（辅助方法）
+
+        Args:
+            db_type: 数据库类型
+
+        Returns:
+            连接对象
+        """
+        conn = self.connections.get(db_type)
+        if conn:
+            return conn
+        
+        # 如果是sqlite且未找到，尝试找到第一个sqlite连接
+        if db_type == 'sqlite':
+            for key, conn in self.connections.items():
+                if key.startswith('sqlite_'):
+                    return conn
+        
+        raise ValueError(f"未找到 {db_type} 连接")
+
     def list_tables(self, db_type: str = 'sqlite') -> List[str]:
         """
         列出数据库中的所有表
@@ -202,9 +228,7 @@ class DatabaseManager:
         Returns:
             表名列表
         """
-        conn = self.connections.get(db_type)
-        if not conn:
-            raise ValueError(f"未找到 {db_type} 连接")
+        conn = self._get_connection(db_type)
 
         if db_type == 'sqlite':
             cursor = conn.cursor()
@@ -235,9 +259,7 @@ class DatabaseManager:
         Returns:
             表结构信息
         """
-        conn = self.connections.get(db_type)
-        if not conn:
-            raise ValueError(f"未找到 {db_type} 连接")
+        conn = self._get_connection(db_type)
 
         if db_type == 'sqlite':
             cursor = conn.cursor()
@@ -310,9 +332,7 @@ class DatabaseManager:
         Returns:
             查询结果列表
         """
-        conn = self.connections.get(db_type)
-        if not conn:
-            raise ValueError(f"未找到 {db_type} 连接")
+        conn = self._get_connection(db_type)
 
         cursor = conn.cursor()
         if params:
@@ -334,9 +354,7 @@ class DatabaseManager:
         Returns:
             受影响的行数
         """
-        conn = self.connections.get(db_type)
-        if not conn:
-            raise ValueError(f"未找到 {db_type} 连接")
+        conn = self._get_connection(db_type)
 
         cursor = conn.cursor()
         if params:
@@ -399,7 +417,7 @@ class DatabaseManager:
         Returns:
             健康状态信息
         """
-        conn = self.connections.get(db_type)
+        conn = self._get_connection(db_type)
         if not conn:
             return {'status': 'disconnected', 'error': '未找到连接'}
 
