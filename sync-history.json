@@ -134,6 +134,276 @@
         "skipped": [],
         "deleted": []
       }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.018334",
+      "source": "/tmp/tmp6exlc_rg/source",
+      "target": "/tmp/tmp6exlc_rg/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file1.txt",
+          "file2.txt",
+          "subdir/file3.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.018860",
+      "source": "/tmp/tmpmtst6psg/source",
+      "target": "/tmp/tmpmtst6psg/target",
+      "mode": "reflect",
+      "result": {
+        "copied": [],
+        "updated": [
+          "keep.txt"
+        ],
+        "skipped": [],
+        "deleted": [
+          "delete.txt"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.025616",
+      "source": "/tmp/tmp0uwe9t8f/source",
+      "target": "/tmp/tmp0uwe9t8f/target",
+      "mode": "two-way",
+      "result": {
+        "copied": [
+          "only_source.txt",
+          "only_target.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "conflicts": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.026002",
+      "source": "/tmp/tmpg_wvh7b4/source",
+      "target": "/tmp/tmpg_wvh7b4/backup",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file1.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.026341",
+      "source": "/tmp/tmpg_wvh7b4/source",
+      "target": "/tmp/tmpg_wvh7b4/backup",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file2.txt"
+        ],
+        "updated": [
+          "file1.txt"
+        ],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.026841",
+      "source": "/tmp/tmp3fm40hi_/source",
+      "target": "/tmp/tmp3fm40hi_/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "keep.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.027628",
+      "source": "/tmp/tmp8_xa82m4/source",
+      "target": "/tmp/tmp8_xa82m4/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.028025",
+      "source": "/tmp/tmpsklem23c/source",
+      "target": "/tmp/tmpsklem23c/target",
+      "mode": "two-way",
+      "result": {
+        "copied": [],
+        "updated": [],
+        "skipped": [],
+        "conflicts": [
+          "conflict.txt"
+        ],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:17:48.030640",
+      "source": "/tmp/tmp0xpy7390/source",
+      "target": "/tmp/tmp0xpy7390/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "large.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.948854",
+      "source": "/tmp/tmpjytc3rwx/source",
+      "target": "/tmp/tmpjytc3rwx/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file1.txt",
+          "file2.txt",
+          "subdir/file3.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.949463",
+      "source": "/tmp/tmpfwre0ef1/source",
+      "target": "/tmp/tmpfwre0ef1/target",
+      "mode": "reflect",
+      "result": {
+        "copied": [],
+        "updated": [
+          "keep.txt"
+        ],
+        "skipped": [],
+        "deleted": [
+          "delete.txt"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.960632",
+      "source": "/tmp/tmpepbgpw3y/source",
+      "target": "/tmp/tmpepbgpw3y/target",
+      "mode": "two-way",
+      "result": {
+        "copied": [
+          "only_target.txt",
+          "only_source.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "conflicts": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.961066",
+      "source": "/tmp/tmpo8fwov5k/source",
+      "target": "/tmp/tmpo8fwov5k/backup",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file1.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.961521",
+      "source": "/tmp/tmpo8fwov5k/source",
+      "target": "/tmp/tmpo8fwov5k/backup",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file2.txt"
+        ],
+        "updated": [
+          "file1.txt"
+        ],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.962089",
+      "source": "/tmp/tmpj4bt6ppw/source",
+      "target": "/tmp/tmpj4bt6ppw/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "keep.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.962951",
+      "source": "/tmp/tmpg56icy3l/source",
+      "target": "/tmp/tmpg56icy3l/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "file.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.963415",
+      "source": "/tmp/tmpigf99nuj/source",
+      "target": "/tmp/tmpigf99nuj/target",
+      "mode": "two-way",
+      "result": {
+        "copied": [],
+        "updated": [],
+        "skipped": [],
+        "conflicts": [
+          "conflict.txt"
+        ],
+        "deleted": []
+      }
+    },
+    {
+      "timestamp": "2026-02-09T00:18:04.966061",
+      "source": "/tmp/tmpsh908gi4/source",
+      "target": "/tmp/tmpsh908gi4/target",
+      "mode": "copy",
+      "result": {
+        "copied": [
+          "large.txt"
+        ],
+        "updated": [],
+        "skipped": [],
+        "deleted": []
+      }
     }
   ],
   "file_records": {}

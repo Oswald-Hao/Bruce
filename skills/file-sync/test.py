@@ -218,10 +218,10 @@ def test_sync_status():
             tool = FileSyncTool()
             status = tool.get_sync_status(str(source_dir), str(target_dir))
             
-            assert 'only_source' in status['only_in_source'], "only_source.txt未被识别"
-            assert 'only_target' in status['only_in_target'], "only_target.txt未被识别"
-            assert 'different' in status['different'], "different.txt未被识别为不同"
-            assert 'same' in status['same'], "same.txt未被识别为相同"
+            assert 'only_source.txt' in status['only_in_source'], "only_source.txt未被识别"
+            assert 'only_target.txt' in status['only_in_target'], "only_target.txt未被识别"
+            assert 'different.txt' in status['different'], "different.txt未被识别为不同"
+            assert 'same.txt' in status['same'], "same.txt未被识别为相同"
             
             print("✓ 同步状态成功")
             return True

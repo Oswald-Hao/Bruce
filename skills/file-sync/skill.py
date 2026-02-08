@@ -363,7 +363,7 @@ class FileSyncTool:
         all_paths = set(source_records.keys()) | set(target_records.keys())
 
         for rel_path in all_paths:
-            if rel_path in source and rel_path not in target_records:
+            if rel_path in source_records and rel_path not in target_records:
                 only_in_source.append(rel_path)
             elif rel_path in target_records and rel_path not in source_records:
                 only_in_target.append(rel_path)
