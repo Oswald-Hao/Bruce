@@ -40,8 +40,8 @@ class ModelSelector:
 
         # 任务类型映射
         self.task_types = {
-            'code': ['代码', '编程', 'code', 'programming', 'debug'],
-            'writing': ['写作', '文案', 'writing', 'content'],
+            'code': ['代码', '编程', 'code', 'programming', 'debug', '写', '编写'],
+            'writing': ['写作', '文案', 'writing', 'content', '文章', '一篇文章'],
             'analysis': ['分析', '研究', 'analysis', 'research'],
             'reasoning': ['推理', '逻辑', 'reasoning', 'logic']
         }

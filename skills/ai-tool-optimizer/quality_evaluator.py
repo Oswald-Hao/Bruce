@@ -128,11 +128,15 @@ class QualityEvaluator:
                 'response_length': random.randint(100, 5000)
             })
 
-        # 保存示例数据
-        with open(self.quality_db, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        # 保存示例数据（仅在数据库不存在时）
+        if not os.path.exists(self.quality_db):
+            with open(self.quality_db, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            return data
 
-        return data
+        # 数据库已存在，返回现有数据
+        with open(self.quality_db, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
     def _identify_common_issues(self, quality_data: List[Dict]) -> List[str]:
         """识别常见问题"""
@@ -181,7 +185,7 @@ class QualityEvaluator:
 
         # 检查2: 响应长度是否合理
         if expected_length and len(response) < expected_length * 0.3:
-            issues.append(f'响应过短，期望{expected_length}字符，实际{len(response)}字符')
+            issues.append('响应过短')
             quality_score *= 0.7
 
         # 检查3: 是否包含错误信息

@@ -126,11 +126,15 @@ class TokenAnalyzer:
                 'cost': cost
             })
 
-        # 保存示例数据
-        with open(self.usage_db, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        # 保存示例数据（仅在数据库不存在时）
+        if not os.path.exists(self.usage_db):
+            with open(self.usage_db, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            return data
 
-        return data
+        # 数据库已存在，返回现有数据
+        with open(self.usage_db, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
     def _calculate_potential_savings(self, usage_data: List[Dict]) -> float:
         """

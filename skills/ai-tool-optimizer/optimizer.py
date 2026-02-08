@@ -147,7 +147,7 @@ class PromptOptimizer:
                 constraints.append("- 给出具体的数据和证据")
 
         # 通用约束
-        if not any('格式' in prompt or 'format' in prompt.lower()):
+        if not ('格式' in prompt or 'format' in prompt.lower()):
             constraints.append("- 使用清晰的输出格式")
 
         # 添加约束到提示词
