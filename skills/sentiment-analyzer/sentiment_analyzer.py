@@ -182,8 +182,8 @@ class SentimentAnalyzer:
         # 否定词到目标词的距离（考虑字符数）
         distance = word_pos - (neg_pos + len(neg_word))
 
-        # 如果距离在5个字符内，认为是否定
-        return distance <= 5
+        # 如果距离在3个字符内，认为是否定（更严格的距离）
+        return distance <= 3
 
     def _get_degree(self, text: str, word_pos: int) -> float:
         """
@@ -203,8 +203,8 @@ class SentimentAnalyzer:
             # 查找程度副词是否在词前面
             pos = lookbehind.rfind(word)
             if pos != -1:
-                # 检查距离（5个字符内）
-                if word_pos - (pos + len(word)) <= 5:
+                # 检查距离（3个字符内）
+                if word_pos - (pos + len(word)) <= 3:
                     return weight
 
         return 1.0
