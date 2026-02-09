@@ -209,7 +209,7 @@
       "name": "进化汇报 - 每天上午10点",
       "enabled": true,
       "createdAtMs": 1769839580043,
-      "updatedAtMs": 1770516000003,
+      "updatedAtMs": 1770602400001,
       "schedule": {
         "kind": "cron",
         "expr": "0 10 * * *",
@@ -225,10 +225,10 @@
         "to": "ou_ac30832212aa13310b80594b6a24b8d9"
       },
       "state": {
-        "nextRunAtMs": 1770602400000,
-        "lastRunAtMs": 1770516000003,
+        "nextRunAtMs": 1770688800000,
+        "lastRunAtMs": 1770602400001,
         "lastStatus": "ok",
-        "lastDurationMs": 163020
+        "lastDurationMs": 208033
       }
     },
     {
