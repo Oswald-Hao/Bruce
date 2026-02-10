@@ -108,11 +108,11 @@ class ResumeParser:
         # 查找工作年限相关描述
         patterns = [
             r'工作[经验|年限|时间][：:\s]*(\d+)\s*年',
-            r'(\d+)\s*年[工作经验|工作经验|工作经验|经验|工作时间]',
+            r'(\d+)\s*年(工作经验|工作|经验|工作时间)?',
             r'(\d+)\s*years?\s*(of)?\s*experience'
         ]
         for pattern in patterns:
-            match = re.search(pattern, text)
+            match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 return int(match.group(1))
         return 0
