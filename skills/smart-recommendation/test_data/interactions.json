@@ -1,0 +1,90 @@
+[
+  {
+    "id": "19a6e242-c7a7-4d3b-948d-b083598a75d5",
+    "user_id": "user001",
+    "item_id": "item001",
+    "rating": 5,
+    "action": "purchase",
+    "timestamp": "2026-02-12T00:23:46.879166"
+  },
+  {
+    "id": "cb541fb4-b87e-44dc-9e31-0190215f30c2",
+    "user_id": "user002",
+    "item_id": "item001",
+    "rating": 1,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.879354"
+  },
+  {
+    "id": "34e527f1-9a96-4c61-af3e-ad5e37c2a4be",
+    "user_id": "user003",
+    "item_id": "item002",
+    "rating": 2,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.879538"
+  },
+  {
+    "id": "4f6e5b76-984a-4013-8f6d-3c3738e294c6",
+    "user_id": "user004",
+    "item_id": "item003",
+    "rating": 3,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.879742"
+  },
+  {
+    "id": "945c7655-e393-4627-a585-8869dae54868",
+    "user_id": "user005",
+    "item_id": "item004",
+    "rating": 4,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.879967"
+  },
+  {
+    "id": "4e70d524-a000-4f1d-aa27-dc28173e8012",
+    "user_id": "user006",
+    "item_id": "item005",
+    "rating": 5,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.880173"
+  },
+  {
+    "id": "c9252280-cef8-46e1-9772-97ea0b406f93",
+    "user_id": "user007",
+    "item_id": "item001",
+    "rating": 1,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.880374"
+  },
+  {
+    "id": "dfc88a33-f679-454f-8b4a-903d96401f9b",
+    "user_id": "user008",
+    "item_id": "item002",
+    "rating": 2,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.880587"
+  },
+  {
+    "id": "49977cab-6458-4599-9f1b-08125654755f",
+    "user_id": "user009",
+    "item_id": "item003",
+    "rating": 3,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.880802"
+  },
+  {
+    "id": "3144e73a-8f2d-4dd3-8297-10b09d848cf9",
+    "user_id": "user0010",
+    "item_id": "item004",
+    "rating": 4,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.881023"
+  },
+  {
+    "id": "f71c566d-5a75-4c7d-b851-9eabd0eb1d10",
+    "user_id": "user0011",
+    "item_id": "item005",
+    "rating": 5,
+    "action": "view",
+    "timestamp": "2026-02-12T00:23:46.881275"
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "item001": {
+    "id": "item001",
+    "name": "无线耳机",
+    "category": "电子产品",
+    "tags": [
+      "音频",
+      "蓝牙"
+    ],
+    "features": {},
+    "price": 299.0,
+    "created_at": "2026-02-12T00:23:46.878820"
+  },
+  "item002": {
+    "id": "item002",
+    "name": "有线耳机",
+    "category": "电子产品",
+    "tags": [],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.878986"
+  },
+  "item006": {
+    "id": "item006",
+    "name": "商品6",
+    "category": "电子产品",
+    "tags": [
+      "标签0"
+    ],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.881654"
+  },
+  "item007": {
+    "id": "item007",
+    "name": "商品7",
+    "category": "电子产品",
+    "tags": [
+      "标签1"
+    ],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.881908"
+  },
+  "item008": {
+    "id": "item008",
+    "name": "商品8",
+    "category": "电子产品",
+    "tags": [
+      "标签2"
+    ],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.882157"
+  },
+  "item009": {
+    "id": "item009",
+    "name": "商品9",
+    "category": "服装",
+    "tags": [
+      "标签3"
+    ],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.882414"
+  },
+  "item0010": {
+    "id": "item0010",
+    "name": "商品10",
+    "category": "服装",
+    "tags": [
+      "标签4"
+    ],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.882717"
+  },
+  "item011": {
+    "id": "item011",
+    "name": "T恤",
+    "category": "服装",
+    "tags": [],
+    "features": {},
+    "price": 0.0,
+    "created_at": "2026-02-12T00:23:46.882994"
+  }
+}
