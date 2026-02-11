@@ -1,0 +1,18 @@
+{
+  "2cb7a8ce-9dcc-4139-bf06-feb340e5c306": {
+    "id": "2cb7a8ce-9dcc-4139-bf06-feb340e5c306",
+    "name": "VIP客户",
+    "description": "",
+    "type": "behavioral",
+    "conditions": {
+      "total_spent": {
+        "op": ">=",
+        "value": 1000
+      }
+    },
+    "customer_ids": [],
+    "created_at": "2026-02-12T00:12:46.685102",
+    "updated_at": "2026-02-12T00:12:46.685104",
+    "is_dynamic": true
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "06118e6a-2a28-4410-b324-345d737826c7": {
+    "id": "06118e6a-2a28-4410-b324-345d737826c7",
+    "name": "邮件主题测试",
+    "description": "",
+    "type": "email_subject",
+    "status": "completed",
+    "variants": [
+      {
+        "id": "d0446420-a862-4da0-8311-9bbf2db055d9",
+        "name": "主题A",
+        "config": {
+          "subject": "欢迎加入我们"
+        },
+        "traffic_allocation": 0.5,
+        "metrics": {
+          "exposures": 11,
+          "conversions": 1,
+          "value": 100.0
+        },
+        "sample_size": 11
+      },
+      {
+        "id": "0c435f51-de84-4065-9251-b7162ea42860",
+        "name": "主题B",
+        "config": {
+          "subject": "您好，欢迎"
+        },
+        "traffic_allocation": 0.5,
+        "metrics": {
+          "exposures": 10,
+          "conversions": 0,
+          "value": 0
+        },
+        "sample_size": 10
+      }
+    ],
+    "primary_metric": "conversion_rate",
+    "created_at": "2026-02-12T00:12:46.678906",
+    "started_at": "2026-02-12T00:12:46.679016",
+    "completed_at": "2026-02-12T00:12:46.683986",
+    "min_sample_size": 10,
+    "confidence_level": 0.95,
+    "result": {
+      "best_variant_id": "d0446420-a862-4da0-8311-9bbf2db055d9",
+      "p_value": 1.0,
+      "statistically_significant": false,
+      "min_sample_size_reached": true,
+      "analyzed_at": "2026-02-12T00:12:46.683995"
+    },
+    "winner": null
+  },
+  "cd12f0bc-fea9-4a68-b8d1-47e49dd58255": {
+    "id": "cd12f0bc-fea9-4a68-b8d1-47e49dd58255",
+    "name": "邮件内容测试",
+    "description": "",
+    "type": "email_content",
+    "status": "draft",
+    "variants": [
+      {
+        "id": "34bf543e-dc11-4083-b571-2fbe1b19588c",
+        "name": "Content 1",
+        "config": {
+          "subject": "促销",
+          "body": "限时促销"
+        },
+        "traffic_allocation": 0.5,
+        "metrics": {
+          "exposures": 0,
+          "conversions": 0,
+          "value": 0
+        },
+        "sample_size": 0
+      },
+      {
+        "id": "deb1c0f2-e671-4315-a38e-7f8754956b97",
+        "name": "Content 2",
+        "config": {
+          "subject": "活动",
+          "body": "精彩活动"
+        },
+        "traffic_allocation": 0.5,
+        "metrics": {
+          "exposures": 0,
+          "conversions": 0,
+          "value": 0
+        },
+        "sample_size": 0
+      }
+    ],
+    "primary_metric": "conversion_rate",
+    "created_at": "2026-02-12T00:12:46.684299",
+    "started_at": null,
+    "completed_at": null,
+    "min_sample_size": 100,
+    "confidence_level": 0.95,
+    "result": {},
+    "winner": null
+  },
+  "66fdf9af-0c35-4738-bcb8-2edfa128ebcb": {
+    "id": "66fdf9af-0c35-4738-bcb8-2edfa128ebcb",
+    "name": "三变体测试",
+    "description": "",
+    "type": "custom",
+    "status": "draft",
+    "variants": [
+      {
+        "id": "a28468ad-5cc3-4a3a-8955-771293992519",
+        "name": "A",
+        "config": {},
+        "traffic_allocation": 0.3333333333333333,
+        "metrics": {
+          "exposures": 0,
+          "conversions": 0,
+          "value": 0
+        },
+        "sample_size": 0
+      },
+      {
+        "id": "6b596ee8-90cb-491b-a5ca-2e25a9b5dfa2",
+        "name": "B",
+        "config": {},
+        "traffic_allocation": 0.3333333333333333,
+        "metrics": {
+          "exposures": 0,
+          "conversions": 0,
+          "value": 0
+        },
+        "sample_size": 0
+      },
+      {
+        "id": "69dca827-5310-4911-86c9-75096892d44a",
+        "name": "C",
+        "config": {},
+        "traffic_allocation": 0.3333333333333333,
+        "metrics": {
+          "exposures": 0,
+          "conversions": 0,
+          "value": 0
+        },
+        "sample_size": 0
+      }
+    ],
+    "primary_metric": "conversion_rate",
+    "created_at": "2026-02-12T00:12:46.684659",
+    "started_at": null,
+    "completed_at": null,
+    "min_sample_size": 100,
+    "confidence_level": 0.95,
+    "result": {},
+    "winner": null
+  }
+}

@@ -412,7 +412,7 @@ def main():
     # 创建分群
     create_parser = subparsers.add_parser("create", help="创建分群")
     create_parser.add_argument("--name", required=True, help="分群名称")
-    create_parser.add_argument("--type", required=True, choices=["behavioral", "demographic", "rfm", "custom"], help="分群类型")
+    create_parser.add_argument("--segment-type", required=True, choices=["behavioral", "demographic", "rfm", "custom"], help="分群类型")
     create_parser.add_argument("--description", help="描述")
     create_parser.add_argument("--static", action="store_true", help="静态分群")
 

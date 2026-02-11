@@ -1,0 +1,206 @@
+{
+  "09d5f556-bd6a-4747-b6dc-fb52bb0278fe": {
+    "id": "09d5f556-bd6a-4747-b6dc-fb52bb0278fe",
+    "email": "test@example.com",
+    "phone": "13800138000",
+    "name": "新名字",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:12:46.672437",
+    "last_active": "2026-02-12T00:12:46.672447",
+    "total_spent": 1500,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "f402ec73-02fe-44e8-91d0-dff93072747d": {
+    "id": "f402ec73-02fe-44e8-91d0-dff93072747d",
+    "email": "user0@example.com",
+    "phone": null,
+    "name": "用户0",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.673546",
+    "last_active": "2026-02-12T00:12:46.673549",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "804234d9-d46a-4223-810b-908532c8ee82": {
+    "id": "804234d9-d46a-4223-810b-908532c8ee82",
+    "email": "user1@example.com",
+    "phone": null,
+    "name": "用户1",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.673688",
+    "last_active": "2026-02-12T00:12:46.673689",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "c4201661-1fff-4914-b6c0-a5ace44038ed": {
+    "id": "c4201661-1fff-4914-b6c0-a5ace44038ed",
+    "email": "user2@example.com",
+    "phone": null,
+    "name": "用户2",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.673834",
+    "last_active": "2026-02-12T00:12:46.673835",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "44d0e460-7c51-4c2a-9da4-45369734c715": {
+    "id": "44d0e460-7c51-4c2a-9da4-45369734c715",
+    "email": "user3@example.com",
+    "phone": null,
+    "name": "用户3",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.673993",
+    "last_active": "2026-02-12T00:12:46.673994",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "a144c16c-958e-4863-95a2-a68cb93e3cf3": {
+    "id": "a144c16c-958e-4863-95a2-a68cb93e3cf3",
+    "email": "user4@example.com",
+    "phone": null,
+    "name": "用户4",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.674190",
+    "last_active": "2026-02-12T00:12:46.674191",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "3bc3e2ea-6175-4ad2-bed4-5448060f0906": {
+    "id": "3bc3e2ea-6175-4ad2-bed4-5448060f0906",
+    "email": "user5@example.com",
+    "phone": null,
+    "name": "用户5",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.674373",
+    "last_active": "2026-02-12T00:12:46.674375",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "52d124f4-1e75-4ae7-a3a9-04550d42951f": {
+    "id": "52d124f4-1e75-4ae7-a3a9-04550d42951f",
+    "email": "user6@example.com",
+    "phone": null,
+    "name": "用户6",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.674571",
+    "last_active": "2026-02-12T00:12:46.674572",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "ebf82256-d910-4045-a631-3d22837fdd35": {
+    "id": "ebf82256-d910-4045-a631-3d22837fdd35",
+    "email": "user7@example.com",
+    "phone": null,
+    "name": "用户7",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.674777",
+    "last_active": "2026-02-12T00:12:46.674778",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "b80b6bdc-1124-47b4-9ebd-c1de10c15435": {
+    "id": "b80b6bdc-1124-47b4-9ebd-c1de10c15435",
+    "email": "user8@example.com",
+    "phone": null,
+    "name": "用户8",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.675000",
+    "last_active": "2026-02-12T00:12:46.675002",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "ea805d20-9855-4279-a2a5-b89324f47598": {
+    "id": "ea805d20-9855-4279-a2a5-b89324f47598",
+    "email": "user9@example.com",
+    "phone": null,
+    "name": "用户9",
+    "tags": [],
+    "created_at": "2026-02-12T00:12:46.675220",
+    "last_active": "2026-02-12T00:12:46.675221",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "cc799aca-652d-4f4b-80e5-cb85556c36d1": {
+    "id": "cc799aca-652d-4f4b-80e5-cb85556c36d1",
+    "email": "vip0@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:12:46.675454",
+    "last_active": "2026-02-12T00:12:46.675455",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "261bf776-7b19-4b6d-a7b3-a114bd52baf8": {
+    "id": "261bf776-7b19-4b6d-a7b3-a114bd52baf8",
+    "email": "vip1@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:12:46.676233",
+    "last_active": "2026-02-12T00:12:46.676236",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "63f175d5-60d2-41f9-9654-19aef13d260b": {
+    "id": "63f175d5-60d2-41f9-9654-19aef13d260b",
+    "email": "vip2@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:12:46.676739",
+    "last_active": "2026-02-12T00:12:46.676741",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "a95b2772-d3d8-45f5-bbf2-98584581efab": {
+    "id": "a95b2772-d3d8-45f5-bbf2-98584581efab",
+    "email": "vip3@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:12:46.677268",
+    "last_active": "2026-02-12T00:12:46.677270",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "87271d76-27c9-4994-bb1b-86f5cceae5b7": {
+    "id": "87271d76-27c9-4994-bb1b-86f5cceae5b7",
+    "email": "vip4@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:12:46.677840",
+    "last_active": "2026-02-12T00:12:46.677842",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  }
+}

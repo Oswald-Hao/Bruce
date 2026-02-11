@@ -153,8 +153,23 @@ class AutomationEngine:
 
     def _save_data(self):
         """保存数据"""
+        def serialize_flow(flow):
+            flow_dict = asdict(flow)
+            # 序列化步骤中的枚举类型
+            steps_data = {}
+            for step_id, step in flow_dict["steps"].items():
+                if "trigger" in step and step["trigger"]:
+                    if isinstance(step["trigger"]["type"], TriggerType):
+                        step["trigger"]["type"] = step["trigger"]["type"].value
+                if "action" in step and step["action"]:
+                    if isinstance(step["action"]["type"], ActionType):
+                        step["action"]["type"] = step["action"]["type"].value
+                steps_data[step_id] = step
+            flow_dict["steps"] = steps_data
+            return flow_dict
+
         flows_file = self.data_dir / "automation_flows.json"
-        flows_data = {id_: asdict(flow) for id_, flow in self.flows.items()}
+        flows_data = {id_: serialize_flow(flow) for id_, flow in self.flows.items()}
         with open(flows_file, 'w', encoding='utf-8') as f:
             json.dump(flows_data, f, indent=2, ensure_ascii=False)
 

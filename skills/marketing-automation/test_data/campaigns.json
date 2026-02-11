@@ -1,0 +1,22 @@
+{
+  "a93391fe-a4a6-446a-8695-6bd16a8d603a": {
+    "id": "a93391fe-a4a6-446a-8695-6bd16a8d603a",
+    "name": "测试活动",
+    "channel": "email",
+    "audience": "all",
+    "template": "",
+    "content": {},
+    "status": "running",
+    "scheduled_at": "2026-02-13T10:00:00",
+    "sent_at": "2026-02-12T00:12:46.672908",
+    "created_at": "2026-02-12T00:12:46.672668",
+    "metrics": {
+      "sent": 1,
+      "delivered": 0,
+      "opened": 1,
+      "clicked": 1,
+      "converted": 1,
+      "bounced": 1
+    }
+  }
+}
