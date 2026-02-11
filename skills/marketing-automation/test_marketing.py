@@ -8,6 +8,7 @@ import os
 import sys
 import time
 import json
+from datetime import datetime
 from pathlib import Path
 
 # 添加技能目录到Python路径
@@ -152,6 +153,8 @@ def test_marketing_core():
         result.add("客户列表限制", len(customers) == 5)
 
         # 测试18: 按标签分群
+        # 先给第一个客户添加vip标签
+        ma.add_tag(customer.id, "vip")
         for i in range(5):
             c = ma.add_customer(email=f"vip{i}@example.com")
             ma.add_tag(c.id, "vip")

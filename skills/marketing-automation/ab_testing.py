@@ -201,9 +201,10 @@ class ABTesting:
     def start_test(self, test_id: str) -> bool:
         """启动测试"""
         test = self.tests.get(test_id)
-        if test and test.status == TestStatus.DRAFT:
+        if test and test.status in [TestStatus.DRAFT, TestStatus.PAUSED]:
+            if test.status == TestStatus.DRAFT:
+                test.started_at = datetime.now().isoformat()
             test.status = TestStatus.RUNNING
-            test.started_at = datetime.now().isoformat()
             self._save_data()
             return True
         return False

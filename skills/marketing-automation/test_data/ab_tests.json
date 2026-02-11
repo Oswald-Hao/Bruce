@@ -1,64 +1,64 @@
 {
-  "2c36d1e4-ce14-4d40-ad1d-1d3e0ba95083": {
-    "id": "2c36d1e4-ce14-4d40-ad1d-1d3e0ba95083",
+  "9607a737-ab63-4af3-b836-97fd142471d3": {
+    "id": "9607a737-ab63-4af3-b836-97fd142471d3",
     "name": "邮件主题测试",
     "description": "",
     "type": "email_subject",
     "status": "completed",
     "variants": [
       {
-        "id": "827e425d-389d-475f-a15f-f22fe65fd1ae",
+        "id": "02e76b0e-2df0-40fe-9222-e6392fc24412",
         "name": "主题A",
         "config": {
           "subject": "欢迎加入我们"
         },
         "traffic_allocation": 0.5,
         "metrics": {
-          "exposures": 10,
+          "exposures": 11,
           "conversions": 1,
           "value": 100.0
         },
-        "sample_size": 10
+        "sample_size": 11
       },
       {
-        "id": "3e590d97-58e3-4ded-bc68-5e271c963c9f",
+        "id": "5617a04f-a847-4a02-8edd-aa3b166274ef",
         "name": "主题B",
         "config": {
           "subject": "您好，欢迎"
         },
         "traffic_allocation": 0.5,
         "metrics": {
-          "exposures": 11,
+          "exposures": 10,
           "conversions": 0,
           "value": 0
         },
-        "sample_size": 11
+        "sample_size": 10
       }
     ],
     "primary_metric": "conversion_rate",
-    "created_at": "2026-02-12T00:14:06.339515",
-    "started_at": "2026-02-12T00:14:06.339647",
-    "completed_at": "2026-02-12T00:14:06.344651",
+    "created_at": "2026-02-12T00:15:01.406890",
+    "started_at": "2026-02-12T00:15:01.407018",
+    "completed_at": "2026-02-12T00:15:01.412477",
     "min_sample_size": 10,
     "confidence_level": 0.95,
     "result": {
-      "best_variant_id": "827e425d-389d-475f-a15f-f22fe65fd1ae",
+      "best_variant_id": "02e76b0e-2df0-40fe-9222-e6392fc24412",
       "p_value": 1.0,
       "statistically_significant": false,
       "min_sample_size_reached": true,
-      "analyzed_at": "2026-02-12T00:14:06.344663"
+      "analyzed_at": "2026-02-12T00:15:01.412494"
     },
     "winner": null
   },
-  "7102ea44-4119-4a02-ba42-13a0ca02199a": {
-    "id": "7102ea44-4119-4a02-ba42-13a0ca02199a",
+  "4933b138-b361-4e2f-b29b-7efde7121345": {
+    "id": "4933b138-b361-4e2f-b29b-7efde7121345",
     "name": "邮件内容测试",
     "description": "",
     "type": "email_content",
     "status": "draft",
     "variants": [
       {
-        "id": "e31d2f75-f57f-4890-903d-3cf875ac67ff",
+        "id": "8d24b7ce-f6fe-4bce-8550-207b467fa6c5",
         "name": "Content 1",
         "config": {
           "subject": "促销",
@@ -73,7 +73,7 @@
         "sample_size": 0
       },
       {
-        "id": "cc2633f8-7cdd-44ed-b850-52342a7c1f20",
+        "id": "20f6ddf6-c0a2-4590-a35d-ba4f4857dbb5",
         "name": "Content 2",
         "config": {
           "subject": "活动",
@@ -89,7 +89,7 @@
       }
     ],
     "primary_metric": "conversion_rate",
-    "created_at": "2026-02-12T00:14:06.344968",
+    "created_at": "2026-02-12T00:15:01.412854",
     "started_at": null,
     "completed_at": null,
     "min_sample_size": 100,
@@ -97,15 +97,15 @@
     "result": {},
     "winner": null
   },
-  "3ca4cd0e-0192-4c30-a539-4ba34bbce6f9": {
-    "id": "3ca4cd0e-0192-4c30-a539-4ba34bbce6f9",
+  "891b4258-803d-4a15-915e-87434c7f8fab": {
+    "id": "891b4258-803d-4a15-915e-87434c7f8fab",
     "name": "三变体测试",
     "description": "",
     "type": "custom",
     "status": "draft",
     "variants": [
       {
-        "id": "ebe4093c-2bb6-429b-80f5-55a59b464a69",
+        "id": "d3228d45-b096-4320-a81c-67bec0db7e2c",
         "name": "A",
         "config": {},
         "traffic_allocation": 0.3333333333333333,
@@ -117,7 +117,7 @@
         "sample_size": 0
       },
       {
-        "id": "48f72897-6206-4a54-8389-c102b8f1ab7b",
+        "id": "f5ecd0da-67cf-4b90-b18c-d518014e192d",
         "name": "B",
         "config": {},
         "traffic_allocation": 0.3333333333333333,
@@ -129,7 +129,7 @@
         "sample_size": 0
       },
       {
-        "id": "70a7083c-6d45-481f-b6af-b9e61cc0c2f3",
+        "id": "f06acb64-d03d-4697-85d8-e491b602bce2",
         "name": "C",
         "config": {},
         "traffic_allocation": 0.3333333333333333,
@@ -142,7 +142,7 @@
       }
     ],
     "primary_metric": "conversion_rate",
-    "created_at": "2026-02-12T00:14:06.345342",
+    "created_at": "2026-02-12T00:15:01.413240",
     "started_at": null,
     "completed_at": null,
     "min_sample_size": 100,

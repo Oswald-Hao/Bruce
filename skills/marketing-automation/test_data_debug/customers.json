@@ -1,0 +1,86 @@
+{
+  "75f543f6-100b-4368-814c-f0388f2dd827": {
+    "id": "75f543f6-100b-4368-814c-f0388f2dd827",
+    "email": "test@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:15:06.452085",
+    "last_active": "2026-02-12T00:15:06.452096",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "6fcec76c-caf3-4bdc-ba27-dc8b7c1e08d1": {
+    "id": "6fcec76c-caf3-4bdc-ba27-dc8b7c1e08d1",
+    "email": "vip0@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:15:06.452308",
+    "last_active": "2026-02-12T00:15:06.452309",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "03a5e542-c76a-4e3d-ae03-03eba7f0bd2a": {
+    "id": "03a5e542-c76a-4e3d-ae03-03eba7f0bd2a",
+    "email": "vip1@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:15:06.466045",
+    "last_active": "2026-02-12T00:15:06.466049",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "4e47506a-c0c9-4200-bdfd-99fb72fce50a": {
+    "id": "4e47506a-c0c9-4200-bdfd-99fb72fce50a",
+    "email": "vip2@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:15:06.466266",
+    "last_active": "2026-02-12T00:15:06.466268",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "1d158648-b76a-4a95-8262-e9d895f8474c": {
+    "id": "1d158648-b76a-4a95-8262-e9d895f8474c",
+    "email": "vip3@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:15:06.466501",
+    "last_active": "2026-02-12T00:15:06.466502",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  },
+  "fad544d9-44a6-47dc-89a4-67a4b2b4deb5": {
+    "id": "fad544d9-44a6-47dc-89a4-67a4b2b4deb5",
+    "email": "vip4@example.com",
+    "phone": null,
+    "name": "",
+    "tags": [
+      "vip"
+    ],
+    "created_at": "2026-02-12T00:15:06.466780",
+    "last_active": "2026-02-12T00:15:06.466781",
+    "total_spent": 0.0,
+    "order_count": 0,
+    "custom_fields": {}
+  }
+}
