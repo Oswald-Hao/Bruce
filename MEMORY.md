@@ -238,10 +238,10 @@
   - 安全扫描工具 - 端口扫描/漏洞检测，8个测试全部通过
   - 当前进度：33/200（16.5%）
 
-## 当前技能列表（2026-02-05）
+## 当前技能列表（2026-02-11）
 
 **自创技能目录：** /home/lejurobot/clawd/skills/
-**总数：** 33个技能（不包括test-开头的测试技能）
+**总数：** 60个技能（不包括test-开头的测试技能）
 
 **技能列表：**
 1. auto-test-framework（自动化测试框架）
@@ -280,6 +280,8 @@
 34. financial-analysis（金融数据分析）
 35. social-media-analysis（社交媒体分析）
 36. game-ai-system（游戏AI系统）
+37. marketing-automation（自动化营销系统）
+38. cross-border-ecommerce（跨境电商系统）
 - 2026-02-05（周四）：完成第34个自创技能
   - 技能名称：金融数据分析系统（Financial Analysis System）
   - 技能路径：/home/lejurobot/clawd/skills/financial-analysis/
