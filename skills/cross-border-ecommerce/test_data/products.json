@@ -1,6 +1,6 @@
 {
-  "e93b3539-91b4-4916-961b-6d8acf7e4615": {
-    "id": "e93b3539-91b4-4916-961b-6d8acf7e4615",
+  "747b01be-7b27-4bbb-911a-f9ebd8c86617": {
+    "id": "747b01be-7b27-4bbb-911a-f9ebd8c86617",
     "sku": "SKU001",
     "name": "新名称2",
     "description": "高品质蓝牙耳机",
@@ -12,7 +12,7 @@
     ],
     "skus": [
       {
-        "id": "4614f18c-717c-4756-b745-14fb0de22ffc",
+        "id": "1ca3db6c-3507-4058-b607-a5e2ccfdadb4",
         "name": "颜色",
         "value": "白色",
         "price": 29.99,
@@ -21,7 +21,7 @@
         "currency": "USD"
       },
       {
-        "id": "08cdf7dd-16f0-464f-b91a-2130e83b3fd5",
+        "id": "0337c3a1-a46e-440c-92f2-64f4cae6e454",
         "name": "颜色",
         "value": "红色",
         "price": 29.99,
@@ -30,7 +30,7 @@
         "currency": "USD"
       },
       {
-        "id": "0cd006f0-dfa6-4649-a283-7050e0f52145",
+        "id": "367d5f84-bbf5-475a-929c-306a34074b9e",
         "name": "颜色",
         "value": "蓝色",
         "price": 29.99,
@@ -46,8 +46,8 @@
     "platform": "amazon",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.884818",
-    "updated_at": "2026-02-12T00:19:34.005433",
+    "created_at": "2026-02-12T00:20:37.976033",
+    "updated_at": "2026-02-12T00:20:38.096836",
     "tags": [
       "热销",
       "新品"
@@ -57,8 +57,8 @@
       "material": "塑料"
     }
   },
-  "fa3941a7-7a68-4dc3-a1cb-efb49c8ab6f1": {
-    "id": "fa3941a7-7a68-4dc3-a1cb-efb49c8ab6f1",
+  "e3b1a6de-6b64-4ce2-bc40-5737f7e4d421": {
+    "id": "e3b1a6de-6b64-4ce2-bc40-5737f7e4d421",
     "sku": "SKU002",
     "name": "商品2",
     "description": "",
@@ -73,13 +73,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.900277",
-    "updated_at": "2026-02-12T00:19:34.005777",
+    "created_at": "2026-02-12T00:20:37.991624",
+    "updated_at": "2026-02-12T00:20:38.097176",
     "tags": [],
     "custom_fields": {}
   },
-  "7f9e12de-619d-4778-95e5-e89f58e79405": {
-    "id": "7f9e12de-619d-4778-95e5-e89f58e79405",
+  "fd1bef8f-9236-4cf2-83c5-f8ec1a689462": {
+    "id": "fd1bef8f-9236-4cf2-83c5-f8ec1a689462",
     "sku": "SKU003",
     "name": "商品3",
     "description": "",
@@ -94,13 +94,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.900484",
-    "updated_at": "2026-02-12T00:19:33.900485",
+    "created_at": "2026-02-12T00:20:37.991820",
+    "updated_at": "2026-02-12T00:20:37.991821",
     "tags": [],
     "custom_fields": {}
   },
-  "f84cabd0-6afc-4447-af12-2395048e22b8": {
-    "id": "f84cabd0-6afc-4447-af12-2395048e22b8",
+  "862469bc-521a-4454-9d7d-ed1d7b0d2bb0": {
+    "id": "862469bc-521a-4454-9d7d-ed1d7b0d2bb0",
     "sku": "SKU004",
     "name": "商品4",
     "description": "",
@@ -115,13 +115,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.900705",
-    "updated_at": "2026-02-12T00:19:33.900706",
+    "created_at": "2026-02-12T00:20:37.992034",
+    "updated_at": "2026-02-12T00:20:37.992036",
     "tags": [],
     "custom_fields": {}
   },
-  "2dfdb8df-93cb-42a3-8a70-ab24d80a9ac0": {
-    "id": "2dfdb8df-93cb-42a3-8a70-ab24d80a9ac0",
+  "0ed1b681-bcec-440e-a253-7c9b69492482": {
+    "id": "0ed1b681-bcec-440e-a253-7c9b69492482",
     "sku": "SKU005",
     "name": "商品5",
     "description": "",
@@ -136,13 +136,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.900943",
-    "updated_at": "2026-02-12T00:19:33.900944",
+    "created_at": "2026-02-12T00:20:37.992276",
+    "updated_at": "2026-02-12T00:20:37.992278",
     "tags": [],
     "custom_fields": {}
   },
-  "f43af356-8b5e-4632-b428-de398da5df10": {
-    "id": "f43af356-8b5e-4632-b428-de398da5df10",
+  "ead7ea61-ee56-4ec4-833a-1eceffda00cd": {
+    "id": "ead7ea61-ee56-4ec4-833a-1eceffda00cd",
     "sku": "SKU006",
     "name": "商品6",
     "description": "",
@@ -157,13 +157,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.901198",
-    "updated_at": "2026-02-12T00:19:33.901200",
+    "created_at": "2026-02-12T00:20:37.992534",
+    "updated_at": "2026-02-12T00:20:37.992535",
     "tags": [],
     "custom_fields": {}
   },
-  "209c0e6e-eb79-4818-8906-31439a9e6c44": {
-    "id": "209c0e6e-eb79-4818-8906-31439a9e6c44",
+  "f3cc8eee-c3ea-469c-bb75-9e3da815bf9f": {
+    "id": "f3cc8eee-c3ea-469c-bb75-9e3da815bf9f",
     "sku": "DELETE002",
     "name": "待删除2",
     "description": "",
@@ -178,13 +178,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.902312",
-    "updated_at": "2026-02-12T00:19:33.902315",
+    "created_at": "2026-02-12T00:20:37.993650",
+    "updated_at": "2026-02-12T00:20:37.993653",
     "tags": [],
     "custom_fields": {}
   },
-  "6d27070f-126c-417e-a682-52d0b5479114": {
-    "id": "6d27070f-126c-417e-a682-52d0b5479114",
+  "bc2c73bd-4a2d-439f-bc2b-048ad9e575b1": {
+    "id": "bc2c73bd-4a2d-439f-bc2b-048ad9e575b1",
     "sku": "SKU_EUR",
     "name": "欧元商品",
     "description": "",
@@ -199,13 +199,13 @@
     "platform": "custom",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.903774",
-    "updated_at": "2026-02-12T00:19:33.903775",
+    "created_at": "2026-02-12T00:20:37.995108",
+    "updated_at": "2026-02-12T00:20:37.995109",
     "tags": [],
     "custom_fields": {}
   },
-  "5a7f7416-dc42-4c80-b50e-f005910e7bae": {
-    "id": "5a7f7416-dc42-4c80-b50e-f005910e7bae",
+  "891b4a00-7abd-4fc9-b535-cb908974de2f": {
+    "id": "891b4a00-7abd-4fc9-b535-cb908974de2f",
     "sku": "SKU_EBAY",
     "name": "eBay商品",
     "description": "",
@@ -220,8 +220,8 @@
     "platform": "ebay",
     "platform_product_id": "",
     "status": "active",
-    "created_at": "2026-02-12T00:19:33.904126",
-    "updated_at": "2026-02-12T00:19:33.904128",
+    "created_at": "2026-02-12T00:20:37.995458",
+    "updated_at": "2026-02-12T00:20:37.995460",
     "tags": [],
     "custom_fields": {}
   }

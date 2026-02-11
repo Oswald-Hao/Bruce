@@ -1,35 +1,35 @@
 {
-  "e93b3539-91b4-4916-961b-6d8acf7e4615_ebay": {
-    "id": "e93b3539-91b4-4916-961b-6d8acf7e4615_ebay",
-    "product_id": "e93b3539-91b4-4916-961b-6d8acf7e4615",
+  "747b01be-7b27-4bbb-911a-f9ebd8c86617_ebay": {
+    "id": "747b01be-7b27-4bbb-911a-f9ebd8c86617_ebay",
+    "product_id": "747b01be-7b27-4bbb-911a-f9ebd8c86617",
     "platform": "ebay",
     "platform_product_id": "",
     "price": 34.99,
     "currency": "USD",
     "status": "active",
-    "synced_at": "2026-02-12T00:19:33.899634",
+    "synced_at": "2026-02-12T00:20:37.990959",
     "last_sync_status": "success"
   },
-  "e93b3539-91b4-4916-961b-6d8acf7e4615_aliexpress": {
-    "id": "e93b3539-91b4-4916-961b-6d8acf7e4615_aliexpress",
-    "product_id": "e93b3539-91b4-4916-961b-6d8acf7e4615",
+  "747b01be-7b27-4bbb-911a-f9ebd8c86617_aliexpress": {
+    "id": "747b01be-7b27-4bbb-911a-f9ebd8c86617_aliexpress",
+    "product_id": "747b01be-7b27-4bbb-911a-f9ebd8c86617",
     "platform": "aliexpress",
     "platform_product_id": "",
     "price": 34.99,
     "currency": "USD",
     "status": "active",
-    "synced_at": "2026-02-12T00:19:33.899767",
+    "synced_at": "2026-02-12T00:20:37.991094",
     "last_sync_status": "success"
   },
-  "e93b3539-91b4-4916-961b-6d8acf7e4615_shopee": {
-    "id": "e93b3539-91b4-4916-961b-6d8acf7e4615_shopee",
-    "product_id": "e93b3539-91b4-4916-961b-6d8acf7e4615",
+  "747b01be-7b27-4bbb-911a-f9ebd8c86617_shopee": {
+    "id": "747b01be-7b27-4bbb-911a-f9ebd8c86617_shopee",
+    "product_id": "747b01be-7b27-4bbb-911a-f9ebd8c86617",
     "platform": "shopee",
     "platform_product_id": "",
     "price": 34.99,
     "currency": "USD",
     "status": "active",
-    "synced_at": "2026-02-12T00:19:33.899909",
+    "synced_at": "2026-02-12T00:20:37.991238",
     "last_sync_status": "success"
   }
 }
