@@ -1,6 +1,6 @@
 {
-  "2cb7a8ce-9dcc-4139-bf06-feb340e5c306": {
-    "id": "2cb7a8ce-9dcc-4139-bf06-feb340e5c306",
+  "fe7b50e3-1c28-48dd-ac62-1e68679684d6": {
+    "id": "fe7b50e3-1c28-48dd-ac62-1e68679684d6",
     "name": "VIP客户",
     "description": "",
     "type": "behavioral",
@@ -10,9 +10,142 @@
         "value": 1000
       }
     },
+    "customer_ids": [
+      "4cf836c2-2a71-47a0-b1cd-210206eb8b08"
+    ],
+    "created_at": "2026-02-12T00:14:06.345820",
+    "updated_at": "2026-02-12T00:14:06.346568",
+    "is_dynamic": true
+  },
+  "a2c2ded9-92e0-46ad-9b89-4c71f596d319": {
+    "id": "a2c2ded9-92e0-46ad-9b89-4c71f596d319",
+    "name": "活跃用户",
+    "description": "最近7天活跃的用户",
+    "type": "behavioral",
+    "conditions": {
+      "days_since_last_active": {
+        "op": "<=",
+        "value": 7
+      }
+    },
+    "customer_ids": [
+      "4cf836c2-2a71-47a0-b1cd-210206eb8b08",
+      "c4d88bfa-4e59-4e89-998c-b655f25831ff",
+      "bb768c64-247d-49be-a80a-b78a84471e03",
+      "33bf9512-9a18-4230-a612-91a649b0d415",
+      "49dcb582-d939-4387-b406-b4b09ff29bf8",
+      "b25868c6-feec-4683-bb38-b2807229eddb",
+      "db969938-3367-4395-9cc0-2b506a6958a0",
+      "9839f4e9-a668-4629-9d34-8539b4fe3940",
+      "7180f68d-e9f9-4b06-8429-773c58a59da7",
+      "3518d337-78a0-49bc-8fa5-b978a308ed15",
+      "2986b59b-1b1a-4ab6-bddf-626b22b66e12",
+      "6afc8fa3-17a8-4e29-889c-a7e5d52546ab",
+      "0ddae457-61c5-4966-b179-494047f21959",
+      "32b9907c-8222-4b0c-9017-11e296809383",
+      "e93c596f-ca0e-4f67-8d46-f9b5caa87d2e",
+      "472dc760-da46-48db-bc5c-b5eafd5e3379"
+    ],
+    "created_at": "2026-02-12T00:14:06.346064",
+    "updated_at": "2026-02-12T00:14:06.346591",
+    "is_dynamic": true
+  },
+  "47a9d20b-1436-48f8-ae84-e3911cf0a253": {
+    "id": "47a9d20b-1436-48f8-ae84-e3911cf0a253",
+    "name": "新注册用户",
+    "description": "尚未下单的用户",
+    "type": "behavioral",
+    "conditions": {
+      "order_count": {
+        "op": "==",
+        "value": 0
+      }
+    },
+    "customer_ids": [
+      "4cf836c2-2a71-47a0-b1cd-210206eb8b08",
+      "c4d88bfa-4e59-4e89-998c-b655f25831ff",
+      "bb768c64-247d-49be-a80a-b78a84471e03",
+      "33bf9512-9a18-4230-a612-91a649b0d415",
+      "49dcb582-d939-4387-b406-b4b09ff29bf8",
+      "b25868c6-feec-4683-bb38-b2807229eddb",
+      "db969938-3367-4395-9cc0-2b506a6958a0",
+      "9839f4e9-a668-4629-9d34-8539b4fe3940",
+      "7180f68d-e9f9-4b06-8429-773c58a59da7",
+      "3518d337-78a0-49bc-8fa5-b978a308ed15",
+      "2986b59b-1b1a-4ab6-bddf-626b22b66e12",
+      "6afc8fa3-17a8-4e29-889c-a7e5d52546ab",
+      "0ddae457-61c5-4966-b179-494047f21959",
+      "32b9907c-8222-4b0c-9017-11e296809383",
+      "e93c596f-ca0e-4f67-8d46-f9b5caa87d2e",
+      "472dc760-da46-48db-bc5c-b5eafd5e3379"
+    ],
+    "created_at": "2026-02-12T00:14:06.346202",
+    "updated_at": "2026-02-12T00:14:06.346595",
+    "is_dynamic": true
+  },
+  "78eb30c7-1ac7-4174-83ac-da4b6c7f310d": {
+    "id": "78eb30c7-1ac7-4174-83ac-da4b6c7f310d",
+    "name": "静态分群",
+    "description": "",
+    "type": "custom",
+    "conditions": {},
     "customer_ids": [],
-    "created_at": "2026-02-12T00:12:46.685102",
-    "updated_at": "2026-02-12T00:12:46.685104",
+    "created_at": "2026-02-12T00:14:06.346749",
+    "updated_at": "2026-02-12T00:14:06.346751",
+    "is_dynamic": false
+  },
+  "b8f8bbc5-c5a9-4edf-96a6-d7b0788c949b": {
+    "id": "b8f8bbc5-c5a9-4edf-96a6-d7b0788c949b",
+    "name": "标签分群",
+    "description": "",
+    "type": "behavioral",
+    "conditions": {
+      "tags": {
+        "op": "any",
+        "value": [
+          "vip"
+        ]
+      }
+    },
+    "customer_ids": [],
+    "created_at": "2026-02-12T00:14:06.347237",
+    "updated_at": "2026-02-12T00:14:06.347239",
+    "is_dynamic": true
+  },
+  "d49b0f92-98ea-4a89-88fb-5c03e46dd4fd": {
+    "id": "d49b0f92-98ea-4a89-88fb-5c03e46dd4fd",
+    "name": "时间分群",
+    "description": "",
+    "type": "behavioral",
+    "conditions": {
+      "days_since_last_active": {
+        "op": "<=",
+        "value": 30
+      }
+    },
+    "customer_ids": [],
+    "created_at": "2026-02-12T00:14:06.347552",
+    "updated_at": "2026-02-12T00:14:06.347554",
+    "is_dynamic": true
+  },
+  "88ed063c-2566-427b-9b65-7314d64949f2": {
+    "id": "88ed063c-2566-427b-9b65-7314d64949f2",
+    "name": "混合条件分群",
+    "description": "",
+    "type": "behavioral",
+    "conditions": {
+      "total_spent": {
+        "op": ">=",
+        "value": 500
+      },
+      "order_count": {
+        "op": ">=",
+        "value": 1
+      }
+    },
+    "customer_ids": [],
+    "created_at": "2026-02-12T00:14:06.347930",
+    "updated_at": "2026-02-12T00:14:06.347933",
     "is_dynamic": true
   }
 }

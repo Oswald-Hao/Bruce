@@ -377,19 +377,19 @@ class CustomerSegmentation:
         segments_to_create = [
             {
                 "name": "VIP客户",
-                "type": SegmentType.BEHAVIORAL,
+                "segment_type": SegmentType.BEHAVIORAL,
                 "conditions": {"total_spent": {"op": ">=", "value": 1000}},
                 "description": "累计消费超过1000元的客户"
             },
             {
                 "name": "活跃用户",
-                "type": SegmentType.BEHAVIORAL,
+                "segment_type": SegmentType.BEHAVIORAL,
                 "conditions": {"days_since_last_active": {"op": "<=", "value": 7}},
                 "description": "最近7天活跃的用户"
             },
             {
                 "name": "新注册用户",
-                "type": SegmentType.BEHAVIORAL,
+                "segment_type": SegmentType.BEHAVIORAL,
                 "conditions": {"order_count": {"op": "==", "value": 0}},
                 "description": "尚未下单的用户"
             }
@@ -418,7 +418,7 @@ def main():
 
     # 列出分群
     list_parser = subparsers.add_parser("list", help="列出分群")
-    list_parser.add_argument("--type", choices=["behavioral", "demographic", "rfm", "custom"], help="按类型筛选")
+    list_parser.add_argument("--segment-type", choices=["behavioral", "demographic", "rfm", "custom"], help="按类型筛选")
 
     # 删除分群
     delete_parser = subparsers.add_parser("delete", help="删除分群")
@@ -437,7 +437,7 @@ def main():
     if args.command == "create":
         segment = segmentation.create_segment(
             name=args.name,
-            segment_type=SegmentType(args.type),
+            segment_type=SegmentType(getattr(args, 'segment_type', 'custom')),
             description=args.description or "",
             is_dynamic=not args.static
         )
@@ -448,7 +448,7 @@ def main():
 
     elif args.command == "list":
         segments = segmentation.list_segments(
-            segment_type=SegmentType(args.type) if args.type else None
+            segment_type=SegmentType(getattr(args, 'segment_type', None)) if hasattr(args, 'segment_type') else None
         )
         print(f"客户分群列表 ({len(segments)}):")
         for s in segments:

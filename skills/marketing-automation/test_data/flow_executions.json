@@ -1,1 +1,375 @@
-{}
+{
+  "704f5122-b378-43a4-be47-2f7a05b9f022": {
+    "id": "704f5122-b378-43a4-be47-2f7a05b9f022",
+    "flow_id": "19f0ba8c-47eb-484d-bea8-a55f20fe21cd",
+    "customer_id": "customer_001",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.318370",
+    "completed_at": "2026-02-12T00:14:06.318524",
+    "current_step_id": "c9e39483-08c6-463f-af90-0ff52a47c17f",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "96a718bd-1ca3-437c-896f-fd5d84aebaf3",
+        "timestamp": "2026-02-12T00:14:06.318515",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "1e546161-9081-4b24-a08b-fa7d52e34c58",
+        "timestamp": "2026-02-12T00:14:06.318519",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎",
+          "body": "欢迎加入"
+        }
+      },
+      {
+        "step_id": "c9e39483-08c6-463f-af90-0ff52a47c17f",
+        "timestamp": "2026-02-12T00:14:06.318523",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "24小时后",
+          "body": ""
+        }
+      }
+    ]
+  },
+  "17a6e250-5ab3-4408-aab1-d0f1ed9c6356": {
+    "id": "17a6e250-5ab3-4408-aab1-d0f1ed9c6356",
+    "flow_id": "6d204f98-eb93-4597-b7ac-cc388e7cac9e",
+    "customer_id": "customer_welcome",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.322080",
+    "completed_at": "2026-02-12T00:14:06.322440",
+    "current_step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "6c6cd5df-eb1e-4096-97ff-5f3725fdc2b4",
+        "timestamp": "2026-02-12T00:14:06.322430",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "7fcee055-fea8-4cfa-9306-cf4f593a42ed",
+        "timestamp": "2026-02-12T00:14:06.322434",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎加入我们！",
+          "body": "亲爱的用户，欢迎加入我们的大家庭！"
+        }
+      },
+      {
+        "step_id": "30e775ce-04f4-4e73-9c7e-d2a29ec0522f",
+        "timestamp": "2026-02-12T00:14:06.322437",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "新手指南",
+          "body": "这里是新手指南，帮助您快速上手。"
+        }
+      },
+      {
+        "step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+        "timestamp": "2026-02-12T00:14:06.322439",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "7d 0h 0m",
+          "to": null,
+          "subject": "专属优惠码",
+          "body": "这是您的专属优惠码：WELCOME10"
+        }
+      }
+    ]
+  },
+  "d7f53cd3-9f1e-4f23-adbe-5cb4e57f51a6": {
+    "id": "d7f53cd3-9f1e-4f23-adbe-5cb4e57f51a6",
+    "flow_id": "6d204f98-eb93-4597-b7ac-cc388e7cac9e",
+    "customer_id": "customer_0",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.324894",
+    "completed_at": "2026-02-12T00:14:06.325313",
+    "current_step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "6c6cd5df-eb1e-4096-97ff-5f3725fdc2b4",
+        "timestamp": "2026-02-12T00:14:06.325303",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "7fcee055-fea8-4cfa-9306-cf4f593a42ed",
+        "timestamp": "2026-02-12T00:14:06.325307",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎加入我们！",
+          "body": "亲爱的用户，欢迎加入我们的大家庭！"
+        }
+      },
+      {
+        "step_id": "30e775ce-04f4-4e73-9c7e-d2a29ec0522f",
+        "timestamp": "2026-02-12T00:14:06.325310",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "新手指南",
+          "body": "这里是新手指南，帮助您快速上手。"
+        }
+      },
+      {
+        "step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+        "timestamp": "2026-02-12T00:14:06.325313",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "7d 0h 0m",
+          "to": null,
+          "subject": "专属优惠码",
+          "body": "这是您的专属优惠码：WELCOME10"
+        }
+      }
+    ]
+  },
+  "82054865-4dd6-497a-9252-e9c71f2630dd": {
+    "id": "82054865-4dd6-497a-9252-e9c71f2630dd",
+    "flow_id": "6d204f98-eb93-4597-b7ac-cc388e7cac9e",
+    "customer_id": "customer_1",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.327192",
+    "completed_at": "2026-02-12T00:14:06.327681",
+    "current_step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "6c6cd5df-eb1e-4096-97ff-5f3725fdc2b4",
+        "timestamp": "2026-02-12T00:14:06.327670",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "7fcee055-fea8-4cfa-9306-cf4f593a42ed",
+        "timestamp": "2026-02-12T00:14:06.327674",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎加入我们！",
+          "body": "亲爱的用户，欢迎加入我们的大家庭！"
+        }
+      },
+      {
+        "step_id": "30e775ce-04f4-4e73-9c7e-d2a29ec0522f",
+        "timestamp": "2026-02-12T00:14:06.327678",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "新手指南",
+          "body": "这里是新手指南，帮助您快速上手。"
+        }
+      },
+      {
+        "step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+        "timestamp": "2026-02-12T00:14:06.327680",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "7d 0h 0m",
+          "to": null,
+          "subject": "专属优惠码",
+          "body": "这是您的专属优惠码：WELCOME10"
+        }
+      }
+    ]
+  },
+  "ef02171b-a054-480b-b8b1-52d154d16ef3": {
+    "id": "ef02171b-a054-480b-b8b1-52d154d16ef3",
+    "flow_id": "6d204f98-eb93-4597-b7ac-cc388e7cac9e",
+    "customer_id": "customer_2",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.329783",
+    "completed_at": "2026-02-12T00:14:06.330331",
+    "current_step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "6c6cd5df-eb1e-4096-97ff-5f3725fdc2b4",
+        "timestamp": "2026-02-12T00:14:06.330320",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "7fcee055-fea8-4cfa-9306-cf4f593a42ed",
+        "timestamp": "2026-02-12T00:14:06.330324",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎加入我们！",
+          "body": "亲爱的用户，欢迎加入我们的大家庭！"
+        }
+      },
+      {
+        "step_id": "30e775ce-04f4-4e73-9c7e-d2a29ec0522f",
+        "timestamp": "2026-02-12T00:14:06.330328",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "新手指南",
+          "body": "这里是新手指南，帮助您快速上手。"
+        }
+      },
+      {
+        "step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+        "timestamp": "2026-02-12T00:14:06.330330",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "7d 0h 0m",
+          "to": null,
+          "subject": "专属优惠码",
+          "body": "这是您的专属优惠码：WELCOME10"
+        }
+      }
+    ]
+  },
+  "2a6cd906-065e-4e20-9d33-968d967e1b83": {
+    "id": "2a6cd906-065e-4e20-9d33-968d967e1b83",
+    "flow_id": "6d204f98-eb93-4597-b7ac-cc388e7cac9e",
+    "customer_id": "customer_3",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.332709",
+    "completed_at": "2026-02-12T00:14:06.333321",
+    "current_step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "6c6cd5df-eb1e-4096-97ff-5f3725fdc2b4",
+        "timestamp": "2026-02-12T00:14:06.333310",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "7fcee055-fea8-4cfa-9306-cf4f593a42ed",
+        "timestamp": "2026-02-12T00:14:06.333314",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎加入我们！",
+          "body": "亲爱的用户，欢迎加入我们的大家庭！"
+        }
+      },
+      {
+        "step_id": "30e775ce-04f4-4e73-9c7e-d2a29ec0522f",
+        "timestamp": "2026-02-12T00:14:06.333318",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "新手指南",
+          "body": "这里是新手指南，帮助您快速上手。"
+        }
+      },
+      {
+        "step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+        "timestamp": "2026-02-12T00:14:06.333320",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "7d 0h 0m",
+          "to": null,
+          "subject": "专属优惠码",
+          "body": "这是您的专属优惠码：WELCOME10"
+        }
+      }
+    ]
+  },
+  "407b3a7b-adf3-4dd2-b910-8444818e3b0b": {
+    "id": "407b3a7b-adf3-4dd2-b910-8444818e3b0b",
+    "flow_id": "6d204f98-eb93-4597-b7ac-cc388e7cac9e",
+    "customer_id": "customer_4",
+    "status": "completed",
+    "started_at": "2026-02-12T00:14:06.335912",
+    "completed_at": "2026-02-12T00:14:06.336615",
+    "current_step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+    "context": {
+      "event": "signup"
+    },
+    "history": [
+      {
+        "step_id": "6c6cd5df-eb1e-4096-97ff-5f3725fdc2b4",
+        "timestamp": "2026-02-12T00:14:06.336602",
+        "status": "triggered",
+        "result": {}
+      },
+      {
+        "step_id": "7fcee055-fea8-4cfa-9306-cf4f593a42ed",
+        "timestamp": "2026-02-12T00:14:06.336607",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "to": null,
+          "subject": "欢迎加入我们！",
+          "body": "亲爱的用户，欢迎加入我们的大家庭！"
+        }
+      },
+      {
+        "step_id": "30e775ce-04f4-4e73-9c7e-d2a29ec0522f",
+        "timestamp": "2026-02-12T00:14:06.336612",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "0d 24h 0m",
+          "to": null,
+          "subject": "新手指南",
+          "body": "这里是新手指南，帮助您快速上手。"
+        }
+      },
+      {
+        "step_id": "033a9bf2-2013-4ac3-94d6-cf80a25642d2",
+        "timestamp": "2026-02-12T00:14:06.336614",
+        "status": "executed",
+        "result": {
+          "action": "send_email",
+          "delay": "7d 0h 0m",
+          "to": null,
+          "subject": "专属优惠码",
+          "body": "这是您的专属优惠码：WELCOME10"
+        }
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "a93391fe-a4a6-446a-8695-6bd16a8d603a": {
-    "id": "a93391fe-a4a6-446a-8695-6bd16a8d603a",
+  "db0e4695-3123-4864-ab6a-b3cb3ce04732": {
+    "id": "db0e4695-3123-4864-ab6a-b3cb3ce04732",
     "name": "测试活动",
     "channel": "email",
     "audience": "all",
@@ -8,15 +8,15 @@
     "content": {},
     "status": "running",
     "scheduled_at": "2026-02-13T10:00:00",
-    "sent_at": "2026-02-12T00:12:46.672908",
-    "created_at": "2026-02-12T00:12:46.672668",
+    "sent_at": "2026-02-12T00:14:06.311894",
+    "created_at": "2026-02-12T00:14:06.299082",
     "metrics": {
       "sent": 1,
-      "delivered": 0,
+      "delivered": 1,
       "opened": 1,
       "clicked": 1,
       "converted": 1,
-      "bounced": 1
+      "bounced": 0
     }
   }
 }
