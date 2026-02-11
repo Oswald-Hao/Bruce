@@ -1,0 +1,87 @@
+[
+  {
+    "buy": {
+      "platform": "淘宝",
+      "title": "iPhone 15正品",
+      "price": 100.0,
+      "link": "https://taobao.com/..."
+    },
+    "sell": {
+      "platform": "京东",
+      "title": "iPhone 15正品",
+      "price": 110.0,
+      "link": "https://jd.com/..."
+    },
+    "profit": 10.0,
+    "profit_rate": 10.0,
+    "timestamp": "2026-02-11T10:44:35.957589"
+  },
+  {
+    "buy": {
+      "platform": "淘宝",
+      "title": "AirPods Pro正品",
+      "price": 100.0,
+      "link": "https://taobao.com/..."
+    },
+    "sell": {
+      "platform": "京东",
+      "title": "AirPods Pro正品",
+      "price": 110.0,
+      "link": "https://jd.com/..."
+    },
+    "profit": 10.0,
+    "profit_rate": 10.0,
+    "timestamp": "2026-02-11T10:44:36.958853"
+  },
+  {
+    "buy": {
+      "platform": "淘宝",
+      "title": "MacBook Pro正品",
+      "price": 100.0,
+      "link": "https://taobao.com/..."
+    },
+    "sell": {
+      "platform": "京东",
+      "title": "MacBook Pro正品",
+      "price": 110.0,
+      "link": "https://jd.com/..."
+    },
+    "profit": 10.0,
+    "profit_rate": 10.0,
+    "timestamp": "2026-02-11T10:44:37.959832"
+  },
+  {
+    "buy": {
+      "platform": "淘宝",
+      "title": "Nike鞋正品",
+      "price": 100.0,
+      "link": "https://taobao.com/..."
+    },
+    "sell": {
+      "platform": "京东",
+      "title": "Nike鞋正品",
+      "price": 110.0,
+      "link": "https://jd.com/..."
+    },
+    "profit": 10.0,
+    "profit_rate": 10.0,
+    "timestamp": "2026-02-11T10:44:38.960840"
+  },
+  {
+    "buy": {
+      "platform": "淘宝",
+      "title": "SK-II神仙水正品",
+      "price": 100.0,
+      "link": "https://taobao.com/..."
+    },
+    "sell": {
+      "platform": "京东",
+      "title": "SK-II神仙水正品",
+      "price": 110.0,
+      "link": "https://jd.com/..."
+    },
+    "profit": 10.0,
+    "profit_rate": 10.0,
+    "timestamp": "2026-02-11T10:44:39.961864"
+  }
+]
