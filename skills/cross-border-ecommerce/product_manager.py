@@ -76,9 +76,10 @@ class Product:
 @dataclass
 class PlatformMapping:
     """平台映射"""
+    id: str
     product_id: str
     platform: Platform
-    platform_product_id: str
+    platform_product_id: str = ""
     price: float = 0.0
     currency: Currency = Currency.USD
     status: str = "active"
