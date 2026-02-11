@@ -1,13 +1,13 @@
 {
-  "ef7036e6-63fa-4aff-aee6-6fcee1b68ab3": {
-    "id": "ef7036e6-63fa-4aff-aee6-6fcee1b68ab3",
+  "17977901-65a0-46a0-9628-ce39b153bd46": {
+    "id": "17977901-65a0-46a0-9628-ce39b153bd46",
     "name": "测试流程",
     "description": "这是一个测试流程",
     "status": "paused",
-    "created_at": "2026-02-12T00:15:01.384980",
+    "created_at": "2026-02-12T00:16:03.002080",
     "steps": {
-      "af37e33d-609b-4a1f-8328-fb19e686a920": {
-        "id": "af37e33d-609b-4a1f-8328-fb19e686a920",
+      "8121dd0f-2c83-457f-ab51-f680a765ff99": {
+        "id": "8121dd0f-2c83-457f-ab51-f680a765ff99",
         "trigger": {
           "type": "user_signup",
           "conditions": {
@@ -17,11 +17,11 @@
         },
         "action": null,
         "next_step_ids": [
-          "611f8740-5924-4a9a-9411-f1d7ffb4ebe3"
+          "42acab75-f102-4265-91c3-73690057823a"
         ]
       },
-      "611f8740-5924-4a9a-9411-f1d7ffb4ebe3": {
-        "id": "611f8740-5924-4a9a-9411-f1d7ffb4ebe3",
+      "42acab75-f102-4265-91c3-73690057823a": {
+        "id": "42acab75-f102-4265-91c3-73690057823a",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -34,11 +34,11 @@
           "delay_days": 0
         },
         "next_step_ids": [
-          "2a441fa6-b382-40cf-ac97-c89131d97223"
+          "4f4139fc-535c-401c-88cb-0f140722ae97"
         ]
       },
-      "2a441fa6-b382-40cf-ac97-c89131d97223": {
-        "id": "2a441fa6-b382-40cf-ac97-c89131d97223",
+      "4f4139fc-535c-401c-88cb-0f140722ae97": {
+        "id": "4f4139fc-535c-401c-88cb-0f140722ae97",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -53,7 +53,7 @@
       }
     },
     "entry_points": [
-      "af37e33d-609b-4a1f-8328-fb19e686a920"
+      "8121dd0f-2c83-457f-ab51-f680a765ff99"
     ],
     "stats": {
       "triggered": 1,
@@ -61,15 +61,15 @@
       "failed": 0
     }
   },
-  "90643f83-b79d-4d29-b4b6-912e7229c7ac": {
-    "id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "8f48efcb-7086-4466-a259-6e62e725470d": {
+    "id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "name": "欢迎流程",
     "description": "新用户注册欢迎流程",
     "status": "active",
-    "created_at": "2026-02-12T00:15:01.386435",
+    "created_at": "2026-02-12T00:16:03.003531",
     "steps": {
-      "121691b6-abc8-46ad-9ded-787948e3327e": {
-        "id": "121691b6-abc8-46ad-9ded-787948e3327e",
+      "4e6b0a3b-c5a0-47ac-a47b-318507224f79": {
+        "id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
         "trigger": {
           "type": "user_signup",
           "conditions": {},
@@ -77,11 +77,11 @@
         },
         "action": null,
         "next_step_ids": [
-          "b93f2c0f-8bae-4257-89e2-47cb956128f5"
+          "af2f2c65-15ad-4c3d-b18c-b07240fc09e8"
         ]
       },
-      "b93f2c0f-8bae-4257-89e2-47cb956128f5": {
-        "id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
+      "af2f2c65-15ad-4c3d-b18c-b07240fc09e8": {
+        "id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -94,11 +94,11 @@
           "delay_days": 0
         },
         "next_step_ids": [
-          "7807beab-655e-48b7-8e31-1c93b65e8f8d"
+          "26d02a76-f5ba-427a-bf84-f16d9e13bd20"
         ]
       },
-      "7807beab-655e-48b7-8e31-1c93b65e8f8d": {
-        "id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
+      "26d02a76-f5ba-427a-bf84-f16d9e13bd20": {
+        "id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -111,11 +111,11 @@
           "delay_days": 0
         },
         "next_step_ids": [
-          "094dba6c-841f-4bc1-8bbe-6b0270dd8613"
+          "47f21419-9191-49ea-8c7e-d59ba0242ab5"
         ]
       },
-      "094dba6c-841f-4bc1-8bbe-6b0270dd8613": {
-        "id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+      "47f21419-9191-49ea-8c7e-d59ba0242ab5": {
+        "id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -131,7 +131,7 @@
       }
     },
     "entry_points": [
-      "121691b6-abc8-46ad-9ded-787948e3327e"
+      "4e6b0a3b-c5a0-47ac-a47b-318507224f79"
     ],
     "stats": {
       "triggered": 6,
@@ -139,15 +139,15 @@
       "failed": 0
     }
   },
-  "b0d16d0f-48b7-4c29-b6e2-9975361df5fa": {
-    "id": "b0d16d0f-48b7-4c29-b6e2-9975361df5fa",
+  "85bb9488-8fe7-4680-970a-a53d41d9f6c2": {
+    "id": "85bb9488-8fe7-4680-970a-a53d41d9f6c2",
     "name": "购物车召回流程",
     "description": "购物车放弃召回流程",
     "status": "draft",
-    "created_at": "2026-02-12T00:15:01.387639",
+    "created_at": "2026-02-12T00:16:03.004737",
     "steps": {
-      "80df7439-d99e-419a-993f-84658b5d9b53": {
-        "id": "80df7439-d99e-419a-993f-84658b5d9b53",
+      "990781b3-f445-43bc-9181-d8d96a20f6e3": {
+        "id": "990781b3-f445-43bc-9181-d8d96a20f6e3",
         "trigger": {
           "type": "cart_abandoned",
           "conditions": {
@@ -157,11 +157,11 @@
         },
         "action": null,
         "next_step_ids": [
-          "76c54b6d-c03b-4bad-84ca-c187173eafbe"
+          "693a2d62-71f1-4c7a-a034-ee83bd259057"
         ]
       },
-      "76c54b6d-c03b-4bad-84ca-c187173eafbe": {
-        "id": "76c54b6d-c03b-4bad-84ca-c187173eafbe",
+      "693a2d62-71f1-4c7a-a034-ee83bd259057": {
+        "id": "693a2d62-71f1-4c7a-a034-ee83bd259057",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -174,11 +174,11 @@
           "delay_days": 0
         },
         "next_step_ids": [
-          "aef4f798-b115-4e76-9a52-213291d231a5"
+          "d5bef720-1653-40b5-848e-c0c23715ca27"
         ]
       },
-      "aef4f798-b115-4e76-9a52-213291d231a5": {
-        "id": "aef4f798-b115-4e76-9a52-213291d231a5",
+      "d5bef720-1653-40b5-848e-c0c23715ca27": {
+        "id": "d5bef720-1653-40b5-848e-c0c23715ca27",
         "trigger": null,
         "action": {
           "type": "send_email",
@@ -194,7 +194,7 @@
       }
     },
     "entry_points": [
-      "80df7439-d99e-419a-993f-84658b5d9b53"
+      "990781b3-f445-43bc-9181-d8d96a20f6e3"
     ],
     "stats": {
       "triggered": 0,

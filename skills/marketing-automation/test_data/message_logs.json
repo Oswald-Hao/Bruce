@@ -1,11 +1,11 @@
 [
   {
-    "id": "9e47d044-095d-42ef-a5c8-7a00979fd7c7",
-    "campaign_id": "9341369f-f62b-4cbc-8213-59c0b971663f",
-    "customer_id": "72fee449-eeba-4467-ac4e-3bda6693961b",
+    "id": "3e8d51a1-5eb3-4dc3-9c04-fe65ad16d23c",
+    "campaign_id": "4b20f3a1-e4ec-4f12-ac31-b0a40e108c01",
+    "customer_id": "7612a099-6c8c-41f7-b582-c9d70edb140f",
     "channel": "email",
     "status": "converted",
-    "sent_at": "2026-02-12T00:15:01.379085",
+    "sent_at": "2026-02-12T00:16:02.995811",
     "metadata": {}
   }
 ]

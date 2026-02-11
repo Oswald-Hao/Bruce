@@ -153,13 +153,15 @@ def test_marketing_core():
         result.add("客户列表限制", len(customers) == 5)
 
         # 测试18: 按标签分群
-        # 先给第一个客户添加vip标签
-        ma.add_tag(customer.id, "vip")
+        # 使用标签名作为受众（get_audience的else分支按标签分群）
+        tag_name = "vip_tag"
+        # 先给第一个客户添加标签
+        ma.add_tag(customer.id, tag_name)
         for i in range(5):
             c = ma.add_customer(email=f"vip{i}@example.com")
-            ma.add_tag(c.id, "vip")
+            ma.add_tag(c.id, tag_name)
 
-        audience = ma.get_audience("vip")
+        audience = ma.get_audience(tag_name)
         result.add("按标签分群", len(audience) >= 6)
 
         # 测试19: 更新客户

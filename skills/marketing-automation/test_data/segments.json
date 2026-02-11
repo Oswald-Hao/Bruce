@@ -1,6 +1,6 @@
 {
-  "d6fd9b9e-dd4e-4596-8f93-98522f689ccc": {
-    "id": "d6fd9b9e-dd4e-4596-8f93-98522f689ccc",
+  "88eba838-589f-4dbc-9e2b-caa79c83cd25": {
+    "id": "88eba838-589f-4dbc-9e2b-caa79c83cd25",
     "name": "VIP客户",
     "description": "",
     "type": "behavioral",
@@ -11,14 +11,14 @@
       }
     },
     "customer_ids": [
-      "72fee449-eeba-4467-ac4e-3bda6693961b"
+      "7612a099-6c8c-41f7-b582-c9d70edb140f"
     ],
-    "created_at": "2026-02-12T00:15:01.413708",
-    "updated_at": "2026-02-12T00:15:01.414463",
+    "created_at": "2026-02-12T00:16:03.030377",
+    "updated_at": "2026-02-12T00:16:03.031111",
     "is_dynamic": true
   },
-  "b17830e2-4bd3-4fe3-acaa-3b887bba364b": {
-    "id": "b17830e2-4bd3-4fe3-acaa-3b887bba364b",
+  "96ea03b1-5250-43ad-8e5b-576d9a1868eb": {
+    "id": "96ea03b1-5250-43ad-8e5b-576d9a1868eb",
     "name": "活跃用户",
     "description": "最近7天活跃的用户",
     "type": "behavioral",
@@ -29,29 +29,29 @@
       }
     },
     "customer_ids": [
-      "72fee449-eeba-4467-ac4e-3bda6693961b",
-      "dd03e5d5-7719-4186-af93-7e71dd71062a",
-      "cd3d8746-e68c-4720-92d3-44540277c0f3",
-      "f95f9ab0-f52c-419f-9eb5-87d8f2f3b49b",
-      "189256d6-69aa-42f8-8487-acaad2230b2c",
-      "b0cb47c0-b8dc-4465-aaba-7392fff96685",
-      "fb770e32-3671-48c0-9e43-4e74b67ca6e3",
-      "a62f50a8-7b34-4dbb-9de3-921496850378",
-      "f33779f8-6cb6-4732-945d-b3c208eb284a",
-      "ebc41444-797e-4ed5-a14b-1fee5cb29118",
-      "bda7440b-231a-49c9-b463-aab02a951add",
-      "86eb1a3e-2961-40d5-b437-c0df1155980f",
-      "5f55fa2c-865a-45ea-b3e2-2ded32f719a9",
-      "f3f5922e-e216-4ba3-895c-71b49128fca2",
-      "729eaf45-ac19-4cbf-ac8a-0863dcc7730a",
-      "0e5acda7-e472-4ad4-a991-1aec2a9d6dc5"
+      "7612a099-6c8c-41f7-b582-c9d70edb140f",
+      "674ee5f3-cdda-46ba-a924-dd41c60f5d2d",
+      "14e8cdc4-94e4-4a28-ac4f-3142e00445b7",
+      "bcaa969d-66d2-4914-8c4e-6c06db5003a7",
+      "b5c59b9a-745b-4530-b68d-426f4bc46fb7",
+      "b3b94205-3b1a-444e-9ae7-134a8962404f",
+      "ecce2f40-0288-40d9-a614-72ba1fbbec7e",
+      "86bfcc32-4231-4ecb-93cb-35b0a2ca2e17",
+      "58cc8e4a-df90-4dfd-a12e-0dc5d5e892bc",
+      "77113467-d27d-40fb-8cc1-1e6a9b22c42e",
+      "4cf12dbf-9d7b-4ea6-893e-dcd630d6b68d",
+      "1ae3677e-56f4-4d99-8434-c9681a27198a",
+      "9493c14d-256b-47fb-9bde-f82769e3ac7d",
+      "a41f8b2e-f6a0-463c-b03e-88d56cb2776d",
+      "efb0ca61-8a73-421c-a28b-4f686baa058c",
+      "067ab802-ee02-48a2-96e9-bcc9a8fad63a"
     ],
-    "created_at": "2026-02-12T00:15:01.413967",
-    "updated_at": "2026-02-12T00:15:01.414484",
+    "created_at": "2026-02-12T00:16:03.030627",
+    "updated_at": "2026-02-12T00:16:03.031132",
     "is_dynamic": true
   },
-  "42bec266-670a-4746-8326-6f149f945358": {
-    "id": "42bec266-670a-4746-8326-6f149f945358",
+  "516c2eef-36fd-416f-b946-21a2d62ed79f": {
+    "id": "516c2eef-36fd-416f-b946-21a2d62ed79f",
     "name": "新注册用户",
     "description": "尚未下单的用户",
     "type": "behavioral",
@@ -62,40 +62,40 @@
       }
     },
     "customer_ids": [
-      "72fee449-eeba-4467-ac4e-3bda6693961b",
-      "dd03e5d5-7719-4186-af93-7e71dd71062a",
-      "cd3d8746-e68c-4720-92d3-44540277c0f3",
-      "f95f9ab0-f52c-419f-9eb5-87d8f2f3b49b",
-      "189256d6-69aa-42f8-8487-acaad2230b2c",
-      "b0cb47c0-b8dc-4465-aaba-7392fff96685",
-      "fb770e32-3671-48c0-9e43-4e74b67ca6e3",
-      "a62f50a8-7b34-4dbb-9de3-921496850378",
-      "f33779f8-6cb6-4732-945d-b3c208eb284a",
-      "ebc41444-797e-4ed5-a14b-1fee5cb29118",
-      "bda7440b-231a-49c9-b463-aab02a951add",
-      "86eb1a3e-2961-40d5-b437-c0df1155980f",
-      "5f55fa2c-865a-45ea-b3e2-2ded32f719a9",
-      "f3f5922e-e216-4ba3-895c-71b49128fca2",
-      "729eaf45-ac19-4cbf-ac8a-0863dcc7730a",
-      "0e5acda7-e472-4ad4-a991-1aec2a9d6dc5"
+      "7612a099-6c8c-41f7-b582-c9d70edb140f",
+      "674ee5f3-cdda-46ba-a924-dd41c60f5d2d",
+      "14e8cdc4-94e4-4a28-ac4f-3142e00445b7",
+      "bcaa969d-66d2-4914-8c4e-6c06db5003a7",
+      "b5c59b9a-745b-4530-b68d-426f4bc46fb7",
+      "b3b94205-3b1a-444e-9ae7-134a8962404f",
+      "ecce2f40-0288-40d9-a614-72ba1fbbec7e",
+      "86bfcc32-4231-4ecb-93cb-35b0a2ca2e17",
+      "58cc8e4a-df90-4dfd-a12e-0dc5d5e892bc",
+      "77113467-d27d-40fb-8cc1-1e6a9b22c42e",
+      "4cf12dbf-9d7b-4ea6-893e-dcd630d6b68d",
+      "1ae3677e-56f4-4d99-8434-c9681a27198a",
+      "9493c14d-256b-47fb-9bde-f82769e3ac7d",
+      "a41f8b2e-f6a0-463c-b03e-88d56cb2776d",
+      "efb0ca61-8a73-421c-a28b-4f686baa058c",
+      "067ab802-ee02-48a2-96e9-bcc9a8fad63a"
     ],
-    "created_at": "2026-02-12T00:15:01.414060",
-    "updated_at": "2026-02-12T00:15:01.414488",
+    "created_at": "2026-02-12T00:16:03.030766",
+    "updated_at": "2026-02-12T00:16:03.031136",
     "is_dynamic": true
   },
-  "856a385d-5138-4b34-9e59-662259060529": {
-    "id": "856a385d-5138-4b34-9e59-662259060529",
+  "294b50cd-6128-4148-b000-1aa98767966a": {
+    "id": "294b50cd-6128-4148-b000-1aa98767966a",
     "name": "静态分群",
     "description": "",
     "type": "custom",
     "conditions": {},
     "customer_ids": [],
-    "created_at": "2026-02-12T00:15:01.414644",
-    "updated_at": "2026-02-12T00:15:01.414646",
+    "created_at": "2026-02-12T00:16:03.031291",
+    "updated_at": "2026-02-12T00:16:03.031293",
     "is_dynamic": false
   },
-  "ba169606-735c-498d-8336-b4c11106c80d": {
-    "id": "ba169606-735c-498d-8336-b4c11106c80d",
+  "1175ffef-0ba8-4bf8-9285-b2f8197c3e13": {
+    "id": "1175ffef-0ba8-4bf8-9285-b2f8197c3e13",
     "name": "标签分群",
     "description": "",
     "type": "behavioral",
@@ -108,12 +108,12 @@
       }
     },
     "customer_ids": [],
-    "created_at": "2026-02-12T00:15:01.415137",
-    "updated_at": "2026-02-12T00:15:01.415139",
+    "created_at": "2026-02-12T00:16:03.031792",
+    "updated_at": "2026-02-12T00:16:03.031795",
     "is_dynamic": true
   },
-  "10c287c4-2497-4426-bc1c-6c0148287bbf": {
-    "id": "10c287c4-2497-4426-bc1c-6c0148287bbf",
+  "e1c8b18a-b847-41d8-8c2a-9520146166e4": {
+    "id": "e1c8b18a-b847-41d8-8c2a-9520146166e4",
     "name": "时间分群",
     "description": "",
     "type": "behavioral",
@@ -124,12 +124,12 @@
       }
     },
     "customer_ids": [],
-    "created_at": "2026-02-12T00:15:01.415451",
-    "updated_at": "2026-02-12T00:15:01.415452",
+    "created_at": "2026-02-12T00:16:03.032115",
+    "updated_at": "2026-02-12T00:16:03.032117",
     "is_dynamic": true
   },
-  "918444a8-a8a8-42af-b62a-8aa3432a23b6": {
-    "id": "918444a8-a8a8-42af-b62a-8aa3432a23b6",
+  "949bddf4-8827-4288-b314-3a4b141ef52a": {
+    "id": "949bddf4-8827-4288-b314-3a4b141ef52a",
     "name": "混合条件分群",
     "description": "",
     "type": "behavioral",
@@ -144,8 +144,8 @@
       }
     },
     "customer_ids": [],
-    "created_at": "2026-02-12T00:15:01.415789",
-    "updated_at": "2026-02-12T00:15:01.415792",
+    "created_at": "2026-02-12T00:16:03.032470",
+    "updated_at": "2026-02-12T00:16:03.032472",
     "is_dynamic": true
   }
 }

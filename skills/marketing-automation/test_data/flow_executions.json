@@ -1,25 +1,25 @@
 {
-  "bca05623-c505-4573-8a98-e7b4ff89bf19": {
-    "id": "bca05623-c505-4573-8a98-e7b4ff89bf19",
-    "flow_id": "ef7036e6-63fa-4aff-aee6-6fcee1b68ab3",
+  "d2313758-5142-41f2-abc5-cffffdbaad9d": {
+    "id": "d2313758-5142-41f2-abc5-cffffdbaad9d",
+    "flow_id": "17977901-65a0-46a0-9628-ce39b153bd46",
     "customer_id": "customer_001",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.385574",
-    "completed_at": "2026-02-12T00:15:01.385724",
-    "current_step_id": "2a441fa6-b382-40cf-ac97-c89131d97223",
+    "started_at": "2026-02-12T00:16:03.002678",
+    "completed_at": "2026-02-12T00:16:03.002830",
+    "current_step_id": "4f4139fc-535c-401c-88cb-0f140722ae97",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "af37e33d-609b-4a1f-8328-fb19e686a920",
-        "timestamp": "2026-02-12T00:15:01.385715",
+        "step_id": "8121dd0f-2c83-457f-ab51-f680a765ff99",
+        "timestamp": "2026-02-12T00:16:03.002821",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "611f8740-5924-4a9a-9411-f1d7ffb4ebe3",
-        "timestamp": "2026-02-12T00:15:01.385719",
+        "step_id": "42acab75-f102-4265-91c3-73690057823a",
+        "timestamp": "2026-02-12T00:16:03.002825",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -29,8 +29,8 @@
         }
       },
       {
-        "step_id": "2a441fa6-b382-40cf-ac97-c89131d97223",
-        "timestamp": "2026-02-12T00:15:01.385722",
+        "step_id": "4f4139fc-535c-401c-88cb-0f140722ae97",
+        "timestamp": "2026-02-12T00:16:03.002828",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -42,27 +42,27 @@
       }
     ]
   },
-  "28db6891-a76b-4549-809a-58cae8a8f826": {
-    "id": "28db6891-a76b-4549-809a-58cae8a8f826",
-    "flow_id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "66654176-1b87-4db9-9df0-6b25cde9d317": {
+    "id": "66654176-1b87-4db9-9df0-6b25cde9d317",
+    "flow_id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "customer_id": "customer_welcome",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.389257",
-    "completed_at": "2026-02-12T00:15:01.389626",
-    "current_step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+    "started_at": "2026-02-12T00:16:03.006360",
+    "completed_at": "2026-02-12T00:16:03.006733",
+    "current_step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "121691b6-abc8-46ad-9ded-787948e3327e",
-        "timestamp": "2026-02-12T00:15:01.389615",
+        "step_id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
+        "timestamp": "2026-02-12T00:16:03.006721",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
-        "timestamp": "2026-02-12T00:15:01.389619",
+        "step_id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
+        "timestamp": "2026-02-12T00:16:03.006725",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -72,8 +72,8 @@
         }
       },
       {
-        "step_id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
-        "timestamp": "2026-02-12T00:15:01.389622",
+        "step_id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
+        "timestamp": "2026-02-12T00:16:03.006728",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -84,8 +84,8 @@
         }
       },
       {
-        "step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
-        "timestamp": "2026-02-12T00:15:01.389625",
+        "step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
+        "timestamp": "2026-02-12T00:16:03.006732",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -97,27 +97,27 @@
       }
     ]
   },
-  "318ac38f-978d-4412-91be-c9edc3dfc32a": {
-    "id": "318ac38f-978d-4412-91be-c9edc3dfc32a",
-    "flow_id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "d29b5945-d2b4-45bf-80ce-c01c4ac6e724": {
+    "id": "d29b5945-d2b4-45bf-80ce-c01c4ac6e724",
+    "flow_id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "customer_id": "customer_0",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.392069",
-    "completed_at": "2026-02-12T00:15:01.392488",
-    "current_step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+    "started_at": "2026-02-12T00:16:03.009175",
+    "completed_at": "2026-02-12T00:16:03.009609",
+    "current_step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "121691b6-abc8-46ad-9ded-787948e3327e",
-        "timestamp": "2026-02-12T00:15:01.392478",
+        "step_id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
+        "timestamp": "2026-02-12T00:16:03.009597",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
-        "timestamp": "2026-02-12T00:15:01.392481",
+        "step_id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
+        "timestamp": "2026-02-12T00:16:03.009601",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -127,8 +127,8 @@
         }
       },
       {
-        "step_id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
-        "timestamp": "2026-02-12T00:15:01.392485",
+        "step_id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
+        "timestamp": "2026-02-12T00:16:03.009605",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -139,8 +139,8 @@
         }
       },
       {
-        "step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
-        "timestamp": "2026-02-12T00:15:01.392487",
+        "step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
+        "timestamp": "2026-02-12T00:16:03.009608",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -152,27 +152,27 @@
       }
     ]
   },
-  "33a64934-b608-4311-8b7a-96bf47a41490": {
-    "id": "33a64934-b608-4311-8b7a-96bf47a41490",
-    "flow_id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "72fd934d-42dd-469d-9ce6-305b95bec310": {
+    "id": "72fd934d-42dd-469d-9ce6-305b95bec310",
+    "flow_id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "customer_id": "customer_1",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.394348",
-    "completed_at": "2026-02-12T00:15:01.394860",
-    "current_step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+    "started_at": "2026-02-12T00:16:03.011468",
+    "completed_at": "2026-02-12T00:16:03.011967",
+    "current_step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "121691b6-abc8-46ad-9ded-787948e3327e",
-        "timestamp": "2026-02-12T00:15:01.394849",
+        "step_id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
+        "timestamp": "2026-02-12T00:16:03.011956",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
-        "timestamp": "2026-02-12T00:15:01.394853",
+        "step_id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
+        "timestamp": "2026-02-12T00:16:03.011960",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -182,8 +182,8 @@
         }
       },
       {
-        "step_id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
-        "timestamp": "2026-02-12T00:15:01.394856",
+        "step_id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
+        "timestamp": "2026-02-12T00:16:03.011962",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -194,8 +194,8 @@
         }
       },
       {
-        "step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
-        "timestamp": "2026-02-12T00:15:01.394859",
+        "step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
+        "timestamp": "2026-02-12T00:16:03.011966",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -207,27 +207,27 @@
       }
     ]
   },
-  "abc4a3d2-4848-4540-b395-143f580382e3": {
-    "id": "abc4a3d2-4848-4540-b395-143f580382e3",
-    "flow_id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "52708f5e-4372-4058-bec6-452bb35e96af": {
+    "id": "52708f5e-4372-4058-bec6-452bb35e96af",
+    "flow_id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "customer_id": "customer_2",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.396972",
-    "completed_at": "2026-02-12T00:15:01.397515",
-    "current_step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+    "started_at": "2026-02-12T00:16:03.014057",
+    "completed_at": "2026-02-12T00:16:03.014602",
+    "current_step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "121691b6-abc8-46ad-9ded-787948e3327e",
-        "timestamp": "2026-02-12T00:15:01.397504",
+        "step_id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
+        "timestamp": "2026-02-12T00:16:03.014590",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
-        "timestamp": "2026-02-12T00:15:01.397509",
+        "step_id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
+        "timestamp": "2026-02-12T00:16:03.014594",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -237,8 +237,8 @@
         }
       },
       {
-        "step_id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
-        "timestamp": "2026-02-12T00:15:01.397512",
+        "step_id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
+        "timestamp": "2026-02-12T00:16:03.014597",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -249,8 +249,8 @@
         }
       },
       {
-        "step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
-        "timestamp": "2026-02-12T00:15:01.397514",
+        "step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
+        "timestamp": "2026-02-12T00:16:03.014600",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -262,27 +262,27 @@
       }
     ]
   },
-  "9241abb2-6eb6-4c31-a44b-bc81bb30de5f": {
-    "id": "9241abb2-6eb6-4c31-a44b-bc81bb30de5f",
-    "flow_id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "a8151fac-f47f-4dcd-a07c-90494a6eba4b": {
+    "id": "a8151fac-f47f-4dcd-a07c-90494a6eba4b",
+    "flow_id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "customer_id": "customer_3",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.399854",
-    "completed_at": "2026-02-12T00:15:01.400499",
-    "current_step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+    "started_at": "2026-02-12T00:16:03.016960",
+    "completed_at": "2026-02-12T00:16:03.017593",
+    "current_step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "121691b6-abc8-46ad-9ded-787948e3327e",
-        "timestamp": "2026-02-12T00:15:01.400488",
+        "step_id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
+        "timestamp": "2026-02-12T00:16:03.017581",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
-        "timestamp": "2026-02-12T00:15:01.400492",
+        "step_id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
+        "timestamp": "2026-02-12T00:16:03.017585",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -292,8 +292,8 @@
         }
       },
       {
-        "step_id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
-        "timestamp": "2026-02-12T00:15:01.400495",
+        "step_id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
+        "timestamp": "2026-02-12T00:16:03.017588",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -304,8 +304,8 @@
         }
       },
       {
-        "step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
-        "timestamp": "2026-02-12T00:15:01.400498",
+        "step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
+        "timestamp": "2026-02-12T00:16:03.017591",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -317,27 +317,27 @@
       }
     ]
   },
-  "441ee82c-f436-4c7d-ac74-65a9b9f7cab1": {
-    "id": "441ee82c-f436-4c7d-ac74-65a9b9f7cab1",
-    "flow_id": "90643f83-b79d-4d29-b4b6-912e7229c7ac",
+  "418d7f9b-d94f-41aa-b7f0-16b22f98b8e1": {
+    "id": "418d7f9b-d94f-41aa-b7f0-16b22f98b8e1",
+    "flow_id": "8f48efcb-7086-4466-a259-6e62e725470d",
     "customer_id": "customer_4",
     "status": "completed",
-    "started_at": "2026-02-12T00:15:01.403323",
-    "completed_at": "2026-02-12T00:15:01.403990",
-    "current_step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
+    "started_at": "2026-02-12T00:16:03.020192",
+    "completed_at": "2026-02-12T00:16:03.020861",
+    "current_step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
     "context": {
       "event": "signup"
     },
     "history": [
       {
-        "step_id": "121691b6-abc8-46ad-9ded-787948e3327e",
-        "timestamp": "2026-02-12T00:15:01.403979",
+        "step_id": "4e6b0a3b-c5a0-47ac-a47b-318507224f79",
+        "timestamp": "2026-02-12T00:16:03.020850",
         "status": "triggered",
         "result": {}
       },
       {
-        "step_id": "b93f2c0f-8bae-4257-89e2-47cb956128f5",
-        "timestamp": "2026-02-12T00:15:01.403983",
+        "step_id": "af2f2c65-15ad-4c3d-b18c-b07240fc09e8",
+        "timestamp": "2026-02-12T00:16:03.020854",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -347,8 +347,8 @@
         }
       },
       {
-        "step_id": "7807beab-655e-48b7-8e31-1c93b65e8f8d",
-        "timestamp": "2026-02-12T00:15:01.403986",
+        "step_id": "26d02a76-f5ba-427a-bf84-f16d9e13bd20",
+        "timestamp": "2026-02-12T00:16:03.020856",
         "status": "executed",
         "result": {
           "action": "send_email",
@@ -359,8 +359,8 @@
         }
       },
       {
-        "step_id": "094dba6c-841f-4bc1-8bbe-6b0270dd8613",
-        "timestamp": "2026-02-12T00:15:01.403989",
+        "step_id": "47f21419-9191-49ea-8c7e-d59ba0242ab5",
+        "timestamp": "2026-02-12T00:16:03.020859",
         "status": "executed",
         "result": {
           "action": "send_email",
