@@ -5,7 +5,7 @@
     "name": "主账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.950942",
+    "created_at": "2026-02-13T00:29:40.503339",
     "api_config": {}
   },
   {
@@ -14,7 +14,7 @@
     "name": "Facebook账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.951022",
+    "created_at": "2026-02-13T00:29:40.503415",
     "api_config": {}
   },
   {
@@ -23,7 +23,7 @@
     "name": "抖音账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.951086",
+    "created_at": "2026-02-13T00:29:40.503471",
     "api_config": {}
   },
   {
@@ -32,7 +32,7 @@
     "name": "测试账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.964711",
+    "created_at": "2026-02-13T00:29:40.509167",
     "api_config": {}
   },
   {
@@ -41,7 +41,7 @@
     "name": "数据测试账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.964985",
+    "created_at": "2026-02-13T00:29:40.509357",
     "api_config": {}
   },
   {
@@ -50,7 +50,7 @@
     "name": "ROI测试账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.965141",
+    "created_at": "2026-02-13T00:29:40.509512",
     "api_config": {}
   },
   {
@@ -59,7 +59,7 @@
     "name": "报告测试账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.965319",
+    "created_at": "2026-02-13T00:29:40.509691",
     "api_config": {}
   },
   {
@@ -68,7 +68,25 @@
     "name": "A/B测试账户",
     "currency": "CNY",
     "status": "active",
-    "created_at": "2026-02-13T00:27:41.965682",
+    "created_at": "2026-02-13T00:29:40.510034",
+    "api_config": {}
+  },
+  {
+    "account_id": "000-111-2222",
+    "platform": "google",
+    "name": "自动优化账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:29:40.510381",
+    "api_config": {}
+  },
+  {
+    "account_id": "333-444-5555",
+    "platform": "google",
+    "name": "建议测试账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:29:40.511241",
     "api_config": {}
   }
 ]

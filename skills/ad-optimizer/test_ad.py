@@ -185,8 +185,9 @@ class TestAdOptimizer:
         """测试ROI报告"""
         print("\n📋 测试ROI报告...")
 
-        # 创建多个广告系列
-        account = self.optimizer.add_account("google", "444-555-6666", "报告测试账户")
+        # 创建一个账户的广告系列
+        account_id = "444-555-6666"
+        account = self.optimizer.add_account("google", account_id, "报告测试账户")
         
         camp1 = self.optimizer.create_campaign(account.account_id, "广告A", 5000)
         metrics1 = {'impressions': 20000, 'clicks': 1000, 'conversions': 50, 'cost': 2000, 'revenue': 4000}
@@ -196,8 +197,8 @@ class TestAdOptimizer:
         metrics2 = {'impressions': 10000, 'clicks': 300, 'conversions': 10, 'cost': 1000, 'revenue': 500}
         self.optimizer.update_metrics(camp2.campaign_id, metrics2)
 
-        # 测试: 生成报告
-        report = self.optimizer.roi_report()
+        # 测试: 生成单个账户的报告
+        report = self.optimizer.roi_report(account_id=account_id)
         summary = report['summary']
 
         self.assert_equal(len(report['campaigns']), 2, "广告系列数量正确")
