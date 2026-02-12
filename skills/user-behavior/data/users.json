@@ -1,10 +1,219 @@
 [
   {
     "user_id": "user_001",
-    "first_seen": "2026-02-13T00:18:14.452035",
-    "last_seen": "2026-02-13T00:18:14.452154",
+    "first_seen": "2026-02-13T00:19:53.362717",
+    "last_seen": "2026-02-13T00:19:53.362842",
     "status": "active",
     "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_002",
+    "first_seen": "2026-02-13T00:19:53.362943",
+    "last_seen": "2026-02-13T00:19:53.362943",
+    "status": "active",
+    "total_events": 0,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_test_1",
+    "first_seen": "2026-02-13T00:19:53.363040",
+    "last_seen": "2026-02-13T00:19:53.363040",
+    "status": "inactive",
+    "total_events": 0,
+    "total_sessions": 0,
+    "properties": {
+      "name": "测试用户"
+    }
+  },
+  {
+    "user_id": "user_profile_test",
+    "first_seen": "2026-02-13T00:19:53.363294",
+    "last_seen": "2026-02-13T00:19:53.363488",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_0",
+    "first_seen": "2026-02-13T00:19:53.363736",
+    "last_seen": "2026-02-13T00:19:53.363851",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_1",
+    "first_seen": "2026-02-13T00:19:53.363956",
+    "last_seen": "2026-02-13T00:19:53.364075",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_2",
+    "first_seen": "2026-02-13T00:19:53.364189",
+    "last_seen": "2026-02-13T00:19:53.364341",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_3",
+    "first_seen": "2026-02-13T00:19:53.364468",
+    "last_seen": "2026-02-13T00:19:53.364620",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_4",
+    "first_seen": "2026-02-13T00:19:53.364755",
+    "last_seen": "2026-02-13T00:19:53.364900",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_5",
+    "first_seen": "2026-02-13T00:19:53.365047",
+    "last_seen": "2026-02-13T00:19:53.365207",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_6",
+    "first_seen": "2026-02-13T00:19:53.365369",
+    "last_seen": "2026-02-13T00:19:53.365537",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_7",
+    "first_seen": "2026-02-13T00:19:53.365715",
+    "last_seen": "2026-02-13T00:19:53.365895",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_8",
+    "first_seen": "2026-02-13T00:19:53.366096",
+    "last_seen": "2026-02-13T00:19:53.366283",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_9",
+    "first_seen": "2026-02-13T00:19:53.366470",
+    "last_seen": "2026-02-13T00:19:53.366681",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_0",
+    "first_seen": "2026-02-13T00:19:53.366904",
+    "last_seen": "2026-02-13T00:19:53.369438",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_1",
+    "first_seen": "2026-02-13T00:19:53.367132",
+    "last_seen": "2026-02-13T00:19:53.369714",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_2",
+    "first_seen": "2026-02-13T00:19:53.367351",
+    "last_seen": "2026-02-13T00:19:53.369993",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_3",
+    "first_seen": "2026-02-13T00:19:53.367577",
+    "last_seen": "2026-02-13T00:19:53.370274",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_4",
+    "first_seen": "2026-02-13T00:19:53.367809",
+    "last_seen": "2026-02-13T00:19:53.370558",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_5",
+    "first_seen": "2026-02-13T00:19:53.368047",
+    "last_seen": "2026-02-13T00:19:53.370851",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_6",
+    "first_seen": "2026-02-13T00:19:53.368297",
+    "last_seen": "2026-02-13T00:19:53.371144",
+    "status": "active",
+    "total_events": 1,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_7",
+    "first_seen": "2026-02-13T00:19:53.368607",
+    "last_seen": "2026-02-13T00:19:53.368607",
+    "status": "active",
+    "total_events": 0,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_8",
+    "first_seen": "2026-02-13T00:19:53.368871",
+    "last_seen": "2026-02-13T00:19:53.368871",
+    "status": "active",
+    "total_events": 0,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_9",
+    "first_seen": "2026-02-13T00:19:53.369151",
+    "last_seen": "2026-02-13T00:19:53.369151",
+    "status": "active",
+    "total_events": 0,
     "total_sessions": 0,
     "properties": {}
   }

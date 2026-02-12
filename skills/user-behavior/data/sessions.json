@@ -1,0 +1,20 @@
+[
+  {
+    "session_id": "sess_ab3b5b05",
+    "user_id": "user_session_1",
+    "start_time": "2026-02-13T00:19:53.363150",
+    "end_time": "2026-02-13T00:19:53.363261",
+    "duration": 0,
+    "events_count": 0,
+    "page_views": 0
+  },
+  {
+    "session_id": "sess_c7f6014b",
+    "user_id": "user_profile_test",
+    "start_time": "2026-02-13T00:19:53.363595",
+    "end_time": "2026-02-13T00:19:53.363692",
+    "duration": 0,
+    "events_count": 0,
+    "page_views": 0
+  }
+]
