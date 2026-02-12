@@ -1,28 +1,28 @@
 [
   {
     "user_id": "user_001",
-    "first_seen": "2026-02-13T00:19:53.362717",
-    "last_seen": "2026-02-13T00:19:53.362842",
+    "first_seen": "2026-02-13T00:20:43.531461",
+    "last_seen": "2026-02-13T00:20:43.531593",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_002",
+    "first_seen": "2026-02-13T00:20:43.531695",
+    "last_seen": "2026-02-13T00:20:43.531695",
     "status": "active",
     "total_events": 1,
     "total_sessions": 0,
     "properties": {}
   },
   {
-    "user_id": "user_002",
-    "first_seen": "2026-02-13T00:19:53.362943",
-    "last_seen": "2026-02-13T00:19:53.362943",
-    "status": "active",
-    "total_events": 0,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
     "user_id": "user_test_1",
-    "first_seen": "2026-02-13T00:19:53.363040",
-    "last_seen": "2026-02-13T00:19:53.363040",
+    "first_seen": "2026-02-13T00:20:43.545334",
+    "last_seen": "2026-02-13T00:20:43.545334",
     "status": "inactive",
-    "total_events": 0,
+    "total_events": 1,
     "total_sessions": 0,
     "properties": {
       "name": "测试用户"
@@ -30,190 +30,208 @@
   },
   {
     "user_id": "user_profile_test",
-    "first_seen": "2026-02-13T00:19:53.363294",
-    "last_seen": "2026-02-13T00:19:53.363488",
+    "first_seen": "2026-02-13T00:20:43.545634",
+    "last_seen": "2026-02-13T00:20:43.545843",
+    "status": "active",
+    "total_events": 3,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_stats_0",
+    "first_seen": "2026-02-13T00:20:43.546101",
+    "last_seen": "2026-02-13T00:20:43.546233",
     "status": "active",
     "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
-    "user_id": "user_stats_0",
-    "first_seen": "2026-02-13T00:19:53.363736",
-    "last_seen": "2026-02-13T00:19:53.363851",
-    "status": "active",
-    "total_events": 1,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
     "user_id": "user_stats_1",
-    "first_seen": "2026-02-13T00:19:53.363956",
-    "last_seen": "2026-02-13T00:19:53.364075",
+    "first_seen": "2026-02-13T00:20:43.546352",
+    "last_seen": "2026-02-13T00:20:43.546486",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_2",
-    "first_seen": "2026-02-13T00:19:53.364189",
-    "last_seen": "2026-02-13T00:19:53.364341",
+    "first_seen": "2026-02-13T00:20:43.546616",
+    "last_seen": "2026-02-13T00:20:43.546787",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_3",
-    "first_seen": "2026-02-13T00:19:53.364468",
-    "last_seen": "2026-02-13T00:19:53.364620",
+    "first_seen": "2026-02-13T00:20:43.546919",
+    "last_seen": "2026-02-13T00:20:43.547075",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_4",
-    "first_seen": "2026-02-13T00:19:53.364755",
-    "last_seen": "2026-02-13T00:19:53.364900",
+    "first_seen": "2026-02-13T00:20:43.547214",
+    "last_seen": "2026-02-13T00:20:43.547365",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_5",
-    "first_seen": "2026-02-13T00:19:53.365047",
-    "last_seen": "2026-02-13T00:19:53.365207",
+    "first_seen": "2026-02-13T00:20:43.547510",
+    "last_seen": "2026-02-13T00:20:43.547681",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_6",
-    "first_seen": "2026-02-13T00:19:53.365369",
-    "last_seen": "2026-02-13T00:19:53.365537",
+    "first_seen": "2026-02-13T00:20:43.547846",
+    "last_seen": "2026-02-13T00:20:43.548024",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_7",
-    "first_seen": "2026-02-13T00:19:53.365715",
-    "last_seen": "2026-02-13T00:19:53.365895",
+    "first_seen": "2026-02-13T00:20:43.548197",
+    "last_seen": "2026-02-13T00:20:43.548377",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_8",
-    "first_seen": "2026-02-13T00:19:53.366096",
-    "last_seen": "2026-02-13T00:19:53.366283",
+    "first_seen": "2026-02-13T00:20:43.548588",
+    "last_seen": "2026-02-13T00:20:43.548776",
     "status": "active",
-    "total_events": 1,
+    "total_events": 2,
     "total_sessions": 0,
     "properties": {}
   },
   {
     "user_id": "user_stats_9",
-    "first_seen": "2026-02-13T00:19:53.366470",
-    "last_seen": "2026-02-13T00:19:53.366681",
+    "first_seen": "2026-02-13T00:20:43.548961",
+    "last_seen": "2026-02-13T00:20:43.549159",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_0",
+    "first_seen": "2026-02-13T00:20:43.549383",
+    "last_seen": "2026-02-13T00:20:43.551907",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_1",
+    "first_seen": "2026-02-13T00:20:43.549598",
+    "last_seen": "2026-02-13T00:20:43.552195",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_2",
+    "first_seen": "2026-02-13T00:20:43.549815",
+    "last_seen": "2026-02-13T00:20:43.552484",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_3",
+    "first_seen": "2026-02-13T00:20:43.550040",
+    "last_seen": "2026-02-13T00:20:43.552776",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_4",
+    "first_seen": "2026-02-13T00:20:43.550269",
+    "last_seen": "2026-02-13T00:20:43.553060",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_5",
+    "first_seen": "2026-02-13T00:20:43.550508",
+    "last_seen": "2026-02-13T00:20:43.553366",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_6",
+    "first_seen": "2026-02-13T00:20:43.550753",
+    "last_seen": "2026-02-13T00:20:43.553670",
+    "status": "active",
+    "total_events": 2,
+    "total_sessions": 0,
+    "properties": {}
+  },
+  {
+    "user_id": "user_retention_final_7",
+    "first_seen": "2026-02-13T00:20:43.551051",
+    "last_seen": "2026-02-13T00:20:43.551051",
     "status": "active",
     "total_events": 1,
     "total_sessions": 0,
     "properties": {}
   },
   {
-    "user_id": "user_retention_0",
-    "first_seen": "2026-02-13T00:19:53.366904",
-    "last_seen": "2026-02-13T00:19:53.369438",
+    "user_id": "user_retention_final_8",
+    "first_seen": "2026-02-13T00:20:43.551327",
+    "last_seen": "2026-02-13T00:20:43.551327",
     "status": "active",
     "total_events": 1,
     "total_sessions": 0,
     "properties": {}
   },
   {
-    "user_id": "user_retention_1",
-    "first_seen": "2026-02-13T00:19:53.367132",
-    "last_seen": "2026-02-13T00:19:53.369714",
+    "user_id": "user_retention_final_9",
+    "first_seen": "2026-02-13T00:20:43.551621",
+    "last_seen": "2026-02-13T00:20:43.551621",
     "status": "active",
     "total_events": 1,
     "total_sessions": 0,
     "properties": {}
   },
   {
-    "user_id": "user_retention_2",
-    "first_seen": "2026-02-13T00:19:53.367351",
-    "last_seen": "2026-02-13T00:19:53.369993",
+    "user_id": "user_filter_test",
+    "first_seen": "2026-02-13T00:20:43.554112",
+    "last_seen": "2026-02-13T00:20:43.555744",
     "status": "active",
-    "total_events": 1,
+    "total_events": 5,
     "total_sessions": 0,
     "properties": {}
   },
   {
-    "user_id": "user_retention_3",
-    "first_seen": "2026-02-13T00:19:53.367577",
-    "last_seen": "2026-02-13T00:19:53.370274",
+    "user_id": "user_journey",
+    "first_seen": "2026-02-13T00:20:43.556183",
+    "last_seen": "2026-02-13T00:20:43.557547",
     "status": "active",
-    "total_events": 1,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
-    "user_id": "user_retention_4",
-    "first_seen": "2026-02-13T00:19:53.367809",
-    "last_seen": "2026-02-13T00:19:53.370558",
-    "status": "active",
-    "total_events": 1,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
-    "user_id": "user_retention_5",
-    "first_seen": "2026-02-13T00:19:53.368047",
-    "last_seen": "2026-02-13T00:19:53.370851",
-    "status": "active",
-    "total_events": 1,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
-    "user_id": "user_retention_6",
-    "first_seen": "2026-02-13T00:19:53.368297",
-    "last_seen": "2026-02-13T00:19:53.371144",
-    "status": "active",
-    "total_events": 1,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
-    "user_id": "user_retention_7",
-    "first_seen": "2026-02-13T00:19:53.368607",
-    "last_seen": "2026-02-13T00:19:53.368607",
-    "status": "active",
-    "total_events": 0,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
-    "user_id": "user_retention_8",
-    "first_seen": "2026-02-13T00:19:53.368871",
-    "last_seen": "2026-02-13T00:19:53.368871",
-    "status": "active",
-    "total_events": 0,
-    "total_sessions": 0,
-    "properties": {}
-  },
-  {
-    "user_id": "user_retention_9",
-    "first_seen": "2026-02-13T00:19:53.369151",
-    "last_seen": "2026-02-13T00:19:53.369151",
-    "status": "active",
-    "total_events": 0,
+    "total_events": 5,
     "total_sessions": 0,
     "properties": {}
   }

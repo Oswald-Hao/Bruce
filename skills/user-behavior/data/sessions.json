@@ -1,18 +1,27 @@
 [
   {
-    "session_id": "sess_ab3b5b05",
+    "session_id": "sess_5652e120",
     "user_id": "user_session_1",
-    "start_time": "2026-02-13T00:19:53.363150",
-    "end_time": "2026-02-13T00:19:53.363261",
+    "start_time": "2026-02-13T00:20:43.545451",
+    "end_time": "2026-02-13T00:20:43.545591",
     "duration": 0,
     "events_count": 0,
     "page_views": 0
   },
   {
-    "session_id": "sess_c7f6014b",
+    "session_id": "sess_abb653d2",
     "user_id": "user_profile_test",
-    "start_time": "2026-02-13T00:19:53.363595",
-    "end_time": "2026-02-13T00:19:53.363692",
+    "start_time": "2026-02-13T00:20:43.545944",
+    "end_time": "2026-02-13T00:20:43.546051",
+    "duration": 0,
+    "events_count": 0,
+    "page_views": 0
+  },
+  {
+    "session_id": "sess_6574ea68",
+    "user_id": "user_journey",
+    "start_time": "2026-02-13T00:20:43.556080",
+    "end_time": "2026-02-13T00:20:43.557891",
     "duration": 0,
     "events_count": 0,
     "page_views": 0
