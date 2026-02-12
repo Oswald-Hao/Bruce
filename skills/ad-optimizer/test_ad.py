@@ -290,10 +290,10 @@ class TestAdOptimizer:
         # 创建低ROI广告数据
         metrics = {
             'impressions': 10000,
-            'clicks': 50,  # CTR = 0.005 (< 1%)
-            'conversions': 1,  # 转化率 = 0.02 (< 1%)
+            'clicks': 30,  # CTR = 0.003 (< 0.01)
+            'conversions': 0,  # 转化率 = 0 (< 0.01)
             'cost': 1000,
-            'revenue': 500  # ROI = 0.5
+            'revenue': 500  # ROI = 0.5 (< 1.0)
         }
         self.optimizer.update_metrics(campaign.campaign_id, metrics)
 
