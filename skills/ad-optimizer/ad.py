@@ -302,6 +302,11 @@ class ABTestManager(DataManager):
         if test:
             if variant not in test.results:
                 test.results[variant] = {}
+            # 计算conversion_rate
+            clicks = metrics.get('clicks', 0)
+            conversions = metrics.get('conversions', 0)
+            if clicks > 0:
+                metrics['conversion_rate'] = conversions / clicks
             test.results[variant].update(metrics)
             self.update_test(test_id, results=test.results)
             return True
