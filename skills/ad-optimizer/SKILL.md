@@ -1,594 +1,350 @@
-# 广告投放优化系统 - Ad Optimization System
-
-**技能路径：** `/home/lejurobot/clawd/skills/ad-optimizer/`
-
-## 功能描述
-
-智能广告投放优化系统，支持多平台广告自动化优化，提升广告ROI，降低获客成本。
-
-**支持功能：**
-- ✓ 广告数据分析（点击率、转化率、ROI分析）
-- ✓ 受众优化（精准定位、受众分层、A/B测试）
-- ✓ 出价策略（智能出价、动态调整、预算分配）
-- ✓ 创意优化（素材测试、文案优化、多版本对比）
-- ✓ 竞品分析（竞品广告、投放策略、预算对比）
-- ✓ 实时监控（实时数据、异常告警、自动暂停）
-- ✓ 报告生成（日报/周报、趋势分析、优化建议）
-
-## 文件结构
-
-```
-ad-optimizer/
-├── SKILL.md           # 技能文档
-├── optimizer.py       # 广告优化器核心类
-├── analyzer.py        # 数据分析模块
-├── bidder.py         # 出价策略模块
-├── monitor.py        # 实时监控模块
-└── test.py           # 测试脚本
-```
-
-## 核心类和方法
-
-### AdOptimizer
-
-**初始化：**
-```python
-from optimizer import AdOptimizer
-
-optimizer = AdOptimizer(
-    platform="facebook",  # facebook/google/tiktok/baidu
-    api_key="your_api_key"
-)
-```
-
-**核心方法：**
-
-1. **analyze_performance** - 分析广告表现
-```python
-analysis = optimizer.analyze_performance(
-    ad_ids=["ad1", "ad2"],
-    period="7d"
-)
-```
-
-2. **optimize_audience** - 优化受众
-```python
-optimized = optimizer.optimize_audience(
-    campaign_id="camp1",
-    metrics="conversion_rate"
-)
-```
-
-3. **adjust_bids** - 调整出价
-```python
-result = optimizer.adjust_bids(
-    campaign_id="camp1",
-    strategy="auto"
-)
-```
-
-4. **test_creatives** - 测试创意
-```python
-results = optimizer.test_creatives(
-    campaign_id="camp1",
-    creatives=[...],
-    budget=100
-)
-```
-
-5. **analyze_competitors** - 分析竞品
-```python
-competitors = optimizer.analyze_competitors(
-    industry="ecommerce",
-    keywords=["shoes", "sneakers"]
-)
-```
-
-6. **monitor_ads** - 实时监控
-```python
-optimizer.monitor_ads(
-    campaign_ids=["camp1", "camp2"],
-    interval=300,  # 5分钟
-    alert_threshold=0.05  # 转化率低于5%时告警
-)
-```
-
-7. **generate_report** - 生成报告
-```python
-report = optimizer.generate_report(
-    campaign_id="camp1",
-    period="7d",
-    format="html"
-)
-```
-
-## 使用示例
-
-### 示例1：分析广告表现
-
-```python
-from optimizer import AdOptimizer
-
-optimizer = AdOptimizer(
-    platform="facebook",
-    api_key="your_api_key"
-)
-
-# 分析广告表现
-analysis = optimizer.analyze_performance(
-    ad_ids=["ad123", "ad456", "ad789"],
-    period="7d"
-)
-
-print(f"总花费: {analysis['total_spend']}")
-print(f"总点击: {analysis['total_clicks']}")
-print(f"点击率: {analysis['ctr']}%")
-print(f"转化数: {analysis['conversions']}")
-print(f"转化率: {analysis['conversion_rate']}%")
-print(f"ROI: {analysis['roi']}%")
-
-# 识别表现最佳和最差的广告
-print(f"最佳广告: {analysis['best_ad']['id']}")
-print(f"最佳ROI: {analysis['best_ad']['roi']}%")
-print(f"最差广告: {analysis['worst_ad']['id']}")
-print(f"最差ROI: {analysis['worst_ad']['roi']}%")
-```
-
-### 示例2：优化受众
-
-```python
-# 优化受众
-optimized = optimizer.optimize_audience(
-    campaign_id="camp123",
-    metrics="conversion_rate"
-)
-
-print("优化建议：")
-for suggestion in optimized['suggestions']:
-    print(f"  - {suggestion['type']}: {suggestion['description']}")
-    print(f"    预期提升: {suggestion['expected_improvement']}%")
-
-# 应用优化
-optimizer.apply_audience_optimization(
-    campaign_id="camp123",
-    optimization_id=optimized['optimization_id']
-)
-```
-
-### 示例3：智能出价
-
-```python
-# 调整出价策略
-result = optimizer.adjust_bids(
-    campaign_id="camp123",
-    strategy="auto"  # auto/conservative/aggressive
-)
-
-print(f"调整的广告数: {result['adjusted_ads']}")
-print(f"平均出价变化: {result['avg_bid_change']}%")
-print(f"预期ROI提升: {result['expected_roi_increase']}%")
-
-# 查看具体调整
-for ad in result['ad_adjustments']:
-    print(f"  广告 {ad['ad_id']}:")
-    print(f"    旧出价: {ad['old_bid']}")
-    print(f"    新出价: {ad['new_bid']}")
-    print(f"    变化: {ad['change']}%")
-```
-
-### 示例4：创意A/B测试
-
-```python
-# 创建A/B测试
-test = optimizer.create_ab_test(
-    campaign_id="camp123",
-    name="创意测试1",
-    variants=[
-        {
-            "creative_id": "creative1",
-            "name": "创意A",
-            "image": "image1.jpg",
-            "headline": "标题1",
-            "description": "描述1"
-        },
-        {
-            "creative_id": "creative2",
-            "name": "创意B",
-            "image": "image2.jpg",
-            "headline": "标题2",
-            "description": "描述2"
-        }
-    ],
-    budget=50,
-    duration="7d"
-)
-
-print(f"测试ID: {test['test_id']}")
-print(f"预计完成时间: {test['estimated_completion']}")
-
-# 查看测试结果
-results = optimizer.get_test_results(test_id=test['test_id'])
-
-for variant in results['variants']:
-    print(f"{variant['name']}:")
-    print(f"  点击率: {variant['ctr']}%")
-    print(f"  转化率: {variant['conversion_rate']}%")
-    print(f"  胜率: {variant['win_rate']}%")
-
-# 选择最佳创意
-best_creative = results['winner']
-print(f"最佳创意: {best_creative['name']}")
-```
-
-### 示例5：竞品分析
-
-```python
-# 分析竞品广告
-competitors = optimizer.analyze_competitors(
-    industry="fashion",
-    keywords=["运动鞋", "跑鞋", "运动鞋"],
-    limit=10
-)
-
-print("竞品分析结果：")
-for comp in competitors['competitors']:
-    print(f"\n{comp['brand']}:")
-    print(f"  广告数: {comp['ad_count']}")
-    print(f"  估计月预算: ${comp['estimated_monthly_budget']}")
-    print(f"  平均点击率: {comp['avg_ctr']}%")
-    print(f"  平均转化率: {comp['avg_conversion_rate']}%")
-    print(f"  主要受众: {comp['top_audiences']}")
-    print(f"  主要创意主题: {comp['top_themes']}")
-
-# 生成竞品策略建议
-suggestions = optimizer.generate_competitor_strategy(
-    competitors
-)
-
-print("\n策略建议：")
-for s in suggestions:
-    print(f"  - {s}")
-```
-
-### 示例6：实时监控和告警
-
-```python
-# 设置实时监控
-def alert_handler(alert):
-    """告警处理函数"""
-    print(f"⚠️ 告警: {alert['type']}")
-    print(f"  广告: {alert['ad_id']}")
-    print(f"  问题: {alert['issue']}")
-    print(f"  当前值: {alert['current_value']}")
-    print(f"  阈值: {alert['threshold']}")
-    print(f"  建议: {alert['recommendation']}")
-
-optimizer.monitor_ads(
-    campaign_ids=["camp123", "camp456"],
-    interval=300,  # 每5分钟检查一次
-    alert_rules={
-        "low_ctr": {"threshold": 0.01, "action": "pause"},
-        "low_conversion_rate": {"threshold": 0.05, "action": "adjust_bid"},
-        "high_cpa": {"threshold": 50, "action": "pause"}
-    },
-    alert_handler=alert_handler
-)
-```
-
-### 示例7：生成优化报告
-
-```python
-# 生成日报
-daily_report = optimizer.generate_report(
-    campaign_id="camp123",
-    period="1d",
-    format="html"
-)
-
-# 保存报告
-with open("daily_report.html", "w") as f:
-    f.write(daily_report['html'])
-
-# 生成周报
-weekly_report = optimizer.generate_report(
-    campaign_id="camp123",
-    period="7d",
-    format="markdown"
-)
-
-print(weekly_report['summary'])
-print("\n优化建议：")
-for suggestion in weekly_report['recommendations']:
-    print(f"  - {suggestion}")
-```
-
-## 平台支持
-
-### Facebook/Instagram Ads
-```python
-optimizer = AdOptimizer(platform="facebook", api_key="...")
-```
-
-### Google Ads
-```python
-optimizer = AdOptimizer(platform="google", api_key="...")
-```
-
-### TikTok Ads
-```python
-optimizer = AdOptimizer(platform="tiktok", api_key="...")
-```
-
-### 百度推广
-```python
-optimizer = AdOptimizer(platform="baidu", api_key="...")
-```
-
-## 核心算法
-
-### 1. 受众优化算法
-- 基于转化数据的受众分层
-- Lookalike受众生成
-- 兴趣标签优化
-- 排除不转化用户
-
-### 2. 出价策略算法
-- 基于历史数据的动态出价
-- 预算自动分配
-- 时段优化
-- 设备优化
-
-### 3. 创意优化算法
-- A/B测试自动分析
-- 多变量测试
-- 胜者归因
-- 创意疲劳度分析
-
-## 数据分析指标
-
-### 核心指标
-- **CTR（点击率）：** CTR = 点击数 / 展示数
-- **CVR（转化率）：** CVR = 转化数 / 点击数
-- **CPA（每次转化成本）：** CPA = 花费 / 转化数
-- **ROI（投资回报率）：** ROI = (收入 - 花费) / 花费 × 100%
-
-### 辅助指标
-- **CPC（每次点击成本）：** CPC = 花费 / 点击数
-- **CPM（千次展示成本）：** CPM = 花费 / (展示数 / 1000)
-- **ROAS（广告支出回报率）：** ROAS = 收入 / 花费
-- **LTV（用户终身价值）：** LTV = 平均用户总收入
-
-## 优化策略
-
-### 受众优化
-1. **高转化受众扩展**
-   - 识别高转化用户特征
-   - 创建Lookalike受众
-   - 扩展到相似人群
-
-2. **低转化受众优化**
-   - 暂停低转化受众
-   - 细分并重新测试
-   - 添加排除条件
-
-3. **新受众测试**
-   - 基于兴趣标签创建新受众
-   - A/B测试不同受众
-   - 记录最佳表现
-
-### 出价优化
-1. **保守策略**
-   - 降低出价
-   - 优先保证ROI
-   - 适合稳定期
-
-2. **激进策略**
-   - 提高出价
-   - 争取更多流量
-   - 适合增长期
-
-3. **动态策略**
-   - 根据时段调整
-   - 根据表现调整
-   - 自动优化
-
-### 创意优化
-1. **素材优化**
-   - 测试不同图片/视频
-   - 识别高转化素材
-   - 替换低转化素材
-
-2. **文案优化**
-   - 测试不同标题
-   - 测试不同描述
-   - A/B测试CTA按钮
-
-3. **组合优化**
-   - 测试素材+文案组合
-   - 识别最佳搭配
-   - 批量应用
-
-## 错误处理
-
-**常见错误：**
-
-1. **API密钥错误**
-   ```
-   Exception: API密钥无效
-   ```
-   解决：检查API密钥是否正确
-
-2. **权限不足**
-   ```
-   Exception: 无访问该广告的权限
-   ```
-   解决：检查API权限设置
-
-3. **数据缺失**
-   ```
-   Exception: 广告数据不足，无法分析
-   ```
-   解决：等待更多数据积累
-
-4. **预算不足**
-   ```
-   Exception: 账户余额不足
-   ```
-   解决：充值或降低预算
-
-## 测试
-
-运行测试脚本：
+# 智能广告投放优化系统（Smart Ad Optimizer）
+
+智能化的广告投放管理系统，提供多平台广告管理、智能出价优化、A/B测试、ROI分析等功能，帮助企业提升广告效果和投资回报率。
+
+## 功能
+
+### 多平台广告管理
+- 支持Google Ads、Facebook Ads、抖音广告、快手广告
+- 统一管理多个广告账户和活动
+- 批量操作广告系列和广告组
+- 实时同步广告数据
+
+### 智能出价优化
+- 自动出价策略（CPC、CPM、CPA、ROAS目标）
+- 基于ROI的动态出价调整
+- 预算智能分配
+- 竞价预测和优化建议
+
+### A/B测试系统
+- 广告创意A/B测试
+- 受众A/B测试
+- 出价A/B测试
+- 多变量测试支持
+- 统计显著性分析
+
+### ROI分析
+- 实时ROI计算
+- 广告系列ROI分析
+- 转化路径分析
+- 归因模型支持
+- 预测性分析
+
+### 自动化优化
+- 自动暂停低效广告
+- 自动增加高ROI广告预算
+- 自动调整出价
+- 自动生成优化报告
+- 规则引擎支持
+
+### 竞品分析
+- 竞品广告监控
+- 竞品关键词分析
+- 市场份额追踪
+- 竞争策略建议
+
+## 使用方法
+
+### 添加广告平台账户
 
 ```bash
 cd /home/lejurobot/clawd/skills/ad-optimizer
-python3 test.py
+
+# 添加Google Ads账户
+python3 ad.py add_account \
+  --platform "google" \
+  --account_id "123-456-7890" \
+  --client_id "client_id" \
+  --client_secret "client_secret"
+
+# 添加Facebook Ads账户
+python3 ad.py add_account \
+  --platform "facebook" \
+  --account_id "act_123456" \
+  --access_token "your_token"
+
+# 添加抖音广告账户
+python3 ad.py add_account \
+  --platform "douyin" \
+  --account_id "123456" \
+  --app_id "app_id" \
+  --app_secret "app_secret"
 ```
 
-**测试覆盖：**
-- ✓ 模块导入
-- ✓ 初始化
-- ✓ API连接
-- ✓ 广告数据分析
-- ✓ 受众优化
-- ✓ 出价调整
-- ✓ 创意测试
-- ✓ 竞品分析
-- ✓ 实时监控
-- ✓ 报告生成
-- ✓ 多平台支持
-- ✓ 错误处理
+### 创建广告系列
 
-## 集成到Moltbot
+```bash
+# 创建广告系列
+python3 ad.py create_campaign \
+  --platform "google" \
+  --account_id "123-456-7890" \
+  --name "测试广告系列" \
+  --budget 10000 \
+  --bidding_strategy "MAXIMIZE_CONVERSIONS" \
+  --start_date "2026-02-14"
 
-### 在广告管理中使用
-
-```python
-from ad_optimizer.optimizer import AdOptimizer
-
-class AdManager:
-    def __init__(self, account):
-        self.optimizer = AdOptimizer(
-            platform=account.config.platform,
-            api_key=account.config.apiKey
-        )
-
-    def daily_optimization(self):
-        """每日优化"""
-        # 分析表现
-        analysis = self.optimizer.analyze_performance(
-            period="1d"
-        )
-
-        # 优化受众
-        audience = self.optimizer.optimize_audience(
-            metrics="roi"
-        )
-
-        # 调整出价
-        bids = self.optimizer.adjust_bids(
-            strategy="auto"
-        )
-
-        # 生成报告
-        report = self.optimizer.generate_report(
-            period="1d"
-        )
-
-        return {
-            "analysis": analysis,
-            "audience": audience,
-            "bids": bids,
-            "report": report
-        }
+# 设置出价
+python3 ad.py set_bidding \
+  --campaign_id "camp_001" \
+  --strategy "TARGET_ROAS" \
+  --target_roas 3.0
 ```
 
-## 价值评估
+### A/B测试
 
-**核心价值：**
-1. 提升广告ROI 20-50%
-2. 降低获客成本 30-60%
-3. 自动化优化流程
-4. 多平台统一管理
-5. 实时监控和告警
-6. 数据驱动决策
+```bash
+# 创建A/B测试
+python3 ad.py create_ab_test \
+  --test_name "创意测试" \
+  --campaign_id "camp_001" \
+  --variable "creative" \
+  --variants "A,B,C" \
+  --duration 7
 
-**预期收益：**
-- 直接为客户优化广告：月收益 5000-20000元
-- 自己投放广告：月收益 2000-10000元
-- 广告代理服务：月收益 10000-50000元
+# 查看测试结果
+python3 ad.py ab_test_results --test_id "test_001"
 
-**应用场景：**
-- 电商广告优化
-- App推广优化
-- 品牌广告优化
-- 效果广告优化
-- 多账户管理
+# 结束测试并应用胜出方案
+python3 ad.py conclude_ab_test --test_id "test_001" --apply_winner
+```
 
-## 优先级理由
+### ROI分析
 
-**为什么优先开发广告优化系统：**
-1. **直接赚钱：** 广告优化是高价值服务
-2. **市场需求大：** 大量企业需要广告优化
-3. **技术成熟：** 有成熟的API和工具
-4. **可扩展：** 支持多平台和多账户
-5. **自动化：** 可完全自动化
+```bash
+# 广告系列ROI分析
+python3 ad.py roi_analysis --campaign_id "camp_001"
 
-**对自我更迭的贡献：**
-- 增强数据分析能力
-- 提升自动化水平
-- 增加收入来源
-- 扩展服务范围
+# 整体ROI报告
+python3 ad.py roi_report \
+  --platform "google" \
+  --start_date "2026-02-01" \
+  --end_date "2026-02-13"
 
-## 后续优化方向
+# 转化路径分析
+python3 ad.py conversion_path --campaign_id "camp_001"
+```
 
-1. **更多平台支持：**
-   - 微信广告
-   - 快手广告
-   - 小红书广告
+### 自动化优化
 
-2. **AI增强：**
-   - AI创意生成
-   - AI文案优化
-   - AI受众预测
+```bash
+# 启动自动化优化
+python3 ad.py start_auto_optimize --platform "google"
 
-3. **高级功能：**
-   - 跨平台优化
-   - 预算自动分配
-   - 智能暂停/启动
+# 添加优化规则
+python3 ad.py add_optimization_rule \
+  --type "pause_low_roi" \
+  --condition "roi < 0.5" \
+  --action "pause"
 
-4. **可视化：**
-   - 实时仪表盘
-   - 趋势图表
-   - 竞品对比图
+# 查看优化建议
+python3 ad.py optimization_suggestions --campaign_id "camp_001"
 
-## 技术实现
+# 应用优化建议
+python3 ad.py apply_suggestions --campaign_id "camp_001"
+```
 
-**核心技术：**
-- Python 3.x
-- requests库（API调用）
-- pandas（数据分析）
-- numpy（数值计算）
-- matplotlib（可视化）
-- 各平台API
+### 竞品分析
 
-**依赖：**
-- requests
-- pandas
-- numpy
-- matplotlib
-- facebook-ads-api（可选）
-- google-ads（可选）
+```bash
+# 添加竞品监控
+python3 ad.py add_competitor \
+  --name "竞争对手A" \
+  --platform "google" \
+  --keywords ["关键词1", "关键词2"]
 
-**性能：**
-- 数据分析：< 2s
-- 受众优化：< 5s
-- 出价调整：< 3s
-- 创意测试：< 5s
-- 报告生成：< 3s
+# 查看竞品分析报告
+python3 ad.py competitor_report --competitor_id "comp_001"
 
-## 完成
+# 竞品关键词分析
+python3 ad.py competitor_keywords --competitor_id "comp_001"
+```
 
-✅ 技能开发完成
-✅ 全部测试通过
-✅ 文档编写完成
+## 配置
+
+配置文件：`config/ad.yaml`
+
+```yaml
+# 平台配置
+platforms:
+  google:
+    enabled: true
+    developer_token: "your_token"
+    client_id: "your_client_id"
+    client_secret: "your_client_secret"
+
+  facebook:
+    enabled: false
+    app_id: ""
+    app_secret: ""
+
+  douyin:
+    enabled: false
+    app_id: ""
+    app_secret: ""
+
+# 优化配置
+optimization:
+  auto_optimize: true
+  check_interval: 3600  # 每小时检查一次
+  roi_threshold: 1.0  # ROI低于1.0暂停
+  max_daily_budget: 100000  # 每日最大预算
+
+# A/B测试配置
+ab_testing:
+  min_sample_size: 100  # 最小样本量
+  significance_level: 0.05  # 显著性水平
+  min_duration_days: 3  # 最短测试天数
+
+# 出价配置
+bidding:
+  default_strategy: "MAXIMIZE_CONVERSIONS"
+  target_roas: 3.0
+  max_cpc: 10.0
+  min_cpc: 0.5
+
+# 报告配置
+reports:
+  auto_generate: true
+  email_reports: true
+  report_schedule: "daily"  # daily, weekly, monthly
+  recipients: ["manager@company.com"]
+```
+
+## 数据结构
+
+### 广告账户
+
+```json
+{
+  "account_id": "123-456-7890",
+  "platform": "google",
+  "name": "主账户",
+  "currency": "CNY",
+  "status": "active",
+  "created_at": "2026-02-13",
+  "api_config": {
+    "client_id": "xxx",
+    "client_secret": "xxx"
+  }
+}
+```
+
+### 广告系列
+
+```json
+{
+  "campaign_id": "camp_001",
+  "account_id": "123-456-7890",
+  "name": "测试广告系列",
+  "status": "active",
+  "budget": 10000,
+  "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+  "target_roas": 3.0,
+  "start_date": "2026-02-14",
+  "end_date": null,
+  "metrics": {
+    "impressions": 10000,
+    "clicks": 500,
+    "conversions": 25,
+    "cost": 1000,
+    "revenue": 3000,
+    "roi": 2.0
+  }
+}
+```
+
+### A/B测试
+
+```json
+{
+  "test_id": "test_001",
+  "name": "创意测试",
+  "campaign_id": "camp_001",
+  "variable": "creative",
+  "variants": ["A", "B", "C"],
+  "start_date": "2026-02-13",
+  "end_date": null,
+  "status": "running",
+  "results": {
+    "A": {"impressions": 5000, "clicks": 250, "conversions": 12, "ctr": 0.05, "conversion_rate": 0.048},
+    "B": {"impressions": 5000, "clicks": 280, "conversions": 15, "ctr": 0.056, "conversion_rate": 0.054},
+    "C": {"impressions": 5000, "clicks": 230, "conversions": 10, "ctr": 0.046, "conversion_rate": 0.043}
+  },
+  "winner": "B",
+  "significance": 0.03
+}
+```
+
+### 优化规则
+
+```json
+{
+  "rule_id": "rule_001",
+  "type": "pause_low_roi",
+  "name": "低ROI自动暂停",
+  "condition": "roi < 0.5",
+  "action": "pause",
+  "enabled": true,
+  "created_at": "2026-02-13"
+}
+```
+
+## 优化策略
+
+### ROI优化
+1. **预算分配**：将更多预算分配给高ROI广告系列
+2. **出价调整**：根据ROI动态调整出价
+3. **关键词优化**：暂停低效关键词，增加高效关键词预算
+4. **受众优化**：优化受众定位，提高转化率
+
+### A/B测试
+1. **创意测试**：测试不同广告素材
+2. **受众测试**：测试不同受众群体
+3. **出价测试**：测试不同出价策略
+4. **标题测试**：测试不同广告标题
+
+### 自动化
+1. **自动暂停**：自动暂停低ROI广告
+2. **自动加预算**：自动增加高ROI广告预算
+3. **自动调整出价**：根据表现自动调整出价
+4. **自动生成报告**：自动发送优化报告
+
+## 赚钱价值
+
+### 代运营服务
+- 为企业提供广告投放代运营服务
+- 按广告消耗收费（3-5%佣金）+ 基础服务费
+- 月服务费：5000-20000元/客户
+- 服务10-30个客户：月50000-600000元
+
+### 效果分成
+- 按ROI提升比例收费
+- 提升ROI的20-30%作为服务费
+- 每客户月收益：10000-100000元
+
+### 培训和咨询
+- 广告投放培训和咨询
+- 按次收费：每次5000-20000元
+- 月5-10次培训：月25000-200000元
+
+### SaaS工具订阅
+- 提供广告优化SaaS工具
+- 按用户收费：月500-2000元/用户
+- 100-500个用户：月50000-1000000元
+
+### 预期收益
+- 代运营服务：月50000-600000元
+- 效果分成：月50000-500000元
+- 培训咨询：月25000-200000元
+- SaaS订阅：月50000-1000000元
+- **总计：月175000-2300000元**
+
+## 注意事项
+
+1. 各平台API有调用限制，需要合理控制请求频率
+2. 广告优化需要一定的数据积累，新账户效果可能不稳定
+3. A/B测试需要足够的样本量和时间才能得到显著结果
+4. ROI计算需要准确的转化追踪数据
+5. 自动化优化需要设置合理的阈值，避免过度优化
+6. 需要定期监控和调整优化策略
+7. 遵守各平台的广告政策和规定
