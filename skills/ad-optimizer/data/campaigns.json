@@ -1,0 +1,116 @@
+[
+  {
+    "campaign_id": "camp_b073d6af",
+    "account_id": "123-456-7890",
+    "name": "测试广告系列",
+    "status": "active",
+    "budget": 10000,
+    "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+    "target_roas": null,
+    "start_date": "2026-02-13",
+    "end_date": null,
+    "metrics": {},
+    "created_at": "2026-02-13T00:27:41.964864"
+  },
+  {
+    "campaign_id": "camp_43874419",
+    "account_id": "987-654-3210",
+    "name": "数据测试",
+    "status": "active",
+    "budget": 5000,
+    "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+    "target_roas": null,
+    "start_date": "2026-02-13",
+    "end_date": null,
+    "metrics": {
+      "impressions": 10000,
+      "clicks": 500,
+      "conversions": 25,
+      "cost": 1000,
+      "revenue": 3000,
+      "roi": 3.0,
+      "ctr": 0.05,
+      "conversion_rate": 0.05
+    },
+    "created_at": "2026-02-13T00:27:41.965043"
+  },
+  {
+    "campaign_id": "camp_8c1b0b21",
+    "account_id": "111-222-3333",
+    "name": "ROI测试",
+    "status": "active",
+    "budget": 10000,
+    "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+    "target_roas": null,
+    "start_date": "2026-02-13",
+    "end_date": null,
+    "metrics": {
+      "impressions": 50000,
+      "clicks": 2500,
+      "conversions": 125,
+      "cost": 5000,
+      "revenue": 15000,
+      "roi": 3.0,
+      "ctr": 0.05,
+      "conversion_rate": 0.05
+    },
+    "created_at": "2026-02-13T00:27:41.965204"
+  },
+  {
+    "campaign_id": "camp_f8b87bd9",
+    "account_id": "444-555-6666",
+    "name": "广告A",
+    "status": "active",
+    "budget": 5000,
+    "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+    "target_roas": null,
+    "start_date": "2026-02-13",
+    "end_date": null,
+    "metrics": {
+      "impressions": 20000,
+      "clicks": 1000,
+      "conversions": 50,
+      "cost": 2000,
+      "revenue": 4000,
+      "roi": 2.0,
+      "ctr": 0.05,
+      "conversion_rate": 0.05
+    },
+    "created_at": "2026-02-13T00:27:41.965381"
+  },
+  {
+    "campaign_id": "camp_5922521b",
+    "account_id": "444-555-6666",
+    "name": "广告B",
+    "status": "active",
+    "budget": 3000,
+    "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+    "target_roas": null,
+    "start_date": "2026-02-13",
+    "end_date": null,
+    "metrics": {
+      "impressions": 10000,
+      "clicks": 300,
+      "conversions": 10,
+      "cost": 1000,
+      "revenue": 500,
+      "roi": 0.5,
+      "ctr": 0.03,
+      "conversion_rate": 0.03333333333333333
+    },
+    "created_at": "2026-02-13T00:27:41.965509"
+  },
+  {
+    "campaign_id": "camp_8ff13994",
+    "account_id": "777-888-9999",
+    "name": "A/B测试广告",
+    "status": "active",
+    "budget": 5000,
+    "bidding_strategy": "MAXIMIZE_CONVERSIONS",
+    "target_roas": null,
+    "start_date": "2026-02-13",
+    "end_date": null,
+    "metrics": {},
+    "created_at": "2026-02-13T00:27:41.965744"
+  }
+]

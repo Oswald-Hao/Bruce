@@ -1,0 +1,74 @@
+[
+  {
+    "account_id": "123-456-7890",
+    "platform": "google",
+    "name": "主账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.950942",
+    "api_config": {}
+  },
+  {
+    "account_id": "act_123456",
+    "platform": "facebook",
+    "name": "Facebook账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.951022",
+    "api_config": {}
+  },
+  {
+    "account_id": "123456",
+    "platform": "douyin",
+    "name": "抖音账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.951086",
+    "api_config": {}
+  },
+  {
+    "account_id": "123-456-7890",
+    "platform": "google",
+    "name": "测试账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.964711",
+    "api_config": {}
+  },
+  {
+    "account_id": "987-654-3210",
+    "platform": "google",
+    "name": "数据测试账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.964985",
+    "api_config": {}
+  },
+  {
+    "account_id": "111-222-3333",
+    "platform": "google",
+    "name": "ROI测试账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.965141",
+    "api_config": {}
+  },
+  {
+    "account_id": "444-555-6666",
+    "platform": "google",
+    "name": "报告测试账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.965319",
+    "api_config": {}
+  },
+  {
+    "account_id": "777-888-9999",
+    "platform": "google",
+    "name": "A/B测试账户",
+    "currency": "CNY",
+    "status": "active",
+    "created_at": "2026-02-13T00:27:41.965682",
+    "api_config": {}
+  }
+]
