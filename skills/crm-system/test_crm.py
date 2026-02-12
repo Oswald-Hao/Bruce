@@ -325,9 +325,13 @@ class TestCRM:
         self.crm.create_opportunity(customer.customer_id, "方案提交商机", 120000, stage=OpportunityStage.PROPOSAL.value)
         self.crm.create_opportunity(customer.customer_id, "谈判商机", 150000, stage=OpportunityStage.NEGOTIATION.value)
 
+        # 重新加载数据
+        self.crm.opportunity_mgr.load()
+
         # 分析销售漏斗
         funnel = self.crm.sales_funnel()
 
+        print(f"DEBUG - 漏斗数据: {funnel}")
         self.assert_true('初步接触' in funnel, "漏斗包含初始阶段")
         self.assert_true('需求确认' in funnel, "漏斗包含需求确认阶段")
         self.assert_true('方案提交' in funnel, "漏斗包含方案提交阶段")
@@ -353,10 +357,12 @@ class TestCRM:
 
         # 重新加载manager以确保最新数据
         self.crm.opportunity_mgr.load()
+        self.crm.customer_mgr.load()
 
         # 分析客户价值
         value = self.crm.customer_value()
 
+        print(f"DEBUG - 客户价值数据: {value}")
         self.assert_true(value['total_customers'] >= 2, "客户总数正确")
         self.assert_true(value['active_customers'] >= 2, "活跃客户数正确")
         self.assert_true(len(value['revenue_by_customer']) >= 2, "客户收入列表正确")
@@ -392,6 +398,7 @@ class TestCRM:
         # RFM分析
         rfm = self.crm.rfm_analysis()
 
+        print(f"DEBUG - RFM数据: {rfm}")
         self.assert_true(rfm['customer_count'] >= 1, "客户数量正确")
         self.assert_true(rfm['lead_count'] >= 2, "线索数量正确")
         self.assert_true(len(rfm['top_customers']) >= 1, "Top客户列表正确")

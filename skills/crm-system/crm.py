@@ -523,6 +523,13 @@ class AnalyticsManager:
         self.lead_mgr = LeadManager()
         self.task_mgr = TaskManager()
 
+    def reload_data(self):
+        """重新加载数据"""
+        self.customer_mgr.load()
+        self.opportunity_mgr.load()
+        self.lead_mgr.load()
+        self.task_mgr.load()
+
     def sales_funnel(self) -> Dict:
         """销售漏斗分析"""
         opps = self.opportunity_mgr.list_opportunities(status="open")
