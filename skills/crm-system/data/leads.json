@@ -1,6 +1,6 @@
 [
   {
-    "lead_id": "lead_e939c235",
+    "lead_id": "lead_cfc941c7",
     "name": "王五",
     "company": "潜在客户A",
     "phone": "13900139000",
@@ -10,7 +10,63 @@
     "interest": "CRM系统",
     "score": 100,
     "status": "new",
-    "created_at": "2026-02-13T00:06:54.837416",
+    "created_at": "2026-02-13T00:07:52.366750",
+    "assigned_to": null
+  },
+  {
+    "lead_id": "lead_443aae1a",
+    "name": "赵六",
+    "company": "潜在客户B",
+    "phone": null,
+    "email": null,
+    "position": null,
+    "source": "website",
+    "interest": null,
+    "score": 60,
+    "status": "new",
+    "created_at": "2026-02-13T00:07:52.366802",
+    "assigned_to": null
+  },
+  {
+    "lead_id": "lead_790b200a",
+    "name": "转化测试",
+    "company": "将转化的公司",
+    "phone": "13700137000",
+    "email": "convert@test.com",
+    "position": "CTO",
+    "source": null,
+    "interest": null,
+    "score": 75,
+    "status": "converted",
+    "created_at": "2026-02-13T00:07:52.366866",
+    "assigned_to": null
+  },
+  {
+    "lead_id": "lead_452a7112",
+    "name": "线索A",
+    "company": "潜在客户A",
+    "phone": null,
+    "email": null,
+    "position": null,
+    "source": null,
+    "interest": null,
+    "score": 50,
+    "status": "new",
+    "created_at": "2026-02-13T00:07:52.369270",
+    "assigned_to": null
+  },
+  {
+    "lead_id": "lead_04694c17",
+    "name": "线索B",
+    "company": "潜在客户B",
+    "phone": null,
+    "email": null,
+    "position": null,
+    "source": null,
+    "interest": null,
+    "score": 50,
+    "status": "new",
+    "created_at": "2026-02-13T00:07:52.369335",
     "assigned_to": null
   }
 ]

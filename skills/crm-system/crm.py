@@ -335,7 +335,7 @@ class LeadManager(DataManager):
             score += 15
 
         # 职位加分
-        position = lead.get('position', '').lower()
+        position = (lead.get('position') or '').lower()
         if 'ceo' in position or 'cto' in position or 'vp' in position:
             score += 15
         elif 'manager' in position or 'director' in position:
@@ -388,7 +388,7 @@ class OpportunityManager(DataManager):
     def create_opportunity(self, customer_id: str, title: str, amount: float, **kwargs) -> Opportunity:
         """创建商机"""
         # 根据阶段设置概率
-        stage = kwargs.get('stage', OpportunityStage.INITIAL.value)
+        stage = kwargs.pop('stage', OpportunityStage.INITIAL.value)
         probability = kwargs.get('probability', self._get_stage_probability(stage))
 
         opportunity = Opportunity(
@@ -437,6 +437,9 @@ class OpportunityManager(DataManager):
         elif status == 'lost':
             kwargs['stage'] = OpportunityStage.LOST.value
             kwargs['probability'] = 0
+
+        # 移除actual_amount等非Opportunity字段
+        actual_amount = kwargs.pop('actual_amount', None)
 
         kwargs['status'] = status
         return self.update_opportunity(opportunity_id, **kwargs)

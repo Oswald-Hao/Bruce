@@ -1,0 +1,32 @@
+[
+  {
+    "task_id": "task_80f68779",
+    "type": "followup",
+    "customer_id": "cust_d05f1e9f",
+    "contact_id": "contact_65b40ea2",
+    "opportunity_id": "opp_50ba0af9",
+    "title": "回访客户",
+    "description": "确认产品使用情况",
+    "due_date": null,
+    "priority": "normal",
+    "status": "completed",
+    "assignee": "sales_001",
+    "created_at": "2026-02-13T00:07:52.367903",
+    "completed_at": "2026-02-13T00:07:52.367942"
+  },
+  {
+    "task_id": "task_1eb85e27",
+    "type": "call",
+    "customer_id": "cust_d05f1e9f",
+    "contact_id": null,
+    "opportunity_id": null,
+    "title": "电话回访",
+    "description": null,
+    "due_date": null,
+    "priority": "normal",
+    "status": "pending",
+    "assignee": null,
+    "created_at": "2026-02-13T00:07:52.367972",
+    "completed_at": null
+  }
+]
