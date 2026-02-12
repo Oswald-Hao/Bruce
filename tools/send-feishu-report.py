@@ -41,8 +41,11 @@ def send_message(text):
         data = {
             "msg_type": "text",
             "receive_id": OPEN_ID,
-            "content": json.dumps({"text": text})
+            "open_id": OPEN_ID
         }
+
+        # content必须是JSON对象，不是字符串
+        data["content"] = {"text": text}
 
         response = requests.post(url, headers=headers, json=data)
         result = response.json()
