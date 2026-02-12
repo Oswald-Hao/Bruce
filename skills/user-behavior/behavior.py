@@ -401,17 +401,17 @@ class UserBehaviorAnalytics:
     def track_page_view(self, user_id: str, page_url: str, **kwargs) -> Event:
         """记录页面浏览"""
         return self.track_event(user_id, EventType.PAGE_VIEW.value,
-                               page_url=page_url, **kwargs)
+                               page_url=page_url, session_id=kwargs.get('session_id'),
+                               referrer=kwargs.get('referrer'))
 
-    def track_click(self, user_id: str, element: str, **kwargs) -> Event:
+    def track_click(self, user_id: str, **kwargs) -> Event:
         """记录点击"""
-        return self.track_event(user_id, EventType.CLICK.value,
-                               element=element, **kwargs)
+        return self.track_event(user_id, EventType.CLICK.value, **kwargs)
 
     def track_purchase(self, user_id: str, amount: float, **kwargs) -> Event:
         """记录购买"""
         return self.track_event(user_id, EventType.PURCHASE.value,
-                               amount=amount, **kwargs)
+                               properties={'amount': amount}, **kwargs)
 
     # 会话管理
     def create_session(self, user_id: str) -> Session:

@@ -1,0 +1,22 @@
+[
+  {
+    "event_id": "evt_ca5f4af7",
+    "user_id": "user_001",
+    "event_type": "click",
+    "timestamp": "2026-02-13T00:18:14.452106",
+    "properties": {},
+    "session_id": null,
+    "page_url": null,
+    "referrer": null
+  },
+  {
+    "event_id": "evt_6014c14b",
+    "user_id": "user_001",
+    "event_type": "page_view",
+    "timestamp": "2026-02-13T00:18:14.452209",
+    "properties": {},
+    "session_id": null,
+    "page_url": "/home",
+    "referrer": null
+  }
+]
