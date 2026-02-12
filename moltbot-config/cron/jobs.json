@@ -58,7 +58,7 @@
       "name": "AI资讯收集",
       "enabled": true,
       "createdAtMs": 1769732676759,
-      "updatedAtMs": 1770773400002,
+      "updatedAtMs": 1770859800001,
       "schedule": {
         "kind": "cron",
         "expr": "30 9 * * *",
@@ -74,10 +74,10 @@
         "deliver": true
       },
       "state": {
-        "nextRunAtMs": 1770859800000,
-        "lastRunAtMs": 1770773400002,
+        "nextRunAtMs": 1770946200000,
+        "lastRunAtMs": 1770859800001,
         "lastStatus": "ok",
-        "lastDurationMs": 96006
+        "lastDurationMs": 89077
       }
     },
     {
