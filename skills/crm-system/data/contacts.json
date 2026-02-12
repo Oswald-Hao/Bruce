@@ -1,0 +1,31 @@
+[
+  {
+    "contact_id": "contact_453a478d",
+    "customer_id": "cust_a62a841e",
+    "name": "张三",
+    "position": "CTO",
+    "phone": "13800138000",
+    "email": "zhangsan@company.com",
+    "wechat": null,
+    "role": null,
+    "interactions": [
+      {
+        "date": "2026-02-13T00:06:54.837327",
+        "type": "phone",
+        "content": "讨论产品方案",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "contact_id": "contact_a9fe6f00",
+    "customer_id": "cust_a62a841e",
+    "name": "李四",
+    "position": "CEO",
+    "phone": null,
+    "email": null,
+    "wechat": null,
+    "role": null,
+    "interactions": []
+  }
+]

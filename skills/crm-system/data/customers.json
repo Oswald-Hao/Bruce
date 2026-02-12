@@ -1,0 +1,60 @@
+[
+  {
+    "customer_id": "cust_2ec375e6",
+    "name": "测试公司A",
+    "industry": "软件",
+    "scale": "大型",
+    "phone": "0755-12345678",
+    "email": "test@companya.com",
+    "address": null,
+    "tags": [
+      "VIP"
+    ],
+    "created_at": "2026-02-13T00:06:54.836862",
+    "updated_at": "2026-02-13T00:06:54.837048",
+    "status": "active",
+    "rfm_score": {}
+  },
+  {
+    "customer_id": "cust_d060488e",
+    "name": "测试公司B",
+    "industry": "互联网",
+    "scale": "小型",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "tags": [],
+    "created_at": "2026-02-13T00:06:54.837113",
+    "updated_at": "2026-02-13T00:06:54.837115",
+    "status": "active",
+    "rfm_score": {}
+  },
+  {
+    "customer_id": "cust_a66761e6",
+    "name": "测试公司C",
+    "industry": "金融",
+    "scale": "大型",
+    "phone": null,
+    "email": null,
+    "address": null,
+    "tags": [],
+    "created_at": "2026-02-13T00:06:54.837169",
+    "updated_at": "2026-02-13T00:06:54.837170",
+    "status": "active",
+    "rfm_score": {}
+  },
+  {
+    "customer_id": "cust_a62a841e",
+    "name": "联系人测试公司",
+    "industry": null,
+    "scale": null,
+    "phone": null,
+    "email": null,
+    "address": null,
+    "tags": [],
+    "created_at": "2026-02-13T00:06:54.837229",
+    "updated_at": "2026-02-13T00:06:54.837230",
+    "status": "active",
+    "rfm_score": {}
+  }
+]
