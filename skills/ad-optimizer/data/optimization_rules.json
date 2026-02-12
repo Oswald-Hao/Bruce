@@ -1,11 +1,11 @@
 [
   {
-    "rule_id": "rule_7ac08f09",
+    "rule_id": "rule_b37d8b7e",
     "type": "pause_low_roi",
     "name": "低ROI自动暂停",
     "condition": "roi < 1.0",
     "action": "pause",
     "enabled": true,
-    "created_at": "2026-02-13T00:29:40.510835"
+    "created_at": "2026-02-13T00:32:27.432507"
   }
 ]

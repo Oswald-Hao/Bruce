@@ -1,8 +1,8 @@
 [
   {
-    "test_id": "test_f071c8c3",
+    "test_id": "test_d37e4ace",
     "name": "创意测试",
-    "campaign_id": "camp_6500e34d",
+    "campaign_id": "camp_9e893725",
     "variable": "creative",
     "variants": [
       "A",
@@ -10,27 +10,30 @@
       "C"
     ],
     "start_date": "2026-02-13",
-    "end_date": null,
-    "status": "running",
+    "end_date": "2026-02-13",
+    "status": "completed",
     "results": {
       "A": {
         "impressions": 5000,
         "clicks": 250,
-        "conversions": 12
+        "conversions": 12,
+        "conversion_rate": 0.048
       },
       "B": {
         "impressions": 5000,
         "clicks": 280,
-        "conversions": 15
+        "conversions": 15,
+        "conversion_rate": 0.05357142857142857
       },
       "C": {
         "impressions": 5000,
         "clicks": 230,
-        "conversions": 10
+        "conversions": 10,
+        "conversion_rate": 0.043478260869565216
       }
     },
-    "winner": null,
+    "winner": "B",
     "significance": 0.0,
-    "created_at": "2026-02-13T00:29:40.510183"
+    "created_at": "2026-02-13T00:32:27.431828"
   }
 ]
