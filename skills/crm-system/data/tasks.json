@@ -1,23 +1,23 @@
 [
   {
-    "task_id": "task_e9760156",
+    "task_id": "task_a024f8ae",
     "type": "followup",
-    "customer_id": "cust_9fce8b7c",
-    "contact_id": "contact_bb0e987a",
-    "opportunity_id": "opp_cda790d7",
+    "customer_id": "cust_98bf5e4c",
+    "contact_id": "contact_ffe840fc",
+    "opportunity_id": "opp_da8788a8",
     "title": "回访客户",
     "description": "确认产品使用情况",
     "due_date": null,
     "priority": "normal",
     "status": "completed",
     "assignee": "sales_001",
-    "created_at": "2026-02-13T00:11:03.057505",
-    "completed_at": "2026-02-13T00:11:03.057547"
+    "created_at": "2026-02-13T00:12:00.378429",
+    "completed_at": "2026-02-13T00:12:00.378468"
   },
   {
-    "task_id": "task_58056770",
+    "task_id": "task_4ae7cad0",
     "type": "call",
-    "customer_id": "cust_9fce8b7c",
+    "customer_id": "cust_98bf5e4c",
     "contact_id": null,
     "opportunity_id": null,
     "title": "电话回访",
@@ -26,7 +26,37 @@
     "priority": "normal",
     "status": "pending",
     "assignee": null,
-    "created_at": "2026-02-13T00:11:03.057583",
+    "created_at": "2026-02-13T00:12:00.378503",
+    "completed_at": null
+  },
+  {
+    "task_id": "task_7accb41a",
+    "type": "call",
+    "customer_id": null,
+    "contact_id": null,
+    "opportunity_id": null,
+    "title": "电话回访",
+    "description": null,
+    "due_date": null,
+    "priority": "normal",
+    "status": "completed",
+    "assignee": "sales_001",
+    "created_at": "2026-02-13T00:12:00.381486",
+    "completed_at": "2026-02-13T00:12:00.381634"
+  },
+  {
+    "task_id": "task_f075638e",
+    "type": "email",
+    "customer_id": null,
+    "contact_id": null,
+    "opportunity_id": null,
+    "title": "发送邮件",
+    "description": null,
+    "due_date": null,
+    "priority": "normal",
+    "status": "pending",
+    "assignee": "sales_001",
+    "created_at": "2026-02-13T00:12:00.381541",
     "completed_at": null
   }
 ]

@@ -665,7 +665,7 @@ class AnalyticsManager:
         """销售业绩分析"""
         # 重新加载数据
         self.reload_data()
-        opps = self.opportunity_mgr.list_all()
+        opps = self.opportunity_mgr.list_opportunities()
         tasks = self.task_mgr.list_tasks()
 
         # 按销售人员统计

@@ -331,7 +331,6 @@ class TestCRM:
         # 分析销售漏斗
         funnel = self.crm.sales_funnel()
 
-        print(f"DEBUG - 漏斗数据: {funnel}")
         self.assert_true('初步接触' in funnel, "漏斗包含初始阶段")
         self.assert_true('需求确认' in funnel, "漏斗包含需求确认阶段")
         self.assert_true('方案提交' in funnel, "漏斗包含方案提交阶段")
@@ -362,7 +361,6 @@ class TestCRM:
         # 分析客户价值
         value = self.crm.customer_value()
 
-        print(f"DEBUG - 客户价值数据: {value}")
         self.assert_true(value['total_customers'] >= 2, "客户总数正确")
         self.assert_true(value['active_customers'] >= 2, "活跃客户数正确")
         self.assert_true(len(value['revenue_by_customer']) >= 2, "客户收入列表正确")
@@ -398,7 +396,6 @@ class TestCRM:
         # RFM分析
         rfm = self.crm.rfm_analysis()
 
-        print(f"DEBUG - RFM数据: {rfm}")
         self.assert_true(rfm['customer_count'] >= 1, "客户数量正确")
         self.assert_true(rfm['lead_count'] >= 2, "线索数量正确")
         self.assert_true(len(rfm['top_customers']) >= 1, "Top客户列表正确")
@@ -421,12 +418,12 @@ class TestCRM:
         opp1 = self.crm.create_opportunity(
             customer.customer_id, "商机A", 100000,
             stage=OpportunityStage.INITIAL.value,
-            assignee="sales_001"
+            assigned_to="sales_001"
         )
         opp2 = self.crm.create_opportunity(
             customer.customer_id, "商机B", 150000,
             stage=OpportunityStage.INITIAL.value,
-            assignee="sales_002"
+            assigned_to="sales_002"
         )
 
         # 成交部分商机

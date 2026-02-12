@@ -1,6 +1,6 @@
 [
   {
-    "customer_id": "cust_f23d92a8",
+    "customer_id": "cust_3d8a6c98",
     "name": "测试公司A",
     "industry": "软件",
     "scale": "大型",
@@ -10,13 +10,13 @@
     "tags": [
       "VIP"
     ],
-    "created_at": "2026-02-13T00:11:03.050428",
-    "updated_at": "2026-02-13T00:11:03.050573",
+    "created_at": "2026-02-13T00:12:00.376756",
+    "updated_at": "2026-02-13T00:12:00.376902",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_df9bb508",
+    "customer_id": "cust_0f8d2ba3",
     "name": "测试公司B",
     "industry": "互联网",
     "scale": "小型",
@@ -24,13 +24,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.055987",
-    "updated_at": "2026-02-13T00:11:03.055989",
+    "created_at": "2026-02-13T00:12:00.376967",
+    "updated_at": "2026-02-13T00:12:00.376968",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_09527dd0",
+    "customer_id": "cust_793801e2",
     "name": "测试公司C",
     "industry": "金融",
     "scale": "大型",
@@ -38,13 +38,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.056046",
-    "updated_at": "2026-02-13T00:11:03.056047",
+    "created_at": "2026-02-13T00:12:00.377023",
+    "updated_at": "2026-02-13T00:12:00.377024",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_a152019e",
+    "customer_id": "cust_e7ca52a5",
     "name": "联系人测试公司",
     "industry": null,
     "scale": null,
@@ -52,13 +52,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.056107",
-    "updated_at": "2026-02-13T00:11:03.056108",
+    "created_at": "2026-02-13T00:12:00.377078",
+    "updated_at": "2026-02-13T00:12:00.377080",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_fcb2539e",
+    "customer_id": "cust_8318440e",
     "name": "转化后的公司",
     "industry": null,
     "scale": null,
@@ -68,13 +68,13 @@
     "tags": [
       "从线索转化"
     ],
-    "created_at": "2026-02-13T00:11:03.056519",
-    "updated_at": "2026-02-13T00:11:03.056520",
+    "created_at": "2026-02-13T00:12:00.377441",
+    "updated_at": "2026-02-13T00:12:00.377443",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_9547cab1",
+    "customer_id": "cust_08e90e3b",
     "name": "商机测试公司",
     "industry": null,
     "scale": null,
@@ -82,13 +82,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.056693",
-    "updated_at": "2026-02-13T00:11:03.056694",
+    "created_at": "2026-02-13T00:12:00.377611",
+    "updated_at": "2026-02-13T00:12:00.377612",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_4719ac76",
+    "customer_id": "cust_42af146f",
     "name": "成交测试公司",
     "industry": null,
     "scale": null,
@@ -96,13 +96,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.056961",
-    "updated_at": "2026-02-13T00:11:03.056963",
+    "created_at": "2026-02-13T00:12:00.377902",
+    "updated_at": "2026-02-13T00:12:00.377904",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_9fce8b7c",
+    "customer_id": "cust_98bf5e4c",
     "name": "任务测试公司",
     "industry": null,
     "scale": null,
@@ -110,13 +110,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.057300",
-    "updated_at": "2026-02-13T00:11:03.057301",
+    "created_at": "2026-02-13T00:12:00.378219",
+    "updated_at": "2026-02-13T00:12:00.378220",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_a0006534",
+    "customer_id": "cust_323832ae",
     "name": "漏斗测试公司",
     "industry": null,
     "scale": null,
@@ -124,13 +124,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.057663",
-    "updated_at": "2026-02-13T00:11:03.057664",
+    "created_at": "2026-02-13T00:12:00.378551",
+    "updated_at": "2026-02-13T00:12:00.378554",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_10930121",
+    "customer_id": "cust_5f3b3647",
     "name": "高价值客户",
     "industry": null,
     "scale": null,
@@ -138,13 +138,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.058233",
-    "updated_at": "2026-02-13T00:11:03.058234",
+    "created_at": "2026-02-13T00:12:00.379161",
+    "updated_at": "2026-02-13T00:12:00.379163",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_65334f68",
+    "customer_id": "cust_fb4fb7e1",
     "name": "普通客户",
     "industry": null,
     "scale": null,
@@ -152,13 +152,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.058716",
-    "updated_at": "2026-02-13T00:11:03.058721",
+    "created_at": "2026-02-13T00:12:00.379566",
+    "updated_at": "2026-02-13T00:12:00.379569",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_7e7345cd",
+    "customer_id": "cust_07868a4f",
     "name": "RFM测试客户",
     "industry": null,
     "scale": null,
@@ -166,13 +166,13 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.059269",
-    "updated_at": "2026-02-13T00:11:03.059271",
+    "created_at": "2026-02-13T00:12:00.380065",
+    "updated_at": "2026-02-13T00:12:00.380066",
     "status": "active",
     "rfm_score": {}
   },
   {
-    "customer_id": "cust_6d51025a",
+    "customer_id": "cust_9ec450fa",
     "name": "业绩测试公司",
     "industry": null,
     "scale": null,
@@ -180,8 +180,8 @@
     "email": null,
     "address": null,
     "tags": [],
-    "created_at": "2026-02-13T00:11:03.060243",
-    "updated_at": "2026-02-13T00:11:03.060244",
+    "created_at": "2026-02-13T00:12:00.380972",
+    "updated_at": "2026-02-13T00:12:00.380973",
     "status": "active",
     "rfm_score": {}
   }
