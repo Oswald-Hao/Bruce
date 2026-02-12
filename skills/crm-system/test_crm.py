@@ -351,6 +351,9 @@ class TestCRM:
         opp2 = self.crm.create_opportunity(customer2.customer_id, "小单", 30000, stage=OpportunityStage.PROPOSAL.value)
         self.crm.close_opportunity(opp2.opportunity_id, status="won", actual_amount=28000)
 
+        # 重新加载manager以确保最新数据
+        self.crm.opportunity_mgr.load()
+
         # 分析客户价值
         value = self.crm.customer_value()
 
@@ -381,6 +384,10 @@ class TestCRM:
 
         opp2 = self.crm.create_opportunity(customer.customer_id, "订单2", 80000, stage=OpportunityStage.INITIAL.value)
         self.crm.close_opportunity(opp2.opportunity_id, status="won", actual_amount=75000)
+
+        # 重新加载manager以确保最新数据
+        self.crm.opportunity_mgr.load()
+        self.crm.lead_mgr.load()
 
         # RFM分析
         rfm = self.crm.rfm_analysis()
@@ -422,6 +429,10 @@ class TestCRM:
         task1 = self.crm.create_task("call", "电话回访", assignee="sales_001")
         task2 = self.crm.create_task("email", "发送邮件", assignee="sales_001")
         self.crm.complete_task(task1.task_id)
+
+        # 重新加载manager以确保最新数据
+        self.crm.opportunity_mgr.load()
+        self.crm.task_mgr.load()
 
         # 销售业绩分析
         performance = self.crm.sales_performance()
