@@ -30,7 +30,7 @@
       "name": "天气穿衣提醒",
       "enabled": true,
       "createdAtMs": 1769732670532,
-      "updatedAtMs": 1770769200006,
+      "updatedAtMs": 1770855600001,
       "schedule": {
         "kind": "cron",
         "expr": "20 8 * * *",
@@ -46,10 +46,10 @@
         "deliver": true
       },
       "state": {
-        "nextRunAtMs": 1770855600000,
-        "lastRunAtMs": 1770769200006,
+        "nextRunAtMs": 1770942000000,
+        "lastRunAtMs": 1770855600001,
         "lastStatus": "ok",
-        "lastDurationMs": 36553
+        "lastDurationMs": 48644
       }
     },
     {
