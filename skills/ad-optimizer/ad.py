@@ -273,7 +273,8 @@ class ABTestManager(DataManager):
             name=name,
             campaign_id=campaign_id,
             variable=variable,
-            variants=variants
+            variants=variants,
+            start_date=datetime.now().date().isoformat()
         )
         self.data.append(asdict(test))
         self.save()
