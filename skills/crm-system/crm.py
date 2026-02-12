@@ -447,6 +447,10 @@ class OpportunityManager(DataManager):
     def list_opportunities(self, **filters) -> List[Opportunity]:
         """列出商机"""
         results = []
+        # Opportunity类的字段
+        opp_fields = {'opportunity_id', 'customer_id', 'title', 'amount', 'stage',
+                      'probability', 'expected_close_date', 'created_at', 'updated_at',
+                      'assigned_to', 'competitors', 'status'}
         for opp in self.data:
             match = True
             for key, value in filters.items():
@@ -454,14 +458,22 @@ class OpportunityManager(DataManager):
                     match = False
                     break
             if match:
-                results.append(Opportunity(**opp))
+                # 只传递Opportunity类定义的字段
+                opp_data = {k: v for k, v in opp.items() if k in opp_fields}
+                results.append(Opportunity(**opp_data))
         return results
 
     def get_opportunity(self, opportunity_id: str) -> Optional[Opportunity]:
         """获取商机"""
+        # Opportunity类的字段
+        opp_fields = {'opportunity_id', 'customer_id', 'title', 'amount', 'stage',
+                      'probability', 'expected_close_date', 'created_at', 'updated_at',
+                      'assigned_to', 'competitors', 'status'}
         for opp in self.data:
             if opp['opportunity_id'] == opportunity_id:
-                return Opportunity(**opp)
+                # 只传递Opportunity类定义的字段
+                opp_data = {k: v for k, v in opp.items() if k in opp_fields}
+                return Opportunity(**opp_data)
         return None
 
 
@@ -532,6 +544,8 @@ class AnalyticsManager:
 
     def sales_funnel(self) -> Dict:
         """销售漏斗分析"""
+        # 重新加载数据
+        self.reload_data()
         opps = self.opportunity_mgr.list_opportunities(status="open")
 
         funnel = {}
@@ -551,6 +565,8 @@ class AnalyticsManager:
 
     def customer_value(self) -> Dict:
         """客户价值分析"""
+        # 重新加载数据
+        self.reload_data()
         customers = self.customer_mgr.list_all()
         opps = self.opportunity_mgr.list_opportunities(status="won")
 
@@ -582,6 +598,8 @@ class AnalyticsManager:
 
     def rfm_analysis(self) -> Dict:
         """RFM分析"""
+        # 重新加载数据
+        self.reload_data()
         opps = self.opportunity_mgr.list_opportunities(status="won")
         leads = self.lead_mgr.list_leads()
 
@@ -645,6 +663,8 @@ class AnalyticsManager:
 
     def sales_performance(self, period: str = None) -> Dict:
         """销售业绩分析"""
+        # 重新加载数据
+        self.reload_data()
         opps = self.opportunity_mgr.list_all()
         tasks = self.task_mgr.list_tasks()
 

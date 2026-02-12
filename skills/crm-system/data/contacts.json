@@ -1,7 +1,7 @@
 [
   {
-    "contact_id": "contact_81d65358",
-    "customer_id": "cust_c47c4b09",
+    "contact_id": "contact_1c1be218",
+    "customer_id": "cust_a152019e",
     "name": "张三",
     "position": "CTO",
     "phone": "13800138000",
@@ -10,7 +10,7 @@
     "role": null,
     "interactions": [
       {
-        "date": "2026-02-13T00:09:59.793792",
+        "date": "2026-02-13T00:11:03.056210",
         "type": "phone",
         "content": "讨论产品方案",
         "notes": null
@@ -18,8 +18,8 @@
     ]
   },
   {
-    "contact_id": "contact_ed044f00",
-    "customer_id": "cust_c47c4b09",
+    "contact_id": "contact_313cf518",
+    "customer_id": "cust_a152019e",
     "name": "李四",
     "position": "CEO",
     "phone": null,
@@ -29,8 +29,8 @@
     "interactions": []
   },
   {
-    "contact_id": "contact_8a0cdf3d",
-    "customer_id": "cust_4107b4d2",
+    "contact_id": "contact_381a8517",
+    "customer_id": "cust_fcb2539e",
     "name": "转化测试",
     "position": "CTO",
     "phone": "13700137000",
@@ -40,8 +40,8 @@
     "interactions": []
   },
   {
-    "contact_id": "contact_c8fc808a",
-    "customer_id": "cust_85eec024",
+    "contact_id": "contact_bb0e987a",
+    "customer_id": "cust_9fce8b7c",
     "name": "测试联系人",
     "position": null,
     "phone": null,

@@ -1,6 +1,6 @@
 [
   {
-    "lead_id": "lead_0020118a",
+    "lead_id": "lead_f151b7bd",
     "name": "王五",
     "company": "潜在客户A",
     "phone": "13900139000",
@@ -10,11 +10,11 @@
     "interest": "CRM系统",
     "score": 100,
     "status": "new",
-    "created_at": "2026-02-13T00:09:59.794027",
+    "created_at": "2026-02-13T00:11:03.056306",
     "assigned_to": null
   },
   {
-    "lead_id": "lead_111de3fc",
+    "lead_id": "lead_dbbb2a63",
     "name": "赵六",
     "company": "潜在客户B",
     "phone": null,
@@ -24,11 +24,11 @@
     "interest": null,
     "score": 60,
     "status": "new",
-    "created_at": "2026-02-13T00:09:59.794143",
+    "created_at": "2026-02-13T00:11:03.056356",
     "assigned_to": null
   },
   {
-    "lead_id": "lead_15d12056",
+    "lead_id": "lead_f352d639",
     "name": "转化测试",
     "company": "将转化的公司",
     "phone": "13700137000",
@@ -38,11 +38,11 @@
     "interest": null,
     "score": 75,
     "status": "converted",
-    "created_at": "2026-02-13T00:09:59.794288",
+    "created_at": "2026-02-13T00:11:03.056417",
     "assigned_to": null
   },
   {
-    "lead_id": "lead_10a0e628",
+    "lead_id": "lead_2a8cb30c",
     "name": "线索A",
     "company": "潜在客户A",
     "phone": null,
@@ -52,11 +52,11 @@
     "interest": null,
     "score": 50,
     "status": "new",
-    "created_at": "2026-02-13T00:09:59.799910",
+    "created_at": "2026-02-13T00:11:03.059393",
     "assigned_to": null
   },
   {
-    "lead_id": "lead_1186aed2",
+    "lead_id": "lead_81dc65e7",
     "name": "线索B",
     "company": "潜在客户B",
     "phone": null,
@@ -66,7 +66,7 @@
     "interest": null,
     "score": 50,
     "status": "new",
-    "created_at": "2026-02-13T00:09:59.800058",
+    "created_at": "2026-02-13T00:11:03.059470",
     "assigned_to": null
   }
 ]
