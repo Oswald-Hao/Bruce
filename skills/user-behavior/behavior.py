@@ -249,13 +249,6 @@ class SessionManager(DataManager):
         )
         self.data.append(asdict(session))
         self.save()
-
-        # 更新用户的会话数
-        user_mgr = UserManager()
-        user = user_mgr.get_user(user_id)
-        if user:
-            user_mgr.update_user(user_id, total_sessions=user.total_sessions + 1)
-
         return session
 
     def end_session(self, session_id: str) -> bool:
@@ -379,6 +372,42 @@ class UserBehaviorAnalytics:
         self.session_mgr = SessionManager()
         self.funnel_mgr = FunnelManager()
 
+    # 事件跟踪
+    def track_event(self, user_id: str, event_type: str, **kwargs) -> Event:
+        """记录事件"""
+        # 确保用户存在
+        self.user_mgr.get_or_create_user(user_id)
+
+        # 记录事件
+        event = self.event_mgr.track_event(user_id, event_type, **kwargs)
+
+        # 如果有会话ID，更新会话
+        session_id = kwargs.get('session_id')
+        if session_id:
+            session = self.session_mgr.get_session(session_id)
+            if session:
+                session.events_count += 1
+                if event_type == EventType.PAGE_VIEW.value:
+                    session.page_views += 1
+
+        return event
+
+    def track_page_view(self, user_id: str, page_url: str, **kwargs) -> Event:
+        """记录页面浏览"""
+        return self.track_event(user_id, EventType.PAGE_VIEW.value,
+                               page_url=page_url, session_id=kwargs.get('session_id'),
+                               referrer=kwargs.get('referrer'))
+
+    def track_click(self, user_id: str, **kwargs) -> Event:
+        """记录点击"""
+        return self.track_event(user_id, EventType.CLICK.value, **kwargs)
+
+    def track_purchase(self, user_id: str, amount: float, **kwargs) -> Event:
+        """记录购买"""
+        return self.track_event(user_id, EventType.PURCHASE.value,
+                               properties={'amount': amount}, **kwargs)
+
+    # 会话管理
     def create_session(self, user_id: str) -> Session:
         """创建会话"""
         session = self.session_mgr.create_session(user_id)
