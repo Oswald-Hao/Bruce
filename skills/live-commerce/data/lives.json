@@ -1,0 +1,104 @@
+[
+  {
+    "live_id": "live_4814183e",
+    "room_id": "123456789",
+    "platform": "douyin",
+    "title": "新品发布直播",
+    "start_time": "2026-02-13T00:16:18.265789",
+    "end_time": "2026-02-13T00:16:18.266019",
+    "status": "ended",
+    "max_viewers": 1000,
+    "avg_viewers": 0,
+    "total_views": 1000,
+    "interaction_count": 1,
+    "sales_amount": 0.0,
+    "products": [
+      "prod_234f30c2"
+    ],
+    "created_at": "2026-02-13T00:16:18.265794"
+  },
+  {
+    "live_id": "live_d8a81213",
+    "room_id": "987654321",
+    "platform": "tiktok",
+    "title": "测试直播",
+    "start_time": "2026-02-13T00:16:18.266059",
+    "end_time": null,
+    "status": "live",
+    "max_viewers": 800,
+    "avg_viewers": 0,
+    "total_views": 1300,
+    "interaction_count": 3,
+    "sales_amount": 0.0,
+    "products": [],
+    "created_at": "2026-02-13T00:16:18.266061"
+  },
+  {
+    "live_id": "live_693a497f",
+    "room_id": "111222333",
+    "platform": "douyin",
+    "title": "观众测试直播",
+    "start_time": "2026-02-13T00:16:18.266326",
+    "end_time": null,
+    "status": "live",
+    "max_viewers": 0,
+    "avg_viewers": 0,
+    "total_views": 0,
+    "interaction_count": 0,
+    "sales_amount": 0.0,
+    "products": [],
+    "created_at": "2026-02-13T00:16:18.266329"
+  },
+  {
+    "live_id": "live_c6d7d2e6",
+    "room_id": "444555666",
+    "platform": "douyin",
+    "title": "画像测试直播",
+    "start_time": "2026-02-13T00:16:18.266550",
+    "end_time": null,
+    "status": "live",
+    "max_viewers": 0,
+    "avg_viewers": 0,
+    "total_views": 0,
+    "interaction_count": 0,
+    "sales_amount": 0.0,
+    "products": [],
+    "created_at": "2026-02-13T00:16:18.266552"
+  },
+  {
+    "live_id": "live_05426d8e",
+    "room_id": "000111222",
+    "platform": "douyin",
+    "title": "转化测试直播",
+    "start_time": "2026-02-13T00:16:18.267222",
+    "end_time": null,
+    "status": "live",
+    "max_viewers": 0,
+    "avg_viewers": 0,
+    "total_views": 0,
+    "interaction_count": 0,
+    "sales_amount": 0.0,
+    "products": [
+      "prod_b2225b0d"
+    ],
+    "created_at": "2026-02-13T00:16:18.267225"
+  },
+  {
+    "live_id": "live_9a9256ee",
+    "room_id": "333444555",
+    "platform": "douyin",
+    "title": "总览测试直播",
+    "start_time": "2026-02-13T00:16:18.268405",
+    "end_time": null,
+    "status": "live",
+    "max_viewers": 100,
+    "avg_viewers": 0,
+    "total_views": 100,
+    "interaction_count": 1,
+    "sales_amount": 0.0,
+    "products": [
+      "prod_dd8370a7"
+    ],
+    "created_at": "2026-02-13T00:16:18.268407"
+  }
+]

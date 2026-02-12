@@ -94,6 +94,7 @@ class Viewer:
     """观众"""
     viewer_id: str
     room_id: str
+    user_id: str
     join_time: str
     platform: str
     leave_time: Optional[str] = None

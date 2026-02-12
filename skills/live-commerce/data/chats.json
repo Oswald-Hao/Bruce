@@ -1,0 +1,57 @@
+[
+  {
+    "chat_id": "chat_7f5cf793",
+    "room_id": "777888999",
+    "user_id": "user_001",
+    "username": "用户A",
+    "content": "这个商品多少钱？",
+    "timestamp": "2026-02-13T00:16:18.266983",
+    "type": "comment",
+    "replied": false,
+    "sentiment": "neutral"
+  },
+  {
+    "chat_id": "chat_ef472e20",
+    "room_id": "777888999",
+    "user_id": "user_002",
+    "username": "用户B",
+    "content": "买一送一吗？",
+    "timestamp": "2026-02-13T00:16:18.267023",
+    "type": "comment",
+    "replied": false,
+    "sentiment": "neutral"
+  },
+  {
+    "chat_id": "chat_3d612b85",
+    "room_id": "777888999",
+    "user_id": "user_003",
+    "username": "用户C",
+    "content": "价格不错",
+    "timestamp": "2026-02-13T00:16:18.267063",
+    "type": "comment",
+    "replied": false,
+    "sentiment": "neutral"
+  },
+  {
+    "chat_id": "chat_5932f16f",
+    "room_id": "777888999",
+    "user_id": "user_001",
+    "username": "用户A",
+    "content": "多少钱",
+    "timestamp": "2026-02-13T00:16:18.267108",
+    "type": "comment",
+    "replied": false,
+    "sentiment": "neutral"
+  },
+  {
+    "chat_id": "chat_97234793",
+    "room_id": "777888999",
+    "user_id": "user_004",
+    "username": "用户D",
+    "content": "价格",
+    "timestamp": "2026-02-13T00:16:18.267156",
+    "type": "comment",
+    "replied": false,
+    "sentiment": "neutral"
+  }
+]
