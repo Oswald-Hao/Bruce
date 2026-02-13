@@ -298,7 +298,7 @@ class APIGateway:
     def __init__(self):
         self.routes: List[Route] = []
         self.services: Dict[str, List[Service]] = defaultdict(list)
-        self.rate_limiter = RateLimiter(rate=100)
+        self.rate_limiters: Dict[str, RateLimiter] = {}  # 每个路由独立的限流器
         self.auth_manager = AuthManager()
         self.load_balancer = LoadBalancer(strategy="round_robin")
         self.metrics = MetricsCollector()
@@ -334,8 +334,14 @@ class APIGateway:
 
     def _check_rate_limit(self, route: Route, client_id: str) -> bool:
         """检查限流"""
-        key = f"{client_id}:{route.path}"
-        return self.rate_limiter.check(key, 1)
+        key = f"{route.path}"
+        
+        # 为每个路由创建独立的限流器
+        if key not in self.rate_limiters:
+            self.rate_limiters[key] = RateLimiter(rate=route.rate_limit, per=60)
+        
+        limiter = self.rate_limiters[key]
+        return limiter.check(client_id, 1)
 
     def _check_auth(self, route: Route, request: APIRequest) -> bool:
         """检查认证"""

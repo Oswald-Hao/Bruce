@@ -98,7 +98,7 @@ def test_auth_manager():
     assert not auth.validate_api_key("invalid_key")
 
     # 测试JWT验证（简化版）
-    result = auth.validate_token("Bearer valid_token")
+    result = auth.validate_token("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8xMjMifQ.signature")
     assert result.get("valid") is True
 
     result = auth.validate_token("Invalid")
