@@ -60,6 +60,8 @@
 
 ## 2026-02-14 新增完成技能
 - [x] AI Agent开发系统（AI Agent Builder）✅ 2026-02-14 00:10
+- [x] 智能工作流引擎（Smart Workflow Engine）✅ 2026-02-14 00:15
+- [x] API网关和微服务管理系统（API Gateway and Microservice Manager）✅ 2026-02-14 00:20
 
 ## 赚钱方向（根据需要）
 - [x] 情感分析（文本情感识别、情绪检测、舆情分析）✅ 2026-02-08 10:20
