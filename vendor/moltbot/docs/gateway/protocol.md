@@ -4,13 +4,12 @@ read_when:
   - Implementing or updating gateway WS clients
   - Debugging protocol mismatches or connect failures
   - Regenerating protocol schema/models
-title: "Gateway Protocol"
 ---
 
 # Gateway protocol (WebSocket)
 
 The Gateway WS protocol is the **single control plane + node transport** for
-OpenClaw. All clients (CLI, web UI, macOS app, iOS/Android nodes, headless
+Moltbot. All clients (CLI, web UI, macOS app, iOS/Android nodes, headless
 nodes) connect over WebSocket and declare their **role** + **scope** at
 handshake time.
 
@@ -54,7 +53,7 @@ Client → Gateway:
     "permissions": {},
     "auth": { "token": "…" },
     "locale": "en-US",
-    "userAgent": "openclaw-cli/1.2.3",
+    "userAgent": "moltbot-cli/1.2.3",
     "device": {
       "id": "device_fingerprint",
       "publicKey": "…",
@@ -112,7 +111,7 @@ When a device token is issued, `hello-ok` also includes:
     "permissions": { "camera.capture": true, "screen.record": false },
     "auth": { "token": "…" },
     "locale": "en-US",
-    "userAgent": "openclaw-ios/1.2.3",
+    "userAgent": "moltbot-ios/1.2.3",
     "device": {
       "id": "device_fingerprint",
       "publicKey": "…",
@@ -126,8 +125,8 @@ When a device token is issued, `hello-ok` also includes:
 
 ## Framing
 
-- **Request**: `{type:"req", id, method, params}`
-- **Response**: `{type:"res", id, ok, payload|error}`
+- **Request**: `{type:"req", id, method, params}`  
+- **Response**: `{type:"res", id, ok, payload|error}`  
 - **Event**: `{type:"event", event, payload, seq?, stateVersion?}`
 
 Side-effecting methods require **idempotency keys** (see schema).
@@ -135,14 +134,11 @@ Side-effecting methods require **idempotency keys** (see schema).
 ## Roles + scopes
 
 ### Roles
-
 - `operator` = control plane client (CLI/UI/automation).
 - `node` = capability host (camera/screen/canvas/system.run).
 
 ### Scopes (operator)
-
 Common scopes:
-
 - `operator.read`
 - `operator.write`
 - `operator.admin`
@@ -150,9 +146,7 @@ Common scopes:
 - `operator.pairing`
 
 ### Caps/commands/permissions (node)
-
 Nodes declare capability claims at connect time:
-
 - `caps`: high-level capability categories.
 - `commands`: command allowlist for invoke.
 - `permissions`: granular toggles (e.g. `screen.record`, `camera.capture`).
@@ -170,14 +164,6 @@ The Gateway treats these as **claims** and enforces server-side allowlists.
 - Nodes may call `skills.bins` to fetch the current list of skill executables
   for auto-allow checks.
 
-### Operator helper methods
-
-- Operators may call `tools.catalog` (`operator.read`) to fetch the runtime tool catalog for an
-  agent. The response includes grouped tools and provenance metadata:
-  - `source`: `core` or `plugin`
-  - `pluginId`: plugin owner when `source="plugin"`
-  - `optional`: whether a plugin tool is optional
-
 ## Exec approvals
 
 - When an exec request needs approval, the gateway broadcasts `exec.approval.requested`.
@@ -194,7 +180,7 @@ The Gateway treats these as **claims** and enforces server-side allowlists.
 
 ## Auth
 
-- If `OPENCLAW_GATEWAY_TOKEN` (or `--token`) is set, `connect.params.auth.token`
+- If `CLAWDBOT_GATEWAY_TOKEN` (or `--token`) is set, `connect.params.auth.token`
   must match or the socket is closed.
 - After pairing, the Gateway issues a **device token** scoped to the connection
   role + scopes. It is returned in `hello-ok.auth.deviceToken` and should be
@@ -212,9 +198,9 @@ The Gateway treats these as **claims** and enforces server-side allowlists.
 - **Local** connects include loopback and the gateway host’s own tailnet address
   (so same‑host tailnet binds can still auto‑approve).
 - All WS clients must include `device` identity during `connect` (operator + node).
-  Control UI can omit it **only** when `gateway.controlUi.dangerouslyDisableDeviceAuth`
-  is enabled for break-glass use.
-- All connections must sign the server-provided `connect.challenge` nonce.
+  Control UI can omit it **only** when `gateway.controlUi.allowInsecureAuth` is enabled
+  (or `gateway.controlUi.dangerouslyDisableDeviceAuth` for break-glass use).
+- Non-local connections must sign the server-provided `connect.challenge` nonce.
 
 ## TLS + pinning
 
