@@ -1,158 +1,78 @@
-import type { ResolvedFeishuAccount } from "./types.config.js";
+import type { FeishuIdType } from "./types.js";
 
-/**
- * Feishu target formats:
- * - Direct message: "open_id:ou_xxxxxxxxxxxxxxxx" or "user_id:xxxxxxxxxxxxxx"
- * - Group chat: "chat_id:oc_xxxxxxxxxxxxxxxx"
- * - Simple format (defaults to open_id): "ou_xxxxxxxxxxxxxxxx" or "oc_xxxxxxxxxxxxxxxx"
- */
+const CHAT_ID_PREFIX = "oc_";
+const OPEN_ID_PREFIX = "ou_";
+const USER_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
 
-const FEISHU_PREFIXES = ["feishu", "lark", "feishu-bot"];
-
-/**
- * Normalize Feishu target by removing prefix and extracting ID
- */
-export const normalizeFeishuTarget = (target: string): string | null => {
-  if (!target || typeof target !== "string") return null;
-
-  const normalized = target.trim();
-
-  // Remove prefix if present
-  for (const prefix of FEISHU_PREFIXES) {
-    if (normalized.toLowerCase().startsWith(`${prefix}:`)) {
-      return normalized.substring(prefix.length + 1);
-    }
+export function detectIdType(id: string): FeishuIdType | null {
+  const trimmed = id.trim();
+  if (trimmed.startsWith(CHAT_ID_PREFIX)) {
+    return "chat_id";
   }
-
-  // Remove explicit type prefix
-  if (normalized.startsWith("open_id:")) {
-    return normalized.substring(8);
+  if (trimmed.startsWith(OPEN_ID_PREFIX)) {
+    return "open_id";
   }
-  if (normalized.startsWith("user_id:")) {
-    return normalized.substring(8);
+  if (USER_ID_REGEX.test(trimmed)) {
+    return "user_id";
   }
-  if (normalized.startsWith("union_id:")) {
-    return normalized.substring(9);
-  }
-  if (normalized.startsWith("chat_id:")) {
-    return normalized.substring(8);
-  }
+  return null;
+}
 
-  // Return as-is if it looks like a Feishu ID
-  if (normalized.startsWith("ou_") || normalized.startsWith("oc_") || normalized.startsWith("on_")) {
-    return normalized;
-  }
-
-  return normalized;
-};
-
-/**
- * Check if target is a user (open_id)
- */
-export const isFeishuUserTarget = (target: string): boolean => {
-  const normalized = normalizeFeishuTarget(target);
-  return normalized?.startsWith("ou_") ?? false;
-};
-
-/**
- * Check if target is a chat (group)
- */
-export const isFeishuChatTarget = (target: string): boolean => {
-  const normalized = normalizeFeishuTarget(target);
-  return normalized?.startsWith("oc_") ?? false;
-};
-
-/**
- * Format target for API call
- */
-export const formatFeishuTarget = (target: string): {
-  receiveId: string;
-  receiveIdType: "open_id" | "user_id" | "union_id" | "chat_id";
-  msgType: "text" | "post";
-} => {
-  const normalized = normalizeFeishuTarget(target);
-
-  if (!normalized) {
-    throw new Error(`Invalid Feishu target: ${target}`);
-  }
-
-  // Determine target type
-  if (normalized.startsWith("ou_")) {
-    return {
-      receiveId: normalized,
-      receiveIdType: "open_id",
-      msgType: "text",
-    };
-  }
-
-  if (normalized.startsWith("on_")) {
-    return {
-      receiveId: normalized,
-      receiveIdType: "union_id",
-      msgType: "text",
-    };
-  }
-
-  if (normalized.startsWith("oc_")) {
-    // Group chat
-    return {
-      receiveId: normalized,
-      receiveIdType: "chat_id",
-      msgType: "text",
-    };
-  }
-
-  // Default to open_id
-  return {
-    receiveId: normalized,
-    receiveIdType: "open_id",
-    msgType: "text",
-  };
-};
-
-/**
- * Check if a string looks like a Feishu target ID
- */
-export const looksLikeFeishuTargetId = (raw: string, normalized?: string): boolean => {
+export function normalizeFeishuTarget(raw: string): string | null {
   const trimmed = raw.trim();
-  if (!trimmed) return false;
-
-  // Check if it starts with Feishu ID prefixes
-  if (trimmed.startsWith("ou_") || trimmed.startsWith("oc_") || trimmed.startsWith("on_")) {
-    return true;
+  if (!trimmed) {
+    return null;
   }
 
-  // Check if it has explicit type prefixes
-  if (/^open_id:/i.test(trimmed) || /^user_id:/i.test(trimmed) ||
-      /^union_id:/i.test(trimmed) || /^chat_id:/i.test(trimmed)) {
-    return true;
+  const lowered = trimmed.toLowerCase();
+  if (lowered.startsWith("chat:")) {
+    return trimmed.slice("chat:".length).trim() || null;
+  }
+  if (lowered.startsWith("user:")) {
+    return trimmed.slice("user:".length).trim() || null;
+  }
+  if (lowered.startsWith("open_id:")) {
+    return trimmed.slice("open_id:".length).trim() || null;
   }
 
-  // Check if it has channel prefix
-  if (/^(feishu|lark|feishu-bot):/i.test(trimmed)) {
+  return trimmed;
+}
+
+export function formatFeishuTarget(id: string, type?: FeishuIdType): string {
+  const trimmed = id.trim();
+  if (type === "chat_id" || trimmed.startsWith(CHAT_ID_PREFIX)) {
+    return `chat:${trimmed}`;
+  }
+  if (type === "open_id" || trimmed.startsWith(OPEN_ID_PREFIX)) {
+    return `user:${trimmed}`;
+  }
+  return trimmed;
+}
+
+export function resolveReceiveIdType(id: string): "chat_id" | "open_id" | "user_id" {
+  const trimmed = id.trim();
+  if (trimmed.startsWith(CHAT_ID_PREFIX)) {
+    return "chat_id";
+  }
+  if (trimmed.startsWith(OPEN_ID_PREFIX)) {
+    return "open_id";
+  }
+  return "user_id";
+}
+
+export function looksLikeFeishuId(raw: string): boolean {
+  const trimmed = raw.trim();
+  if (!trimmed) {
+    return false;
+  }
+  if (/^(chat|user|open_id):/i.test(trimmed)) {
     return true;
   }
-
+  if (trimmed.startsWith(CHAT_ID_PREFIX)) {
+    return true;
+  }
+  if (trimmed.startsWith(OPEN_ID_PREFIX)) {
+    return true;
+  }
   return false;
-};
-
-/**
- * Resolve target display name
- */
-export const resolveFeishuTargetDisplayName = ({
-  account,
-  target,
-}: {
-  account: ResolvedFeishuAccount;
-  target: string;
-}): string => {
-  const normalized = normalizeFeishuTarget(target);
-
-  if (!normalized) {
-    return target;
-  }
-
-  // For now, return the normalized ID
-  // In production, you might want to fetch user/chat info to get the display name
-  return normalized;
-};
+}

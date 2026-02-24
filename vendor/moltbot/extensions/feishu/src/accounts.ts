@@ -1,143 +1,144 @@
-import {
-  type MoltbotConfig,
-  DEFAULT_ACCOUNT_ID,
-} from "clawdbot/plugin-sdk";
+import type { ClawdbotConfig } from "openclaw/plugin-sdk";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "openclaw/plugin-sdk/account-id";
 import type {
   FeishuConfig,
-  ResolvedFeishuAccount,
   FeishuAccountConfig,
-  FeishuCredentialSource,
-} from "./types.config.js";
-import { resolveCredentialSource } from "./auth.js";
+  FeishuDomain,
+  ResolvedFeishuAccount,
+} from "./types.js";
 
 /**
- * Get config value from section or account
+ * List all configured account IDs from the accounts field.
  */
-const getConfigValue = (
-  section: FeishuConfig | undefined,
-  accountId: string,
-  key: string
-): unknown => {
-  // Try account-specific config first
-  const accountConfig = section?.accounts?.[accountId] as FeishuAccountConfig | undefined;
-  if (accountConfig && (accountConfig as any)[key] !== undefined) {
-    return (accountConfig as any)[key];
+function listConfiguredAccountIds(cfg: ClawdbotConfig): string[] {
+  const accounts = (cfg.channels?.feishu as FeishuConfig)?.accounts;
+  if (!accounts || typeof accounts !== "object") {
+    return [];
   }
-  // Fallback to top-level config
-  return (section as any)?.[key];
-};
+  return Object.keys(accounts).filter(Boolean);
+}
 
 /**
- * List all Feishu account IDs from config
+ * List all Feishu account IDs.
+ * If no accounts are configured, returns [DEFAULT_ACCOUNT_ID] for backward compatibility.
  */
-export const listFeishuAccountIds = (cfg: MoltbotConfig): string[] => {
-  const accounts = (cfg.channels?.["feishu"] as FeishuConfig | undefined)?.accounts;
-  if (accounts) {
-    return Object.keys(accounts);
-  }
-
-  // Check if there's a top-level configuration (legacy single account)
-  const topLevel = cfg.channels?.["feishu"] as FeishuConfig | undefined;
-  if (topLevel && (topLevel.appId || topLevel.appSecret)) {
+export function listFeishuAccountIds(cfg: ClawdbotConfig): string[] {
+  const ids = listConfiguredAccountIds(cfg);
+  if (ids.length === 0) {
+    // Backward compatibility: no accounts configured, use default
     return [DEFAULT_ACCOUNT_ID];
   }
-
-  return [];
-};
+  return [...ids].toSorted((a, b) => a.localeCompare(b));
+}
 
 /**
- * Resolve default Feishu account ID
+ * Resolve the default account ID.
  */
-export const resolveDefaultFeishuAccountId = (cfg: MoltbotConfig): string | undefined => {
-  const accountIds = listFeishuAccountIds(cfg);
-  if (accountIds.length === 0) return undefined;
-  if (accountIds.length === 1) return accountIds[0];
-
-  // Try to find enabled account
-  for (const accountId of accountIds) {
-    const account = resolveFeishuAccount({ cfg, accountId });
-    if (account.enabled) {
-      return accountId;
-    }
+export function resolveDefaultFeishuAccountId(cfg: ClawdbotConfig): string {
+  const ids = listFeishuAccountIds(cfg);
+  if (ids.includes(DEFAULT_ACCOUNT_ID)) {
+    return DEFAULT_ACCOUNT_ID;
   }
-
-  return accountIds[0];
-};
+  return ids[0] ?? DEFAULT_ACCOUNT_ID;
+}
 
 /**
- * Resolve Feishu account configuration
+ * Get the raw account-specific config.
  */
-export const resolveFeishuAccount = ({
-  cfg,
-  accountId = DEFAULT_ACCOUNT_ID,
-}: {
-  cfg: MoltbotConfig;
-  accountId?: string;
-}): ResolvedFeishuAccount => {
-  const section = cfg.channels?.["feishu"] as FeishuConfig | undefined;
+function resolveAccountConfig(
+  cfg: ClawdbotConfig,
+  accountId: string,
+): FeishuAccountConfig | undefined {
+  const accounts = (cfg.channels?.feishu as FeishuConfig)?.accounts;
+  if (!accounts || typeof accounts !== "object") {
+    return undefined;
+  }
+  return accounts[accountId];
+}
 
-  const appId = getConfigValue(section, accountId, "appId") as string | undefined;
-  const appSecret = getConfigValue(section, accountId, "appSecret") as string | undefined;
-  const appType = (getConfigValue(section, accountId, "appType") as
-    | "self_build"
-    | "app_store"
-    | undefined) ?? "self_build";
-  const enabled = getConfigValue(section, accountId, "enabled") as boolean | undefined;
-  const name = getConfigValue(section, accountId, "name") as string | undefined;
-  const webhookPath = getConfigValue(section, accountId, "webhookPath") as
-    | string
-    | undefined;
-  const webhookUrl = getConfigValue(section, accountId, "webhookUrl") as string | undefined;
+/**
+ * Merge top-level config with account-specific config.
+ * Account-specific fields override top-level fields.
+ */
+function mergeFeishuAccountConfig(cfg: ClawdbotConfig, accountId: string): FeishuConfig {
+  const feishuCfg = cfg.channels?.feishu as FeishuConfig | undefined;
 
-  // Get nested config values
-  const accountConfig = section?.accounts?.[accountId] as FeishuAccountConfig | undefined;
-  const topLevelConfig = section as FeishuAccountConfig | undefined;
+  // Extract base config (exclude accounts field to avoid recursion)
+  const { accounts: _ignored, ...base } = feishuCfg ?? {};
 
-  const dmPolicy = (accountConfig?.dm?.policy || topLevelConfig?.dm?.policy ||
-    "pairing") as "pairing" | "allowlist" | "blocklist";
-  const dmAllowFrom = (accountConfig?.dm?.allowFrom || topLevelConfig?.dm?.allowFrom ||
-    []) as Array<string>;
+  // Get account-specific overrides
+  const account = resolveAccountConfig(cfg, accountId) ?? {};
 
-  const groupPolicy = (getConfigValue(section, accountId, "groupPolicy") as
-    | "allowlist"
-    | "blocklist"
-    | "all"
-    | undefined) ?? "allowlist";
-  const allowList = (getConfigValue(section, accountId, "allowList") as
-    | Array<string>
-    | undefined) ?? [];
-  const blockList = (getConfigValue(section, accountId, "blockList") as
-    | Array<string>
-    | undefined) ?? [];
+  // Merge: account config overrides base config
+  return { ...base, ...account } as FeishuConfig;
+}
 
-  const replyToMode = (getConfigValue(section, accountId, "replyToMode") as
-    | "off"
-    | "all"
-    | "op"
-    | undefined) ?? "off";
+/**
+ * Resolve Feishu credentials from a config.
+ */
+export function resolveFeishuCredentials(cfg?: FeishuConfig): {
+  appId: string;
+  appSecret: string;
+  encryptKey?: string;
+  verificationToken?: string;
+  domain: FeishuDomain;
+} | null {
+  const appId = cfg?.appId?.trim();
+  const appSecret = cfg?.appSecret?.trim();
+  if (!appId || !appSecret) {
+    return null;
+  }
+  return {
+    appId,
+    appSecret,
+    encryptKey: cfg?.encryptKey?.trim() || undefined,
+    verificationToken: cfg?.verificationToken?.trim() || undefined,
+    domain: cfg?.domain ?? "feishu",
+  };
+}
 
-  const credentialSource: FeishuCredentialSource =
-    appId && appSecret ? resolveCredentialSource({ config: { appId, appSecret } } as any) : "none";
+/**
+ * Resolve a complete Feishu account with merged config.
+ */
+export function resolveFeishuAccount(params: {
+  cfg: ClawdbotConfig;
+  accountId?: string | null;
+}): ResolvedFeishuAccount {
+  const accountId = normalizeAccountId(params.accountId);
+  const feishuCfg = params.cfg.channels?.feishu as FeishuConfig | undefined;
+
+  // Base enabled state (top-level)
+  const baseEnabled = feishuCfg?.enabled !== false;
+
+  // Merge configs
+  const merged = mergeFeishuAccountConfig(params.cfg, accountId);
+
+  // Account-level enabled state
+  const accountEnabled = merged.enabled !== false;
+  const enabled = baseEnabled && accountEnabled;
+
+  // Resolve credentials from merged config
+  const creds = resolveFeishuCredentials(merged);
 
   return {
     accountId,
-    name: name || `Feishu (${accountId})`,
-    enabled: enabled ?? true,
-    credentialSource,
-    config: {
-      appId: appId || "",
-      appSecret: appSecret || "",
-      appType,
-      webhookPath,
-      webhookUrl,
-      dm: {
-        policy: dmPolicy,
-        allowFrom: dmAllowFrom,
-      },
-      groupPolicy,
-      allowList,
-      blockList,
-      replyToMode,
-    },
+    enabled,
+    configured: Boolean(creds),
+    name: (merged as FeishuAccountConfig).name?.trim() || undefined,
+    appId: creds?.appId,
+    appSecret: creds?.appSecret,
+    encryptKey: creds?.encryptKey,
+    verificationToken: creds?.verificationToken,
+    domain: creds?.domain ?? "feishu",
+    config: merged,
   };
-};
+}
+
+/**
+ * List all enabled and configured accounts.
+ */
+export function listEnabledFeishuAccounts(cfg: ClawdbotConfig): ResolvedFeishuAccount[] {
+  return listFeishuAccountIds(cfg)
+    .map((accountId) => resolveFeishuAccount({ cfg, accountId }))
+    .filter((account) => account.enabled && account.configured);
+}

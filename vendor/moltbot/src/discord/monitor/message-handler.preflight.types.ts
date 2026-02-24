@@ -4,6 +4,10 @@ import type { ReplyToMode } from "../../config/config.js";
 import type { resolveAgentRoute } from "../../routing/resolve-route.js";
 import type { DiscordChannelConfigResolved, DiscordGuildEntryResolved } from "./allow-list.js";
 import type { DiscordChannelInfo } from "./message-utils.js";
+import type { DiscordSenderIdentity } from "./sender-identity.js";
+import type { ThreadBindingManager, ThreadBindingRecord } from "./thread-bindings.js";
+
+export type { DiscordSenderIdentity } from "./sender-identity.js";
 import type { DiscordThreadChannel } from "./threading.js";
 
 export type LoadedConfig = ReturnType<typeof import("../../config/config.js").loadConfig>;
@@ -13,7 +17,9 @@ export type DiscordMessageEvent = import("./listeners.js").DiscordMessageEvent;
 
 export type DiscordMessagePreflightContext = {
   cfg: LoadedConfig;
-  discordConfig: NonNullable<import("../../config/config.js").MoltbotConfig["channels"]>["discord"];
+  discordConfig: NonNullable<
+    import("../../config/config.js").OpenClawConfig["channels"]
+  >["discord"];
   accountId: string;
   token: string;
   runtime: RuntimeEnv;
@@ -29,7 +35,9 @@ export type DiscordMessagePreflightContext = {
   data: DiscordMessageEvent;
   client: Client;
   message: DiscordMessageEvent["message"];
+  messageChannelId: string;
   author: User;
+  sender: DiscordSenderIdentity;
 
   channelInfo: DiscordChannelInfo | null;
   channelName?: string;
@@ -44,6 +52,9 @@ export type DiscordMessagePreflightContext = {
   wasMentioned: boolean;
 
   route: ReturnType<typeof resolveAgentRoute>;
+  threadBinding?: ThreadBindingRecord;
+  boundSessionKey?: string;
+  boundAgentId?: string;
 
   guildInfo: DiscordGuildEntryResolved | null;
   guildSlug: string;
@@ -72,6 +83,7 @@ export type DiscordMessagePreflightContext = {
   canDetectMention: boolean;
 
   historyEntry?: HistoryEntry;
+  threadBindings: ThreadBindingManager;
 };
 
 export type DiscordMessagePreflightParams = {
@@ -88,11 +100,12 @@ export type DiscordMessagePreflightParams = {
   replyToMode: ReplyToMode;
   dmEnabled: boolean;
   groupDmEnabled: boolean;
-  groupDmChannels?: Array<string | number>;
-  allowFrom?: Array<string | number>;
+  groupDmChannels?: string[];
+  allowFrom?: string[];
   guildEntries?: Record<string, DiscordGuildEntryResolved>;
   ackReactionScope: DiscordMessagePreflightContext["ackReactionScope"];
   groupPolicy: DiscordMessagePreflightContext["groupPolicy"];
+  threadBindings: ThreadBindingManager;
   data: DiscordMessageEvent;
   client: Client;
 };

@@ -1,37 +1,37 @@
 {
-  "name": "@moltbot/feishu",
-  "version": "2026.1.27-beta.1",
+  "name": "@openclaw/feishu",
+  "version": "2026.2.23",
+  "description": "OpenClaw Feishu/Lark channel plugin (community maintained by @m1heng)",
   "type": "module",
-  "description": "Moltbot Feishu/Lark channel plugin",
-  "moltbot": {
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.59.0",
+    "@sinclair/typebox": "0.34.48",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "openclaw": "workspace:*"
+  },
+  "openclaw": {
     "extensions": [
       "./index.ts"
     ],
     "channel": {
       "id": "feishu",
       "label": "Feishu",
-      "selectionLabel": "Feishu (飞书)",
-      "detailLabel": "Feishu",
+      "selectionLabel": "Feishu/Lark (飞书)",
       "docsPath": "/channels/feishu",
       "docsLabel": "feishu",
-      "blurb": "Feishu/Lark bot via HTTP webhooks.",
+      "blurb": "飞书/Lark enterprise messaging with doc/wiki/drive tools.",
       "aliases": [
-        "lark",
-        "feishu-bot"
+        "lark"
       ],
-      "order": 60
+      "order": 35,
+      "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/feishu",
+      "npmSpec": "@openclaw/feishu",
       "localPath": "extensions/feishu",
       "defaultChoice": "npm"
     }
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "moltbot": "workspace:*"
-  },
-  "peerDependencies": {
-    "moltbot": ">=2026.1.26"
   }
 }
