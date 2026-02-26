@@ -77,7 +77,7 @@ def webhook():
                     log_message(f"文本内容: {text}")
 
                     # 回复表情
-                    reply_with_emoji(message.get('chat_id'), text, sender_id)
+                    reply_with_emoji(message.get('chat_id'), text, sender_id, data)
 
                 except Exception as e:
                     log_message(f"解析文本失败: {e}")
@@ -134,7 +134,7 @@ def reply_with_emoji(chat_id, text, sender_id):
             log_message(f"✓ 默认表情: {emoji}")
 
         # 发送表情回复（使用 reactions API）
-        message_id = data.get('event', {}).get('message', {}).get('message_id', '')
+        message_id = webhook_data.get('event', {}).get('message', {}).get('message_id', '')
 
         if message_id:
             # 发送表情反应
