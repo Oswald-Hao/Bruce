@@ -28,8 +28,13 @@ def webhook():
             })
 
         # POST 请求
-        data = request.get_json(force=True, silent=True)
-        print(f"Body: {json.dumps(data, indent=2, ensure_ascii=False)}")
+        try:
+            raw_data = request.get_data(as_text=True)
+            print(f"Raw Body: {raw_data}")
+            data = json.loads(raw_data) if raw_data else {}
+        except:
+            data = {}
+        print(f"Parsed Body: {json.dumps(data, indent=2, ensure_ascii=False)}")
 
         # URL 验证
         if data and data.get('type') == 'url_verification':
