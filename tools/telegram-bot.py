@@ -23,9 +23,10 @@ def send_message(text):
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
         data = {"chat_id": CHAT_ID, "text": text}
         resp = requests.post(url, json=data, proxies=proxies, timeout=10)
-        print(f"✓ 发送消息: {text[:50]}... | 状态: {resp.status_code}")
-        if resp.status_code != 200:
-            print(f"  响应: {resp.text}")
+        result = resp.json()
+        print(f"✓ 发送消息: {text[:50]}... | ok={result.get('ok')}")
+        if not result.get("ok"):
+            print(f"  错误: {result.get('description')}")
     except Exception as e:
         print(f"✗ 发送失败: {e}")
 
