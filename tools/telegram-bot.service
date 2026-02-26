@@ -1,0 +1,15 @@
+[Unit]
+Description=Bruce Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=lejurobot
+ExecStart=/usr/bin/python3 /home/lejurobot/clawd/tools/telegram-bot.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
