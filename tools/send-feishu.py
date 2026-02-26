@@ -41,7 +41,9 @@ def send_message(text):
         }
         data = {
             "msg_type": "text",
-            "receive_id": OPEN_ID
+            "receive_id": OPEN_ID,
+            "open_id": OPEN_ID,
+            "content": {"text": text}
         }
 
         # content必须是JSON对象
