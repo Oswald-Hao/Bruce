@@ -133,21 +133,43 @@ def reply_with_emoji(chat_id, text, sender_id):
             emoji = '👍'
             log_message(f"✓ 默认表情: {emoji}")
 
-        # 发送消息回复（而不是表情，因为表情需要 message_id）
-        message = f"收到：{text}\n\n我是 Bruce，你的智能管家！⚙️"
-        send_resp = requests.post(
-            "https://open.feishu.cn/open-apis/message/v4/send?receive_id_type=open_id",
-            headers={
-                "Authorization": f"Bearer {tenant_token}",
-                "Content-Type": "application/json"
-            },
-            json={
-                "msg_type": "text",
-                "receive_id": sender_id,
-                "open_id": sender_id,
-                "content": {"text": message}
-            }
-        )
+        # 发送表情回复（使用 reactions API）
+        message_id = data.get('event', {}).get('message', {}).get('message_id', '')
+
+        if message_id:
+            # 发送表情反应
+            emoji_resp = requests.post(
+                f"https://open.feishu.cn/open-apis/im/v1/messages/{message_id}/reactions",
+                headers={
+                    "Authorization": f"Bearer {tenant_token}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "emoji_type": "static",
+                    "emoji_id": emoji
+                }
+            )
+
+            result = emoji_resp.json()
+            log_message(f"✓ 表情回复: {json.dumps(result, ensure_ascii=False)}")
+        else:
+            # 回退到文本消息
+            message = f"{emoji}"
+            send_resp = requests.post(
+                "https://open.feishu.cn/open-apis/message/v4/send?receive_id_type=open_id",
+                headers={
+                    "Authorization": f"Bearer {tenant_token}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "msg_type": "text",
+                    "receive_id": sender_id,
+                    "open_id": sender_id,
+                    "content": {"text": message}
+                }
+            )
+            result = send_resp.json()
+            log_message(f"✓ 文本回复: {json.dumps(result, ensure_ascii=False)}")
 
         result = send_resp.json()
         log_message(f"✓ 回复消息: {json.dumps(result, ensure_ascii=False)}")
