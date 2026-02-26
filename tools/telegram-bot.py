@@ -22,9 +22,12 @@ def send_message(text):
         proxies = {"http": PROXY, "https": PROXY}
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
         data = {"chat_id": CHAT_ID, "text": text}
-        requests.post(url, json=data, proxies=proxies, timeout=10)
+        resp = requests.post(url, json=data, proxies=proxies, timeout=10)
+        print(f"✓ 发送消息: {text[:50]}... | 状态: {resp.status_code}")
+        if resp.status_code != 200:
+            print(f"  响应: {resp.text}")
     except Exception as e:
-        print(f"发送失败: {e}")
+        print(f"✗ 发送失败: {e}")
 
 def handle_message(message_text):
     """处理收到的消息"""
@@ -76,26 +79,31 @@ def main():
     print("🤖 Bruce Bot 启动...")
     print(f"📱 监听 Telegram: @{CHAT_ID}")
     send_message("🟢 Bruce Bot 已启动！输入 /help 查看命令")
-    
+
     last_update_id = 0
-    
+
     while True:
         try:
             proxies = {"http": PROXY, "https": PROXY}
             url = f"https://api.telegram.org/bot{BOT_TOKEN}/getUpdates"
-            params = {"offset": last_update_id + 1, "timeout": 30}
-            
+
+            # 第一次不使用 offset，获取所有未读消息
+            if last_update_id == 0:
+                params = {"timeout": 10}
+            else:
+                params = {"offset": last_update_id + 1, "timeout": 30}
+
             response = requests.get(url, params=params, proxies=proxies, timeout=35)
             result = response.json()
-            
+
             if result.get("ok"):
                 for update in result.get("result", []):
                     last_update_id = update["update_id"]
-                    
+
                     if "message" in update:
                         message = update["message"]
                         text = message.get("text")
-                        
+
                         if text and text != "/start":
                             print(f"📨 收到消息: {text}")
                             reply = handle_message(text)
