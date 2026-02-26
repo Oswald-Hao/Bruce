@@ -5,7 +5,11 @@ import requests
 import time
 import subprocess
 import json
+import sys
 from datetime import datetime
+
+# 强制刷新输出
+sys.stdout.reconfigure(line_buffering=True)
 
 # Telegram 配置
 BOT_TOKEN = "8744492015:AAHejYg5eCEaaQSmI4hT4OnlRX_12kyIcTk"
