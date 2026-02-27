@@ -401,7 +401,6 @@ addressing their limitations through improved methodology."""
     def _generate_methodology(self, project_analysis):
         """生成方法论"""
         if project_analysis and project_analysis.get('structure'):
-            if project_analysis and project_analysis.get('structure'):
             return f"""Our approach consists of several key components working together.
 Figure~\\ref{{fig:architecture}} illustrates the overall system architecture.
 
@@ -414,10 +413,6 @@ and evaluation. Each component is designed for modularity and extensibility.
 
 Where $\\mathcal{{L}}$ is the loss function, $N$ is the number of samples,
 $y_i$ is the true label, and $\\hat{{y}}_i$ is the predicted probability."""
-
-        return f"""Our methodology follows a systematic approach.
-We employ rigorous experimental design and state-of-the-art techniques.
-The system is designed for modularity and extensibility."""
 
         return f"""Our methodology follows a systematic approach.
 We employ rigorous experimental design and state-of-the-art techniques.
