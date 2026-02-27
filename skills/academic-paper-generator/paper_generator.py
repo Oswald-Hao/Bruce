@@ -420,7 +420,7 @@ The system is designed for modularity and extensibility."""
 
     def _generate_experiments(self):
         """生成实验部分"""
-        return """We conduct extensive experiments to validate our approach.
+        return r"""We conduct extensive experiments to validate our approach.
 Experiments are performed on standard benchmarks with proper train/validation/test splits.
 
 \textbf{Experimental Setup:} We use standard hyperparameters and evaluation metrics.
@@ -431,48 +431,52 @@ traditional methods and recent state-of-the-art approaches."""
 
     def _generate_results(self, figures):
         """生成结果部分"""
-        results_text = """Table~\ref{tab:results} and Figure~\\ref{fig:results} present our main results.
+        results_text = r"""Table~\ref{tab:results} and Figure~\ref{fig:results} present our main results.
 Our approach achieves state-of-the-art performance across all metrics.
 
-\\begin{table}[h]
-\\centering
-\\caption{Performance Comparison}
-\\label{tab:results}
-\\begin{tabular}{lcc}
-\\hline
-Method & Accuracy & F1-Score \\\\
-\\hline
-Baseline 1 & 75.2 & 73.8 \\\\
-Baseline 2 & 81.5 & 80.2 \\\\
-Baseline 3 & 84.3 & 83.1 \\\\
-Ours & \\textbf{92.4} & \\textbf{91.8} \\\\
-\\hline
-\\end{tabular}
-\\end{table}
+\begin{table}[h]
+\centering
+\caption{Performance Comparison}
+\label{tab:results}
+\begin{tabular}{lcc}
+\hline
+Method & Accuracy & F1-Score \\
+\hline
+Baseline 1 & 75.2 & 73.8 \\
+Baseline 2 & 81.5 & 80.2 \\
+Baseline 3 & 84.3 & 83.1 \\
+Ours & \textbf{92.4} & \textbf{91.8} \\
+\hline
+\end{tabular}
+\end{table}
 
 """
 
         if 'results.pdf' in figures:
-            results_text += "\\begin{figure}[h]\n"
-            results_text += "\\centering\n"
-            results_text += "\\includegraphics[width=0.48\\textwidth]{figures/results.pdf}\n"
-            results_text += "\\caption{Experimental Results}\n"
-            results_text += "\\label{fig:results}\n"
-            results_text += "\\end{figure}\n\n"
+            results_text += r"""\begin{figure}[h]
+\centering
+\includegraphics[width=0.48\textwidth]{figures/results.pdf}
+\caption{Experimental Results}
+\label{fig:results}
+\end{figure}
+
+"""
 
         if 'comparison.pdf' in figures:
-            results_text += "\\begin{figure}[h]\n"
-            results_text += "\\centering\n"
-            results_text += "\\includegraphics[width=0.48\\textwidth]{figures/comparison.pdf}\n"
-            results_text += "\\caption{Performance Comparison}\n"
-            results_text += "\\label{fig:comparison}\n"
-            results_text += "\\end{figure}\n"
+            results_text += r"""\begin{figure}[h]
+\centering
+\includegraphics[width=0.48\textwidth]{figures/comparison.pdf}
+\caption{Performance Comparison}
+\label{fig:comparison}
+\end{figure}
+
+"""
 
         return results_text
 
     def _generate_discussion(self):
         """生成讨论"""
-        return """Our results demonstrate significant improvements over existing methods.
+        return r"""Our results demonstrate significant improvements over existing methods.
 Key factors contributing to success include improved architecture design,
 better optimization strategies, and comprehensive experimental validation.
 
@@ -486,24 +490,24 @@ Through rigorous methodology and extensive experimentation, we demonstrated
 state-of-the-art performance.
 
 Key contributions include:
-\begin{{itemize}}
-    \item Novel framework design
-    \item Comprehensive experimental validation
-    \item Detailed analysis and insights
-\end{{itemize}}
+\\begin{{itemize}}
+    \\item Novel framework design
+    \\item Comprehensive experimental validation
+    \\item Detailed analysis and insights
+\\end{{itemize}}
 
 Future work includes extending to larger-scale applications and
 exploring additional research directions."""
 
     def _generate_bibliography(self):
         """生成参考文献"""
-        return r"""\\bibitem{smith2023}
+        return r"""\bibitem{smith2023}
 J. Smith, A. Jones, ``Advanced Methods in Machine Learning,'' Journal of CS, 2023.
 
-\\bibitem{johnson2022}
+\bibitem{johnson2022}
 M. Johnson, K. Williams, ``Efficient Algorithms for Data Processing,'' Proc. ICML, 2022.
 
-\\bibitem{brown2024}
+\bibitem{brown2024}
 L. Brown, R. Davis, ``Modern Approaches to System Design,'' IEEE Trans. Software Engineering, 2024."""
 
     def compile_latex(self, latex_content):
