@@ -518,7 +518,7 @@ L. Brown, R. Davis, ``Modern Approaches to System Design,'' IEEE Trans. Software
         with open(tex_file, 'w', encoding='utf-8') as f:
             f.write(latex_content)
 
-        # 编译LaTeX（需要pdflatex）
+        # 方法1: 尝试本地pdflatex
         max_attempts = 3
         for attempt in range(max_attempts):
             try:
@@ -536,6 +536,84 @@ L. Brown, R. Davis, ``Modern Approaches to System Design,'' IEEE Trans. Software
 
             except (subprocess.TimeoutExpired, FileNotFoundError):
                 break
+
+        # 方法2: 使用Python库直接生成PDF（无需LaTeX）
+        try:
+            from weasyprint import HTML, CSS
+            # 将LaTeX转换为HTML，然后用WeasyPrint生成PDF
+            html_content = self._latex_to_html(latex_content)
+            pdf_file = self.output_dir / 'main.pdf'
+            HTML(string=html_content).write_pdf(pdf_file)
+            return str(pdf_file)
+        except ImportError:
+            pass
+        except Exception:
+            pass
+
+        # 方法3: 使用reportlab直接生成PDF
+        try:
+            from reportlab.lib.pagesizes import letter, A4
+            from reportlab.lib.styles import getSampleStyleSheet
+            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
+            from reportlab.lib import colors
+            from reportlab.lib.units import inch
+
+            pdf_file = self.output_dir / 'main.pdf'
+            doc = SimpleDocTemplate(str(pdf_file), pagesize=A4)
+            styles = getSampleStyleSheet()
+            story = []
+
+            # 标题
+            title_style = styles['Heading1']
+            title = Paragraph(self.metadata['title'], title_style)
+            story.append(title)
+            story.append(Spacer(1, 0.2*inch))
+
+            # 作者
+            author_style = styles['Normal']
+            author = Paragraph(f"<b>{self.metadata['authors']}</b>", author_style)
+            story.append(author)
+            story.append(Spacer(1, 0.2*inch))
+
+            # 日期
+            date = Paragraph(self.metadata['date'], author_style)
+            story.append(date)
+            story.append(Spacer(1, 0.3*inch))
+
+            # 摘要
+            abstract_title = Paragraph("<b>Abstract</b>", styles['Heading2'])
+            story.append(abstract_title)
+            abstract = Paragraph(self.metadata['abstract'], author_style)
+            story.append(abstract)
+            story.append(Spacer(1, 0.3*inch))
+
+            # 添加各章节（简化版）
+            sections = {
+                'Introduction': self._generate_introduction(None),
+                'Related Work': self._generate_related_work(),
+                'Methodology': self._generate_methodology(None),
+                'Experiments': self._generate_experiments(),
+                'Results': self._generate_results([]),
+                'Discussion': self._generate_discussion(),
+                'Conclusion': self._generate_conclusion()
+            }
+
+            for section_name, section_content in sections.items():
+                story.append(PageBreak())
+                heading = Paragraph(f"<b>{section_name}</b>", styles['Heading2'])
+                story.append(heading)
+                story.append(Spacer(1, 0.1*inch))
+
+                # 简化的内容显示（去除LaTeX命令）
+                clean_content = section_content.replace('\\', '').replace('{', '').replace('}', '')
+                content_para = Paragraph(clean_content[:500] + '...' if len(clean_content) > 500 else clean_content, author_style)
+                story.append(content_para)
+
+            doc.build(story)
+            return str(pdf_file)
+
+        except Exception:
+            pass
 
         return None
 
