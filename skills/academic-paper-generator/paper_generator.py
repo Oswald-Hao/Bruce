@@ -17,7 +17,6 @@ import matplotlib
 matplotlib.use('Agg')
 import seaborn as sns
 import networkx as nx
-from jinja2 import Template
 import re
 
 class PaperGenerator:
@@ -271,56 +270,72 @@ Results demonstrate significant improvements over baseline methods."""
         self.metadata['figures'] = figures
         self.metadata['abstract'] = self.generate_abstract(project_analysis)
 
-        # LaTeX模板
-        latex_template = r"""
-\documentclass[10pt,conference]{IEEEtran}
+        # 填充内容
+        content = {
+            'title': self.metadata['title'],
+            'authors': self.metadata['authors'],
+            'date': self.metadata['date'],
+            'abstract': self.generate_abstract(project_analysis),
+            'introduction': self._generate_introduction(project_analysis),
+            'related_work': self._generate_related_work(),
+            'methodology': self._generate_methodology(project_analysis),
+            'experiments': self._generate_experiments(),
+            'results': self._generate_results(figures),
+            'discussion': self._generate_discussion(),
+            'conclusion': self._generate_conclusion(),
+            'bibliography': self._generate_bibliography()
+        }
 
-\usepackage{cite}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
-\usepackage{graphicx}
-\usepackage{textcomp}
-\usepackage{xcolor}
-\usepackage{hyperref}
+        # LaTeX模板（使用f-string）
+        latex_content = f"""
+\\documentclass[10pt,conference]{{IEEEtran}}
 
-\title{{{{title}}}}
-\author{{{{authors}}}}
-\date{{{{date}}}}
+\\usepackage{{cite}}
+\\usepackage{{amsmath,amssymb,amsfonts}}
+\\usepackage{{algorithmic}}
+\\usepackage{{graphicx}}
+\\usepackage{{textcomp}}
+\\usepackage{{xcolor}}
+\\usepackage{{hyperref}}
 
-\begin{document}
+\\title{{{content['title']}}}
+\\author{{{content['authors']}}}
+\\date{{{content['date']}}}
 
-\maketitle
+\\begin{{document}}
 
-\begin{abstract}
-{{{abstract}}}
-\end{abstract}
+\\maketitle
 
-\section{Introduction}
-{{{introduction}}}
+\\begin{{abstract}}
+{content['abstract']}
+\\end{{abstract}}
 
-\section{Related Work}
-{{{related_work}}}
+\\section{{Introduction}}
+{content['introduction']}
 
-\section{Methodology}
-{{{methodology}}}
+\\section{{Related Work}}
+{content['related_work']}
 
-\section{Experiments}
-{{{experiments}}}
+\\section{{Methodology}}
+{content['methodology']}
 
-\section{Results}
-{{{results}}}
+\\section{{Experiments}}
+{content['experiments']}
 
-\section{Discussion}
-{{{discussion}}}
+\\section{{Results}}
+{content['results']}
 
-\section{Conclusion}
-{{{conclusion}}}
+\\section{{Discussion}}
+{content['discussion']}
 
-\begin{thebibliography}{99}
-{{{bibliography}}}
-\end{thebibliography}
+\\section{{Conclusion}}
+{content['conclusion']}
 
-\end{document}
+\\begin{{thebibliography}}{{99}}
+{content['bibliography']}
+\\end{{thebibliography}}
+
+\\end{{document}}
 """
 
         # 填充内容
@@ -339,8 +354,7 @@ Results demonstrate significant improvements over baseline methods."""
             'bibliography': self._generate_bibliography()
         }
 
-        template = Template(latex_template)
-        return template.render(**content), figures
+        return latex_content, figures
 
     def _generate_introduction(self, project_analysis):
         """生成引言"""
@@ -352,19 +366,19 @@ and accuracy. This paper addresses these challenges through a comprehensive fram
 incorporating {modules}.
 
 Our main contributions are:
-\begin{{itemize}}
-    \item A novel framework for {self.metadata['title'].lower()}
-    \item Comprehensive experimental validation
-    \item State-of-the-art performance on benchmark tasks
-    \item Detailed analysis and ablation studies
-\end{{itemize}}
+\\begin{{itemize}}
+    \\item A novel framework for {self.metadata['title'].lower()}
+    \\item Comprehensive experimental validation
+    \\item State-of-the-art performance on benchmark tasks
+    \\item Detailed analysis and ablation studies
+\\end{{itemize}}
 
-The remainder of this paper is organized as follows: Section~\ref{{sec:related}} reviews
-related work. Section~\ref{{sec:method}} presents our methodology.
-Section~\ref{{sec:experiments}} describes experimental setup.
-Section~\ref{{sec:results}} presents results.
-Section~\ref{{sec:discussion}} provides discussion.
-Section~\ref{{sec:conclusion}} concludes."""
+The remainder of this paper is organized as follows: Section~\\ref{{sec:related}} reviews
+related work. Section~\\ref{{sec:method}} presents our methodology.
+Section~\\ref{{sec:experiments}} describes experimental setup.
+Section~\\ref{{sec:results}} presents results.
+Section~\\ref{{sec:discussion}} provides discussion.
+Section~\\ref{{sec:conclusion}} concludes."""
 
         return f"""This paper addresses key challenges in {self.metadata['title'].lower()}.
 Through rigorous methodology and extensive experimentation, we demonstrate significant
@@ -387,18 +401,23 @@ addressing their limitations through improved methodology."""
     def _generate_methodology(self, project_analysis):
         """生成方法论"""
         if project_analysis and project_analysis.get('structure'):
+            if project_analysis and project_analysis.get('structure'):
             return f"""Our approach consists of several key components working together.
-Figure~\ref{{fig:architecture}} illustrates the overall system architecture.
+Figure~\\ref{{fig:architecture}} illustrates the overall system architecture.
 
 The main modules include data processing, feature extraction, model training,
 and evaluation. Each component is designed for modularity and extensibility.
 
-\begin{{equation}}
-    \mathcal{{L}} = -\sum_{{i=1}}^{{N}} y_i \log(\hat{{y}}_i)
-\end{{equation}}
+\\begin{{equation}}
+    \\mathcal{{L}} = -\\sum_{{i=1}}^{{N}} y_i \\log(\\hat{{y}}_i)
+\\end{{equation}}
 
-Where $\mathcal{{L}}$ is the loss function, $N$ is the number of samples,
-$y_i$ is the true label, and $\hat{{y}}_i$ is the predicted probability."""
+Where $\\mathcal{{L}}$ is the loss function, $N$ is the number of samples,
+$y_i$ is the true label, and $\\hat{{y}}_i$ is the predicted probability."""
+
+        return f"""Our methodology follows a systematic approach.
+We employ rigorous experimental design and state-of-the-art techniques.
+The system is designed for modularity and extensibility."""
 
         return f"""Our methodology follows a systematic approach.
 We employ rigorous experimental design and state-of-the-art techniques.
